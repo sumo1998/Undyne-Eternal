@@ -5,13 +5,16 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 ## App Info:
 
 * Team Name: TODO
-* App Name: TODO
+* App Name: Undyne – Essential
 * App Link: <https://TODO.heroku.com/>
 
 ### Students
 
-* First Last, x500@umn.edu
-* ...
+* Nikunj Chawla, chawl025@umn.edu
+* Aaron Kandikatla, kandi021@umn.edu
+* Siyad Gedi, gedi0007@umn.edu
+* Sumukh Nitundila, nitun001@umn.edu
+* Sumanth Kaushik Vishwanath, kaush047@umn.edu
 
 
 ## Key Features
