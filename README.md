@@ -5,7 +5,7 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 ## App Info:
 
 * Team Name: TODO
-* App Name: Undyne – Essential
+* App Name: Undyne – Eternal
 * App Link: <https://TODO.heroku.com/>
 
 ### Students
