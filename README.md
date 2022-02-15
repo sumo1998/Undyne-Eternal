@@ -41,14 +41,9 @@ along with a very brief caption:**
 
 ## Mockup 
 
-There are a few tools for mockups. Paper prototypes (low-tech, but effective and cheap), Digital picture edition software (gimp / photoshop / etc.), or dedicated tools like moqups.com (I'm calling out moqups here in particular since it seems to strike the best balance between "easy-to-use" and "wants your money" -- the free tier isn't perfect, but it should be sufficient for our needs with a little "creative layout" to get around the page-limit)
-
-In this space please either provide images (around 4) showing your prototypes, OR, a link to an online hosted mockup tool like moqups.com
-
-**[Add images/photos that show your paper prototype (around 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
-
-![](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
-
+Wireframe link: https://tinyurl.com/Eternalwireframe
+There are two main parts to the wireframe. The social media part which consists of 3 pages. The main feed page, level page, and the user profile page.
+Then there is the game section which opens by clicking on the "launch game" button on the header. The game has three pages. The first page gives users to pick between playing the default levels or to launch the level creator.
 
 ## External Dependencies
 
