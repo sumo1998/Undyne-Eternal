@@ -43,7 +43,7 @@ along with a very brief caption:**
 
 There are a few tools for mockups. Paper prototypes (low-tech, but effective and cheap), Digital picture edition software (gimp / photoshop / etc.), or dedicated tools like moqups.com (I'm calling out moqups here in particular since it seems to strike the best balance between "easy-to-use" and "wants your money" -- the free tier isn't perfect, but it should be sufficient for our needs with a little "creative layout" to get around the page-limit)
 
-In this space please either provide images (around 4) showing your prototypes, OR, a link to an online hosted mock-p tool like moqups.com
+In this space please either provide images (around 4) showing your prototypes, OR, a link to an online hosted mockup tool like moqups.com
 
 **[Add images/photos that show your paper prototype (around 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
 
