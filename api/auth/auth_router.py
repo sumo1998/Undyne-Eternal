@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, session, jsonify
 
 import utils
 from factory import object_factory
@@ -14,10 +14,15 @@ def register_user():
     return render_template('auth_template.html')
 
 
+@auth_blueprint.route('/user')
+def user_data():
+    return jsonify(session['jwt_payload'])
+
+
 @auth_blueprint.route('/callback')
 def oauth_callback():
     object_factory.get_auth_object().handle_callbacks()
-    return redirect(url_for('auth.register_user'))
+    return redirect(url_for('auth.user_data'))
 
 
 @auth_blueprint.route('/login')
