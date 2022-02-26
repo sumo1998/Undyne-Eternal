@@ -7,8 +7,9 @@ from flask import Flask
 from factory import object_factory
 
 app = Flask(__name__)
-app.secret_key='21344'
-object_factory.get_auth_object(app)
+app.secret_key = '21344'
+object_factory._create_auth_object(app)
+
 from api.auth import auth_router
 
 app.register_blueprint(auth_router.auth_blueprint)
