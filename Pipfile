@@ -6,7 +6,10 @@ name = "pypi"
 [packages]
 flask = "*"
 pydantic = "*"
-pydotenv = "*"
+six = "*"
+requests = "*"
+authlib = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
