@@ -5,6 +5,9 @@
     <title>Home</title>
 </head>
 <body>
-    {{res}}
+    <h1> Levels Feed </h1>
+    {% for level in res %}
+        <p>'{{level}}' </p>
+    {% endfor %}
 </body>
 </html>

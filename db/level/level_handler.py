@@ -3,7 +3,7 @@ from db import database_handler
 
 def getLevelInfo(id):
     query = ""
-    with open('./db/level/levelInfo.sql') as f:
+    with open('./db/level/sql/levelInfo.sql') as f:
         query = f.read()
         query = render_template_string(query,level_id=id)
 
@@ -14,7 +14,7 @@ def getLevelInfo(id):
 
 def getLevelComments(id):
     query = ""
-    with open('./db/level/levelComments.sql') as f:
+    with open('./db/level/sql/levelComments.sql') as f:
         query = f.read()
         query = render_template_string(query,level_id=id)
 

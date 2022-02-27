@@ -3,7 +3,7 @@ from db import database_handler
 
 def getUserInfo(id):
     query = ""
-    with open("./db/user/user_info.sql") as f:
+    with open("./db/user/sql/user_info.sql") as f:
         query = f.read()
         query = render_template_string(query,user_id=id)
 
@@ -14,7 +14,7 @@ def getUserInfo(id):
 
 def getUserLevels(id):
     query = ""
-    with open("./db/user/user_levels.sql") as f:
+    with open("./db/user/sql/user_levels.sql") as f:
         query = f.read()
         query = render_template_string(query,user_id=id)
 

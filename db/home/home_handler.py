@@ -4,7 +4,7 @@ def getHomeFeed():
     with database_handler.get_db_cursor(True) as cur:
         #Get query
         query = ""
-        with open("./db/home/homeFeed.sql") as f:
+        with open("./db/home/sql/homeFeed.sql") as f:
             query = f.read()
         cur.execute(query)
         res = cur.fetchall()

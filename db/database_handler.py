@@ -9,12 +9,11 @@ from psycopg2.pool import ThreadedConnectionPool
 from psycopg2.extras import DictCursor
 
 
-
 pool = None
 
 def setup():
     global pool
-    DATABASE_URL = "postgres://plzkaynmbipdfc:67cc2161a90cd49e5031f0c211e68148d80e335416ff2f41d1c13419a850d9be@ec2-34-204-127-36.compute-1.amazonaws.com:5432/d4vlr17ui4s6ng"
+    DATABASE_URL = os.environ.get("DATABASE_URL")
     current_app.logger.info(f"creating db connection pool")
     pool = ThreadedConnectionPool(1, 100, dsn=DATABASE_URL, sslmode='require')
 
