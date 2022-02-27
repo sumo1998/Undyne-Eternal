@@ -1,0 +1,21 @@
+{% macro levelInFeed(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="") -%}
+<div class="post-page pure-u-1-5">
+    <div class="pure-u-1-1">
+        <div class="comment"><span class="fa fa-user"></span>Username</div>
+        <div class="post-page-stars">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star-o"></span>
+            <span class="fa fa-star-o"></span>
+        </div>
+    </div>
+    
+    <div class="comment comment-content">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip e
+        </p>
+    </div>
+</div>
+{%- endmacro %}
+{% block title %} Sports Survey - {% endblock %}

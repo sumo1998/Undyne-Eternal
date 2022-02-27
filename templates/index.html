@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% import "./components/level_feed.html" as level%}
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+          integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu">
+            <img class="logo pure-menu-item" src="{{ url_for('static',filename='img/logo.png') }}">
+            <input class="pure-menu-item search-bar" type="text" placeholder="Search">
+            <div class="nav-right pure-menu-item">
+                <div class="launch-game"><a href="#" class="launch-game-text pure-menu-link">Launch Game</a></div>
+                <div class="user user-nav"><span class="fa fa-user"></span></div>
+            </div>
+        </div>
+    </div>
+    {{level.levelInFeed("Apocalypse", 2, "HARD", "Username", "My Description")}}
+    {{level.levelInFeed("SuperEasy", 5, "EASY", "HelloWorld", "You can do it!")}}
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+{% macro levelInFeed(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="") -%}
+<div class="post pure-u-1-3">
+    <div class="post-page pure-u-1-6">
+        <div class="pure-u-1-1">
+            <h1 class="post-page-title">Level Title</h1>
+            <div class="post-page-stars">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star-o"></span>
+                <span class="fa fa-star-o"></span>
+            </div>
+            <div class="post-page-difficulty">
+                MEDIUM
+            </div>
+            <div class="post-page-user">
+                <p><span class="fa fa-user"></span> Username</p>
+            </div>
+        </div>
+        
+        <div class="post-page-description">
+            <p>
+                This is the description of the level.
+            </p>
+        </div>
+        
+        <div class="post-page-play-level">
+            <a class="play-level-text">
+                Play level
+            </a>
+        </div>
+        <div class="post-page-play-level review-download">
+            <a class="play-level-text">
+                Write a review
+            </a>
+        </div>
+        <div class="post-page-play-level review-download">
+            <a class="play-level-text">
+                Download
+            </a>
+        </div>
+    </div>
+</div>
+{%- endmacro %}
+{% block title %} Sports Survey - {% endblock %}

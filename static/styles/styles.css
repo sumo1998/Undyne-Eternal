@@ -1,0 +1,242 @@
+@font-face {
+    font-family: 'determination_mono_webregular';
+    src: url("../fonts/determinationsanswebregular-369x-webfont.woff2") format("woff2"),
+    url("../fonts/determinationsanswebregular-369x-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    
+}
+
+body {
+    font-family: determination_mono_webregular;
+    color: white;
+    background-color: black;
+}
+
+.checked {
+    color: orange;
+}
+
+.post {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding: 7px;
+    border-style: solid;
+    border-color: #303030;
+    border-width: 5px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-page {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 7px;
+    border-style: solid;
+    border-color: #303030;
+    border-width: 5px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-title {
+    font-size: 3em;
+    margin: 5px;
+}
+
+.post-page-title {
+    font-size: 4em;
+    position:relative;
+    width: 100%;
+    text-align: center;
+    margin: 5px;
+}
+
+.difficulty {
+    background-color: #74570D;
+    color: #FBB403;
+    display: inline-block;
+    padding: 0.5px 7px;
+    border-radius: 10px;
+}
+
+.post-page-difficulty {
+    background-color: #74570D;
+    color: #FBB403;
+    display: inline-block;
+    padding: 0.5px 7px;
+    border-radius: 10px;
+    font-size: 1.5em;
+}
+
+.stars {
+    display: inline-block;
+    padding-left: 5px;
+}
+
+.post-page-stars {
+    display: block;
+    padding-left: 5px;
+    font-size: 1.4em;
+}
+
+.user {
+    padding: 0px;
+    display: block;
+    font-size: 1.25em;
+}
+
+.post-page-user {
+    padding: 0px;
+    display: block;
+    font-size: 2em;
+}
+
+.post-description {
+    color: #CFCFCF;
+    background-color: #242424;
+    border-style: solid;
+    border-color: #3C3C3C;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 99%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size: 1.5em;
+}
+
+.post-page-description {
+    position: relative;
+    color: #CFCFCF;
+    background-color: #242424;
+    border-style: solid;
+    border-color: #3C3C3C;
+    border-width: 1px;
+    border-radius: 5px;
+    height: 99%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 90%;
+    margin: 10px;
+    font-size: 3em;
+    
+}
+
+.play-level {
+    position: relative;
+    background-color: #74570D;
+    color: #FBB403;
+    display: inline-block;
+    padding: 0.5px 7px;
+    margin-left: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.HARD {
+    color: #FC0303;
+    background-color: #5D1818;
+}
+
+.EASY {
+    color: #00FC91;
+    background-color: #17714B;
+}
+
+.post-page-play-level {
+    position: relative;
+    width: 90%;
+    background-color: #74570D;
+    color: #FBB403;
+    display: inline-block;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 5px;
+    font-size: 1.5em;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.play-level-text {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.review-download {
+    color: white;
+    background-color: #7D7D7D;
+}
+
+.home-menu {
+    padding: 1em;
+    font-size: 1.5em;
+    border-bottom: solid;
+    border-color: #3C3C3C;
+    border-width: 3px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-bar {
+    color: #CFCFCF;
+    background-color: #242424;
+    border: solid;
+    border-color: #3C3C3C;
+    border-width: 3px;
+    height: 1.5em;
+    width: 20em;
+    padding: 0.25em;
+    /*margin-left: 30%;*/
+    /*margin-right: 30%;*/
+}
+
+.launch-game {
+    
+    background-color: #00A1FF;
+    padding: 0.75em;
+    float: left;
+}
+
+.launch-game-text {
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 0.75em;
+}
+
+.comment {
+    font-size: 3em;
+}
+
+.comment-content {
+    color: #CFCFCF;
+    font-size: 2.5em;
+}
+
+.nav-right {
+    display: flex;
+}
+
+.user-nav {
+    margin: 0.75em;
+    display: inline-block;
+}
+
+
