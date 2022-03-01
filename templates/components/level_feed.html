@@ -1,20 +1,26 @@
-{% macro levelInFeed(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="") -%}
+{% macro levelInFeed(title="Title", rating=0, difficulty="medium", description="", username="Username", profileimg="") -%}
 <div class="post pure-u-1-3">
     <div class="pure-u-1-2">
         <h1 class="post-title">{{title}}</h1>
         <div class="difficulty {{difficulty}}">
-            {{difficulty}}
+            {{difficulty | upper}}
         </div>
         <div class="stars">
-            {%- for star in range(rating) %}
+            {%- for star in range(rating |int) %}
             <span class="fa fa-star checked"></span>
             {%- endfor %}
-            {%- for star in range((5 - rating)) %}
+            {%- for star in range((5 - rating|int)) %}
             <span class="fa fa-star-o"></span>
             {%- endfor %}
         </div>
         <div class="user">
+            {% if profileimg == "" %}
             <p><span class="fa fa-user"></span> {{username}}</p>
+            {% else %}
+            <p><img src="{{profileimg}}", style="width: 25px;"> {{username}}</p>
+            
+            {% endif %}
+            
         </div>
     </div>
     <div class="post-description pure-u-1-2">
@@ -22,11 +28,10 @@
             {{description}}
         </p>
     </div>
-    <div class="play-level {{difficulty}} pure-u-2-24">
+    <div class="play-level {{difficulty}} pure-u-2-24 button">
         <a class="play-level-text">
             Play level
         </a>
     </div>
 </div>
 {%- endmacro %}
-{% block title %} Sports Survey - {% endblock %}

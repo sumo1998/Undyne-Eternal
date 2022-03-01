@@ -2,29 +2,30 @@
 <div class="post pure-u-1-3">
     <div class="post-page pure-u-1-6">
         <div class="pure-u-1-1">
-            <h1 class="post-page-title">Level Title</h1>
+            <h1 class="post-page-title">{{title}}</h1>
             <div class="post-page-stars">
+                {%- for star in range(rating |int) %}
                 <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
+                {%- endfor %}
+                {%- for star in range((5 - rating|int)) %}
                 <span class="fa fa-star-o"></span>
-                <span class="fa fa-star-o"></span>
+                {%- endfor %}
             </div>
-            <div class="post-page-difficulty">
-                MEDIUM
+            <div class="post-page-difficulty {{difficulty}}">
+                {{difficulty | upper}}
             </div>
             <div class="post-page-user">
-                <p><span class="fa fa-user"></span> Username</p>
+                <p><span class="fa fa-user"></span>{{username}}</p>
             </div>
         </div>
         
         <div class="post-page-description">
             <p>
-                This is the description of the level.
+                {{description}}
             </p>
         </div>
         
-        <div class="post-page-play-level">
+        <div class="post-page-play-level {{difficulty}}">
             <a class="play-level-text">
                 Play level
             </a>
@@ -42,4 +43,3 @@
     </div>
 </div>
 {%- endmacro %}
-{% block title %} Sports Survey - {% endblock %}

@@ -1,21 +1,21 @@
-{% macro levelInFeed(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="") -%}
+{% macro levelInFeed(rating=0, username="Username", description="") -%}
 <div class="post-page pure-u-1-5">
     <div class="pure-u-1-1">
-        <div class="comment"><span class="fa fa-user"></span>Username</div>
+        <div class="comment"><span class="fa fa-user"></span>{{username}}</div>
         <div class="post-page-stars">
+            {%- for star in range(rating |int) %}
             <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
+            {%- endfor %}
+            {%- for star in range((5 - rating|int)) %}
             <span class="fa fa-star-o"></span>
-            <span class="fa fa-star-o"></span>
+            {%- endfor %}
         </div>
     </div>
     
     <div class="comment comment-content">
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip e
+            {{description}}
         </p>
     </div>
 </div>
 {%- endmacro %}
-{% block title %} Sports Survey - {% endblock %}
