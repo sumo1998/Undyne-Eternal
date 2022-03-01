@@ -5,6 +5,6 @@ from
     levels as l,usr as u
 where 
     l.user_id = u.user_id and
-    l.level_id = '{{level_id}}'
+    l.level_id = %s
 order by 
     l.level_rating desc;
