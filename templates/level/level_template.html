@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    <h1> Level info</h1>
-    {{levelInfo}}
-    <h1> Level comments </h1>
-    {{levelComments}}
-</body>
-</html>
+{% extends "parent_template.html" %}
+{% import "./components/level_page.html" as levelPage%}
+{% import "./components/comment.html" as comments%}
+{% block title %}: {{levelInfo[0][1]}}{% endblock %}
+{%block content%}
+<div class="level-page">{{levelPage.levelInPage(levelInfo[0][1], levelInfo[0][2], levelInfo[0][5], levelInfo[0][7], levelInfo[0][3],
+     levelInfo[0][8])}}
+    <div class="reviews pure-u-2-6">
+        <h1>Ratings and Reviews</h1>
+        {% for comment in levelComments %}
+        <div>{{comments.commentInLevel(levelComments[0][1], levelComments[0][3], levelComments[0][4])}}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

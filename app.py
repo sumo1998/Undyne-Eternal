@@ -42,6 +42,7 @@ def user(id):
 def level(id):
     levelInfo = level_handler.getLevelInfo(id)
     levelComments = level_handler.getLevelComments(id)
+    print(level_handler.getLevelComments(id))
     return render_template("level/level_template.html",levelInfo=levelInfo,levelComments=levelComments)
 if __name__ == '__main__':
     app.run()

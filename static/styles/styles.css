@@ -34,9 +34,9 @@ body {
 .post-page {
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
+    margin-left: 25%;
+    margin-right: 5%;
+    margin-top: 5em;
     margin-bottom: 100px;
     padding: 7px;
     border-style: solid;
@@ -85,7 +85,7 @@ body {
 .post-page-stars {
     display: block;
     padding-left: 5px;
-    font-size: 1.4em;
+    font-size: 1em;
 }
 
 .user {
@@ -155,11 +155,14 @@ body {
     background-color: #17714B;
 }
 
+.medium {
+    background-color: #74570D;
+    color: #FBB403;
+}
+
 .post-page-play-level {
     position: relative;
     width: 90%;
-    background-color: #74570D;
-    color: #FBB403;
     display: inline-block;
     position: relative;
     display: flex;
@@ -222,12 +225,12 @@ body {
 }
 
 .comment {
-    font-size: 3em;
+    font-size: 1.5em;
 }
 
 .comment-content {
     color: #CFCFCF;
-    font-size: 2.5em;
+    font-size: 1.5em;
 }
 
 .nav-right {
@@ -240,7 +243,11 @@ body {
 }
 
 .logo {
-    width: 13%;
+    width: 20%;
+}
+
+.logo-img {
+    width: 60%;
 }
 
 .button {
@@ -255,6 +262,25 @@ body {
 
 .pure-menu-link:hover {
     background-color: #00A1FF;
+}
+
+.reviews {
+    display: inline-block;
+    margin-top: 1em;
+    font-size: 2em;
+}
+
+.level-page {
+    display: flex;
+}
+
+.post-page-comment {
+    margin: 0;
+}
+
+.level-title {
+    text-decoration: none;
+    color: white;
 }
 
 
