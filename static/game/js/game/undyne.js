@@ -86,7 +86,7 @@ function Undyne() {
 	this.speech_bubble = new PIXI.Sprite(speech_bubble_texture);
 	this.speech_bubble.anchor.set(0, 0.5);
 	this.speech_bubble.position.set(400, 60);
-	// this.speech_bubble.visible = false;
+	this.speech_bubble.visible = false;
 
 	this.speech_bubble_text = new PIXI.extras.BitmapText(
 		"",
@@ -121,14 +121,12 @@ function Undyne() {
 }
 
 Undyne.prototype.queue_text = function(text_queue, callback) {
-
 	this.text_queue = this.text_queue.concat(text_queue);
 	this.text_queue_callback = callback;
 	this.text_state = "talking";
 	this.speech_bubble.visible = true;
 	this.speech_bubble_text.visible = true;
 	this.selectNextText();
-
 }
 
 Undyne.prototype.selectNextText = function() {

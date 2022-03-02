@@ -19,11 +19,8 @@ function start_game() {
 	if (game_started == false) {
 		game_started = true;
         
-        undyne.queue_text([
-            { text: "So you want to spar\nwith me, huh?" },
-            { text: "Well you'd better\ngive it all you've\ngot!" },
-        ], menu.show.bind(menu));
         gameplay_stage.alpha = 0;
+        gamestate.restartGame("hard");
         
 		update_time = new Date().getTime();
 		requestAnimationFrame(update);
