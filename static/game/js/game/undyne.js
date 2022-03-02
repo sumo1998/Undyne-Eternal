@@ -8,6 +8,7 @@ var undyne_legs_texture;
 var undyne_rightarm_texture;
 var undyne_leftarm_texture;
 var undyne_hair_textures = Array(4);
+var ground_textures = Array(3);
 
 var speech_bubble_texture;
 var speech_bubble_text;
@@ -27,6 +28,24 @@ function Undyne() {
 
 	this.sprite = new PIXI.Container();
 	this.sprite.alpha = 1;
+    
+    this.ground_sprite1 = new PIXI.Sprite(ground_textures[0]);
+    this.ground_sprite1.anchor.set(0.5, 0.5);
+    this.ground_sprite1.position.set(320, 360);
+    this.ground_sprite1.scale.set(2, 2);
+    this.ground_sprite1.alpha = 0;
+    
+    this.ground_sprite2 = new PIXI.Sprite(ground_textures[1]);
+    this.ground_sprite2.anchor.set(0.5, 0.5);
+    this.ground_sprite2.position.set(320, 360);
+    this.ground_sprite2.scale.set(2, 2);
+    this.ground_sprite2.alpha = 0;
+    
+    this.ground_sprite3 = new PIXI.Sprite(ground_textures[2]);
+    this.ground_sprite3.anchor.set(0.5, 0.5);
+    this.ground_sprite3.position.set(320, 360);
+    this.ground_sprite3.scale.set(2, 2);
+    this.ground_sprite3.alpha = 0;
 
 	this.hair_sprite = new PIXI.extras.MovieClip(undyne_hair_textures);
 	this.hair_sprite.anchor.set(1, 0.5);

@@ -2,8 +2,6 @@ var game_started = false;
 var update_time;
 
 function init_game() {
-
-	splash_animation = new SplashScene();
 	gamestate = new GameState();
 	undyne = new Undyne();
 	box = new Box();
@@ -15,12 +13,18 @@ function init_game() {
 	gameplay_stage.addChild(love_text);
 
 	start_game();
-
 }
 
 function start_game() {
 	if (game_started == false) {
 		game_started = true;
+        
+        undyne.queue_text([
+            { text: "So you want to spar\nwith me, huh?" },
+            { text: "Well you'd better\ngive it all you've\ngot!" },
+        ], menu.show.bind(menu));
+        gameplay_stage.alpha = 0;
+        
 		update_time = new Date().getTime();
 		requestAnimationFrame(update);
 	}

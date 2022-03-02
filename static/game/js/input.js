@@ -9,22 +9,8 @@ function handleKeyInput(key, dir) {
 	} else if (dir == "up") {
 		key_is_down[key] = false;
 	}
-
-	switch(scene.scene_state) {
-		case "splash":
-			if (dir == "down" && key == "2") {
-				se_press_zed.play();
-				splash_animation.add_zed();
-			}
-			if (dir == "down" && key == "A") {
-				splash_animation.outro = true;
-			}
-			break;
-		case "gameplay":
-			if (dir == "down") gamestate.handleInput(key);
-			break;
-	}
-
+    
+    if (dir == "down") gamestate.handleInput(key);
 }
 
 
