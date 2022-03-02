@@ -2,68 +2,61 @@
 <html lang="en">
 
 <head>
-    <meta charset=utf-8>
-    <title>NGAHHH! Simulator v0.99</title>
-    <link rel="stylesheet" href="/static/game/css/undertale.css">
-    
-    <script src="/static/game/js/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.2/cjs/pixi.min.js"
-            integrity="sha512-lOFONJDAFWmT/rQDPRDR5CnbVLWLxkZxzLZa/d44jXSVd79G/KF+4S1qV3w7i2buTwQmmpajM+a2Jk/BxAn1XQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
-            integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/static/game/js/funcs.js"></script>
-    
-    <script src="/static/game/js/vars.js"></script>
-    
-    <script src="/static/game/js/preload.js"></script>
-    <script src="/static/game/js/rendering.js"></script>
-    <script src="/static/game/js/scene.js"></script>
-    
-    <script src="/static/game/js/splash/splash.js"></script>
-    
-    <script src="/static/game/js/game/gamestate.js"></script>
-    <script src="/static/game/js/game/menu.js"></script>
-    <script src="/static/game/js/game/box.js"></script>
-    <script src="/static/game/js/game/arrow.js"></script>
-    <script src="/static/game/js/game/spear.js"></script>
-    <script src="/static/game/js/game/pike.js"></script>
-    <script src="/static/game/js/game/circlespear.js"></script>
-    <script src="/static/game/js/game/swarmspear.js"></script>
-    <script src="/static/game/js/game/heart.js"></script>
-    <script src="/static/game/js/game/undyne.js"></script>
-    <script src="/static/game/js/game/attack.js"></script>
-    
-    <script src="/static/game/js/attacks/normal.js"></script>
-    <script src="/static/game/js/attacks/hard.js"></script>
-    <script src="/static/game/js/attacks/genocide.js"></script>
-    <script src="/static/game/js/attacks/genocide2.js"></script>
-    <script src="/static/game/js/attacks/testing.js"></script>
-    <script src="/static/game/js/attacks/aprilfools.js"></script>
-    <script src="/static/game/js/attacks/attacks.js"></script>
-    
-    <script src="/static/game/js/loader/sounds.js"></script>
-    <script src="/static/game/js/loader/graphics.js"></script>
-    <script src="/static/game/js/loader/fonts.js"></script>
-    
-    <script src="/static/game/js/input.js"></script>
-    <script src="/static/game/js/main.js"></script>
+
+	<meta charset=utf-8>
+	<title>Undyne Eternal</title>
+	<link rel="stylesheet" href="/static/game/css/undertale.css">
+
+	<script src="/static/game/lib/lodash.min.js"></script>
+	<script src="/static/game/lib/pixi.min.js"></script>
+	<script src="/static/game/lib/howler.min.js"></script>
+	<script src="/static/game/lib/funcs.js"></script>
+
+	<script src="/static/game/js/vars.js"></script>
+
+	<script src="/static/game/js/preload.js"></script>
+	<script src="/static/game/js/rendering.js"></script>
+	<script src="/static/game/js/scene.js"></script>
+
+	<script src="/static/game/js/splash/splash.js"></script>
+
+	<script src="/static/game/js/game/gamestate.js"></script>
+	<script src="/static/game/js/game/menu.js"></script>
+	<script src="/static/game/js/game/box.js"></script>
+	<script src="/static/game/js/game/arrow.js"></script>
+	<script src="/static/game/js/game/spear.js"></script>
+	<script src="/static/game/js/game/pike.js"></script>
+	<script src="/static/game/js/game/circlespear.js"></script>
+	<script src="/static/game/js/game/swarmspear.js"></script>
+	<script src="/static/game/js/game/heart.js"></script>
+	<script src="/static/game/js/game/undyne.js"></script>
+	<script src="/static/game/js/game/attack.js"></script>
+
+	<script src="/static/game/js/attacks/normal.js"></script>
+	<script src="/static/game/js/attacks/hard.js"></script>
+	<script src="/static/game/js/attacks/genocide.js"></script>
+	<script src="/static/game/js/attacks/genocide2.js"></script>
+	<script src="/static/game/js/attacks/testing.js"></script>
+	<script src="/static/game/js/attacks/attacks.js"></script>
+
+	<script src="/static/game/js/loader/sounds.js"></script>
+	<script src="/static/game/js/loader/graphics.js"></script>
+	<script src="/static/game/js/loader/fonts.js"></script>
+
+	<script src="/static/game/js/input.js"></script>
+	<script src="/static/game/js/main.js"></script>
+
 </head>
 
 <body>
-    <div class="bottom-credits">
-        <p class="announcement">
-            I'm putting all my new games on <a href="https://joezeng.gitlab.io/" onclick="gitlab_link()">Gitlab</a> from
-            now on! Come discover the next level of games!
-        </p>
+	<div class="bottom-credits">
+		<p>
+            <span>Based on fairdyne by <a href="https://github.com/joezeng">Joe Zeng</a></span>
+		</p>
         <p>
-            <span><span id="fairdyne">Fairdyne</span> v.0.99 (<a href="/fairdyne-v0.81">v0.81</a>, <a
-                href="/fairdyne-v0.63">v0.63</a>), by <a href="/">Joe Zeng</a>.</span>
-            <br/>
-            <span>Undertale &copy; 2015 Toby Fox.</span>
+            <span>Which is based on Undertale &copy; 2015 by Toby Fox.</span>
         </p>
-    </div>
+	</div>
 </body>
 
 </html>
