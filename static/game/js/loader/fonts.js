@@ -3,9 +3,9 @@
 var fonts_loader = new PIXI.loaders.Loader();
 
 fonts_loader
-	.add("undertale", "fonts/undertale.fnt")
-	.add("numbers", "fonts/numbers.fnt")
-	.add("speechbubble", "fonts/speechbubble.fnt")
+	.add("undertale", "static/game/fonts/undertale.fnt")
+	.add("numbers", "static/game/fonts/numbers.fnt")
+	.add("speechbubble", "static/game/fonts/speechbubble.fnt")
 	.on("complete", function(loader, resources) {
 		process_fonts(resources);
 	})

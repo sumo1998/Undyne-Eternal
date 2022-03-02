@@ -1,8 +1,6 @@
 var time_text;
 var love_text;
 
-var april_fools = false;
-
 function GameState() {
 
 	this.state = "menu";
@@ -45,6 +43,7 @@ GameState.prototype.handleInput = function(key) {
 				break;
 			case "A":
 				menu.select();
+                break;
 			default:
 				break;
 		}
@@ -69,37 +68,11 @@ GameState.prototype.handleInput = function(key) {
 
 }
 
-var i_want_out = false;
-
 GameState.prototype.restartGame = function(difficulty) {
-
-	var date = new Date();
-
-	if ((april_fools || date.getMonth() == 3 && date.getDate() == 1) && !i_want_out) {
-		if (april_fools == false) {
-			heart.setMaxHP(99);
-		} else {
-			switch(difficulty){
-				case "normal":
-					heart.setMaxHP(99); break;
-				case "hard":
-					i_want_out = true;
-					difficulty = "genocide";
-					heart.setMaxHP(4); break;
-				case "genocide":
-					heart.setMaxHP(4); break;
-			}
-		}
-		if (!i_want_out) {
-			difficulty = "aprilfools";
-			april_fools = true;
-		}
-	}
-
+    
 	this.difficulty = difficulty;
 
 	this.elapsed_time = 0;
-	this.score = 0;
 	this.state = "playing";
 
 	arrows = [];
@@ -115,7 +88,6 @@ GameState.prototype.restartGame = function(difficulty) {
 		case "hard":
 			heart.invincibility_increment = 500; break;
 		case "genocide":
-		case "aprilfools":
 			heart.invincibility_increment = 100; break;
 	}
 
@@ -137,11 +109,6 @@ GameState.prototype.restartGame = function(difficulty) {
 			attack_queue = [ { type: "null", time: 6.4 } ];
 			addNextAttack(g_ag1);
 			break;
-		case "aprilfools":
-			attack_queue_time = 0;
-			attack_queue = [ { type: "null", time: 0.0 } ];
-			addNextAttack(af_intro1);
-			break;
 	}
 
 
@@ -158,8 +125,6 @@ GameState.prototype.restartGame = function(difficulty) {
 			bgm_undyne1.play(); break;
 		case "genocide":
 			bgm_undyne2.play(); break;
-		case "aprilfools":
-			bgm_aprilfools.play(); break;
 	}
 
 	switchAttackMode();
@@ -196,21 +161,11 @@ GameState.prototype.endGame = function() {
 			bgm_undyne1.stop(); break;
 		case "genocide":
 			bgm_undyne2.stop();	break;
-		case "aprilfools":
-			bgm_aprilfools.stop(); 
-			bgm_aprilfools2.stop(); break;
 	}
-
-	if (this.difficulty == "aprilfools") {
-		document.getElementById("fairdyne").innerHTML = "APRIL FOOLS";
-		menu.normal_text_text = "I want to BE AN APRIL FOOL";
-		menu.hard_text_text = "I want OUT OF THIS MODE";
-		menu.genocide_text_text = "I want to PLAY THIS MODE FOR REAL";
-	} else {
-		menu.normal_text_text = "I want to PET THE VEGETABLES";
-		menu.hard_text_text = "I want to FIGHT THE TRUE HERO";
-		menu.genocide_text_text = "I want to ATONE FOR MY SINS";
-	}
+    
+    menu.normal_text_text = "I want to PET THE VEGETABLES";
+    menu.hard_text_text = "I want to FIGHT THE TRUE HERO";
+    menu.genocide_text_text = "I want to ATONE FOR MY SINS";
 
 	undyne.queue_text(endGameText(this.difficulty, this.elapsed_time), menu.show.bind(menu));
 
@@ -280,10 +235,6 @@ function endGameText(diff, surv_time) {
 		case "genocide":
 			return [
 				{ text: "You're going to have\nto try a little\nharder than THAT." },
-			];
-		case "aprilfools":
-			return [
-				{ text: "APRIL FOOLS,\nMOTHERFUCKERS!" },
 			];
 		default:
 			return [
@@ -386,14 +337,6 @@ GameState.prototype.update = function(delta_ms) {
 
 		if (current_attack.time <= (current_attack.buffer_time || 0))
 				switchAttackMode();
-
-		if (this.difficulty == "aprilfools" && this.elapsed_time > 6400) {
-			var rumble_distance = this.elapsed_time / 2000 + 10;
-			rumble = {
-				x: Math.random() * (rumble_distance * 2) - rumble_distance,
-				y: Math.random() * (rumble_distance * 2) - rumble_distance,
-			};
-		}
 
 	} else if (this.state == "gameover") {
 		rumble = { x:0, y:0 };

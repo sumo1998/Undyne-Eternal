@@ -1,5 +1,4 @@
 var attacks = {
-
 	ag1: ag1,
 	ag2: ag2,
 	ag3: ag3,
@@ -105,10 +104,4 @@ var attacks = {
 	g2_sa2: g2_sa2,
 	g2_ag12: g2_ag12,
 	g2_sp6: g2_sp6,
-
-	af_intro1: af_intro1,
-	af_intro2: af_intro2,
-	af_ag1: af_ag1,
-	af_ag2: af_ag2,
-
 };
