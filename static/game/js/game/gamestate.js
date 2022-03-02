@@ -80,7 +80,7 @@ GameState.prototype.restartGame = function(difficulty) {
 	next_attack = null;
 
 	heart.hp = heart.maxhp;
-	hp_text.text = _.padStart(heart.hp, 2, "0") + " / " + _.padStart(heart.maxhp, 2, "0");
+	hp_text.text = String(heart.hp).padStart(2, "0") + " / " + String(heart.maxhp).padStart(2, "0");
 
 	switch (difficulty) {
 		case "normal":

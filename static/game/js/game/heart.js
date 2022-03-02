@@ -51,7 +51,7 @@ function Heart() {
 	gameplay_stage.addChild(this.sprite);
 	gameplay_stage.addChild(this.shield_sprite);
 
-	hp_text.text = _.padStart(this.hp, 2, "0") + " / " + _.padStart(this.maxhp, 2, "0");
+    hp_text.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxhp).padStart(2, "0");
 
 }
 
@@ -60,8 +60,7 @@ Heart.prototype.setMaxHP = function(maxhp) {
 	this.maxhp = maxhp;
 	this.hp = maxhp;
 
-	hp_text.text = _.padStart(this.hp, 2, "0") + " / " + _.padStart(this.maxhp, 2, "0");
-
+    hp_text.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxhp).padStart(2, "0");
 }
 
 
@@ -179,8 +178,7 @@ Heart.prototype.takeDamage = function(damage) {
 		gamestate.endGame();
 	}
 
-	hp_text.text = _.padStart(this.hp, 2, "0") + " / " + _.padStart(this.maxhp, 2, "0");
-
+    hp_text.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxhp).padStart(2, "0")
 }
 
 
