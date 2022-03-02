@@ -3,7 +3,7 @@ var love_text;
 
 function GameState() {
 
-	this.state = "menu";
+	this.state = "playing";
 	this.level = 1;
 
 	hp_text = new PIXI.extras.BitmapText("04 / 04", {font: "15px Numbers", align: "right"});
@@ -17,7 +17,12 @@ function GameState() {
 	love_text = new PIXI.extras.BitmapText("LV " + this.level, {font: "15px Numbers", align: "left"});
 	love_text.position.x = 150;
 	love_text.position.y = 450;
-
+    
+    this.select_text = new PIXI.extras.BitmapText("", {font: "18px Undertale"});
+    this.select_text.position.set(80, 260);
+    this.select_text.visible = false;
+    
+    gameplay_stage.addChild(this.select_text);
 }
 
 GameState.prototype.handleInput = function(key) {
@@ -30,20 +35,6 @@ GameState.prototype.handleInput = function(key) {
 			case "B":
 				undyne.advanceTextB();
 				break;
-			default:
-				break;
-		}
-	} else if (this.state == "menu") {
-		switch(key) {
-			case "up":
-				menu.moveUp();
-				break;
-			case "down":
-				menu.moveDown();
-				break;
-			case "A":
-				menu.select();
-                break;
 			default:
 				break;
 		}
@@ -69,7 +60,6 @@ GameState.prototype.handleInput = function(key) {
 }
 
 GameState.prototype.restartGame = function(difficulty) {
-    
 	this.difficulty = difficulty;
 
 	this.elapsed_time = 0;
@@ -126,9 +116,8 @@ GameState.prototype.restartGame = function(difficulty) {
 		case "genocide":
 			bgm_undyne2.play(); break;
 	}
-
+    
 	switchAttackMode();
-
 }
 
 
@@ -153,7 +142,7 @@ GameState.prototype.endGame = function() {
 	undyne.opacity_g.alpha = 0;
 	this.state = "gameover";
 
-	menu.select_text.text = "Play again?"
+	this.select_text.text = "Play again?"
 
 	switch (this.difficulty) {
 		case "normal":
@@ -162,12 +151,11 @@ GameState.prototype.endGame = function() {
 		case "genocide":
 			bgm_undyne2.stop();	break;
 	}
-    
-    menu.normal_text_text = "I want to PET THE VEGETABLES";
-    menu.hard_text_text = "I want to FIGHT THE TRUE HERO";
-    menu.genocide_text_text = "I want to ATONE FOR MY SINS";
 
-	undyne.queue_text(endGameText(this.difficulty, this.elapsed_time), menu.show.bind(menu));
+	undyne.queue_text(endGameText(this.difficulty, this.elapsed_time), () => {
+        this.state = "playing";
+        gamestate.restartGame(difficulty);
+    });
 
 }
 
@@ -186,17 +174,10 @@ function endGameText(diff, surv_time) {
 							{ text: "To DEFEND YOURSELF."},
 							{ text: "Can't get more\nstraightforward\nthan that."},
 						];
-					case 2:
+					default:
 						return [
 							{ text: "Are you just doing\nthat on purpose?", face: 2 },
 							{ text: "Because it's not\nfunny. Stop it." },
-						];
-					default:
-						menu.disableEasyMode();
-						return [
-							{ text: "NGAHHHHHHH!", face: 3 },
-							{ text: "If you're not going\nto take this\nseriously...", face: 1 },
-							{ text: "I'm just going to\nhave to force you\nto try harder!", face: 3 },
 						];
 				}
 			} else if (surv_time < 60000)
@@ -210,10 +191,9 @@ function endGameText(diff, surv_time) {
 					{ text: "Keep trying, human!\nReach for the top!" },
 				];
 			else {
-				menu.disableEasyMode();
 				return [
 					{ text: "You're doing well,\nbut only because I'm\ngoing easy on you." },
-					{ text: "It won't be so easy\nnext time!" },
+					{ text: "Try something harder next time!" },
 				];
 			}
 		case "hard":
@@ -250,7 +230,6 @@ GameState.prototype.update = function(delta_ms) {
 	box.update(delta_ms);
 	heart.update(delta_ms);
 	undyne.update(delta_ms);
-	menu.update(delta_ms);
 
 	if (this.state == "playing") {
 		this.elapsed_time += delta_ms;

@@ -1,12 +1,12 @@
 var game_started = false;
 var update_time;
+var difficulty = "hard";
 
 function init_game() {
 	gamestate = new GameState();
 	undyne = new Undyne();
 	box = new Box();
 	heart = new Heart();
-	menu = new Menu();
 
 	gameplay_stage.addChild(hp_text);
 	gameplay_stage.addChild(time_text);
@@ -20,7 +20,8 @@ function start_game() {
 		game_started = true;
         
         gameplay_stage.alpha = 0;
-        gamestate.restartGame("hard");
+        gamestate.level = 1;
+        gamestate.restartGame(difficulty);
         
 		update_time = new Date().getTime();
 		requestAnimationFrame(update);
@@ -28,9 +29,7 @@ function start_game() {
 }
 
 function stop_game() {
-
 	game_started = false;
-
 }
 
 // main game loop
