@@ -1,33 +1,33 @@
-var time_text;
-var love_text;
+var timeText;
+var loveText;
 
 function GameState() {
     
     this.state = "playing";
     this.level = 1;
     
-    hp_text = new PIXI.extras.BitmapText("04 / 04", {font: "15px Numbers", align: "right"});
-    hp_text.position.x = 300;
-    hp_text.position.y = 450;
+    hpText = new PIXI.extras.BitmapText("04 / 04", {font: "15px Numbers", align: "right"});
+    hpText.position.x = 300;
+    hpText.position.y = 450;
     
-    time_text = new PIXI.extras.BitmapText("00:00.00", {font: "15px Numbers", align: "left"});
-    time_text.position.x = 500;
-    time_text.position.y = 450;
+    timeText = new PIXI.extras.BitmapText("00:00.00", {font: "15px Numbers", align: "left"});
+    timeText.position.x = 500;
+    timeText.position.y = 450;
     
-    love_text = new PIXI.extras.BitmapText("LV " + this.level, {font: "15px Numbers", align: "left"});
-    love_text.position.x = 150;
-    love_text.position.y = 450;
+    loveText = new PIXI.extras.BitmapText("LV " + this.level, {font: "15px Numbers", align: "left"});
+    loveText.position.x = 150;
+    loveText.position.y = 450;
     
-    this.select_text = new PIXI.extras.BitmapText("", {font: "18px Undertale"});
-    this.select_text.position.set(80, 260);
-    this.select_text.visible = false;
+    this.selectText = new PIXI.extras.BitmapText("", {font: "18px Undertale"});
+    this.selectText.position.set(80, 260);
+    this.selectText.visible = false;
     
-    gameplay_stage.addChild(this.select_text);
+    gameplayStage.addChild(this.selectText);
 }
 
 GameState.prototype.handleInput = function(key) {
     
-    if(undyne.text_state != "none") {
+    if(undyne.textState != "none") {
         switch(key) {
             case "A":
                 undyne.advanceTextA();
@@ -63,62 +63,62 @@ GameState.prototype.handleInput = function(key) {
 GameState.prototype.restartGame = function(difficulty) {
     this.difficulty = difficulty;
     
-    this.elapsed_time = 0;
+    this.elapsedTime = 0;
     this.state = "playing";
     
     arrows = [];
     spears = [];
-    next_attack = null;
+    nextAttack = null;
     
-    heart.hp = heart.maxhp;
-    hp_text.text = String(heart.hp).padStart(2, "0") + " / " + String(heart.maxhp).padStart(2, "0");
+    heart.hp = heart.maxHp;
+    hpText.text = String(heart.hp).padStart(2, "0") + " / " + String(heart.maxHp).padStart(2, "0");
     
     switch(difficulty) {
         case "normal":
-            heart.invincibility_increment = 1000;
+            heart.invincibilityIncrement = 1000;
             break;
         case "hard":
-            heart.invincibility_increment = 500;
+            heart.invincibilityIncrement = 500;
             break;
         case "genocide":
-            heart.invincibility_increment = 100;
+            heart.invincibilityIncrement = 100;
             break;
     }
     
     switch(difficulty) {
         case "normal":
             // have a 2-second buffer before the first attack
-            attack_queue_time = 2;
-            attack_queue = [{type: "null", time: 2}];
+            attackQueueTime = 2;
+            attackQueue = [{type: "null", time: 2}];
             addNextAttack(ag1);
             break;
         case "hard":
-            attack_queue_time = 2;
-            attack_queue = [{type: "null", time: 2}];
-            addNextAttack(h_ag1);
+            attackQueueTime = 2;
+            attackQueue = [{type: "null", time: 2}];
+            addNextAttack(hAg1);
             break;
         case "genocide":
             // genocide is timed to the music.
-            attack_queue_time = 6.4;
-            attack_queue = [{type: "null", time: 6.4}];
-            addNextAttack(g_ag1);
+            attackQueueTime = 6.4;
+            attackQueue = [{type: "null", time: 6.4}];
+            addNextAttack(gAg1);
             break;
     }
     
-    box.dest_left = 320 - SHIELD_DISTANCE;
-    box.dest_right = 320 + SHIELD_DISTANCE;
-    box.dest_top = 240 - SHIELD_DISTANCE;
-    box.dest_bottom = 240 + SHIELD_DISTANCE;
+    box.destLeft = 320 - shieldDistance;
+    box.destRight = 320 + shieldDistance;
+    box.destTop = 240 - shieldDistance;
+    box.destBottom = 240 + shieldDistance;
     heart.sprite.visible = true;
-    heart.shield_sprite.visible = true;
+    heart.shieldSprite.visible = true;
     
     switch(difficulty) {
         case "normal":
         case "hard":
-            bgm_undyne1.play();
+            bgmUndyne1.play();
             break;
         case "genocide":
-            bgm_undyne2.play();
+            bgmUndyne2.play();
             break;
     }
     
@@ -130,42 +130,42 @@ GameState.prototype.endGame = function() {
     // remove all arrows and spears
     
     for(var a = 0; a < arrows.length; ++a) {
-        gameplay_stage.removeChild(arrows[a].sprite);
+        gameplayStage.removeChild(arrows[a].sprite);
     }
     for(var a = 0; a < spears.length; ++a) {
-        gameplay_stage.removeChild(spears[a].sprite);
+        gameplayStage.removeChild(spears[a].sprite);
     }
     for(var a = 0; a < pikes.length; ++a) {
-        gameplay_stage.removeChild(pikes[a].sprite);
+        gameplayStage.removeChild(pikes[a].sprite);
     }
-    for(var a = 0; a < circle_spears.length; ++a) {
-        gameplay_stage.removeChild(circle_spears[a].sprite);
+    for(var a = 0; a < circleSpears.length; ++a) {
+        gameplayStage.removeChild(circleSpears[a].sprite);
     }
-    for(var a = 0; a < swarm_spears.length; ++a) {
-        gameplay_stage.removeChild(swarm_spears[a].sprite);
-    }
-    
-    if(box.top < 240 - SHIELD_DISTANCE) {
-        box.top = 240 - SHIELD_DISTANCE;
+    for(var a = 0; a < swarmSpears.length; ++a) {
+        gameplayStage.removeChild(swarmSpears[a].sprite);
     }
     
-    heart.shield_sprite.visible = false;
-    undyne.opacity_g.alpha = 0;
+    if(box.top < 240 - shieldDistance) {
+        box.top = 240 - shieldDistance;
+    }
+    
+    heart.shieldSprite.visible = false;
+    undyne.opacityG.alpha = 0;
     this.state = "gameover";
     
-    this.select_text.text = "Play again?";
+    this.selectText.text = "Play again?";
     
     switch(this.difficulty) {
         case "normal":
         case "hard":
-            bgm_undyne1.stop();
+            bgmUndyne1.stop();
             break;
         case "genocide":
-            bgm_undyne2.stop();
+            bgmUndyne2.stop();
             break;
     }
     
-    undyne.queue_text(endGameText(this.difficulty, this.elapsed_time), () => {
+    undyne.queueText(endGameText(this.difficulty, this.elapsedTime), () => {
         this.state = "playing";
         gamestate.restartGame(difficulty);
     });
@@ -175,10 +175,10 @@ GameState.prototype.endGame = function() {
 var annoyance = 0;
 var rumble = {x: 0, y: 0};
 
-function endGameText(diff, surv_time) {
+function endGameText(diff, survivalTime) {
     switch(diff) {
         case "normal":
-            if(surv_time < 6890) {
+            if(survivalTime < 6890) {
                 ++annoyance;
                 switch(annoyance) {
                     case 1:
@@ -194,13 +194,13 @@ function endGameText(diff, surv_time) {
                         ];
                 }
             }
-            else if(surv_time < 60000) {
+            else if(survivalTime < 60000) {
                 return [
                     {text: "Is that the best\nyou've got?"},
                     {text: "Pathetic. I know you\ncan do better!"}
                 ];
             }
-            else if(surv_time < 120000) {
+            else if(survivalTime < 120000) {
                 return [
                     {text: "Good, but still\nnot good enough."},
                     {text: "Keep trying, human!\nReach for the top!"}
@@ -213,13 +213,13 @@ function endGameText(diff, surv_time) {
                 ];
             }
         case "hard":
-            if(surv_time < 60000) {
+            if(survivalTime < 60000) {
                 return [
                     {text: "Is that the best\nyou've got?"},
                     {text: "Pathetic. I know you\ncan do better!"}
                 ];
             }
-            else if(surv_time < 120000) {
+            else if(survivalTime < 120000) {
                 return [
                     {text: "Good, but still\nnot good enough."},
                     {text: "Keep trying, human!\nReach for the top!"}
@@ -243,100 +243,100 @@ function endGameText(diff, surv_time) {
     }
 }
 
-GameState.prototype.update = function(delta_ms) {
+GameState.prototype.update = function(deltaMs) {
     
-    box.update(delta_ms);
-    heart.update(delta_ms);
-    undyne.update(delta_ms);
+    box.update(deltaMs);
+    heart.update(deltaMs);
+    undyne.update(deltaMs);
     
     if(this.state == "playing") {
-        this.elapsed_time += delta_ms;
-        time_text.text = format_time_long(this.elapsed_time);
+        this.elapsedTime += deltaMs;
+        timeText.text = formatTimeLong(this.elapsedTime);
         
-        // arrows.update(delta_ms)
+        // arrows.update(deltaMs)
         for(var a = 0; a < arrows.length; ++a) {
-            arrows[a].update(delta_ms / 1000);
+            arrows[a].update(deltaMs / 1000);
             if(arrows[a].removed) {
-                gameplay_stage.removeChild(arrows[a].sprite);
+                gameplayStage.removeChild(arrows[a].sprite);
                 arrows.splice(a, 1);
             }
         }
         
-        // spears.update(delta_ms)
+        // spears.update(deltaMs)
         for(var a = 0; a < spears.length; ++a) {
-            spears[a].update(delta_ms);
+            spears[a].update(deltaMs);
             if(spears[a].removed) {
-                gameplay_stage.removeChild(spears[a].sprite);
+                gameplayStage.removeChild(spears[a].sprite);
                 spears.splice(a, 1);
             }
         }
         
-        // pikes.update(delta_ms)
+        // pikes.update(deltaMs)
         for(var a = 0; a < pikes.length; ++a) {
-            pikes[a].update(delta_ms);
+            pikes[a].update(deltaMs);
             if(pikes[a].removed) {
-                gameplay_stage.removeChild(pikes[a].sprite);
+                gameplayStage.removeChild(pikes[a].sprite);
                 pikes.splice(a, 1);
             }
         }
         
-        // circle_spears.update(delta_ms)
-        for(var a = 0; a < circle_spears.length; ++a) {
-            circle_spears[a].update(delta_ms);
-            if(circle_spears[a].removed) {
-                gameplay_stage.removeChild(circle_spears[a].sprite);
-                circle_spears.splice(a, 1);
+        // circleSpears.update(deltaMs)
+        for(var a = 0; a < circleSpears.length; ++a) {
+            circleSpears[a].update(deltaMs);
+            if(circleSpears[a].removed) {
+                gameplayStage.removeChild(circleSpears[a].sprite);
+                circleSpears.splice(a, 1);
             }
         }
         
-        // swarm.update(delta_ms)
-        for(var a = 0; a < swarm_spears.length; ++a) {
-            swarm_spears[a].update(delta_ms);
-            if(swarm_spears[a].removed) {
-                gameplay_stage.removeChild(swarm_spears[a].sprite);
-                swarm_spears.splice(a, 1);
+        // swarm.update(deltaMs)
+        for(var a = 0; a < swarmSpears.length; ++a) {
+            swarmSpears[a].update(deltaMs);
+            if(swarmSpears[a].removed) {
+                gameplayStage.removeChild(swarmSpears[a].sprite);
+                swarmSpears.splice(a, 1);
             }
         }
         
-        var current_attack = attack_queue[0];
-        current_attack.time -= delta_ms / 1000;
+        var currentAttack = attackQueue[0];
+        currentAttack.time -= deltaMs / 1000;
         
-        if(current_attack.type == "spear") {
-            spear_time -= delta_ms;
-            if(spear_time <= 0) {
-                spear_time += spear_interval;
+        if(currentAttack.type == "spear") {
+            spearTime -= deltaMs;
+            if(spearTime <= 0) {
+                spearTime += spearInterval;
                 addNewSpear();
             }
         }
-        else if(current_attack.type == "pike") {
-            pike_time -= delta_ms;
-            if(pike_time <= 0) {
-                pike_time += pike_interval;
+        else if(currentAttack.type == "pike") {
+            pikeTime -= deltaMs;
+            if(pikeTime <= 0) {
+                pikeTime += pikeInterval;
                 addNewPike();
             }
         }
-        else if(current_attack.type == "circlespear") {
-            circle_time -= delta_ms;
-            if(circle_time <= 0) {
-                circle_time += circle_interval;
-                addNewCircleSpear(circle_count);
+        else if(currentAttack.type == "circlespear") {
+            circleTime -= deltaMs;
+            if(circleTime <= 0) {
+                circleTime += circleInterval;
+                addNewCircleSpear(circleCount);
             }
         }
-        else if(current_attack.type == "swarmspear") {
-            swarm_time -= delta_ms;
-            if(swarm_time <= 0) {
-                swarm_time += swarm_interval;
-                swarm_initial_angle += Math.random() * 0.8 - 0.5;
-                addNewSwarmSpear(6, swarm_interval, swarm_initial_angle);
+        else if(currentAttack.type == "swarmspear") {
+            swarmTime -= deltaMs;
+            if(swarmTime <= 0) {
+                swarmTime += swarmInterval;
+                swarmInitialAngle += Math.random() * 0.8 - 0.5;
+                addNewSwarmSpear(6, swarmInterval, swarmInitialAngle);
             }
         }
         
-        if(current_attack.time <= 0.4 + (current_attack.buffer_time || 0) &&
-            current_attack.type != attack_queue[1].type) {
-            undyne.swing_arm();
+        if(currentAttack.time <= 0.4 + (currentAttack.bufferTime || 0) &&
+            currentAttack.type != attackQueue[1].type) {
+            undyne.swingArm();
         }
         
-        if(current_attack.time <= (current_attack.buffer_time || 0)) {
+        if(currentAttack.time <= (currentAttack.bufferTime || 0)) {
             switchAttackMode();
         }
         
@@ -348,8 +348,8 @@ GameState.prototype.update = function(delta_ms) {
         
     }
     
-    gameplay_stage.position.set(rumble.x, rumble.y);
+    gameplayStage.position.set(rumble.x, rumble.y);
     
-}
+};
 
 var gamestate;

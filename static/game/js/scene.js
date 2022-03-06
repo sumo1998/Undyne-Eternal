@@ -1,17 +1,17 @@
-var gameplay_stage;
+var gameplayStage;
 
 function Scene() {
-    this.scene_time = 0;
-};
+    this.sceneTime = 0;
+}
 
-Scene.prototype.update = function(delta_ms) {
+Scene.prototype.update = function(deltaMs) {
     
-    this.scene_time += delta_ms;
+    this.sceneTime += deltaMs;
     
-    if(this.scene_time < 150) {
-        gameplay_stage.alpha = interp_clamp(this.scene_time, 0, 100, 0, 1);
+    if(this.sceneTime < 150) {
+        gameplayStage.alpha = interpolateClamp(this.sceneTime, 0, 100, 0, 1);
     }
-    gamestate.update(delta_ms);
+    gamestate.update(deltaMs);
 };
 
 var scene = new Scene();

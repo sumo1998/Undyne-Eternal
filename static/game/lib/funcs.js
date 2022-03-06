@@ -1,18 +1,18 @@
-function format_time_long(ms) {
+function formatTimeLong(ms) {
 
-	var opt_days = "", opt_hours = "";
+	var optDays = "", optHours = "";
 
 	if (ms > 86400000) {
-		opt_days = Math.floor(ms / 86400000) + "/";
+		optDays = Math.floor(ms / 86400000) + "/";
 	} if (ms > 3600000) {
-        opt_hours = String(Math.floor((ms % 86400000) / 3600000)).padStart(2, "0") + ":";
+        optHours = String(Math.floor((ms % 86400000) / 3600000)).padStart(2, "0") + ":";
 	}
 
 	var minutes = String(Math.floor((ms % 3600000) / 60000)).padStart(2, "0") + ":";
 	var seconds = String(Math.floor((ms % 60000) / 1000)).padStart(2, "0") + '.';
 	var cs = String(Math.floor((ms % 1000) / 10)).padStart(2, "0");
 
-	return opt_days + opt_hours + minutes + seconds + cs;
+	return optDays + optHours + minutes + seconds + cs;
 
 }
 
@@ -23,19 +23,19 @@ function clamp(v, start, end) {
 	return v;
 }
 
-function interp_clamp(v, start, end, f_start, f_end) {
+function interpolateClamp(v, start, end, fStart, fEnd) {
 	/*
 		a linear function that clamps function return values
 		between min and max and then interpolates outputs between
-		f_start and f_end.
+		fStart and fEnd.
 	*/
-	if (v < start && end > start || v > start && end < start) return f_start;
-	if (v > end && end > start || v < end && end < start) return f_end;
-	else return f_start + ((f_end - f_start) * (v - start) / (end - start));
+	if (v < start && end > start || v > start && end < start) return fStart;
+	if (v > end && end > start || v < end && end < start) return fEnd;
+	else return fStart + ((fEnd - fStart) * (v - start) / (end - start));
 }
 
 
-function dot_product(a, b) {
+function dotProduct(a, b) {
 	return a.x * b.x + a.y * b.y;
 }
 
@@ -48,6 +48,6 @@ function norm(dx, dy) {
 	return Math.sqrt(dx * dx + dy * dy);
 }
 
-function scalar_mult(v, m){
+function scalarMult(v, m){
 	return { x: v.x * m, y: v.y * m };
 }

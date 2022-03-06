@@ -1,50 +1,50 @@
-var game_started = false;
-var update_time;
+var gameStarted = false;
+var updateTime;
 var difficulty = "hard";
 
-function init_game() {
+function initializeGame() {
     gamestate = new GameState();
     undyne = new Undyne();
     box = new Box();
     heart = new Heart();
     
-    gameplay_stage.addChild(hp_text);
-    gameplay_stage.addChild(time_text);
-    gameplay_stage.addChild(love_text);
+    gameplayStage.addChild(hpText);
+    gameplayStage.addChild(timeText);
+    gameplayStage.addChild(loveText);
     
-    start_game();
+    startGame();
 }
 
-function start_game() {
-    if(game_started == false) {
-        game_started = true;
+function startGame() {
+    if(gameStarted == false) {
+        gameStarted = true;
         
-        gameplay_stage.alpha = 0;
+        gameplayStage.alpha = 0;
         gamestate.level = 1;
         gamestate.restartGame(difficulty);
         
-        update_time = new Date().getTime();
+        updateTime = new Date().getTime();
         requestAnimationFrame(update);
     }
 }
 
-function stop_game() {
-    game_started = false;
+function stopGame() {
+    gameStarted = false;
 }
 
 // main game loop
 function update() {
     
-    if(game_started == true) {
+    if(gameStarted == true) {
         requestAnimationFrame(update);
     }
     
-    var current_time = new Date().getTime();
-    var delta_ms = clamp(current_time - update_time, 0, 100);
+    var currentTime = new Date().getTime();
+    var deltaMs = clamp(currentTime - updateTime, 0, 100);
     
-    update_time = current_time;
+    updateTime = currentTime;
     
-    scene.update(delta_ms);
+    scene.update(deltaMs);
     
     render();
     
@@ -52,7 +52,7 @@ function update() {
 
 window.onload = function() {
     
-    setup_rendering();
-    start_preload();
+    setUpRendering();
+    startPreload();
     
-}
+};

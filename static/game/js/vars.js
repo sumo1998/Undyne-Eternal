@@ -1,6 +1,6 @@
-const SHIELD_DISTANCE = 32;
-const HEART_SIZE = 16;
+const shieldDistance = 32;
+const heartSize = 16;
 
-const BOX_ADJUST_SPEED = 0.5; // px/ms
-const MOVEMENT_SPEED = 0.16;  // px/ms
-const SPEAR_SPEED = 0.25;
+const boxAdjustSpeed = 0.5; // px/ms
+const movementSpeed = 0.16;  // px/ms
+const spearSpeed = 0.25;

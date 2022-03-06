@@ -1,37 +1,37 @@
-var next_attack = null;
+var nextAttack = null;
 
-var attack_queue_time = 0;
-var attack_queue = [];
+var attackQueueTime = 0;
+var attackQueue = [];
 
-var spear_interval = 400;
-var spear_time = 0;
+var spearInterval = 400;
+var spearTime = 0;
 
-var pike_interval = 400;
-var pike_time = 0;
+var pikeInterval = 400;
+var pikeTime = 0;
 
-var circle_interval = 1200;
-var circle_count = 7;
-var circle_time = 0;
+var circleInterval = 1200;
+var circleCount = 7;
+var circleTime = 0;
 
-var swarm_interval = 400;
-var swarm_time = 0;
-var swarm_initial_angle = 0;
+var swarmInterval = 400;
+var swarmTime = 0;
+var swarmInitialAngle = 0;
 
 function switchAttackMode() {
     
-    var borrowed_time = attack_queue[0].time;
-    attack_queue.shift();
+    var borrowedTime = attackQueue[0].time;
+    attackQueue.shift();
     
-    var current_attack = attack_queue[0];
-    current_attack.time += borrowed_time;
+    var currentAttack = attackQueue[0];
+    currentAttack.time += borrowedTime;
     
-    switch(current_attack.type) {
+    switch(currentAttack.type) {
         case "arrow":
-            undyne.opacity_g.alpha = 0.8;
-            box.dest_left = 320 - SHIELD_DISTANCE;
-            box.dest_right = 320 + SHIELD_DISTANCE;
-            box.dest_top = 240 - SHIELD_DISTANCE;
-            box.dest_bottom = 240 + SHIELD_DISTANCE;
+            undyne.opacityG.alpha = 0.8;
+            box.destLeft = 320 - shieldDistance;
+            box.destRight = 320 + shieldDistance;
+            box.destTop = 240 - shieldDistance;
+            box.destBottom = 240 + shieldDistance;
             // get rid of all spears and pikes
             for(var a = 0; a < spears.length; ++a) {
                 spears[a].removed = true;
@@ -39,11 +39,11 @@ function switchAttackMode() {
             for(var a = 0; a < pikes.length; ++a) {
                 pikes[a].removed = true;
             }
-            for(var a = 0; a < circle_spears.length; ++a) {
-                circle_spears[a].removed = true;
+            for(var a = 0; a < circleSpears.length; ++a) {
+                circleSpears[a].removed = true;
             }
-            for(var a = 0; a < swarm_spears.length; ++a) {
-                swarm_spears[a].removed = true;
+            for(var a = 0; a < swarmSpears.length; ++a) {
+                swarmSpears[a].removed = true;
             }
             for(var a = 0; a < arrows.length; ++a) {
                 arrows[a].sprite.visible = true;
@@ -51,53 +51,53 @@ function switchAttackMode() {
             heart.setColour("green");
             break;
         case "spear":
-            spear_interval = current_attack.interval;
-            undyne.opacity_g.alpha = 0.5;
-            box.dest_left = 240;
-            box.dest_right = 400;
-            box.dest_top = 200;
-            box.dest_bottom = 360;
-            spear_time = spear_interval + borrowed_time;
+            spearInterval = currentAttack.interval;
+            undyne.opacityG.alpha = 0.5;
+            box.destLeft = 240;
+            box.destRight = 400;
+            box.destTop = 200;
+            box.destBottom = 360;
+            spearTime = spearInterval + borrowedTime;
             for(var a = 0; a < arrows.length; ++a) {
                 arrows[a].sprite.visible = false;
             }
             heart.setColour("red");
             break;
         case "pike":
-            pike_interval = current_attack.interval;
-            undyne.opacity_g.alpha = 0.5;
-            box.dest_left = 288;
-            box.dest_right = 352;
-            box.dest_top = 280;
-            box.dest_bottom = 360;
-            pike_time = pike_interval + borrowed_time;
+            pikeInterval = currentAttack.interval;
+            undyne.opacityG.alpha = 0.5;
+            box.destLeft = 288;
+            box.destRight = 352;
+            box.destTop = 280;
+            box.destBottom = 360;
+            pikeTime = pikeInterval + borrowedTime;
             for(var a = 0; a < arrows.length; ++a) {
                 arrows[a].sprite.visible = false;
             }
             heart.setColour("red");
             break;
         case "circlespear":
-            circle_interval = current_attack.interval;
-            circle_count = current_attack.count;
-            undyne.opacity_g.alpha = 0.5;
-            box.dest_left = 40;
-            box.dest_right = 600;
-            box.dest_top = 160;
-            box.dest_bottom = 400;
-            circle_time = circle_interval + borrowed_time;
+            circleInterval = currentAttack.interval;
+            circleCount = currentAttack.count;
+            undyne.opacityG.alpha = 0.5;
+            box.destLeft = 40;
+            box.destRight = 600;
+            box.destTop = 160;
+            box.destBottom = 400;
+            circleTime = circleInterval + borrowedTime;
             for(var a = 0; a < arrows.length; ++a) {
                 arrows[a].sprite.visible = false;
             }
             heart.setColour("red");
             break;
         case "swarmspear":
-            swarm_interval = current_attack.interval;
-            undyne.opacity_g.alpha = 0.5;
-            box.dest_left = 40;
-            box.dest_right = 600;
-            box.dest_top = 160;
-            box.dest_bottom = 400;
-            swarm_time = swarm_interval + borrowed_time;
+            swarmInterval = currentAttack.interval;
+            undyne.opacityG.alpha = 0.5;
+            box.destLeft = 40;
+            box.destRight = 600;
+            box.destTop = 160;
+            box.destBottom = 400;
+            swarmTime = swarmInterval + borrowedTime;
             for(var a = 0; a < arrows.length; ++a) {
                 arrows[a].sprite.visible = false;
             }
@@ -111,49 +111,49 @@ function switchAttackMode() {
 
 function addNextAttack(attack) {
     
-    var new_attack;
+    var newAttack;
     
     if(attack) {
-        attack_queue_time += attack.time;
-        new_attack = attack;
+        attackQueueTime += attack.time;
+        newAttack = attack;
     }
     else {
-        attack_queue_time += next_attack.next_time;
-        var new_attack = attacks[next_attack.next_sets[Math.floor(next_attack.next_sets.length * Math.random())]];
+        attackQueueTime += nextAttack.nextTime;
+        var newAttack = attacks[nextAttack.nextSets[Math.floor(nextAttack.nextSets.length * Math.random())]];
     }
     
-    switch(new_attack.type) {
+    switch(newAttack.type) {
         case "arrow":
             // add arrows two attacks in advance.
-            addArrowGroup(new_attack);
+            addArrowGroup(newAttack);
             break;
         default:
             // for other types, a mode switch is required instead.
             break;
     }
     
-    next_attack = new_attack;
+    nextAttack = newAttack;
     
-    var attack_info = {type: next_attack.type, time: next_attack.next_time};
+    var attackInfo = {type: nextAttack.type, time: nextAttack.nextTime};
     
-    if(new_attack.type == "spear") {
-        attack_info.interval = new_attack.spear_interval;
+    if(newAttack.type == "spear") {
+        attackInfo.interval = newAttack.spearInterval;
     }
-    if(new_attack.type == "pike") {
-        attack_info.interval = new_attack.pike_interval;
-        attack_info.down = new_attack.down;
+    if(newAttack.type == "pike") {
+        attackInfo.interval = newAttack.pikeInterval;
+        attackInfo.down = newAttack.down;
     }
-    if(new_attack.type == "circlespear") {
-        attack_info.interval = new_attack.spear_interval;
-        attack_info.count = new_attack.spear_count;
+    if(newAttack.type == "circlespear") {
+        attackInfo.interval = newAttack.spearInterval;
+        attackInfo.count = newAttack.spearCount;
     }
-    if(new_attack.type == "swarmspear") {
-        attack_info.interval = new_attack.spear_interval;
+    if(newAttack.type == "swarmspear") {
+        attackInfo.interval = newAttack.spearInterval;
     }
-    if(new_attack.buffer_time) {
-        attack_info.buffer_time = new_attack.buffer_time;
+    if(newAttack.bufferTime) {
+        attackInfo.bufferTime = newAttack.bufferTime;
     }
     
-    attack_queue.push(attack_info);
+    attackQueue.push(attackInfo);
     
 }

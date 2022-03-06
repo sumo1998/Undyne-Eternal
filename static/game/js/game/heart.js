@@ -1,131 +1,131 @@
-var heart_texture;
-var shield_texture;
-var hp_text;
+var heartTexture;
+var shieldTexture;
+var hpText;
 
-var heart_colours = {
+var heartColors = {
     "red": 0xff0000,
     "green": 0x00ff00
 };
 
 function Heart() {
     
-    this.maxhp = 4; // always starts with 4 HP
-    this.hp = this.maxhp;
+    this.maxHp = 4; // always starts with 4 HP
+    this.hp = this.maxHp;
     this.invincibility = 0;
-    this.invincibility_increment = 1000;
+    this.invincibilityIncrement = 1000;
     
     /* rendering info */
     
     // position relative to the BOX
     // counting from top-left corner
     
-    this.pos_x = 320;
-    this.pos_y = 240;
+    this.posX = 320;
+    this.posY = 240;
     
-    // rel_pos_x is used in dual dodge+block mode. Don't worry for it for now.
-    this.rel_pos_x = 320;
-    this.rel_pos_y = 240;
+    // relPosX is used in dual dodge+block mode. Don't worry about it for now.
+    this.relPosX = 320;
+    this.relPosY = 240;
     
     this.colour = "green";
-    this.shield_dir = 3;
+    this.shieldDir = 3;
     
-    this.abs_shield_dir = 3;
-    this.target_rotation = Math.PI * 2;
+    this.absShieldDir = 3;
+    this.targetRotation = Math.PI * 2;
     
-    this.sprite = new PIXI.Sprite(heart_texture);
+    this.sprite = new PIXI.Sprite(heartTexture);
     this.sprite.anchor.set(0.5, 0.5);
-    this.sprite.position.set(this.pos_x, this.pos_y);
-    this.sprite.tint = heart_colours[this.colour];
+    this.sprite.position.set(this.posX, this.posY);
+    this.sprite.tint = heartColors[this.colour];
     this.sprite.visible = false;
     
-    this.shield_sprite = new PIXI.Sprite(shield_texture);
-    this.shield_sprite.anchor.set(0.5, 1.4);
-    this.shield_sprite.position.set(this.pos_x, this.pos_y);
-    this.shield_sprite.tint = 0xcdcdcd;
-    this.shield_sprite.rotation = Math.PI / 2 * (1 + this.shield_dir);
-    this.shield_sprite.visible = false;
+    this.shieldSprite = new PIXI.Sprite(shieldTexture);
+    this.shieldSprite.anchor.set(0.5, 1.4);
+    this.shieldSprite.position.set(this.posX, this.posY);
+    this.shieldSprite.tint = 0xcdcdcd;
+    this.shieldSprite.rotation = Math.PI / 2 * (1 + this.shieldDir);
+    this.shieldSprite.visible = false;
     
     this.graphics = new PIXI.Graphics();
-    gameplay_stage.addChild(this.graphics);
+    gameplayStage.addChild(this.graphics);
     
-    gameplay_stage.addChild(this.sprite);
-    gameplay_stage.addChild(this.shield_sprite);
+    gameplayStage.addChild(this.sprite);
+    gameplayStage.addChild(this.shieldSprite);
     
-    hp_text.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxhp).padStart(2, "0");
+    hpText.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxHp).padStart(2, "0");
     
 }
 
 Heart.prototype.setMaxHP = function(maxhp) {
     
-    this.maxhp = maxhp;
+    this.maxHp = maxhp;
     this.hp = maxhp;
     
-    hp_text.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxhp).padStart(2, "0");
+    hpText.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxHp).padStart(2, "0");
 };
 
-Heart.prototype.update = function(delta_ms) {
+Heart.prototype.update = function(deltaMs) {
     
-    this.invincibility = Math.max(0, this.invincibility - delta_ms);
+    this.invincibility = Math.max(0, this.invincibility - deltaMs);
     this.sprite.alpha = Math.cos(Math.PI * 2 * this.invincibility / 250) * 0.5 + 0.5;
     
-    this.shield_sprite.rotation = 0.6 * this.shield_sprite.rotation + 0.4 * this.target_rotation;
+    this.shieldSprite.rotation = 0.6 * this.shieldSprite.rotation + 0.4 * this.targetRotation;
     
     if(gamestate.state == "playing") {
         if(this.colour == "green") {
-            this.recenter(delta_ms);
+            this.recenter(deltaMs);
         }
         if(this.colour == "red") {
-            this.move(delta_ms);
+            this.move(deltaMs);
         }
     }
     
 };
 
-Heart.prototype.move = function(delta_ms) {
+Heart.prototype.move = function(deltaMs) {
     
-    var speed = MOVEMENT_SPEED;
+    var speed = movementSpeed;
     if(isKeyDown("B")) {
         speed /= 2;
     }
     
     var d = {x: 0, y: 0};
     
-    if(key_is_down["left"]) {
-        d.x = -speed * delta_ms;
+    if(keyIsDown["left"]) {
+        d.x = -speed * deltaMs;
     }
-    if(key_is_down["right"]) {
-        d.x = +speed * delta_ms;
+    if(keyIsDown["right"]) {
+        d.x = +speed * deltaMs;
     }
-    if(key_is_down["up"]) {
-        d.y = -speed * delta_ms;
+    if(keyIsDown["up"]) {
+        d.y = -speed * deltaMs;
     }
-    if(key_is_down["down"]) {
-        d.y = +speed * delta_ms;
+    if(keyIsDown["down"]) {
+        d.y = +speed * deltaMs;
     }
     
-    var f = vnorm(d) == 0 ? d : scalar_mult(d, speed * delta_ms / vnorm(d));
+    var f = vnorm(d) == 0 ? d : scalarMult(d, speed * deltaMs / vnorm(d));
     
-    this.pos_x = clamp(this.pos_x + f.x, box.left + HEART_SIZE / 2, box.right - HEART_SIZE / 2);
-    this.pos_y = clamp(this.pos_y + f.y, box.top + HEART_SIZE / 2, box.bottom - HEART_SIZE / 2);
+    this.posX = clamp(this.posX + f.x, box.left + heartSize / 2, box.right - heartSize / 2);
+    this.posY = clamp(this.posY + f.y, box.top + heartSize / 2, box.bottom - heartSize / 2);
     
     this.setSpritePosition();
     
 };
 
-Heart.prototype.recenter = function(delta_ms) {
+Heart.prototype.recenter = function(deltaMs) {
     
-    if(this.pos_x < 320) {
-        this.pos_x = Math.min(320, this.pos_x + BOX_ADJUST_SPEED * delta_ms);
+    if(this.posX < 320) {
+        this.posX = Math.min(320, this.posX + boxAdjustSpeed * deltaMs);
     }
-    if(this.pos_x > 320) {
-        this.pos_x = Math.max(320, this.pos_x - BOX_ADJUST_SPEED * delta_ms);
+    if(this.posX > 320) {
+        this.posX = Math.max(320, this.posX - boxAdjustSpeed * deltaMs);
     }
     
-    if(this.pos_y < 240) {
-        this.pos_y = Math.min(240, this.pos_y + BOX_ADJUST_SPEED * delta_ms);
+    if(this.posY < 240) {
+        this.posY = Math.min(240, this.posY + boxAdjustSpeed * deltaMs);
     }
-    if(this.pos_y > 240) {
-        this.pos_y = Math.max(240, this.pos_y - BOX_ADJUST_SPEED * delta_ms);
+    if(this.posY > 240) {
+        this.posY = Math.max(240, this.posY - boxAdjustSpeed * deltaMs);
     }
     
     this.setSpritePosition();
@@ -134,30 +134,30 @@ Heart.prototype.recenter = function(delta_ms) {
 
 Heart.prototype.setPosition = function(x, y) {
     if(x != null) {
-        this.pos_x = x;
+        this.posX = x;
     }
     if(y != null) {
-        this.pos_y = y;
+        this.posY = y;
     }
     this.setSpritePosition();
 };
 
 Heart.prototype.setSpritePosition = function() {
-    this.sprite.position.set(this.pos_x, this.pos_y);
-    this.shield_sprite.position.set(this.pos_x, this.pos_y);
+    this.sprite.position.set(this.posX, this.posY);
+    this.shieldSprite.position.set(this.posX, this.posY);
 };
 
 Heart.prototype.setColour = function(colour) {
     
     this.colour = colour;
-    this.sprite.tint = heart_colours[colour];
+    this.sprite.tint = heartColors[colour];
     
     switch(colour) {
         case "red":
-            this.shield_sprite.visible = false;
+            this.shieldSprite.visible = false;
             break;
         case "green":
-            this.shield_sprite.visible = true;
+            this.shieldSprite.visible = true;
             break;
     }
     
@@ -165,21 +165,21 @@ Heart.prototype.setColour = function(colour) {
 
 Heart.prototype.setShieldDir = function(dir) {
     // set target rotation to the one with the least distance.
-    var new_dir = dir;
+    var newDir = dir;
     
-    if(new_dir < this.shield_dir) {
-        new_dir += 4;
+    if(newDir < this.shieldDir) {
+        newDir += 4;
     }
     
-    if(new_dir - this.shield_dir <= 2) {
-        this.abs_shield_dir += new_dir - this.shield_dir;
+    if(newDir - this.shieldDir <= 2) {
+        this.absShieldDir += newDir - this.shieldDir;
     }
     else {
-        this.abs_shield_dir += new_dir - 4 - this.shield_dir;
+        this.absShieldDir += newDir - 4 - this.shieldDir;
     }
     
-    this.shield_dir = dir;
-    this.target_rotation = Math.PI / 2 * (1 + this.abs_shield_dir);
+    this.shieldDir = dir;
+    this.targetRotation = Math.PI / 2 * (1 + this.absShieldDir);
 };
 
 Heart.prototype.takeDamage = function(damage) {
@@ -188,15 +188,15 @@ Heart.prototype.takeDamage = function(damage) {
         return;
     }
     
-    this.invincibility = this.invincibility_increment;
+    this.invincibility = this.invincibilityIncrement;
     
-    se_damage.play();
+    seDamage.play();
     this.hp = Math.max(0, this.hp - damage);
     if(this.hp == 0) {
         gamestate.endGame();
     }
     
-    hp_text.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxhp).padStart(2, "0");
+    hpText.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxHp).padStart(2, "0");
 };
 
 Heart.prototype.render = function() {
@@ -207,9 +207,9 @@ Heart.prototype.render = function() {
     this.graphics.lineStyle(0, 0xFFFFFF);
     this.graphics.drawRect(262, 447, 28, 21);
     this.graphics.beginFill(0xffff00);
-    this.graphics.drawRect(262, 447, this.hp * 28 / this.maxhp, 21);
+    this.graphics.drawRect(262, 447, this.hp * 28 / this.maxHp, 21);
     this.graphics.endFill();
     
-}
+};
 
 var heart;

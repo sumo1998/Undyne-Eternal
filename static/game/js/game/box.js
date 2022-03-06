@@ -7,13 +7,13 @@ function Box() {
     this.top = 240;
     this.bottom = 420;
     
-    this.dest_left = 16;
-    this.dest_right = 624;
-    this.dest_top = 240;
-    this.dest_bottom = 420;
+    this.destLeft = 16;
+    this.destRight = 624;
+    this.destTop = 240;
+    this.destBottom = 420;
     
     this.graphics = new PIXI.Graphics();
-    gameplay_stage.addChild(this.graphics);
+    gameplayStage.addChild(this.graphics);
     
 }
 
@@ -23,53 +23,53 @@ Box.prototype.update = function(ms) {
 
 Box.prototype.adjustBounds = function(ms) {
     
-    if(this.left < this.dest_left) {
-        this.left = Math.min(this.dest_left, this.left + BOX_ADJUST_SPEED * ms);
+    if(this.left < this.destLeft) {
+        this.left = Math.min(this.destLeft, this.left + boxAdjustSpeed * ms);
     }
     
-    if(this.left > this.dest_left) {
-        this.left = Math.max(this.dest_left, this.left - BOX_ADJUST_SPEED * ms);
+    if(this.left > this.destLeft) {
+        this.left = Math.max(this.destLeft, this.left - boxAdjustSpeed * ms);
     }
     
-    if(this.right < this.dest_right) {
-        this.right = Math.min(this.dest_right, this.right + BOX_ADJUST_SPEED * ms);
+    if(this.right < this.destRight) {
+        this.right = Math.min(this.destRight, this.right + boxAdjustSpeed * ms);
     }
     
-    if(this.right > this.dest_right) {
-        this.right = Math.max(this.dest_right, this.right - BOX_ADJUST_SPEED * ms);
+    if(this.right > this.destRight) {
+        this.right = Math.max(this.destRight, this.right - boxAdjustSpeed * ms);
     }
     
-    if(this.top < this.dest_top) {
-        this.top = Math.min(this.dest_top, this.top + BOX_ADJUST_SPEED * ms);
+    if(this.top < this.destTop) {
+        this.top = Math.min(this.destTop, this.top + boxAdjustSpeed * ms);
     }
     
-    if(this.top > this.dest_top) {
-        this.top = Math.max(this.dest_top, this.top - BOX_ADJUST_SPEED * ms);
+    if(this.top > this.destTop) {
+        this.top = Math.max(this.destTop, this.top - boxAdjustSpeed * ms);
     }
     
-    if(this.bottom < this.dest_bottom) {
-        this.bottom = Math.min(this.dest_bottom, this.bottom + BOX_ADJUST_SPEED * ms);
+    if(this.bottom < this.destBottom) {
+        this.bottom = Math.min(this.destBottom, this.bottom + boxAdjustSpeed * ms);
     }
     
-    if(this.bottom > this.dest_bottom) {
-        this.bottom = Math.max(this.dest_bottom, this.bottom - BOX_ADJUST_SPEED * ms);
+    if(this.bottom > this.destBottom) {
+        this.bottom = Math.max(this.destBottom, this.bottom - boxAdjustSpeed * ms);
     }
     
     if(heart.colour == "red") {
-        if(heart.pos_x < this.left + HEART_SIZE / 2) {
-            heart.setPosition(this.left + HEART_SIZE / 2, null);
+        if(heart.posX < this.left + heartSize / 2) {
+            heart.setPosition(this.left + heartSize / 2, null);
         }
         
-        if(heart.pos_x > this.right - HEART_SIZE / 2) {
-            heart.setPosition(this.right - HEART_SIZE / 2, null);
+        if(heart.posX > this.right - heartSize / 2) {
+            heart.setPosition(this.right - heartSize / 2, null);
         }
         
-        if(heart.pos_y < this.top + HEART_SIZE / 2) {
-            heart.setPosition(null, this.top + HEART_SIZE / 2);
+        if(heart.posY < this.top + heartSize / 2) {
+            heart.setPosition(null, this.top + heartSize / 2);
         }
         
-        if(heart.pos_y > this.bottom - HEART_SIZE / 2) {
-            heart.setPosition(null, this.bottom - HEART_SIZE / 2);
+        if(heart.posY > this.bottom - heartSize / 2) {
+            heart.setPosition(null, this.bottom - heartSize / 2);
         }
     }
     
@@ -89,6 +89,6 @@ Box.prototype.render = function() {
     );
     this.graphics.endFill();
     
-}
+};
 
 var box;

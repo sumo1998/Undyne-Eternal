@@ -1,17 +1,17 @@
 // graphics
 
-var fonts_loader = new PIXI.loaders.Loader();
+var fontLoader = new PIXI.loaders.Loader();
 
-fonts_loader
+fontLoader
 .add("undertale", "static/game/fonts/undertale.fnt")
 .add("numbers", "static/game/fonts/numbers.fnt")
 .add("speechbubble", "static/game/fonts/speechbubble.fnt")
 .on("complete", function(loader, resources) {
-    process_fonts(resources);
+    processFonts(resources);
 })
 ;
 
-function process_fonts(resources) {
+function processFonts(resources) {
     
     resources["undertale_image"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     resources["numbers_image"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;

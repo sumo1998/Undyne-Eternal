@@ -1,14 +1,14 @@
-var device_scale = window.devicePixelRatio;
+var deviceScale = window.devicePixelRatio;
 var renderer;
 
-function setup_rendering() {
+function setUpRendering() {
     
     var width = 640, height = 480;
     renderer = PIXI.autoDetectRenderer(width, height,
         {transparent: true, resolution: window.devicePixelRatio}
     );
     
-    gameplay_stage = new PIXI.Container();
+    gameplayStage = new PIXI.Container();
     
     // add the renderer view element to the DOM
     renderer.view.style.width = width;
@@ -17,11 +17,11 @@ function setup_rendering() {
     
 }
 
-var box_thickness = 4;
+var boxThickness = 4;
 
 // render the current frame
 function render() {
     box.render();
     heart.render();
-    renderer.render(gameplay_stage);
+    renderer.render(gameplayStage);
 }

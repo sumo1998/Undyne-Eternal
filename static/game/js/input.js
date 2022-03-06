@@ -1,16 +1,16 @@
-key_is_down = {};
+keyIsDown = {};
 
 function handleKeyInput(key, dir) {
     
-    if(!game_started) {
+    if(!gameStarted) {
         return false;
     }
     
     if(dir == "down") {
-        key_is_down[key] = true;
+        keyIsDown[key] = true;
     }
     else if(dir == "up") {
-        key_is_down[key] = false;
+        keyIsDown[key] = false;
     }
     
     if(dir == "down") {
@@ -19,7 +19,7 @@ function handleKeyInput(key, dir) {
 }
 
 function isKeyDown(key) {
-    if(key_is_down[key]) {
+    if(keyIsDown[key]) {
         return true;
     }
     else {

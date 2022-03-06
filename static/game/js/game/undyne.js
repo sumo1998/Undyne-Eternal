@@ -1,181 +1,181 @@
 var undyne;
 
-var undyne_texture;
-var undyne_head_textures = Array(4);
-var undyne_breastplate_texture;
-var undyne_skirt_texture;
-var undyne_legs_texture;
-var undyne_rightarm_texture;
-var undyne_leftarm_texture;
-var undyne_hair_textures = Array(4);
-var ground_textures = Array(3);
+var undyneTexture;
+var undyneHeadTextures = Array(4);
+var undyneBreastplateTexture;
+var undyneSkirtTexture;
+var undyneLegsTexture;
+var undyneRightArmTexture;
+var undyneLeftArmTexture;
+var undyneHairTextureArr = Array(4);
+var groundTextureArr = Array(3);
 
-var speech_bubble_texture;
-var speech_bubble_text;
+var speechBubbleTexture;
+var speechBubbleText;
 
 function Undyne() {
     
-    this.animation_state = "breathing";
-    this.animation_time = 0;
+    this.animationState = "breathing";
+    this.animationTime = 0;
     
     this.sbtext = null;
-    this.text_state = "none";
-    this.text_queue = [];
-    this.text_queue_callback = null;
-    this.text_chars = 0;
-    this.text_se = se_undyne;
+    this.textState = "none";
+    this.textQueue = [];
+    this.textQueueCallback = null;
+    this.textChars = 0;
+    this.textSe = seUndyne;
     this.cps = 25;
     
     this.sprite = new PIXI.Container();
     this.sprite.alpha = 1;
     
-    this.ground_sprite1 = new PIXI.Sprite(ground_textures[0]);
-    this.ground_sprite1.anchor.set(0.5, 0.5);
-    this.ground_sprite1.position.set(320, 360);
-    this.ground_sprite1.scale.set(2, 2);
-    this.ground_sprite1.alpha = 0;
+    this.groundSprite1 = new PIXI.Sprite(groundTextureArr[0]);
+    this.groundSprite1.anchor.set(0.5, 0.5);
+    this.groundSprite1.position.set(320, 360);
+    this.groundSprite1.scale.set(2, 2);
+    this.groundSprite1.alpha = 0;
     
-    this.ground_sprite2 = new PIXI.Sprite(ground_textures[1]);
-    this.ground_sprite2.anchor.set(0.5, 0.5);
-    this.ground_sprite2.position.set(320, 360);
-    this.ground_sprite2.scale.set(2, 2);
-    this.ground_sprite2.alpha = 0;
+    this.groundSprite2 = new PIXI.Sprite(groundTextureArr[1]);
+    this.groundSprite2.anchor.set(0.5, 0.5);
+    this.groundSprite2.position.set(320, 360);
+    this.groundSprite2.scale.set(2, 2);
+    this.groundSprite2.alpha = 0;
     
-    this.ground_sprite3 = new PIXI.Sprite(ground_textures[2]);
-    this.ground_sprite3.anchor.set(0.5, 0.5);
-    this.ground_sprite3.position.set(320, 360);
-    this.ground_sprite3.scale.set(2, 2);
-    this.ground_sprite3.alpha = 0;
+    this.groundSprite3 = new PIXI.Sprite(groundTextureArr[2]);
+    this.groundSprite3.anchor.set(0.5, 0.5);
+    this.groundSprite3.position.set(320, 360);
+    this.groundSprite3.scale.set(2, 2);
+    this.groundSprite3.alpha = 0;
     
-    this.hair_sprite = new PIXI.extras.MovieClip(undyne_hair_textures);
-    this.hair_sprite.anchor.set(1, 0.5);
-    this.hair_sprite.scale.set(2, 2);
-    this.hair_sprite.position.set(310, 40);
-    this.hair_sprite.animationSpeed = 4 / 30;
+    this.hairSprite = new PIXI.extras.MovieClip(undyneHairTextureArr);
+    this.hairSprite.anchor.set(1, 0.5);
+    this.hairSprite.scale.set(2, 2);
+    this.hairSprite.position.set(310, 40);
+    this.hairSprite.animationSpeed = 4 / 30;
     
-    this.head_sprite = new PIXI.Sprite(undyne_head_textures[1]);
-    this.head_sprite.anchor.set(0.5, 0.5);
-    this.head_sprite.scale.set(2, 2);
-    this.head_sprite.position.set(318, 48);
+    this.headSprite = new PIXI.Sprite(undyneHeadTextures[1]);
+    this.headSprite.anchor.set(0.5, 0.5);
+    this.headSprite.scale.set(2, 2);
+    this.headSprite.position.set(318, 48);
     
-    this.body_sprite = new PIXI.Sprite(undyne_breastplate_texture);
-    this.body_sprite.anchor.set(0.5, 0.5);
-    this.body_sprite.scale.set(2, 2);
-    this.body_sprite.position.set(324, 108);
+    this.bodySprite = new PIXI.Sprite(undyneBreastplateTexture);
+    this.bodySprite.anchor.set(0.5, 0.5);
+    this.bodySprite.scale.set(2, 2);
+    this.bodySprite.position.set(324, 108);
     
-    this.rightarm_sprite = new PIXI.Sprite(undyne_rightarm_texture);
-    this.rightarm_sprite.anchor.set(1, 0);
-    this.rightarm_sprite.scale.set(2, 2);
-    this.rightarm_sprite.position.set(308, 98);
+    this.rightArmSprite = new PIXI.Sprite(undyneRightArmTexture);
+    this.rightArmSprite.anchor.set(1, 0);
+    this.rightArmSprite.scale.set(2, 2);
+    this.rightArmSprite.position.set(308, 98);
     
-    this.leftarm_sprite = new PIXI.Sprite(undyne_leftarm_texture);
-    this.leftarm_sprite.anchor.set(0.5, 0.5);
-    this.leftarm_sprite.scale.set(2, 2);
-    this.leftarm_sprite.position.set(369, 134);
+    this.leftArmSprite = new PIXI.Sprite(undyneLeftArmTexture);
+    this.leftArmSprite.anchor.set(0.5, 0.5);
+    this.leftArmSprite.scale.set(2, 2);
+    this.leftArmSprite.position.set(369, 134);
     
-    this.skirt_sprite = new PIXI.Sprite(undyne_skirt_texture);
-    this.skirt_sprite.anchor.set(0.5, 0.5);
-    this.skirt_sprite.scale.set(2, 2);
-    this.skirt_sprite.position.set(320, 166);
+    this.skirtSprite = new PIXI.Sprite(undyneSkirtTexture);
+    this.skirtSprite.anchor.set(0.5, 0.5);
+    this.skirtSprite.scale.set(2, 2);
+    this.skirtSprite.position.set(320, 166);
     
-    this.legs_sprite = new PIXI.Sprite(undyne_legs_texture);
-    this.legs_sprite.anchor.set(0.5, 0.5);
-    this.legs_sprite.scale.set(2, 2);
-    this.legs_sprite.position.set(324, 210);
+    this.legsSprite = new PIXI.Sprite(undyneLegsTexture);
+    this.legsSprite.anchor.set(0.5, 0.5);
+    this.legsSprite.scale.set(2, 2);
+    this.legsSprite.position.set(324, 210);
     
-    this.speech_bubble = new PIXI.Sprite(speech_bubble_texture);
-    this.speech_bubble.anchor.set(0, 0.5);
-    this.speech_bubble.position.set(400, 60);
-    this.speech_bubble.visible = false;
+    this.speechBubble = new PIXI.Sprite(speechBubbleTexture);
+    this.speechBubble.anchor.set(0, 0.5);
+    this.speechBubble.position.set(400, 60);
+    this.speechBubble.visible = false;
     
-    this.speech_bubble_text = new PIXI.extras.BitmapText(
+    this.speechBubbleText = new PIXI.extras.BitmapText(
         "",
         {font: "12px SpeechBubble", align: "left"}
     );
-    this.speech_bubble_text.maxWidth = 180;
-    this.speech_bubble_text.position.set(442, 24);
-    this.speech_bubble_text.tint = 0;
-    // this.speech_bubble_text.visible = false;
+    this.speechBubbleText.maxWidth = 180;
+    this.speechBubbleText.position.set(442, 24);
+    this.speechBubbleText.tint = 0;
+    // this.speechBubbleText.visible = false;
     
-    this.opacity_g = new PIXI.Graphics();
-    this.opacity_g.alpha = 0;
-    this.opacity_g.beginFill(0x000000);
-    this.opacity_g.drawRect(0, 0, 640, 480);
-    this.opacity_g.endFill();
+    this.opacityG = new PIXI.Graphics();
+    this.opacityG.alpha = 0;
+    this.opacityG.beginFill(0x000000);
+    this.opacityG.drawRect(0, 0, 640, 480);
+    this.opacityG.endFill();
     
-    gameplay_stage.addChild(this.hair_sprite);
-    gameplay_stage.addChild(this.rightarm_sprite);
-    gameplay_stage.addChild(this.leftarm_sprite);
-    gameplay_stage.addChild(this.legs_sprite);
-    gameplay_stage.addChild(this.skirt_sprite);
-    gameplay_stage.addChild(this.body_sprite);
-    gameplay_stage.addChild(this.head_sprite);
-    gameplay_stage.addChild(this.speech_bubble);
-    gameplay_stage.addChild(this.speech_bubble_text);
-    gameplay_stage.addChild(this.opacity_g);
+    gameplayStage.addChild(this.hairSprite);
+    gameplayStage.addChild(this.rightArmSprite);
+    gameplayStage.addChild(this.leftArmSprite);
+    gameplayStage.addChild(this.legsSprite);
+    gameplayStage.addChild(this.skirtSprite);
+    gameplayStage.addChild(this.bodySprite);
+    gameplayStage.addChild(this.headSprite);
+    gameplayStage.addChild(this.speechBubble);
+    gameplayStage.addChild(this.speechBubbleText);
+    gameplayStage.addChild(this.opacityG);
     
-    this.hair_sprite.play();
+    this.hairSprite.play();
     
-    gameplay_stage.addChild(this.sprite);
+    gameplayStage.addChild(this.sprite);
     
 }
 
-Undyne.prototype.queue_text = function(text_queue, callback) {
-    this.text_queue = this.text_queue.concat(text_queue);
-    this.text_queue_callback = callback;
-    this.text_state = "talking";
-    this.speech_bubble.visible = true;
-    this.speech_bubble_text.visible = true;
+Undyne.prototype.queueText = function(textQueue, callback) {
+    this.textQueue = this.textQueue.concat(textQueue);
+    this.textQueueCallback = callback;
+    this.textState = "talking";
+    this.speechBubble.visible = true;
+    this.speechBubbleText.visible = true;
     this.selectNextText();
 };
 
 Undyne.prototype.selectNextText = function() {
     
-    if(this.text_queue.length > 0) {
-        this.sbtext = this.text_queue.shift();
-        this.text_chars = 0;
-        this.text_state = "talking";
+    if(this.textQueue.length > 0) {
+        this.sbtext = this.textQueue.shift();
+        this.textChars = 0;
+        this.textState = "talking";
         if(this.sbtext.se) {
-            this.text_se = this.sbtext.se;
+            this.textSe = this.sbtext.se;
         }
         else {
-            this.text_se = se_undyne;
+            this.textSe = seUndyne;
         }
         if(this.sbtext.face) {
-            this.head_sprite.texture = undyne_head_textures[this.sbtext.face];
+            this.headSprite.texture = undyneHeadTextures[this.sbtext.face];
         }
         else {
-            this.head_sprite.texture = undyne_head_textures[1];
+            this.headSprite.texture = undyneHeadTextures[1];
         }
     }
     else {
-        this.head_sprite.texture = undyne_head_textures[1];
+        this.headSprite.texture = undyneHeadTextures[1];
         this.sbtext = null;
-        this.speech_bubble.visible = false;
-        this.speech_bubble_text.visible = false;
-        this.text_state = "none";
-        this.text_queue_callback();
+        this.speechBubble.visible = false;
+        this.speechBubbleText.visible = false;
+        this.textState = "none";
+        this.textQueueCallback();
     }
     
 };
 
-Undyne.prototype.advanceTextChars = function(text_chars) {
+Undyne.prototype.advanceTextChars = function(textChars) {
     
     if(!this.sbtext) {
         return;
     }
     
-    var char = this.sbtext.text[Math.floor(text_chars)];
+    var char = this.sbtext.text[Math.floor(textChars)];
     if(!(char == " " || char == "\n")) {
-        this.text_se.play();
+        this.textSe.play();
     }
-    this.speech_bubble_text.text = this.sbtext.text.substr(0, Math.floor(text_chars));
+    this.speechBubbleText.text = this.sbtext.text.substr(0, Math.floor(textChars));
     
 };
 
 Undyne.prototype.advanceTextA = function() {
     
-    if(this.text_state == "waiting") {
+    if(this.textState == "waiting") {
         this.selectNextText();
     }
     
@@ -183,82 +183,82 @@ Undyne.prototype.advanceTextA = function() {
 
 Undyne.prototype.advanceTextB = function() {
     
-    if(this.text_state == "talking") {
-        this.speech_bubble_text.text = this.sbtext.text;
-        this.text_state = "waiting";
+    if(this.textState == "talking") {
+        this.speechBubbleText.text = this.sbtext.text;
+        this.textState = "waiting";
     }
     
 };
 
-Undyne.prototype.swing_arm = function() {
+Undyne.prototype.swingArm = function() {
     
-    if(this.animation_state == "swinging_arm") {
+    if(this.animationState == "swinging_arm") {
         return;
     }
     
-    this.animation_state = "swinging_arm";
-    this.body_sprite.position.y = 108;
-    this.head_sprite.position.y = 48;
-    this.skirt_sprite.position.y = 166;
-    this.rightarm_sprite.position.y = 98;
-    this.rightarm_sprite.position.x = 308;
-    this.leftarm_sprite.position.y = 134;
-    this.leftarm_sprite.position.x = 369;
-    this.animation_time = 0;
+    this.animationState = "swinging_arm";
+    this.bodySprite.position.y = 108;
+    this.headSprite.position.y = 48;
+    this.skirtSprite.position.y = 166;
+    this.rightArmSprite.position.y = 98;
+    this.rightArmSprite.position.x = 308;
+    this.leftArmSprite.position.y = 134;
+    this.leftArmSprite.position.x = 369;
+    this.animationTime = 0;
     
-    gameplay_stage.removeChild(this.rightarm_sprite);
-    gameplay_stage.addChild(this.rightarm_sprite);
+    gameplayStage.removeChild(this.rightArmSprite);
+    gameplayStage.addChild(this.rightArmSprite);
     
 };
 
-Undyne.prototype.update = function(delta_ms) {
+Undyne.prototype.update = function(deltaMs) {
     
-    this.animation_time += delta_ms;
+    this.animationTime += deltaMs;
     
-    if(this.text_state == "talking") {
-        var new_text_chars = this.text_chars + this.cps * delta_ms / 1000;
-        if(Math.floor(new_text_chars) > this.text_chars) {
-            this.advanceTextChars(new_text_chars);
+    if(this.textState == "talking") {
+        var newTextChars = this.textChars + this.cps * deltaMs / 1000;
+        if(Math.floor(newTextChars) > this.textChars) {
+            this.advanceTextChars(newTextChars);
         }
-        if(this.text_chars >= this.sbtext.text.length) {
-            this.text_state = "waiting";
+        if(this.textChars >= this.sbtext.text.length) {
+            this.textState = "waiting";
         }
-        this.text_chars = new_text_chars;
+        this.textChars = newTextChars;
     }
     
-    if(this.animation_state == "breathing") {
+    if(this.animationState == "breathing") {
         
-        this.body_sprite.position.y = 108 + 2 * Math.sin(this.animation_time / 1200 * Math.PI * 2);
-        this.head_sprite.position.y = 48 + 1 * Math.sin(this.animation_time / 1200 * Math.PI * 2);
-        this.skirt_sprite.position.y = 166 + 1 * Math.sin(this.animation_time / 1200 * Math.PI * 2);
+        this.bodySprite.position.y = 108 + 2 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
+        this.headSprite.position.y = 48 + 1 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
+        this.skirtSprite.position.y = 166 + 1 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
         
-        this.rightarm_sprite.position.y = 98 + 4 * Math.sin(this.animation_time / 1200 * Math.PI * 2);
-        this.rightarm_sprite.position.x = 308 + 2 * Math.sin(this.animation_time / 1200 * Math.PI * 2);
+        this.rightArmSprite.position.y = 98 + 4 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
+        this.rightArmSprite.position.x = 308 + 2 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
         
-        this.leftarm_sprite.position.y = 134 + 4 * Math.sin(this.animation_time / 1200 * Math.PI * 2);
-        this.leftarm_sprite.position.x = 369 + 2 * Math.sin(this.animation_time / 600 * Math.PI * 2);
+        this.leftArmSprite.position.y = 134 + 4 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
+        this.leftArmSprite.position.x = 369 + 2 * Math.sin(this.animationTime / 600 * Math.PI * 2);
         
     }
-    else if(this.animation_state == "swinging_arm") {
+    else if(this.animationState == "swinging_arm") {
         
-        if(this.animation_time < 300) {
-            this.rightarm_sprite.rotation =
-                (40 - 40 * Math.pow(interp_clamp(this.animation_time, 0, 200, 1, 0), 4)) * Math.PI / 180;
+        if(this.animationTime < 300) {
+            this.rightArmSprite.rotation =
+                (40 - 40 * Math.pow(interpolateClamp(this.animationTime, 0, 200, 1, 0), 4)) * Math.PI / 180;
         }
-        else if(this.animation_time < 600) {
-            this.rightarm_sprite.rotation =
-                (-60 + 100 * Math.pow(interp_clamp(this.animation_time, 300, 400, 1, 0), 4)) * Math.PI / 180;
+        else if(this.animationTime < 600) {
+            this.rightArmSprite.rotation =
+                (-60 + 100 * Math.pow(interpolateClamp(this.animationTime, 300, 400, 1, 0), 4)) * Math.PI / 180;
         }
-        else if(this.animation_time < 750) {
-            this.rightarm_sprite.rotation = interp_clamp(this.animation_time, 600, 650, -60 * Math.PI / 180, 0);
+        else if(this.animationTime < 750) {
+            this.rightArmSprite.rotation = interpolateClamp(this.animationTime, 600, 650, -60 * Math.PI / 180, 0);
         }
         else {
-            gameplay_stage.removeChild(this.rightarm_sprite);
-            gameplay_stage.addChildAt(this.rightarm_sprite, 0);
-            this.animation_state = "breathing";
-            this.animation_time = 0;
+            gameplayStage.removeChild(this.rightArmSprite);
+            gameplayStage.addChildAt(this.rightArmSprite, 0);
+            this.animationState = "breathing";
+            this.animationTime = 0;
         }
         
     }
     
-}
+};

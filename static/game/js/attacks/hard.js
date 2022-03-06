@@ -1,587 +1,587 @@
-var h_ag1 = {
+var hAg1 = {
     type: "arrow",
-    next_time: 3.2,
+    nextTime: 3.2,
     arrows: [
-        {direction: "$3", turntype: 0, target_time: 0.0, speed: 100},
-        {direction: "$3", turntype: 0, target_time: 0.6, speed: 100},
-        {direction: "$3", turntype: 0, target_time: 1.2, speed: 100}
+        {direction: "$3", turntype: 0, targetTime: 0.0, speed: 100},
+        {direction: "$3", turntype: 0, targetTime: 0.6, speed: 100},
+        {direction: "$3", turntype: 0, targetTime: 1.2, speed: 100}
     ],
-    next_sets: ["h_ag2"]
+    nextSets: ["hAg2"]
 };
 
-var h_ag2 = {
+var hAg2 = {
     type: "arrow",
-    next_time: 4.5,
+    nextTime: 4.5,
     arrows: [
-        {direction: "$3", turntype: 0, target_time: 0.0, speed: 150},
-        {direction: "$3", turntype: 0, target_time: 0.5, speed: 150},
-        {direction: "$2", turntype: 0, target_time: 1.0, speed: 150},
-        {direction: "$2", turntype: 0, target_time: 1.5, speed: 150},
-        {direction: "$4", turntype: 0, target_time: 2.0, speed: 150},
-        {direction: "$4", turntype: 0, target_time: 2.5, speed: 150}
+        {direction: "$3", turntype: 0, targetTime: 0.0, speed: 150},
+        {direction: "$3", turntype: 0, targetTime: 0.5, speed: 150},
+        {direction: "$2", turntype: 0, targetTime: 1.0, speed: 150},
+        {direction: "$2", turntype: 0, targetTime: 1.5, speed: 150},
+        {direction: "$4", turntype: 0, targetTime: 2.0, speed: 150},
+        {direction: "$4", turntype: 0, targetTime: 2.5, speed: 150}
     ],
-    next_sets: ["h_ag3"]
+    nextSets: ["hAg3"]
 };
 
-var h_ag3 = {
+var hAg3 = {
     type: "arrow",
-    next_time: 4.8,
+    nextTime: 4.8,
     arrows: [
-        {direction: "2", turntype: 0, target_time: 0.0, speed: 200},
-        {direction: "4", turntype: 0, target_time: 0.4, speed: 200},
-        {direction: "2", turntype: 0, target_time: 0.8, speed: 200},
-        {direction: "4", turntype: 0, target_time: 1.2, speed: 200},
-        {direction: "4", turntype: 0, target_time: 1.6, speed: 200},
-        {direction: "2", turntype: 0, target_time: 2.0, speed: 200},
-        {direction: "2", turntype: 0, target_time: 2.4, speed: 200},
-        {direction: "1", turntype: 0, target_time: 2.8, speed: 200}
+        {direction: "2", turntype: 0, targetTime: 0.0, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 0.4, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 0.8, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 1.2, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 1.6, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 2.0, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 2.4, speed: 200},
+        {direction: "1", turntype: 0, targetTime: 2.8, speed: 200}
     ],
-    next_sets: ["h_ag4a", "h_ag4b"]
+    nextSets: ["hAg4a", "hAg4b"]
 };
 
-var h_ag4a = {
+var hAg4a = {
     type: "arrow",
-    next_time: 4.85,
+    nextTime: 4.85,
     arrows: [
-        {direction: "1", turntype: 0, target_time: 0.0, speed: 250},
-        {direction: "2", turntype: 0, target_time: 0.3, speed: 250},
-        {direction: "3", turntype: 0, target_time: 0.6, speed: 250},
-        {direction: "4", turntype: 0, target_time: 0.9, speed: 250},
-        {direction: "1", turntype: 0, target_time: 1.2, speed: 250},
-        {direction: "2", turntype: 0, target_time: 1.5, speed: 250},
-        {direction: "3", turntype: 0, target_time: 1.8, speed: 250},
-        {direction: "4", turntype: 0, target_time: 2.1, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.4, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.55, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.7, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.85, speed: 250}
+        {direction: "1", turntype: 0, targetTime: 0.0, speed: 250},
+        {direction: "2", turntype: 0, targetTime: 0.3, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 0.6, speed: 250},
+        {direction: "4", turntype: 0, targetTime: 0.9, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 1.2, speed: 250},
+        {direction: "2", turntype: 0, targetTime: 1.5, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 1.8, speed: 250},
+        {direction: "4", turntype: 0, targetTime: 2.1, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.4, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.55, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.7, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.85, speed: 250}
     ],
-    next_sets: ["h_ag5"]
+    nextSets: ["hAg5"]
 };
 
-var h_ag4b = {
+var hAg4b = {
     type: "arrow",
-    next_time: 4.85,
+    nextTime: 4.85,
     arrows: [
-        {direction: "1", turntype: 0, target_time: 0.0, speed: 250},
-        {direction: "4", turntype: 0, target_time: 0.3, speed: 250},
-        {direction: "3", turntype: 0, target_time: 0.6, speed: 250},
-        {direction: "2", turntype: 0, target_time: 0.9, speed: 250},
-        {direction: "1", turntype: 0, target_time: 1.2, speed: 250},
-        {direction: "4", turntype: 0, target_time: 1.5, speed: 250},
-        {direction: "3", turntype: 0, target_time: 1.8, speed: 250},
-        {direction: "2", turntype: 0, target_time: 2.1, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.4, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.55, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.7, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.85, speed: 250}
+        {direction: "1", turntype: 0, targetTime: 0.0, speed: 250},
+        {direction: "4", turntype: 0, targetTime: 0.3, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 0.6, speed: 250},
+        {direction: "2", turntype: 0, targetTime: 0.9, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 1.2, speed: 250},
+        {direction: "4", turntype: 0, targetTime: 1.5, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 1.8, speed: 250},
+        {direction: "2", turntype: 0, targetTime: 2.1, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.4, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.55, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.7, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.85, speed: 250}
     ],
-    next_sets: ["h_ag5"]
+    nextSets: ["hAg5"]
 };
 
-var h_ag5 = {
+var hAg5 = {
     type: "arrow",
-    next_time: 4.1,
+    nextTime: 4.1,
     arrows: [
-        {direction: "4", turntype: 0, target_time: 0.0, speed: 250},
-        {direction: "3", turntype: 0, target_time: 0.3, speed: 250},
-        {direction: "3", turntype: 0, target_time: 0.45, speed: 250},
-        {direction: "2", turntype: 0, target_time: 0.75, speed: 250},
-        {direction: "3", turntype: 0, target_time: 1.05, speed: 250},
-        {direction: "3", turntype: 0, target_time: 1.2, speed: 250},
-        {direction: "4", turntype: 0, target_time: 1.5, speed: 250},
-        {direction: "3", turntype: 0, target_time: 1.8, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.1, speed: 250}
+        {direction: "4", turntype: 0, targetTime: 0.0, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 0.3, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 0.45, speed: 250},
+        {direction: "2", turntype: 0, targetTime: 0.75, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 1.05, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 1.2, speed: 250},
+        {direction: "4", turntype: 0, targetTime: 1.5, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 1.8, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.1, speed: 250}
     ],
-    next_sets: ["h_ag6"]
+    nextSets: ["hAg6"]
 };
 
-var h_ag6 = {
+var hAg6 = {
     type: "arrow",
-    next_time: 4.25,
+    nextTime: 4.25,
     arrows: [
-        {direction: "2", turntype: 0, target_time: 0.0, speed: 250},
-        {direction: "3", turntype: 0, target_time: 0.25, speed: 250},
-        {direction: "1", turntype: 0, target_time: 0.5, speed: 250},
-        {direction: "4", turntype: 0, target_time: 0.75, speed: 250},
-        {direction: "2", turntype: 0, target_time: 1.0, speed: 250},
-        {direction: "3", turntype: 0, target_time: 1.25, speed: 250},
-        {direction: "1", turntype: 0, target_time: 1.5, speed: 250},
-        {direction: "4", turntype: 0, target_time: 1.75, speed: 250},
-        {direction: "1", turntype: 0, target_time: 2.0, speed: 250},
-        {direction: "3", turntype: 0, target_time: 2.25, speed: 250}
+        {direction: "2", turntype: 0, targetTime: 0.0, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 0.25, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 0.5, speed: 250},
+        {direction: "4", turntype: 0, targetTime: 0.75, speed: 250},
+        {direction: "2", turntype: 0, targetTime: 1.0, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 1.25, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 1.5, speed: 250},
+        {direction: "4", turntype: 0, targetTime: 1.75, speed: 250},
+        {direction: "1", turntype: 0, targetTime: 2.0, speed: 250},
+        {direction: "3", turntype: 0, targetTime: 2.25, speed: 250}
     ],
-    next_sets: ["h_sp1"]
+    nextSets: ["hSp1"]
 };
 
-var h_sp1 = {
+var hSp1 = {
     type: "spear",
-    next_time: 10,
-    buffer_time: 2,
-    spear_interval: 600,
-    next_sets: ["h_ag7"]
+    nextTime: 10,
+    bufferTime: 2,
+    spearInterval: 600,
+    nextSets: ["hAg7"]
 };
 
-var h_ag7 = {
+var hAg7 = {
     type: "arrow",
-    next_time: 4.0,
+    nextTime: 4.0,
     arrows: [
-        {direction: "1", turntype: 0, target_time: 0.0, speed: 300},
-        {direction: "3", turntype: 0, target_time: 0.25, speed: 300},
-        {direction: "1", turntype: 0, target_time: 0.5, speed: 300},
-        {direction: "3", turntype: 0, target_time: 0.75, speed: 300},
-        {direction: "3", turntype: 0, target_time: 1.0, speed: 300},
-        {direction: "1", turntype: 0, target_time: 1.25, speed: 300},
-        {direction: "3", turntype: 0, target_time: 1.5, speed: 300},
-        {direction: "1", turntype: 0, target_time: 1.75, speed: 300}
+        {direction: "1", turntype: 0, targetTime: 0.0, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 0.25, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 0.5, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 0.75, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 1.0, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 1.25, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 1.5, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 1.75, speed: 300}
     ],
-    next_sets: ["h_ag8"]
+    nextSets: ["hAg8"]
 };
 
-var h_ag8 = {
+var hAg8 = {
     type: "arrow",
-    next_time: 2.5,
+    nextTime: 2.5,
     arrows: [
-        {direction: "3", turntype: 0, target_time: 0.0, speed: 300},
-        {direction: "4", turntype: 0, target_time: 0.25, speed: 300},
-        {direction: "1", turntype: 0, target_time: 0.5, speed: 300},
-        {direction: "3", turntype: 0, target_time: 0.75, speed: 300},
-        {direction: "4", turntype: 0, target_time: 1.0, speed: 300},
-        {direction: "1", turntype: 0, target_time: 1.25, speed: 300},
-        {direction: "2", turntype: 0, target_time: 1.5, speed: 75}
+        {direction: "3", turntype: 0, targetTime: 0.0, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 0.25, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 0.5, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 0.75, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 1.0, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 1.25, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 1.5, speed: 75}
     ],
-    next_sets: ["h_ag9"]
+    nextSets: ["hAg9"]
 };
 
-var h_ag9 = {
+var hAg9 = {
     type: "arrow",
-    next_time: 3.6,
+    nextTime: 3.6,
     arrows: [
-        {direction: "2", turntype: 0, target_time: 0.0, speed: 400},
-        {direction: "2", turntype: 0, target_time: 0.2, speed: 320},
-        {direction: "2", turntype: 0, target_time: 0.5, speed: 240},
-        {direction: "4", turntype: 0, target_time: 0.9, speed: 400},
-        {direction: "4", turntype: 0, target_time: 1.1, speed: 320},
-        {direction: "4", turntype: 0, target_time: 1.4, speed: 240},
-        {direction: "1", turntype: 0, target_time: 1.7, speed: 300},
-        {direction: "3", turntype: 0, target_time: 2.0, speed: 300},
-        {direction: "1", turntype: 0, target_time: 2.3, speed: 300},
-        {direction: "3", turntype: 0, target_time: 2.6, speed: 300}
+        {direction: "2", turntype: 0, targetTime: 0.0, speed: 400},
+        {direction: "2", turntype: 0, targetTime: 0.2, speed: 320},
+        {direction: "2", turntype: 0, targetTime: 0.5, speed: 240},
+        {direction: "4", turntype: 0, targetTime: 0.9, speed: 400},
+        {direction: "4", turntype: 0, targetTime: 1.1, speed: 320},
+        {direction: "4", turntype: 0, targetTime: 1.4, speed: 240},
+        {direction: "1", turntype: 0, targetTime: 1.7, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 2.0, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 2.3, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 2.6, speed: 300}
     ],
-    next_sets: ["h_ag10"]
+    nextSets: ["hAg10"]
 };
 
-var h_ag10 = {
+var hAg10 = {
     type: "arrow",
-    next_time: 3.75,
+    nextTime: 3.75,
     arrows: [
-        {direction: "4", turntype: 0, target_time: 0.0, speed: 200},
-        {direction: "2", turntype: 0, target_time: 0.25, speed: 200},
-        {direction: "4", turntype: 0, target_time: 0.5, speed: 200},
-        {direction: "2", turntype: 0, target_time: 0.75, speed: 200},
-        {direction: "2", turntype: 0, target_time: 0.9, speed: 300},
-        {direction: "3", turntype: 0, target_time: 1.15, speed: 300},
-        {direction: "1", turntype: 0, target_time: 1.4, speed: 300},
-        {direction: "3", turntype: 0, target_time: 1.65, speed: 300},
-        {direction: "3", turntype: 0, target_time: 2.0, speed: 400},
-        {direction: "1", turntype: 0, target_time: 2.25, speed: 400},
-        {direction: "4", turntype: 0, target_time: 2.5, speed: 400},
-        {direction: "2", turntype: 0, target_time: 2.75, speed: 400}
+        {direction: "4", turntype: 0, targetTime: 0.0, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 0.25, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 0.5, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 0.75, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 0.9, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 1.15, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 1.4, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 1.65, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 2.0, speed: 400},
+        {direction: "1", turntype: 0, targetTime: 2.25, speed: 400},
+        {direction: "4", turntype: 0, targetTime: 2.5, speed: 400},
+        {direction: "2", turntype: 0, targetTime: 2.75, speed: 400}
     ],
-    next_sets: ["h_sp2"]
+    nextSets: ["hSp2"]
 };
 
-var h_sp2 = {
+var hSp2 = {
     type: "spear",
-    next_time: 10,
-    buffer_time: 2,
-    spear_interval: 500,
-    next_sets: ["h_ag11"]
+    nextTime: 10,
+    bufferTime: 2,
+    spearInterval: 500,
+    nextSets: ["hAg11"]
 };
 
-var h_ag11 = {
+var hAg11 = {
     type: "arrow",
-    next_time: 3.2,
+    nextTime: 3.2,
     arrows: [
-        {direction: "4", turntype: 0, target_time: 0.0, speed: 200},
-        {direction: "2", turntype: 0, target_time: 0.4, speed: 200},
-        {direction: "4", turntype: 0, target_time: 0.8, speed: 200},
-        {direction: "2", turntype: 0, target_time: 1.2, speed: 200},
-        {direction: "4", turntype: 3, target_time: 1.6, speed: 300}
+        {direction: "4", turntype: 0, targetTime: 0.0, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 0.4, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 0.8, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 1.2, speed: 200},
+        {direction: "4", turntype: 3, targetTime: 1.6, speed: 300}
     ],
-    next_sets: ["h_ag12"]
+    nextSets: ["hAg12"]
 };
 
-var h_ag12 = {
+var hAg12 = {
     type: "arrow",
-    next_time: 4.4,
+    nextTime: 4.4,
     arrows: [
-        {direction: "2", turntype: 0, target_time: 0.0, speed: 200},
-        {direction: "4", turntype: 0, target_time: 0.4, speed: 200},
-        {direction: "1", turntype: 2, target_time: 0.8, speed: 200},
-        {direction: "1", turntype: 0, target_time: 1.2, speed: 200},
-        {direction: "2", turntype: 0, target_time: 1.6, speed: 300},
-        {direction: "4", turntype: 0, target_time: 2.0, speed: 300},
-        {direction: "3", turntype: 0, target_time: 2.4, speed: 300},
-        {direction: "1", turntype: 3, target_time: 2.8, speed: 300}
+        {direction: "2", turntype: 0, targetTime: 0.0, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 0.4, speed: 200},
+        {direction: "1", turntype: 2, targetTime: 0.8, speed: 200},
+        {direction: "1", turntype: 0, targetTime: 1.2, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 1.6, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 2.0, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 2.4, speed: 300},
+        {direction: "1", turntype: 3, targetTime: 2.8, speed: 300}
     ],
-    next_sets: ["h_ag13"]
+    nextSets: ["hAg13"]
 };
 
-var h_ag13 = {
+var hAg13 = {
     type: "arrow",
-    next_time: 4.4,
+    nextTime: 4.4,
     arrows: [
-        {direction: "2", turntype: 0, target_time: 0.0, speed: 200},
-        {direction: "1", turntype: 0, target_time: 0.4, speed: 200},
-        {direction: "4", turntype: 0, target_time: 0.8, speed: 200},
-        {direction: "3", turntype: 0, target_time: 1.2, speed: 200},
-        {direction: "4", turntype: 2, target_time: 2.0, speed: 300},
-        {direction: "3", turntype: 3, target_time: 2.4, speed: 300},
-        {direction: "2", turntype: 2, target_time: 2.8, speed: 300},
-        {direction: "1", turntype: 3, target_time: 3.2, speed: 300}
+        {direction: "2", turntype: 0, targetTime: 0.0, speed: 200},
+        {direction: "1", turntype: 0, targetTime: 0.4, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 0.8, speed: 200},
+        {direction: "3", turntype: 0, targetTime: 1.2, speed: 200},
+        {direction: "4", turntype: 2, targetTime: 2.0, speed: 300},
+        {direction: "3", turntype: 3, targetTime: 2.4, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 2.8, speed: 300},
+        {direction: "1", turntype: 3, targetTime: 3.2, speed: 300}
     ],
-    next_sets: ["h_ag14"]
+    nextSets: ["hAg14"]
 };
 
-var h_ag14 = {
+var hAg14 = {
     type: "arrow",
-    next_time: 4.8,
+    nextTime: 4.8,
     arrows: [
-        {direction: "4", turntype: 0, target_time: 0.0, speed: 200},
-        {direction: "4", turntype: 0, target_time: 0.35, speed: 200},
-        {direction: "2", turntype: 0, target_time: 0.7, speed: 200},
-        {direction: "2", turntype: 0, target_time: 1.05, speed: 200},
-        {direction: "1", turntype: 0, target_time: 1.4, speed: 300},
-        {direction: "3", turntype: 2, target_time: 1.75, speed: 300},
-        {direction: "3", turntype: 0, target_time: 2.1, speed: 300},
-        {direction: "1", turntype: 2, target_time: 2.45, speed: 300},
-        {direction: "1", turntype: 0, target_time: 2.8, speed: 500},
-        {direction: "4", turntype: 0, target_time: 3.3, speed: 500},
-        {direction: "2", turntype: 0, target_time: 3.6, speed: 500}
+        {direction: "4", turntype: 0, targetTime: 0.0, speed: 200},
+        {direction: "4", turntype: 0, targetTime: 0.35, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 0.7, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 1.05, speed: 200},
+        {direction: "1", turntype: 0, targetTime: 1.4, speed: 300},
+        {direction: "3", turntype: 2, targetTime: 1.75, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 2.1, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 2.45, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 2.8, speed: 500},
+        {direction: "4", turntype: 0, targetTime: 3.3, speed: 500},
+        {direction: "2", turntype: 0, targetTime: 3.6, speed: 500}
     ],
-    next_sets: ["h_ag15"]
+    nextSets: ["hAg15"]
 };
 
-var h_ag15 = {
+var hAg15 = {
     type: "arrow",
-    next_time: 4.7,
+    nextTime: 4.7,
     arrows: [
-        {direction: "4", turntype: 0, target_time: 0.0, speed: 200},
-        {direction: "3", turntype: 0, target_time: 0.35, speed: 200},
-        {direction: "3", turntype: 0, target_time: 0.7, speed: 200},
-        {direction: "3", turntype: 2, target_time: 1.6, speed: 200},
-        {direction: "2", turntype: 0, target_time: 1.8, speed: 300},
-        {direction: "3", turntype: 0, target_time: 2.6, speed: 300},
-        {direction: "2", turntype: 0, target_time: 2.9, speed: 300},
-        {direction: "4", turntype: 3, target_time: 3.2, speed: 300},
-        {direction: "2", turntype: 0, target_time: 3.5, speed: 300}
+        {direction: "4", turntype: 0, targetTime: 0.0, speed: 200},
+        {direction: "3", turntype: 0, targetTime: 0.35, speed: 200},
+        {direction: "3", turntype: 0, targetTime: 0.7, speed: 200},
+        {direction: "3", turntype: 2, targetTime: 1.6, speed: 200},
+        {direction: "2", turntype: 0, targetTime: 1.8, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 2.6, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 2.9, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 3.2, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 3.5, speed: 300}
     ],
-    next_sets: ["h_ag16"]
+    nextSets: ["hAg16"]
 };
 
-var h_ag16 = {
+var hAg16 = {
     type: "arrow",
-    next_time: 4.6,
+    nextTime: 4.6,
     arrows: [
-        {direction: "3", turntype: 0, target_time: 0.0, speed: 500},
-        {direction: "4", turntype: 0, target_time: 0.4, speed: 500},
-        {direction: "4", turntype: 0, target_time: 0.8, speed: 500},
-        {direction: "1", turntype: 0, target_time: 1.2, speed: 500},
-        {direction: "1", turntype: 0, target_time: 1.6, speed: 500},
-        {direction: "4", turntype: 0, target_time: 2.0, speed: 500},
-        {direction: "3", turntype: 0, target_time: 2.4, speed: 500},
-        {direction: "4", turntype: 0, target_time: 2.8, speed: 500},
-        {direction: "4", turntype: 0, target_time: 3.2, speed: 500},
-        {direction: "3", turntype: 0, target_time: 3.6, speed: 500}
+        {direction: "3", turntype: 0, targetTime: 0.0, speed: 500},
+        {direction: "4", turntype: 0, targetTime: 0.4, speed: 500},
+        {direction: "4", turntype: 0, targetTime: 0.8, speed: 500},
+        {direction: "1", turntype: 0, targetTime: 1.2, speed: 500},
+        {direction: "1", turntype: 0, targetTime: 1.6, speed: 500},
+        {direction: "4", turntype: 0, targetTime: 2.0, speed: 500},
+        {direction: "3", turntype: 0, targetTime: 2.4, speed: 500},
+        {direction: "4", turntype: 0, targetTime: 2.8, speed: 500},
+        {direction: "4", turntype: 0, targetTime: 3.2, speed: 500},
+        {direction: "3", turntype: 0, targetTime: 3.6, speed: 500}
     ],
-    next_sets: ["h_ag17"]
+    nextSets: ["hAg17"]
 };
 
-var h_ag17 = {
+var hAg17 = {
     type: "arrow",
-    next_time: 4.5,
+    nextTime: 4.5,
     arrows: [
-        {direction: "2", turntype: 0, target_time: 0.0, speed: 300},
-        {direction: "2", turntype: 0, target_time: 0.32, speed: 300},
-        {direction: "2", turntype: 0, target_time: 0.64, speed: 300},
-        {direction: "2", turntype: 0, target_time: 0.80, speed: 300},
-        {direction: "2", turntype: 0, target_time: 0.96, speed: 300},
-        {direction: "2", turntype: 0, target_time: 1.28, speed: 300},
-        {direction: "4", turntype: 3, target_time: 1.60, speed: 300},
-        {direction: "2", turntype: 0, target_time: 1.92, speed: 300},
-        {direction: "4", turntype: 3, target_time: 2.24, speed: 300},
-        {direction: "4", turntype: 0, target_time: 2.56, speed: 300},
-        {direction: "2", turntype: 2, target_time: 2.88, speed: 300},
-        {direction: "4", turntype: 0, target_time: 3.20, speed: 300},
-        {direction: "2", turntype: 2, target_time: 3.52, speed: 300}
+        {direction: "2", turntype: 0, targetTime: 0.0, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 0.32, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 0.64, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 0.80, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 0.96, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 1.28, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 1.60, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 1.92, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 2.24, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 2.56, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 2.88, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 3.20, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 3.52, speed: 300}
     ],
-    next_sets: ["h_ag18"]
+    nextSets: ["hAg18"]
 };
 
-var h_ag18 = {
+var hAg18 = {
     type: "arrow",
-    next_time: 4.5,
+    nextTime: 4.5,
     arrows: [
-        {direction: "4", turntype: 3, target_time: 0.0, speed: 300},
-        {direction: "3", turntype: 2, target_time: 0.35, speed: 300},
-        {direction: "2", turntype: 2, target_time: 0.7, speed: 300},
-        {direction: "1", turntype: 2, target_time: 1.05, speed: 300},
-        {direction: "4", turntype: 3, target_time: 1.4, speed: 300},
-        {direction: "3", turntype: 2, target_time: 1.75, speed: 300},
-        {direction: "2", turntype: 2, target_time: 2.1, speed: 300},
-        {direction: "1", turntype: 2, target_time: 2.45, speed: 300},
-        {direction: "4", turntype: 3, target_time: 2.8, speed: 300},
-        {direction: "3", turntype: 2, target_time: 3.15, speed: 300},
-        {direction: "2", turntype: 2, target_time: 3.5, speed: 300},
-        {direction: "1", turntype: 2, target_time: 3.85, speed: 300}
+        {direction: "4", turntype: 3, targetTime: 0.0, speed: 300},
+        {direction: "3", turntype: 2, targetTime: 0.35, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 0.7, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 1.05, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 1.4, speed: 300},
+        {direction: "3", turntype: 2, targetTime: 1.75, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 2.1, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 2.45, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 2.8, speed: 300},
+        {direction: "3", turntype: 2, targetTime: 3.15, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 3.5, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 3.85, speed: 300}
     ],
-    next_sets: ["h_sp3"]
+    nextSets: ["hSp3"]
 };
 
-var h_sp3 = {
+var hSp3 = {
     type: "spear",
-    next_time: 10,
-    buffer_time: 2,
-    spear_interval: 400,
-    next_sets: ["h_ag19"]
+    nextTime: 10,
+    bufferTime: 2,
+    spearInterval: 400,
+    nextSets: ["hAg19"]
 };
 
-var h_ag19 = {
+var hAg19 = {
     type: "arrow",
-    next_time: 3.5,
+    nextTime: 3.5,
     arrows: [
-        {direction: "R", turntype: 0, target_time: 0.0, speed: 300},
-        {direction: "R", turntype: 0, target_time: 0.3, speed: 300},
-        {direction: "R", turntype: 0, target_time: 0.6, speed: 300},
-        {direction: "R", turntype: 0, target_time: 0.8, speed: 300},
-        {direction: "R", turntype: 0, target_time: 1.1, speed: 300},
-        {direction: "R", turntype: 0, target_time: 1.4, speed: 300},
-        {direction: "R", turntype: 0, target_time: 1.6, speed: 300},
-        {direction: "R", turntype: 0, target_time: 1.9, speed: 300},
-        {direction: "R", turntype: 0, target_time: 2.1, speed: 300},
-        {direction: "R", turntype: 0, target_time: 2.4, speed: 300},
-        {direction: "R", turntype: 0, target_time: 2.7, speed: 300}
+        {direction: "R", turntype: 0, targetTime: 0.0, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 0.3, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 0.6, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 0.8, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 1.1, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 1.4, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 1.6, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 1.9, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 2.1, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 2.4, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 2.7, speed: 300}
     ],
-    next_sets: ["h_ag20"]
+    nextSets: ["hAg20"]
 };
 
-var h_ag20 = {
+var hAg20 = {
     type: "arrow",
-    next_time: 4.0,
+    nextTime: 4.0,
     arrows: [
-        {direction: "$3", turntype: 0, target_time: 0.00, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.15, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.30, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.45, speed: 500},
-        {direction: "$2", turntype: 0, target_time: 0.80, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.95, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.10, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.25, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.40, speed: 500},
-        {direction: "$4", turntype: 0, target_time: 1.65, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.80, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.95, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.10, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.25, speed: 500},
-        {direction: "$2", turntype: 0, target_time: 2.50, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.65, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.80, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.95, speed: 500},
-        {direction: "$4", turntype: 0, target_time: 3.20, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 3.35, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 3.50, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 3.65, speed: 500}
+        {direction: "$3", turntype: 0, targetTime: 0.00, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.15, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.30, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.45, speed: 500},
+        {direction: "$2", turntype: 0, targetTime: 0.80, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.95, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.10, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.25, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.40, speed: 500},
+        {direction: "$4", turntype: 0, targetTime: 1.65, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.80, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.95, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.10, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.25, speed: 500},
+        {direction: "$2", turntype: 0, targetTime: 2.50, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.65, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.80, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.95, speed: 500},
+        {direction: "$4", turntype: 0, targetTime: 3.20, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 3.35, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 3.50, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 3.65, speed: 500}
     ],
-    next_sets: ["h_ag21"]
+    nextSets: ["hAg21"]
 };
 
-var h_ag21 = {
+var hAg21 = {
     type: "arrow",
-    next_time: 5.0,
+    nextTime: 5.0,
     arrows: [
-        {direction: "1", turntype: 0, target_time: 0.0, speed: 300},
-        {direction: "2", turntype: 0, target_time: 0.25, speed: 300},
-        {direction: "3", turntype: 0, target_time: 0.5, speed: 300},
-        {direction: "4", turntype: 0, target_time: 0.75, speed: 300},
-        {direction: "3", turntype: 2, target_time: 1.0, speed: 300},
-        {direction: "4", turntype: 2, target_time: 1.25, speed: 300},
-        {direction: "1", turntype: 2, target_time: 1.5, speed: 300},
-        {direction: "2", turntype: 2, target_time: 1.75, speed: 300},
-        {direction: "1", turntype: 3, target_time: 2.5, speed: 300},
-        {direction: "2", turntype: 3, target_time: 2.75, speed: 300},
-        {direction: "3", turntype: 3, target_time: 3.0, speed: 300},
-        {direction: "4", turntype: 3, target_time: 3.25, speed: 300},
-        {direction: "3", turntype: 0, target_time: 3.5, speed: 300},
-        {direction: "4", turntype: 0, target_time: 3.75, speed: 300},
-        {direction: "1", turntype: 0, target_time: 4.0, speed: 300},
-        {direction: "2", turntype: 0, target_time: 4.25, speed: 300}
+        {direction: "1", turntype: 0, targetTime: 0.0, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 0.25, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 0.5, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 0.75, speed: 300},
+        {direction: "3", turntype: 2, targetTime: 1.0, speed: 300},
+        {direction: "4", turntype: 2, targetTime: 1.25, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 1.5, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 1.75, speed: 300},
+        {direction: "1", turntype: 3, targetTime: 2.5, speed: 300},
+        {direction: "2", turntype: 3, targetTime: 2.75, speed: 300},
+        {direction: "3", turntype: 3, targetTime: 3.0, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 3.25, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 3.5, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 3.75, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 4.0, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 4.25, speed: 300}
     ],
-    next_sets: ["h_ag22"]
+    nextSets: ["hAg22"]
 };
 
-var h_ag22 = {
+var hAg22 = {
     type: "arrow",
-    next_time: 4.0,
+    nextTime: 4.0,
     arrows: [
-        {direction: "$2", turntype: 2, target_time: 0.0, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.15, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.3, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.45, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 0.6, speed: 500},
-        {direction: "$4", turntype: 3, target_time: 0.85, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.0, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.15, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.3, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.45, speed: 500},
-        {direction: "$2", turntype: 2, target_time: 1.7, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 1.85, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.0, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.15, speed: 500},
-        {direction: "$4", turntype: 3, target_time: 2.4, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.55, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.7, speed: 500},
-        {direction: "$3", turntype: 0, target_time: 2.85, speed: 500}
+        {direction: "$2", turntype: 2, targetTime: 0.0, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.15, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.3, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.45, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 0.6, speed: 500},
+        {direction: "$4", turntype: 3, targetTime: 0.85, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.0, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.15, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.3, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.45, speed: 500},
+        {direction: "$2", turntype: 2, targetTime: 1.7, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 1.85, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.0, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.15, speed: 500},
+        {direction: "$4", turntype: 3, targetTime: 2.4, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.55, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.7, speed: 500},
+        {direction: "$3", turntype: 0, targetTime: 2.85, speed: 500}
     ],
-    next_sets: ["h_pk1"]
+    nextSets: ["hPk1"]
 };
 
-var h_pk1 = {
+var hPk1 = {
     type: "pike",
-    next_time: 6,
-    buffer_time: 0.8,
-    pike_interval: 500,
+    nextTime: 6,
+    bufferTime: 0.8,
+    pikeInterval: 500,
     down: false,
-    next_sets: ["h_ag23", "h_ag24", "h_ag25", "h_ag26", "h_ag27"]
+    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26", "hAg27"]
 };
 
-var h_ag23 = {
+var hAg23 = {
     type: "arrow",
-    next_time: 4.8,
+    nextTime: 4.8,
     arrows: [
-        {direction: "1", turntype: 0, target_time: 0.0, speed: 300},
-        {direction: "3", turntype: 0, target_time: 0.2, speed: 300},
-        {direction: "1", turntype: 0, target_time: 0.4, speed: 300},
-        {direction: "3", turntype: 0, target_time: 0.6, speed: 300},
-        {direction: "2", turntype: 0, target_time: 1.2, speed: 300},
-        {direction: "4", turntype: 0, target_time: 1.4, speed: 300},
-        {direction: "2", turntype: 0, target_time: 1.6, speed: 300},
-        {direction: "4", turntype: 0, target_time: 1.8, speed: 300},
-        {direction: "1", turntype: 0, target_time: 2.4, speed: 300},
-        {direction: "1", turntype: 2, target_time: 2.6, speed: 300},
-        {direction: "1", turntype: 0, target_time: 2.8, speed: 300},
-        {direction: "1", turntype: 2, target_time: 3.0, speed: 300},
-        {direction: "2", turntype: 0, target_time: 3.6, speed: 300},
-        {direction: "2", turntype: 3, target_time: 3.8, speed: 300},
-        {direction: "2", turntype: 0, target_time: 4.0, speed: 300},
-        {direction: "2", turntype: 3, target_time: 4.2, speed: 300}
+        {direction: "1", turntype: 0, targetTime: 0.0, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 0.2, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 0.4, speed: 300},
+        {direction: "3", turntype: 0, targetTime: 0.6, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 1.2, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 1.4, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 1.6, speed: 300},
+        {direction: "4", turntype: 0, targetTime: 1.8, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 2.4, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 2.6, speed: 300},
+        {direction: "1", turntype: 0, targetTime: 2.8, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 3.0, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 3.6, speed: 300},
+        {direction: "2", turntype: 3, targetTime: 3.8, speed: 300},
+        {direction: "2", turntype: 0, targetTime: 4.0, speed: 300},
+        {direction: "2", turntype: 3, targetTime: 4.2, speed: 300}
     ],
-    next_sets: ["h_sp4", "h_pk1", "h_ag24", "h_ag25", "h_ag26", "h_ag27"]
+    nextSets: ["hSp4", "hPk1", "hAg24", "hAg25", "hAg26", "hAg27"]
 };
 
-var h_ag24 = {
+var hAg24 = {
     type: "arrow",
-    next_time: 5.5,
+    nextTime: 5.5,
     arrows: [
-        {direction: "1", turntype: 2, target_time: 0.0, speed: 300},
-        {direction: "2", turntype: 3, target_time: 0.3, speed: 300},
-        {direction: "3", turntype: 2, target_time: 0.6, speed: 300},
-        {direction: "4", turntype: 3, target_time: 0.9, speed: 300},
-        {direction: "1", turntype: 3, target_time: 1.2, speed: 300},
-        {direction: "2", turntype: 2, target_time: 1.5, speed: 300},
-        {direction: "3", turntype: 3, target_time: 1.8, speed: 300},
-        {direction: "4", turntype: 2, target_time: 2.1, speed: 300},
-        {direction: "1", turntype: 2, target_time: 2.4, speed: 300},
-        {direction: "3", turntype: 2, target_time: 2.7, speed: 300},
-        {direction: "2", turntype: 3, target_time: 3.0, speed: 300},
-        {direction: "4", turntype: 3, target_time: 3.3, speed: 300},
-        {direction: "1", turntype: 3, target_time: 3.6, speed: 300},
-        {direction: "3", turntype: 3, target_time: 3.9, speed: 300},
-        {direction: "2", turntype: 2, target_time: 4.2, speed: 300},
-        {direction: "4", turntype: 2, target_time: 4.5, speed: 300}
+        {direction: "1", turntype: 2, targetTime: 0.0, speed: 300},
+        {direction: "2", turntype: 3, targetTime: 0.3, speed: 300},
+        {direction: "3", turntype: 2, targetTime: 0.6, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 0.9, speed: 300},
+        {direction: "1", turntype: 3, targetTime: 1.2, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 1.5, speed: 300},
+        {direction: "3", turntype: 3, targetTime: 1.8, speed: 300},
+        {direction: "4", turntype: 2, targetTime: 2.1, speed: 300},
+        {direction: "1", turntype: 2, targetTime: 2.4, speed: 300},
+        {direction: "3", turntype: 2, targetTime: 2.7, speed: 300},
+        {direction: "2", turntype: 3, targetTime: 3.0, speed: 300},
+        {direction: "4", turntype: 3, targetTime: 3.3, speed: 300},
+        {direction: "1", turntype: 3, targetTime: 3.6, speed: 300},
+        {direction: "3", turntype: 3, targetTime: 3.9, speed: 300},
+        {direction: "2", turntype: 2, targetTime: 4.2, speed: 300},
+        {direction: "4", turntype: 2, targetTime: 4.5, speed: 300}
     ],
-    next_sets: ["h_sp4", "h_ag23", "h_pk1", "h_ag25", "h_ag26", "h_ag27"]
+    nextSets: ["hSp4", "hAg23", "hPk1", "hAg25", "hAg26", "hAg27"]
 };
 
-var h_ag25 = {
+var hAg25 = {
     type: "arrow",
-    next_time: 5.0,
+    nextTime: 5.0,
     arrows: [
-        {direction: "R", turntype: 0, target_time: 0.0, speed: 400},
-        {direction: "+0", turntype: 3, target_time: 0.2, speed: 400},
-        {direction: "+0", turntype: 0, target_time: 0.6, speed: 400},
-        {direction: "+0", turntype: 3, target_time: 0.8, speed: 400},
-        {direction: "R", turntype: 0, target_time: 1.2, speed: 400},
-        {direction: "+0", turntype: 2, target_time: 1.4, speed: 400},
-        {direction: "+0", turntype: 0, target_time: 1.8, speed: 400},
-        {direction: "+0", turntype: 2, target_time: 2.0, speed: 400},
-        {direction: "R", turntype: 0, target_time: 2.4, speed: 400},
-        {direction: "+0", turntype: 2, target_time: 2.6, speed: 400},
-        {direction: "+0", turntype: 0, target_time: 3.0, speed: 400},
-        {direction: "+0", turntype: 3, target_time: 3.2, speed: 400},
-        {direction: "R", turntype: 0, target_time: 3.6, speed: 400},
-        {direction: "+0", turntype: 3, target_time: 3.8, speed: 400},
-        {direction: "+0", turntype: 0, target_time: 4.2, speed: 400},
-        {direction: "+0", turntype: 2, target_time: 4.4, speed: 400}
+        {direction: "R", turntype: 0, targetTime: 0.0, speed: 400},
+        {direction: "+0", turntype: 3, targetTime: 0.2, speed: 400},
+        {direction: "+0", turntype: 0, targetTime: 0.6, speed: 400},
+        {direction: "+0", turntype: 3, targetTime: 0.8, speed: 400},
+        {direction: "R", turntype: 0, targetTime: 1.2, speed: 400},
+        {direction: "+0", turntype: 2, targetTime: 1.4, speed: 400},
+        {direction: "+0", turntype: 0, targetTime: 1.8, speed: 400},
+        {direction: "+0", turntype: 2, targetTime: 2.0, speed: 400},
+        {direction: "R", turntype: 0, targetTime: 2.4, speed: 400},
+        {direction: "+0", turntype: 2, targetTime: 2.6, speed: 400},
+        {direction: "+0", turntype: 0, targetTime: 3.0, speed: 400},
+        {direction: "+0", turntype: 3, targetTime: 3.2, speed: 400},
+        {direction: "R", turntype: 0, targetTime: 3.6, speed: 400},
+        {direction: "+0", turntype: 3, targetTime: 3.8, speed: 400},
+        {direction: "+0", turntype: 0, targetTime: 4.2, speed: 400},
+        {direction: "+0", turntype: 2, targetTime: 4.4, speed: 400}
     ],
-    next_sets: ["h_sp4", "h_ag23", "h_ag24", "h_pk1", "h_ag26", "h_ag27"]
+    nextSets: ["hSp4", "hAg23", "hAg24", "hPk1", "hAg26", "hAg27"]
 };
 
-var h_ag26 = {
+var hAg26 = {
     type: "arrow",
-    next_time: 4.2,
+    nextTime: 4.2,
     arrows: [
-        {direction: "R", turntype: 0, target_time: 0.0, speed: 500},
-        {direction: "R", turntype: 0, target_time: 0.3, speed: 500},
-        {direction: "R", turntype: 0, target_time: 0.6, speed: 500},
-        {direction: "R", turntype: 0, target_time: 0.9, speed: 500},
-        {direction: "R", turntype: 0, target_time: 1.2, speed: 500},
-        {direction: "R", turntype: 0, target_time: 1.5, speed: 500},
-        {direction: "R", turntype: 0, target_time: 1.8, speed: 500},
-        {direction: "R", turntype: 0, target_time: 2.1, speed: 500},
-        {direction: "R", turntype: 0, target_time: 2.4, speed: 500},
-        {direction: "R", turntype: 0, target_time: 2.7, speed: 500},
-        {direction: "R", turntype: 0, target_time: 3.0, speed: 500},
-        {direction: "R", turntype: 0, target_time: 3.3, speed: 500},
-        {direction: "R", turntype: 0, target_time: 3.6, speed: 500}
+        {direction: "R", turntype: 0, targetTime: 0.0, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 0.3, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 0.6, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 0.9, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 1.2, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 1.5, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 1.8, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 2.1, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 2.4, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 2.7, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 3.0, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 3.3, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 3.6, speed: 500}
     ],
-    next_sets: ["h_sp4", "h_ag23", "h_ag24", "h_ag25", "h_pk1", "h_ag27"]
+    nextSets: ["hSp4", "hAg23", "hAg24", "hAg25", "hPk1", "hAg27"]
 };
 
-var h_ag27 = {
+var hAg27 = {
     type: "arrow",
-    next_time: 3.7,
+    nextTime: 3.7,
     arrows: [
-        {direction: "R", turntype: 0, target_time: 0.0, speed: 500},
-        {direction: "R", turntype: 0, target_time: 0.3, speed: 400},
-        {direction: "R", turntype: 0, target_time: 0.6, speed: 300},
-        {direction: "R", turntype: 0, target_time: 0.9, speed: 200},
-        {direction: "R", turntype: 0, target_time: 1.0, speed: 500},
-        {direction: "R", turntype: 0, target_time: 1.3, speed: 400},
-        {direction: "R", turntype: 0, target_time: 1.5, speed: 300},
-        {direction: "R", turntype: 0, target_time: 1.7, speed: 200},
-        {direction: "R", turntype: 0, target_time: 2.0, speed: 500},
-        {direction: "R", turntype: 0, target_time: 2.4, speed: 400},
-        {direction: "R", turntype: 0, target_time: 2.5, speed: 300},
-        {direction: "R", turntype: 0, target_time: 2.7, speed: 200},
-        {direction: "R", turntype: 0, target_time: 2.8, speed: 500}
+        {direction: "R", turntype: 0, targetTime: 0.0, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 0.3, speed: 400},
+        {direction: "R", turntype: 0, targetTime: 0.6, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 0.9, speed: 200},
+        {direction: "R", turntype: 0, targetTime: 1.0, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 1.3, speed: 400},
+        {direction: "R", turntype: 0, targetTime: 1.5, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 1.7, speed: 200},
+        {direction: "R", turntype: 0, targetTime: 2.0, speed: 500},
+        {direction: "R", turntype: 0, targetTime: 2.4, speed: 400},
+        {direction: "R", turntype: 0, targetTime: 2.5, speed: 300},
+        {direction: "R", turntype: 0, targetTime: 2.7, speed: 200},
+        {direction: "R", turntype: 0, targetTime: 2.8, speed: 500}
     ],
-    next_sets: ["h_sp4", "h_ag23", "h_ag24", "h_ag25", "h_ag26", "h_pk1"]
+    nextSets: ["hSp4", "hAg23", "hAg24", "hAg25", "hAg26", "hPk1"]
 };
 
-var h_pk2 = {
+var hPk2 = {
     type: "pike",
-    next_time: 6,
-    buffer_time: 0.8,
-    pike_interval: 400,
+    nextTime: 6,
+    bufferTime: 0.8,
+    pikeInterval: 400,
     down: true,
-    next_sets: ["h_ag23", "h_ag24", "h_ag25", "h_ag26", "h_ag27"]
+    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26", "hAg27"]
 };
 
-var h_sp4 = {
+var hSp4 = {
     type: "spear",
-    next_time: 10,
-    buffer_time: 2,
-    spear_interval: 300,
-    next_sets: ["h_ag23", "h_ag24", "h_ag25", "h_ag26", "h_ag27"]
+    nextTime: 10,
+    bufferTime: 2,
+    spearInterval: 300,
+    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26", "hAg27"]
 };

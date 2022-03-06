@@ -1,31 +1,31 @@
-loaded_assets = {
-    arrow_sets: false,
+loadedAssets = {
+    arrowSets: false,
     graphics: false,
     sounds: false,
     fonts: false
 };
 
-function start_preload() {
+function startPreload() {
     
     // TODO: load arrow sets independently.
-    markAssetLoaded("arrow_sets");
+    markAssetLoaded("arrowSets");
     
-    fonts_loader.load();
-    graphics_loader.load();
+    fontLoader.load();
+    graphicsLoader.load();
     // sounds are handled by Howler.js independently.
     
 }
 
 function markAssetLoaded(asset) {
-    loaded_assets[asset] = true;
+    loadedAssets[asset] = true;
     checkForAllAssetsLoaded();
 }
 
 function checkForAllAssetsLoaded() {
-    for(var asset in loaded_assets) {
-        if(!loaded_assets[asset]) {
+    for(var asset in loadedAssets) {
+        if(!loadedAssets[asset]) {
             return;
         }
     }
-    init_game();
+    initializeGame();
 }

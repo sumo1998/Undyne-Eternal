@@ -1,53 +1,53 @@
-var circle_spear_total_time = 1650;
+var circleSpearTotalTime = 1650;
 
 function CircleSpear(props) {
     
-    this.active_time = 0;
+    this.activeTime = 0;
     
     this.shot = false;
     
     this.anchor = props.anchor || {x: 320, y: 320};
-    this.initial_angle = props.initial_angle || 0;
+    this.initialAngle = props.initialAngle || 0;
     
-    this.direction = this.initial_angle;
+    this.direction = this.initialAngle;
     
-    this.pos_x = this.anchor.x + 160 * Math.cos(this.initial_angle);
-    this.pos_y = this.anchor.y + 160 * Math.sin(this.initial_angle);
+    this.posX = this.anchor.x + 160 * Math.cos(this.initialAngle);
+    this.posY = this.anchor.y + 160 * Math.sin(this.initialAngle);
     
-    this.sprite = new PIXI.Sprite(spear_texture);
+    this.sprite = new PIXI.Sprite(spearTexture);
     this.sprite.anchor.set(1, 0.5);
-    this.sprite.position.set(this.pos_x, this.pos_y);
-    this.sprite.rotation = this.initial_angle;
+    this.sprite.position.set(this.posX, this.posY);
+    this.sprite.rotation = this.initialAngle;
     this.sprite.alpha = 0;
     
-    gameplay_stage.addChild(this.sprite);
+    gameplayStage.addChild(this.sprite);
     
 }
 
-CircleSpear.prototype.update = function(delta_ms) {
+CircleSpear.prototype.update = function(deltaMs) {
     
-    this.active_time += delta_ms;
+    this.activeTime += deltaMs;
     
-    if(this.active_time < 300) {
-        this.sprite.alpha = this.active_time / 300;
+    if(this.activeTime < 300) {
+        this.sprite.alpha = this.activeTime / 300;
     }
-    else if(this.active_time < circle_spear_total_time - 150) {
+    else if(this.activeTime < circleSpearTotalTime - 150) {
         this.sprite.alpha = 1;
     }
     else {
-        this.sprite.alpha = (circle_spear_total_time - this.active_time) / 150;
+        this.sprite.alpha = (circleSpearTotalTime - this.activeTime) / 150;
     }
     
-    var progress = (circle_spear_total_time - this.active_time) / circle_spear_total_time;
+    var progress = (circleSpearTotalTime - this.activeTime) / circleSpearTotalTime;
     
-    var distance = 160 - 160 * this.active_time / (circle_spear_total_time - 150);
+    var distance = 160 - 160 * this.activeTime / (circleSpearTotalTime - 150);
     
-    this.direction = this.initial_angle + (progress * progress) * Math.PI;
+    this.direction = this.initialAngle + (progress * progress) * Math.PI;
     
-    this.pos_x = this.anchor.x + distance * Math.cos(this.direction);
-    this.pos_y = this.anchor.y + distance * Math.sin(this.direction);
+    this.posX = this.anchor.x + distance * Math.cos(this.direction);
+    this.posY = this.anchor.y + distance * Math.sin(this.direction);
     
-    this.sprite.position.set(this.pos_x, this.pos_y);
+    this.sprite.position.set(this.posX, this.posY);
     this.sprite.rotation = this.direction + Math.PI;
     
     if(this.collidesWithHeart()) {
@@ -55,7 +55,7 @@ CircleSpear.prototype.update = function(delta_ms) {
         this.removed = true;
     }
     
-    if(this.active_time > circle_spear_total_time) {
+    if(this.activeTime > circleSpearTotalTime) {
         this.removed = true;
     }
     
@@ -65,11 +65,11 @@ CircleSpear.prototype.collidesWithHeart = function() {
     /*
      check for collisions along the shaft of the spear
      */
-    var displacement = {x: heart.pos_x - this.pos_x, y: heart.pos_y - this.pos_y};
-    var normal_dir = {x: Math.sin(this.direction), y: -Math.cos(this.direction)};
+    var displacement = {x: heart.posX - this.posX, y: heart.posY - this.posY};
+    var normalDir = {x: Math.sin(this.direction), y: -Math.cos(this.direction)};
     // get the decomposition along "direction"
-    var along = dot_product(displacement, {x: Math.cos(this.direction), y: Math.sin(this.direction)});
-    var dist = dot_product(displacement, normal_dir);
+    var along = dotProduct(displacement, {x: Math.cos(this.direction), y: Math.sin(this.direction)});
+    var dist = dotProduct(displacement, normalDir);
     
     // Normally it should be 46, but let's be more lenient about the rear of the arrows here
     if(along > 0 && along < 23 && Math.abs(dist) < 8) {
@@ -79,9 +79,9 @@ CircleSpear.prototype.collidesWithHeart = function() {
     /*
      then, check for collisions at the tip
      */
-    var tip_dist = norm(heart.pos_x - this.pos_x, heart.pos_y - this.pos_y);
+    var tipDist = norm(heart.posX - this.posX, heart.posY - this.posY);
     
-    if(tip_dist < HEART_SIZE / 2) {
+    if(tipDist < heartSize / 2) {
         return true;
     }
     
@@ -89,16 +89,16 @@ CircleSpear.prototype.collidesWithHeart = function() {
     
 };
 
-var circle_spears = [];
+var circleSpears = [];
 
 function addNewCircleSpear(number) {
     
-    var initial_angle = Math.random() * Math.PI * 2;
+    var initialAngle = Math.random() * Math.PI * 2;
     
     for(var a = 0; a < number; ++a) {
-        circle_spears.push(new CircleSpear({
-            anchor: {x: heart.pos_x, y: heart.pos_y},
-            initial_angle: initial_angle + (Math.PI * 2) * a / number,
+        circleSpears.push(new CircleSpear({
+            anchor: {x: heart.posX, y: heart.posY},
+            initialAngle: initialAngle + (Math.PI * 2) * a / number
         }));
     }
     
