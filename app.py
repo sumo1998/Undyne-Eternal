@@ -34,14 +34,14 @@ def feed():
 
 @app.route("/user/<id>")
 def user(id):
-    userInfo = user_handler.getUserInfo(id)
-    userLevels = user_handler.getUserLevels(id)
-    return render_template("profile/profile_template.html",userInfo=userInfo, userLevels=userLevels)
+    user_info = user_handler.getUserInfo(id)
+    user_levels = user_handler.getUserLevels(id)
+    return render_template("profile/profile_template.html",user_info=user_info, user_levels=user_levels)
 
 @app.route("/level/<id>")
 def level(id):
-    levelInfo = level_handler.getLevelInfo(id)
-    levelComments = level_handler.getLevelComments(id)
-    return render_template("level/level_template.html",levelInfo=levelInfo,levelComments=levelComments)
+    level_info = level_handler.getLevelInfo(id)
+    level_comments = level_handler.getLevelComments(id)
+    return render_template("level/level_template.html",level_info=level_info,level_comments=level_comments)
 if __name__ == '__main__':
     app.run()
