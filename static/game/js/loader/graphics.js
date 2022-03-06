@@ -18,20 +18,20 @@ graphicsLoader
 .add("speechbubble", "static/game/img/speechbubble.png")
 .add("un", "static/game/img/un.png")
 .add("undyne", "static/game/img/undyne.png")
-.add("undyne_breastplate", "static/game/img/undyne_breastplate.png")
-.add("undyne_hair1", "static/game/img/undyne_hair1.png")
-.add("undyne_hair2", "static/game/img/undyne_hair2.png")
-.add("undyne_hair3", "static/game/img/undyne_hair3.png")
-.add("undyne_hair4", "static/game/img/undyne_hair4.png")
-.add("undyne_head1", "static/game/img/undyne_head1.png")
-.add("undyne_head2", "static/game/img/undyne_head2.png")
-.add("undyne_head3", "static/game/img/undyne_head_annoyed.png")
-.add("undyne_head4", "static/game/img/undyne_head_angry.png")
-.add("undyne_intro_hairless", "static/game/img/undyne_intro_hairless.png")
-.add("undyne_leftarm", "static/game/img/undyne_leftarm.png")
-.add("undyne_legs", "static/game/img/undyne_legs.png")
-.add("undyne_rightarm", "static/game/img/undyne_rightarm.png")
-.add("undyne_skirt", "static/game/img/undyne_skirt.png")
+.add("undyneBreastplate", "static/game/img/undyne_breastplate.png")
+.add("undyneHair1", "static/game/img/undyne_hair1.png")
+.add("undyneHair2", "static/game/img/undyne_hair2.png")
+.add("undyneHair3", "static/game/img/undyne_hair3.png")
+.add("undyneHair4", "static/game/img/undyne_hair4.png")
+.add("undyneHead1", "static/game/img/undyne_head1.png")
+.add("undyneHead2", "static/game/img/undyne_head2.png")
+.add("undyneHead3", "static/game/img/undyne_head_annoyed.png")
+.add("undyneHead4", "static/game/img/undyne_head_angry.png")
+.add("undyneIntroHairless", "static/game/img/undyne_intro_hairless.png")
+.add("undyneLeftArm", "static/game/img/undyne_left_arm.png")
+.add("undyneLegs", "static/game/img/undyne_legs.png")
+.add("undyneRightArm", "static/game/img/undyne_right_arm.png")
+.add("undyneSkirt", "static/game/img/undyne_skirt.png")
 
 .on("complete", function(loader, resources) {
     processGraphics(resources);
@@ -68,34 +68,34 @@ function processGraphics(resources) {
     speechBubbleTexture = resources["speechbubble"].texture;
     speechBubbleTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     
-    undyneHairTextureArr[0] = resources["undyne_hair1"].texture;
-    undyneHairTextureArr[1] = resources["undyne_hair2"].texture;
-    undyneHairTextureArr[2] = resources["undyne_hair3"].texture;
-    undyneHairTextureArr[3] = resources["undyne_hair4"].texture;
+    undyneHairTextureArr[0] = resources["undyneHair1"].texture;
+    undyneHairTextureArr[1] = resources["undyneHair2"].texture;
+    undyneHairTextureArr[2] = resources["undyneHair3"].texture;
+    undyneHairTextureArr[3] = resources["undyneHair4"].texture;
     for(var a = 0; a < undyneHairTextureArr.length; ++a) {
         undyneHairTextureArr[a].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     }
     
-    undyneHeadTextures[0] = resources["undyne_head1"].texture;
-    undyneHeadTextures[1] = resources["undyne_head2"].texture;
-    undyneHeadTextures[2] = resources["undyne_head3"].texture;
-    undyneHeadTextures[3] = resources["undyne_head4"].texture;
+    undyneHeadTextures[0] = resources["undyneHead1"].texture;
+    undyneHeadTextures[1] = resources["undyneHead2"].texture;
+    undyneHeadTextures[2] = resources["undyneHead3"].texture;
+    undyneHeadTextures[3] = resources["undyneHead4"].texture;
     for(var a = 0; a < undyneHeadTextures.length; ++a) {
         undyneHeadTextures[a].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     }
     
-    undyneBreastplateTexture = resources["undyne_breastplate"].texture;
+    undyneBreastplateTexture = resources["undyneBreastplate"].texture;
     undyneBreastplateTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-    undyneLeftArmTexture = resources["undyne_leftarm"].texture;
+    undyneLeftArmTexture = resources["undyneLeftArm"].texture;
     undyneLeftArmTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-    undyneLegsTexture = resources["undyne_legs"].texture;
+    undyneLegsTexture = resources["undyneLegs"].texture;
     undyneLegsTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-    undyneRightArmTexture = resources["undyne_rightarm"].texture;
+    undyneRightArmTexture = resources["undyneRightArm"].texture;
     undyneRightArmTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-    undyneSkirtTexture = resources["undyne_skirt"].texture;
+    undyneSkirtTexture = resources["undyneSkirt"].texture;
     undyneSkirtTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     
-    undyneIntroHairlessTexture = resources["undyne_intro_hairless"].texture;
+    undyneIntroHairlessTexture = resources["undyneIntroHairless"].texture;
     undyneIntroHairlessTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     
     markAssetLoaded("graphics");

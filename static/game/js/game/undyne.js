@@ -192,11 +192,11 @@ Undyne.prototype.advanceTextB = function() {
 
 Undyne.prototype.swingArm = function() {
     
-    if(this.animationState == "swinging_arm") {
+    if(this.animationState == "swingingArm") {
         return;
     }
     
-    this.animationState = "swinging_arm";
+    this.animationState = "swingingArm";
     this.bodySprite.position.y = 108;
     this.headSprite.position.y = 48;
     this.skirtSprite.position.y = 166;
@@ -239,7 +239,7 @@ Undyne.prototype.update = function(deltaMs) {
         this.leftArmSprite.position.x = 369 + 2 * Math.sin(this.animationTime / 600 * Math.PI * 2);
         
     }
-    else if(this.animationState == "swinging_arm") {
+    else if(this.animationState == "swingingArm") {
         
         if(this.animationTime < 300) {
             this.rightArmSprite.rotation =
