@@ -28,6 +28,10 @@ function isKeyDown(key) {
 }
 
 function onKeyDown(e) {
+    if(["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+    
     if(e.keyCode == 37 || e.keyCode == 74 || e.keyCode == 65) {  // left
         handleKeyInput("left", "down");
     }
