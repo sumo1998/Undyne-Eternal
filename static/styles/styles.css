@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'determination_mono_webregular';
+    font-family: "determination_mono_webregular";
     src: url("../fonts/determinationsanswebregular-369x-webfont.woff2") format("woff2"),
     url("../fonts/determinationsanswebregular-369x-webfont.woff") format("woff");
     font-weight: normal;
@@ -54,7 +54,7 @@ body {
 
 .post-page-title {
     font-size: 4em;
-    position:relative;
+    position: relative;
     width: 100%;
     text-align: center;
     margin: 5px;
@@ -256,7 +256,7 @@ body {
 }
 
 .button:hover {
-    transform:scale(1.1,1.1);
+    transform: scale(1.1, 1.1);
     transition: 0.3s;
 }
 

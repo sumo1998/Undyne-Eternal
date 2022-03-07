@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 {% extends "parent_template.html" %}
-{% import "./components/level_page.html" as level_page%}
-{% import "./components/comment.html" as comments%}
-{% block title %}: {{level_info[0][1]}}{% endblock %}
-{%block content%}
-<div class="level-page">{{level_page.level_in_page(level_info[0][1], level_info[0][2], level_info[0][5], level_info[0][7],
+{% import "./components/level_page.html" as level_page %}
+{% import "./components/comment.html" as comments %}
+{% block title %}: {{ level_info[0][1] }}{% endblock %}
+{% block content %}
+    <div class="level-page">{{ level_page.level_in_page(level_info[0][1], level_info[0][2], level_info[0][5],
+                        level_info[0][7],
                         level_info[0][3],
-                        level_info[0][8])}}
-    <div class="reviews pure-u-2-6">
-        <h1>Ratings and Reviews</h1>
-        {% for comment in level_comments %}
-        <div>{{comments.comment_in_level(level_comments[0][1], level_comments[0][3], level_comments[0][4])}}</div>
-        {% endfor %}
+                        level_info[0][8]) }}
+        <div class="reviews pure-u-2-6">
+            <h1>Ratings and Reviews</h1>
+            {% for comment in level_comments %}
+                <div>{{ comments.comment_in_level(level_comments[0][1], level_comments[0][3], level_comments[0][4]) }}</div>
+            {% endfor %}
+        </div>
     </div>
-</div>
 {% endblock %}

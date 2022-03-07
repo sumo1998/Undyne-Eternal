@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 {% extends "parent_template.html" %}
-{% import "./components/level_feed.html" as level_template%}
+{% import "./components/level_feed.html" as level_template %}
 
-{%block content%}
-{% for level in res %}
-<div>{{level_template.level_in_feed(level.level_name, level.level_rating, level.level_diff, level.level_summary,
-     level.user_name, level.user_avatar, level.level_id)}}
-</div>
-{% endfor %}
-<div>{{level_template.level_in_feed("Hello world", 3, "medium", "testing",
+{% block content %}
+    {% for level in res %}
+        <div>{{ level_template.level_in_feed(level.level_name, level.level_rating, level.level_diff, level.level_summary,
+     level.user_name, level.user_avatar, level.level_id) }}
+        </div>
+    {% endfor %}
+    <div>{{ level_template.level_in_feed("Hello world", 3, "medium", "testing",
      "bigs",
-     "https://cdn.dribbble.com/users/2878951/screenshots/14013747/media/603f0b853c409547dfa51cba996f375c.png?compress=1&resize=400x300&vertical=top")}}
-</div>
+     "https://cdn.dribbble.com/users/2878951/screenshots/14013747/media/603f0b853c409547dfa51cba996f375c.png?compress=1&resize=400x300&vertical=top") }}
+    </div>
 {% endblock %}

@@ -1,44 +1,44 @@
 {% macro level_in_page(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="", profileimg="") -%}
 
-<div class="post-page pure-u-1-6">
-    <div class="pure-u-1-1">
-        <h1 class="post-page-title">{{title}}</h1>
-        <div class="post-page-stars">
-            {%- for star in range(rating |int) %}
-            <span class="fa fa-star checked"></span>
-            {%- endfor %}
-            {%- for star in range((5 - rating|int)) %}
-            <span class="fa fa-star-o"></span>
-            {%- endfor %}
+    <div class="post-page pure-u-1-6">
+        <div class="pure-u-1-1">
+            <h1 class="post-page-title">{{ title }}</h1>
+            <div class="post-page-stars">
+                {%- for star in range(rating |int) %}
+                    <span class="fa fa-star checked"></span>
+                {%- endfor %}
+                {%- for star in range((5 - rating|int)) %}
+                    <span class="fa fa-star-o"></span>
+                {%- endfor %}
+            </div>
+            <div class="post-page-difficulty {{ difficulty }}">
+                {{ difficulty | upper }}
+            </div>
+            <div class="post-page-user">
+                {% if profileimg == "" %}
+                    <p><span class="fa fa-user"></span> {{ username }}</p>
+                {% else %}
+                    <p><img src="{{ profileimg }}" style="width: 25px;"> {{ username }}</p>
+
+                {% endif %}
+            </div>
         </div>
-        <div class="post-page-difficulty {{difficulty}}">
-            {{difficulty | upper}}
+
+        <div class="post-page-description">
+            <p>
+                {{ description }}
+            </p>
         </div>
-        <div class="post-page-user">
-            {% if profileimg == "" %}
-            <p><span class="fa fa-user"></span> {{username}}</p>
-            {% else %}
-            <p><img src="{{profileimg}}" style="width: 25px;"> {{username}}</p>
-            
-            {% endif %}
+
+        <div class="{{ difficulty }} post-page-play-level">
+            <div class="play-level-text">
+                Play level
+            </div>
+        </div>
+        <div class="post-page-play-level review-download">
+            <div class="play-level-text">
+                Write a review
+            </div>
         </div>
     </div>
-    
-    <div class="post-page-description">
-        <p>
-            {{description}}
-        </p>
-    </div>
-    
-    <div class="{{difficulty}} post-page-play-level">
-        <div class="play-level-text">
-            Play level
-        </div>
-    </div>
-    <div class="post-page-play-level review-download">
-        <div class="play-level-text">
-            Write a review
-        </div>
-    </div>
-</div>
 {%- endmacro %}
