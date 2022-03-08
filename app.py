@@ -3,7 +3,7 @@
 # Made it like this to make the structure conform to what flask expects. Just a little less manual path specification
 # But if the project grows bigger, we can change the structure to be more modular
 
-from flask import Flask,render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request
 from factory import object_factory
 
 from db.home import home_handler
@@ -12,79 +12,91 @@ from db.level import level_handler
 from db import database_handler
 
 app = Flask(__name__)
-app.secret_key='21344'
+app.secret_key = '21344'
 object_factory.get_auth_object(app)
 from api.auth import auth_router
 
 app.register_blueprint(auth_router.auth_blueprint)
 
+
 @app.before_first_request
 def init():
     database_handler.setup()
+
 
 @app.route("/")
 def home_page():
     return "<h1>This is the homepage for the app</h1>"
 
+
 @app.route("/home_feed")
 def feed():
-    res = home_handler.getHomeFeed()
-    return render_template("home/home_template.html",res=res)
+    res = home_handler.get_home_feed()
+    return render_template("home/home_template.html", res=res)
+
 
 @app.route("/user/<id>")
 def user(id):
-    userInfo = user_handler.getUserInfo(id)
-    userLevels = user_handler.getUserLevels(id)
-    return render_template("profile/profile_template.html",userInfo=userInfo, userLevels=userLevels)
+    user_info = user_handler.get_user_info(id)
+    user_levels = user_handler.get_user_levels(id)
+    return render_template("profile/profile_template.html", userInfo=user_info, userLevels=user_levels)
+
 
 @app.route("/level/<id>")
 def level(id):
-    levelInfo = level_handler.getLevelInfo(id)
-    levelComments = level_handler.getLevelComments(id)
-    return render_template("level/level_template.html",levelInfo=levelInfo,levelComments=levelComments)
+    level_info = level_handler.get_level_info(id)
+    level_comments = level_handler.get_level_comments(id)
+    return render_template("level/level_template.html", levelInfo=level_info, levelComments=level_comments)
 
-@app.route("/addComment",methods=['POST'])
-def addComment():
+
+@app.route("/addComment", methods=['POST'])
+def add_comment():
     data = request.form
-    level_handler.addLevelComment(data)
-    return redirect(url_for("level",id=data['level_id']))
+    level_handler.add_level_comment(data)
+    return redirect(url_for("level", id=data['levelId']))
+
 
 @app.route("/updateComment", methods=['PATCH'])
-def updateComment():
+def update_comment():
     data = request.form
-    level_handler.updateLevelComment(data)
-    return redirect(url_for("level",id=data['level_id']))
+    level_handler.update_level_comment(data)
+    return redirect(url_for("level", id=data['levelId']))
+
 
 @app.route("/deleteComment", methods=['DELETE'])
-def deleteComment():
+def delete_comment():
     data = request.form
-    level_handler.deleteComment(data)
-    return redirect(url_for("level",id=data['level_id']))
+    level_handler.delete_comment(data)
+    return redirect(url_for("level", id=data['levelId']))
+
 
 @app.route("/updateLevel", methods=['PATCH'])
-def updateLevel():
+def update_level():
     data = request.form
-    level_handler.updateLevel(data)
-    return redirect(url_for("level",id=data['levelId']))
+    level_handler.update_level(data)
+    return redirect(url_for("level", id=data['levelId']))
 
 
 @app.route("/deleteLevel", methods=['DELETE'])
-def deleteLevel():
+def delete_level():
     data = request.form
-    level_handler.deleteLevel(data)
+    level_handler.delete_level(data)
     return redirect(url_for("home_page"))
+
 
 @app.route("/addLevel", methods=['POST'])
-def addLevel():
+def add_level():
     data = request.form
-    level_handler.addLevel(data)
+    level_handler.add_level(data)
     return redirect(url_for("home_page"))
 
-@app.route("/updateUser",methods=['PATCH'])
-def updateUser():
+
+@app.route("/updateUser", methods=['PATCH'])
+def update_user():
     data = request.form
-    user_handler.updateUser(data)
-    return redirect(url_for("user",id=data["userId"]))
+    user_handler.update_user(data)
+    return redirect(url_for("user", id=data["userId"]))
+
 
 if __name__ == '__main__':
     app.run()

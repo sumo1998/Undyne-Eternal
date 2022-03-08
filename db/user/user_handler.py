@@ -6,32 +6,38 @@ from db import database_handler
     Parameters:
         id - user id
 """
-def getUserInfo(id):
+
+
+def get_user_info(id):
     query = ""
     with open("./db/user/sql/user_info.sql") as f:
         query = f.read()
 
         with database_handler.get_db_cursor() as cur:
-            cur.execute(query,id)
+            cur.execute(query, id)
             res = cur.fetchall()
             return res
+
 
 """
     Returns info on all levels created by the user with user_id = id
     Parameters:
         id - user id
 """
-def getUserLevels(id):
+
+
+def get_user_levels(id):
     query = ""
     with open("./db/user/sql/user_levels.sql") as f:
         query = f.read()
 
         with database_handler.get_db_cursor() as cur:
-            cur.execute(query,id)
+            cur.execute(query, id)
             res = cur.fetchall()
             return res
 
-def updateUser(data):
+
+def update_user(data):
     uid = ""
     user_name = ""
     user_avatar = ""
@@ -49,6 +55,6 @@ def updateUser(data):
         query = f.read()
         
         with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query,(user_name,user_avatar,uid))
+            cur.execute(query, (user_name, user_avatar, uid))
             print("Executed query")
     

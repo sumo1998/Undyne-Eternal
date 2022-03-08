@@ -1,109 +1,101 @@
 from flask import render_template_string
 from db import database_handler
 
+
 """
     Returns information for level with level_id = id
     Parameters: 
         id - Level id
 """
-def getLevelInfo(id):
+
+
+def get_level_info(id):
     query = ""
     with open('./db/level/sql/levelInfo.sql') as f:
         query = f.read()
 
         with database_handler.get_db_cursor() as cur:
-            cur.execute(query,id)
+            cur.execute(query, id)
             res = cur.fetchall()
             return res
+
 
 """
     Returns comments information for level with level_id = id 
     Parameters:
         id - level id
 """
-def getLevelComments(id):
+
+
+def get_level_comments(id):
     query = ""
     with open('./db/level/sql/levelComments.sql') as f:
         query = f.read()
 
         with database_handler.get_db_cursor() as cur:
-            cur.execute(query,id)
+            cur.execute(query, id)
             res = cur.fetchall()
             return res
 
-def addLevelComment(data):
+
+def add_level_comment(data):
 
     uid = ""
     body = ""
     rating = ""
     lid = ""
     for key in data:
-        if key == "user_id":
+        if key == "userId":
             uid = int(data[key])
-        elif key == "comment_body":
+        elif key == "commentBody":
             body = data[key]
-        elif key == "level_id":
+        elif key == "levelId":
             lid = int(data[key])
-        elif key == "comment_rating":
+        elif key == "commentRating":
             rating = float(data[key])
-
-                    
+            
     query = ""
-    print("Inside the addComment function")
     with open('./db/level/sql/addLevelComment.sql') as f:
         query = f.read()
         
         with database_handler.get_db_cursor(True) as cur:
-            #cur.execute("insert into comments(user_id,level_id,comment_rating,comment_desc) values (%s,%s,%s,'test2');",(uid,lid,rating))
-            #cur.execute("insert into comments(user_id,level_id,comment_rating,comment_desc) values (2,2,4,'test');")
-            cur.execute(query,(uid,lid,rating,body))
+            cur.execute(query, (uid, lid, rating, body))
             print("Executed query")
 
 
-def updateLevelComment(data):
-    uid = ""
+def update_level_comment(data):
     body = ""
     rating = ""
-    lid = ""
     comment_id = ""
     for key in data:
-        if key == "user_id":
-            uid = int(data[key])
-        elif key == "comment_body":
+        if key == "commentBody":
             body = data[key]
-        elif key == "level_id":
-            lid = int(data[key])
-        elif key == "comment_rating":
+        elif key == "commentRating":
             rating = float(data[key])
-        elif key == "comment_id":
+        elif key == "commentId":
             comment_id = int(data[key])
-
                     
     query = ""
     with open('./db/level/sql/updateLevelComment.sql') as f:
         query = f.read()
         
         with database_handler.get_db_cursor(True) as cur:
-            #cur.execute("insert into comments(user_id,level_id,comment_rating,comment_desc) values (%s,%s,%s,'test2');",(uid,lid,rating))
-            #cur.execute("insert into comments(user_id,level_id,comment_rating,comment_desc) values (2,2,4,'test');")
-            cur.execute(query,(body,rating,comment_id))
+            cur.execute(query, (body, rating, comment_id))
             print("Executed query")
 
 
-def deleteComment(data):
-    comment_id = int(data["comment_id"])
+def delete_comment(data):
+    comment_id = int(data["commentId"])
     query = ""
     with open('./db/level/sql/deleteComment.sql') as f:
         query = f.read()
         
         with database_handler.get_db_cursor(True) as cur:
-            #cur.execute("insert into comments(user_id,level_id,comment_rating,comment_desc) values (%s,%s,%s,'test2');",(uid,lid,rating))
-            #cur.execute("insert into comments(user_id,level_id,comment_rating,comment_desc) values (2,2,4,'test');")
-            cur.execute(query,[comment_id])
+            cur.execute(query, [comment_id])
             print("Executed query")
 
-def updateLevel(data):
-    uid = ""
+
+def update_level(data):
     lid = ""
     level_name = ""
     level_rating = ""
@@ -112,9 +104,7 @@ def updateLevel(data):
     level_diff = ""
 
     for key in data:
-        if key == "userId":
-            uid = int(data[key])
-        elif key == "levelName":
+        if key == "levelName":
             level_name = data[key]
         elif key == "levelId":
             lid = int(data[key])
@@ -132,20 +122,22 @@ def updateLevel(data):
         query = f.read()
         
         with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query,(level_name,level_rating,level_summary,level_description,level_diff,lid))
+            cur.execute(query, (level_name, level_rating, level_summary, level_description, level_diff, lid))
             print("Executed query")
+
             
-def deleteLevel(data):
+def delete_level(data):
     lid = data['levelId']
     query = ""
     with open('./db/level/sql/deleteLevel.sql') as f:
         query = f.read()
         
         with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query,[lid])
+            cur.execute(query, [lid])
             print("Executed query")
 
-def addLevel(data):
+
+def add_level(data):
     uid = ""
     level_name = ""
     level_rating = ""
@@ -172,5 +164,6 @@ def addLevel(data):
         query = f.read()
         
         with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query,(level_name,level_rating,level_diff,level_summary,level_description,uid))
+            cur.execute(query, (level_name, level_rating, level_diff, level_summary, level_description, uid))
             print("Executed query")
+            
