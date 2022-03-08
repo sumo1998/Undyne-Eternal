@@ -3,7 +3,7 @@
 # Made it like this to make the structure conform to what flask expects. Just a little less manual path specification
 # But if the project grows bigger, we can change the structure to be more modular
 
-from flask import Flask,render_template
+from flask import Flask,render_template, redirect, url_for, request
 from factory import object_factory
 
 from db.home import home_handler
@@ -42,5 +42,49 @@ def level(id):
     levelInfo = level_handler.getLevelInfo(id)
     levelComments = level_handler.getLevelComments(id)
     return render_template("level/level_template.html",levelInfo=levelInfo,levelComments=levelComments)
+
+@app.route("/addComment",methods=['POST'])
+def addComment():
+    data = request.form
+    level_handler.addLevelComment(data)
+    return redirect(url_for("level",id=data['level_id']))
+
+@app.route("/updateComment", methods=['PATCH'])
+def updateComment():
+    data = request.form
+    level_handler.updateLevelComment(data)
+    return redirect(url_for("level",id=data['level_id']))
+
+@app.route("/deleteComment", methods=['DELETE'])
+def deleteComment():
+    data = request.form
+    level_handler.deleteComment(data)
+    return redirect(url_for("level",id=data['level_id']))
+
+@app.route("/updateLevel", methods=['PATCH'])
+def updateLevel():
+    data = request.form
+    level_handler.updateLevel(data)
+    return redirect(url_for("level",id=data['levelId']))
+
+
+@app.route("/deleteLevel", methods=['DELETE'])
+def deleteLevel():
+    data = request.form
+    level_handler.deleteLevel(data)
+    return redirect(url_for("home_page"))
+
+@app.route("/addLevel", methods=['POST'])
+def addLevel():
+    data = request.form
+    level_handler.addLevel(data)
+    return redirect(url_for("home_page"))
+
+@app.route("/updateUser",methods=['PATCH'])
+def updateUser():
+    data = request.form
+    user_handler.updateUser(data)
+    return redirect(url_for("user",id=data["userId"]))
+
 if __name__ == '__main__':
     app.run()

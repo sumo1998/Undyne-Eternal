@@ -14,9 +14,9 @@ create table levels (
   level_diff text not null,
   user_id int not null,
   
-  constraint fk_user 
+  constraint fk_user  
     FOREIGN KEY(user_id)
-        references usr(user_id)
+        references usr(user_id) on delete cascade
 );
 
 /*
@@ -36,9 +36,9 @@ create table comments (
     level_id int,
     constraint fk_user
         foreign key(user_id)
-            references usr(user_id),
+            references usr(user_id) on delete cascade,
 
     constraint fk_level
         foreign key(level_id)
-            references levels(level_id)
+            references levels(level_id) on delete cascade
 );
