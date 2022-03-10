@@ -143,6 +143,7 @@ body {
     align-items: center;
     padding-top: 50px;
     padding-bottom: 50px;
+    cursor: pointer;
 }
 
 .hard {
@@ -222,6 +223,7 @@ body {
     font-weight: bold;
     color: white;
     font-size: 0.75em;
+    cursor: default;
 }
 
 .comment {
@@ -253,6 +255,7 @@ body {
 .button {
     transition: 0.3s;
     transform: scale(0.909, 0.909);
+    cursor: pointer;
 }
 
 .button:hover {
