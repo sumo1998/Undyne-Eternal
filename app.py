@@ -4,6 +4,7 @@
 # But if the project grows bigger, we can change the structure to be more modular
 
 from flask import Flask, render_template, redirect, url_for
+from api.auth import auth_router
 from factory import object_factory
 
 from db.home import home_handler
@@ -15,7 +16,6 @@ app = Flask(__name__)
 app.secret_key='21344'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 object_factory.get_auth_object(app)
-from api.auth import auth_router
 
 app.register_blueprint(auth_router.auth_blueprint)
 
@@ -31,6 +31,10 @@ def home_page():
 def feed():
     res = home_handler.getHomeFeed()
     return render_template("home/home_template.html",res=res)
+
+@app.route("/game")
+def game():
+    return render_template("game/game.html")
 
 @app.route("/user/<id>")
 def user(id):

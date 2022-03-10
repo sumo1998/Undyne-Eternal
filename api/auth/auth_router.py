@@ -13,7 +13,7 @@ auth_blueprint = Blueprint(
 
 @auth_blueprint.route('/register')
 def register_user():
-    return render_template('auth_template.html')
+    return render_template('auth/auth_template.html')
 
 
 @auth_blueprint.route('/callback')
