@@ -27,9 +27,9 @@ function Heart() {
     this.relPosY = 240;
     
     this.colour = "green";
-    this.shieldDir = 3;
+    this.shieldDir = 2;
     
-    this.absShieldDir = 3;
+    this.absShieldDir = 2;
     this.targetRotation = Math.PI * 2;
     
     this.sprite = new PIXI.Sprite(heartTexture);
@@ -42,7 +42,7 @@ function Heart() {
     this.shieldSprite.anchor.set(0.5, 1.4);
     this.shieldSprite.position.set(this.posX, this.posY);
     this.shieldSprite.tint = 0xcdcdcd;
-    this.shieldSprite.rotation = Math.PI / 2 * (1 + this.shieldDir);
+    this.shieldSprite.rotation = Math.PI / 2 * (2 + this.shieldDir);
     this.shieldSprite.visible = false;
     
     this.graphics = new PIXI.Graphics();
@@ -179,7 +179,7 @@ Heart.prototype.setShieldDir = function(dir) {
     }
     
     this.shieldDir = dir;
-    this.targetRotation = Math.PI / 2 * (1 + this.absShieldDir);
+    this.targetRotation = Math.PI / 2 * (2 + this.absShieldDir);
 };
 
 Heart.prototype.takeDamage = function(damage) {

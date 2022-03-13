@@ -42,16 +42,16 @@ GameState.prototype.handleInput = function(key) {
     else if(this.state == "playing") {
         switch(key) {
             case "left":
-                heart.setShieldDir(2);
+                heart.setShieldDir(1);
                 break;
             case "right":
-                heart.setShieldDir(4);
-                break;
-            case "up":
                 heart.setShieldDir(3);
                 break;
+            case "up":
+                heart.setShieldDir(2);
+                break;
             case "down":
-                heart.setShieldDir(1);
+                heart.setShieldDir(0);
                 break;
             default:
                 break;
