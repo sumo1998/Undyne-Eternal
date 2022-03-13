@@ -1,23 +1,32 @@
-var deviceScale = window.devicePixelRatio;
 var renderer;
 
 function setUpRendering() {
     
-    var width = 640, height = 480;
-    renderer = PIXI.autoDetectRenderer(width, height,
+    const gameWidth = 640, gameHeight = 480;
+    renderer = PIXI.autoDetectRenderer(gameWidth, gameHeight,
         {transparent: true, resolution: window.devicePixelRatio}
     );
     
     gameplayStage = new PIXI.Container();
     
-    // add the renderer view element to the DOM
-    renderer.view.style.width = width;
-    renderer.view.style.height = height;
-    document.body.appendChild(renderer.view);
+    const maxScreenProportion = 0.625;
     
+    const rendererMaxWidth = screen.width * maxScreenProportion;
+    const rendererMaxHeight = screen.height * maxScreenProportion;
+    
+    const gameDimensionMultiplayer = Math.min(rendererMaxWidth / gameWidth, rendererMaxHeight / gameHeight);
+    
+    const rendererWidth = gameDimensionMultiplayer * gameWidth;
+    const rendererHeight = gameDimensionMultiplayer * gameHeight;
+    
+    // add the renderer view element to the DOM
+    renderer.view.style.width = Math.round(rendererWidth) + "px";
+    renderer.view.style.height = Math.round(rendererHeight) + "px";
+    
+    renderer.view.setAttribute("id", "game-renderer");
+    
+    document.body.appendChild(renderer.view);
 }
-
-var boxThickness = 4;
 
 // render the current frame
 function render() {
