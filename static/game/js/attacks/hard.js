@@ -111,14 +111,6 @@ var hAg6 = {
         {direction: "1", turntype: 0, targetTime: 2.0, speed: 250},
         {direction: "3", turntype: 0, targetTime: 2.25, speed: 250}
     ],
-    nextSets: ["hSp1"]
-};
-
-var hSp1 = {
-    type: "spear",
-    nextTime: 10,
-    bufferTime: 2,
-    spearInterval: 600,
     nextSets: ["hAg7"]
 };
 
@@ -188,14 +180,6 @@ var hAg10 = {
         {direction: "4", turntype: 0, targetTime: 2.5, speed: 400},
         {direction: "2", turntype: 0, targetTime: 2.75, speed: 400}
     ],
-    nextSets: ["hSp2"]
-};
-
-var hSp2 = {
-    type: "spear",
-    nextTime: 10,
-    bufferTime: 2,
-    spearInterval: 500,
     nextSets: ["hAg11"]
 };
 
@@ -336,14 +320,6 @@ var hAg18 = {
         {direction: "2", turntype: 2, targetTime: 3.5, speed: 300},
         {direction: "1", turntype: 2, targetTime: 3.85, speed: 300}
     ],
-    nextSets: ["hSp3"]
-};
-
-var hSp3 = {
-    type: "spear",
-    nextTime: 10,
-    bufferTime: 2,
-    spearInterval: 400,
     nextSets: ["hAg19"]
 };
 
@@ -443,15 +419,6 @@ var hAg22 = {
         {direction: "$3", turntype: 0, targetTime: 2.7, speed: 500},
         {direction: "$3", turntype: 0, targetTime: 2.85, speed: 500}
     ],
-    nextSets: ["hPk1"]
-};
-
-var hPk1 = {
-    type: "pike",
-    nextTime: 6,
-    bufferTime: 0.8,
-    pikeInterval: 500,
-    down: false,
     nextSets: ["hAg23", "hAg24", "hAg25", "hAg26", "hAg27"]
 };
 
@@ -476,7 +443,7 @@ var hAg23 = {
         {direction: "2", turntype: 0, targetTime: 4.0, speed: 300},
         {direction: "2", turntype: 3, targetTime: 4.2, speed: 300}
     ],
-    nextSets: ["hSp4", "hPk1", "hAg24", "hAg25", "hAg26", "hAg27"]
+    nextSets: ["hAg24", "hAg25", "hAg26", "hAg27"]
 };
 
 var hAg24 = {
@@ -500,7 +467,7 @@ var hAg24 = {
         {direction: "2", turntype: 2, targetTime: 4.2, speed: 300},
         {direction: "4", turntype: 2, targetTime: 4.5, speed: 300}
     ],
-    nextSets: ["hSp4", "hAg23", "hPk1", "hAg25", "hAg26", "hAg27"]
+    nextSets: ["hAg23", "hAg25", "hAg26", "hAg27"]
 };
 
 var hAg25 = {
@@ -524,7 +491,7 @@ var hAg25 = {
         {direction: "+0", turntype: 0, targetTime: 4.2, speed: 400},
         {direction: "+0", turntype: 2, targetTime: 4.4, speed: 400}
     ],
-    nextSets: ["hSp4", "hAg23", "hAg24", "hPk1", "hAg26", "hAg27"]
+    nextSets: ["hAg23", "hAg24", "hAg26", "hAg27"]
 };
 
 var hAg26 = {
@@ -545,7 +512,7 @@ var hAg26 = {
         {direction: "R", turntype: 0, targetTime: 3.3, speed: 500},
         {direction: "R", turntype: 0, targetTime: 3.6, speed: 500}
     ],
-    nextSets: ["hSp4", "hAg23", "hAg24", "hAg25", "hPk1", "hAg27"]
+    nextSets: ["hAg23", "hAg24", "hAg25", "hAg27"]
 };
 
 var hAg27 = {
@@ -566,22 +533,5 @@ var hAg27 = {
         {direction: "R", turntype: 0, targetTime: 2.7, speed: 200},
         {direction: "R", turntype: 0, targetTime: 2.8, speed: 500}
     ],
-    nextSets: ["hSp4", "hAg23", "hAg24", "hAg25", "hAg26", "hPk1"]
-};
-
-var hPk2 = {
-    type: "pike",
-    nextTime: 6,
-    bufferTime: 0.8,
-    pikeInterval: 400,
-    down: true,
-    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26", "hAg27"]
-};
-
-var hSp4 = {
-    type: "spear",
-    nextTime: 10,
-    bufferTime: 2,
-    spearInterval: 300,
-    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26", "hAg27"]
+    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26"]
 };

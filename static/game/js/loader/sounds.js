@@ -2,13 +2,8 @@ var soundsLoaded = {
     10: false,
     11: false,
     12: false,
-    101: false,
-    102: false,
     111: false,
     112: false,
-    113: false,
-    114: false,
-    116: false,
     141: false
 };
 
@@ -49,20 +44,6 @@ var bgmUndyne2 = new Howl({
     volume: 0.7
 });
 
-var seTextAdvance = new Howl({
-    onload: registerSound(101),
-    src: "static/game/audio/se/000029ec.wav",
-    loop: false,
-    volume: 0.7
-});
-
-var sePressZed = new Howl({
-    onload: registerSound(102),
-    src: "static/game/audio/se/000029ab.wav",
-    loop: false,
-    volume: 0.7
-});
-
 var seArrowDing = new Howl({
     onload: registerSound(111),
     src: "static/game/audio/se/000029aa.wav",
@@ -73,27 +54,6 @@ var seArrowDing = new Howl({
 var seDamage = new Howl({
     onload: registerSound(112),
     src: "static/game/audio/se/000029c3.wav",
-    loop: false,
-    volume: 0.7
-});
-
-var seSpearAppear = new Howl({
-    onload: registerSound(113),
-    src: "static/game/audio/se/0000299b.wav",
-    loop: false,
-    volume: 0.7
-});
-
-var seSpearShoot = new Howl({
-    onload: registerSound(114),
-    src: "static/game/audio/se/000029a2.wav",
-    loop: false,
-    volume: 0.7
-});
-
-var sePikeShoot = new Howl({
-    onload: registerSound(116),
-    src: "static/game/audio/se/0000299c.wav",
     loop: false,
     volume: 0.7
 });

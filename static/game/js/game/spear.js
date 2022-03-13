@@ -46,7 +46,7 @@ Spear.prototype.update = function(deltaMs) {
     }
     
     // the sound effect is delayed by about 0.1s, so we do this to line them up.
-    if(this.activeTime >= this.appearTime && this.shot == false) {
+    if(this.activeTime >= this.appearTime && this.shot === false) {
         this.shot = true;
         seSpearShoot.play();
     }

@@ -6,8 +6,6 @@ graphicsLoader
     .add("arrow", "static/game/img/arrow.png")
     .add("heart", "static/game/img/heart.png")
     .add("shield", "static/game/img/shield.png")
-    .add("spear", "static/game/img/spear.png")
-    .add("pike", "static/game/img/pike.png")
     
     .add("by", "static/game/img/by.png")
     .add("fairdyne", "static/game/img/fairdyne.png")
@@ -41,8 +39,6 @@ graphicsLoader
 function processGraphics(resources) {
     
     arrowTexture = resources["arrow"].texture;
-    spearTexture = resources["spear"].texture;
-    pikeTexture = resources["pike"].texture;
     
     heartTexture = resources["heart"].texture;
     heartTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;

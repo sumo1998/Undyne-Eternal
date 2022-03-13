@@ -67,7 +67,6 @@ GameState.prototype.restartGame = function(difficulty) {
     this.state = "playing";
     
     arrows = [];
-    spears = [];
     nextAttack = null;
     
     heart.hp = heart.maxHp;
@@ -127,22 +126,10 @@ GameState.prototype.restartGame = function(difficulty) {
 
 GameState.prototype.endGame = function() {
     
-    // remove all arrows and spears
+    // remove all arrows
     
     for(var a = 0; a < arrows.length; ++a) {
         gameplayStage.removeChild(arrows[a].sprite);
-    }
-    for(var a = 0; a < spears.length; ++a) {
-        gameplayStage.removeChild(spears[a].sprite);
-    }
-    for(var a = 0; a < pikes.length; ++a) {
-        gameplayStage.removeChild(pikes[a].sprite);
-    }
-    for(var a = 0; a < circleSpears.length; ++a) {
-        gameplayStage.removeChild(circleSpears[a].sprite);
-    }
-    for(var a = 0; a < swarmSpears.length; ++a) {
-        gameplayStage.removeChild(swarmSpears[a].sprite);
     }
     
     if(box.top < 240 - shieldDistance) {
@@ -262,79 +249,8 @@ GameState.prototype.update = function(deltaMs) {
             }
         }
         
-        // spears.update(deltaMs)
-        for(var a = 0; a < spears.length; ++a) {
-            spears[a].update(deltaMs);
-            if(spears[a].removed) {
-                gameplayStage.removeChild(spears[a].sprite);
-                spears.splice(a, 1);
-            }
-        }
-        
-        // pikes.update(deltaMs)
-        for(var a = 0; a < pikes.length; ++a) {
-            pikes[a].update(deltaMs);
-            if(pikes[a].removed) {
-                gameplayStage.removeChild(pikes[a].sprite);
-                pikes.splice(a, 1);
-            }
-        }
-        
-        // circleSpears.update(deltaMs)
-        for(var a = 0; a < circleSpears.length; ++a) {
-            circleSpears[a].update(deltaMs);
-            if(circleSpears[a].removed) {
-                gameplayStage.removeChild(circleSpears[a].sprite);
-                circleSpears.splice(a, 1);
-            }
-        }
-        
-        // swarm.update(deltaMs)
-        for(var a = 0; a < swarmSpears.length; ++a) {
-            swarmSpears[a].update(deltaMs);
-            if(swarmSpears[a].removed) {
-                gameplayStage.removeChild(swarmSpears[a].sprite);
-                swarmSpears.splice(a, 1);
-            }
-        }
-        
         var currentAttack = attackQueue[0];
         currentAttack.time -= deltaMs / 1000;
-        
-        if(currentAttack.type == "spear") {
-            spearTime -= deltaMs;
-            if(spearTime <= 0) {
-                spearTime += spearInterval;
-                addNewSpear();
-            }
-        }
-        else if(currentAttack.type == "pike") {
-            pikeTime -= deltaMs;
-            if(pikeTime <= 0) {
-                pikeTime += pikeInterval;
-                addNewPike();
-            }
-        }
-        else if(currentAttack.type == "circlespear") {
-            circleTime -= deltaMs;
-            if(circleTime <= 0) {
-                circleTime += circleInterval;
-                addNewCircleSpear(circleCount);
-            }
-        }
-        else if(currentAttack.type == "swarmspear") {
-            swarmTime -= deltaMs;
-            if(swarmTime <= 0) {
-                swarmTime += swarmInterval;
-                swarmInitialAngle += Math.random() * 0.8 - 0.5;
-                addNewSwarmSpear(6, swarmInterval, swarmInitialAngle);
-            }
-        }
-        
-        if(currentAttack.time <= 0.4 + (currentAttack.bufferTime || 0) &&
-            currentAttack.type != attackQueue[1].type) {
-            undyne.swingArm();
-        }
         
         if(currentAttack.time <= (currentAttack.bufferTime || 0)) {
             switchAttackMode();
