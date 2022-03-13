@@ -1,0 +1,19 @@
+{% macro user_in_profile(username="Username", avatar="", level_count=0, average_rating=0) -%}
+    {% import "./components/user_avatar.html" as user_avatar %}
+    <div class="user-page pure-u-1-5">
+        <div class="user-page-title">
+            {{ user_avatar.user_avatar(avatar, username, user_id, True) }}
+            <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
+        </div>
+        <div class="user-level-info">
+            <p class="user-stats">Levels made: {{ level_count }}</p>
+            <p class="user-stats">Average rating: {{ average_rating }}</p>
+        </div>
+        <div class="medium post-page-play-level button">
+            <p class="button-text">
+                Log out
+            </p>
+        </div>
+
+    </div>
+{%- endmacro %}

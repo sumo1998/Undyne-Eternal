@@ -5,7 +5,7 @@
 {% block content %}
     {% for level in res %}
         <div>{{ level_template.level_in_feed(level.level_name, level.level_rating, level.level_diff, level.level_summary,
-     level.user_name, level.user_avatar, level.level_id) }}
+     level.user_name, level.user_avatar, level.level_id, level.user_id) }}
         </div>
     {% endfor %}
     <div>{{ level_template.level_in_feed("Hello world", 3, "medium", "testing",

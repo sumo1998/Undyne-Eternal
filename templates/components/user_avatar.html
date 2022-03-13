@@ -1,0 +1,15 @@
+{% macro user_avatar(img="", username="username", user_id=0, editable=False) -%}
+        {% if editable %}
+                <object data="{{ img }}" type="image/jpg" class="avatar" id="avatar-wrapper">
+                    <img src="../static/img/user.png" class="avatar"/>
+                    <p class="edit-avatar">Change avatar</p>
+                </object>
+        {% else %}
+            <div>
+                <object data="{{ img }}" type="image/jpg" class="avatar">
+                    <img src="../static/img/user.png" class="avatar"/>
+                </object>
+            </div>
+
+        {% endif %}
+{%- endmacro %}
