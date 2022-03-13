@@ -3,39 +3,38 @@
 var graphicsLoader = new PIXI.loaders.Loader();
 
 graphicsLoader
-
-.add("arrow", "static/game/img/arrow.png")
-.add("heart", "static/game/img/heart.png")
-.add("shield", "static/game/img/shield.png")
-.add("spear", "static/game/img/spear.png")
-.add("pike", "static/game/img/pike.png")
-
-.add("by", "static/game/img/by.png")
-.add("fairdyne", "static/game/img/fairdyne.png")
-.add("ground1", "static/game/img/ground1.png")
-.add("ground2", "static/game/img/ground2.png")
-.add("ground3", "static/game/img/ground3.png")
-.add("speechbubble", "static/game/img/speechbubble.png")
-.add("un", "static/game/img/un.png")
-.add("undyne", "static/game/img/undyne.png")
-.add("undyneBreastplate", "static/game/img/undyne_breastplate.png")
-.add("undyneHair1", "static/game/img/undyne_hair1.png")
-.add("undyneHair2", "static/game/img/undyne_hair2.png")
-.add("undyneHair3", "static/game/img/undyne_hair3.png")
-.add("undyneHair4", "static/game/img/undyne_hair4.png")
-.add("undyneHead1", "static/game/img/undyne_head1.png")
-.add("undyneHead2", "static/game/img/undyne_head2.png")
-.add("undyneHead3", "static/game/img/undyne_head_annoyed.png")
-.add("undyneHead4", "static/game/img/undyne_head_angry.png")
-.add("undyneIntroHairless", "static/game/img/undyne_intro_hairless.png")
-.add("undyneLeftArm", "static/game/img/undyne_left_arm.png")
-.add("undyneLegs", "static/game/img/undyne_legs.png")
-.add("undyneRightArm", "static/game/img/undyne_right_arm.png")
-.add("undyneSkirt", "static/game/img/undyne_skirt.png")
-
-.on("complete", function(loader, resources) {
-    processGraphics(resources);
-})
+    .add("arrow", "static/game/img/arrow.png")
+    .add("heart", "static/game/img/heart.png")
+    .add("shield", "static/game/img/shield.png")
+    .add("spear", "static/game/img/spear.png")
+    .add("pike", "static/game/img/pike.png")
+    
+    .add("by", "static/game/img/by.png")
+    .add("fairdyne", "static/game/img/fairdyne.png")
+    .add("ground1", "static/game/img/ground1.png")
+    .add("ground2", "static/game/img/ground2.png")
+    .add("ground3", "static/game/img/ground3.png")
+    .add("speechbubble", "static/game/img/speechbubble.png")
+    .add("un", "static/game/img/un.png")
+    .add("undyne", "static/game/img/undyne.png")
+    .add("undyneBreastplate", "static/game/img/undyne_breastplate.png")
+    .add("undyneHair1", "static/game/img/undyne_hair1.png")
+    .add("undyneHair2", "static/game/img/undyne_hair2.png")
+    .add("undyneHair3", "static/game/img/undyne_hair3.png")
+    .add("undyneHair4", "static/game/img/undyne_hair4.png")
+    .add("undyneHead1", "static/game/img/undyne_head1.png")
+    .add("undyneHead2", "static/game/img/undyne_head2.png")
+    .add("undyneHead3", "static/game/img/undyne_head_annoyed.png")
+    .add("undyneHead4", "static/game/img/undyne_head_angry.png")
+    .add("undyneIntroHairless", "static/game/img/undyne_intro_hairless.png")
+    .add("undyneLeftArm", "static/game/img/undyne_left_arm.png")
+    .add("undyneLegs", "static/game/img/undyne_legs.png")
+    .add("undyneRightArm", "static/game/img/undyne_right_arm.png")
+    .add("undyneSkirt", "static/game/img/undyne_skirt.png")
+    
+    .on("complete", function(loader, resources) {
+        processGraphics(resources);
+    })
 
 ;
 
@@ -99,5 +98,4 @@ function processGraphics(resources) {
     undyneIntroHairlessTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     
     markAssetLoaded("graphics");
-    
 }
