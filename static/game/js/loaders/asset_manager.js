@@ -24,9 +24,9 @@ class AssetManager extends AssetLoader {
     constructor() {
         super();
         
-        const fontLoader = new FontLoader();
-        const audioManager = new AudioManager();
-        const graphicManager = new GraphicManager();
+        this.#fontLoader = new FontLoader();
+        this.#audioManager = new AudioManager();
+        this.#graphicManager = new GraphicManager();
     }
     
     /**
