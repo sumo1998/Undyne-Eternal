@@ -1,15 +1,16 @@
 var hAg1 = {
     nextTime: 3.2,
+    clockwiseShift: false,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 100},
         {direction: "2", reversed: false, targetTime: 0.6, speed: 100},
         {direction: "2", reversed: false, targetTime: 1.2, speed: 100}
-    ],
-    nextSets: ["hAg2"]
+    ]
 };
 
 var hAg2 = {
     nextTime: 4.5,
+    clockwiseShift: false,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 150},
         {direction: "2", reversed: false, targetTime: 0.5, speed: 150},
@@ -17,12 +18,12 @@ var hAg2 = {
         {direction: "1", reversed: false, targetTime: 1.5, speed: 150},
         {direction: "3", reversed: false, targetTime: 2.0, speed: 150},
         {direction: "3", reversed: false, targetTime: 2.5, speed: 150}
-    ],
-    nextSets: ["hAg3"]
+    ]
 };
 
 var hAg3 = {
     nextTime: 4.8,
+    clockwiseShift: true,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 200},
         {direction: "3", reversed: false, targetTime: 0.4, speed: 200},
@@ -32,12 +33,12 @@ var hAg3 = {
         {direction: "1", reversed: false, targetTime: 2.0, speed: 200},
         {direction: "1", reversed: false, targetTime: 2.4, speed: 200},
         {direction: "0", reversed: false, targetTime: 2.8, speed: 200}
-    ],
-    nextSets: ["hAg4"]
+    ]
 };
 
 var hAg4 = {
     nextTime: 4.85,
+    clockwiseShift: true,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 250},
         {direction: "1", reversed: false, targetTime: 0.3, speed: 250},
@@ -51,12 +52,12 @@ var hAg4 = {
         {direction: "0", reversed: false, targetTime: 2.55, speed: 250},
         {direction: "0", reversed: false, targetTime: 2.7, speed: 250},
         {direction: "0", reversed: false, targetTime: 2.85, speed: 250}
-    ],
-    nextSets: ["hAg5"]
+    ]
 };
 
 var hAg5 = {
     nextTime: 4.1,
+    clockwiseShift: true,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 250},
         {direction: "2", reversed: false, targetTime: 0.3, speed: 250},
@@ -67,12 +68,12 @@ var hAg5 = {
         {direction: "3", reversed: false, targetTime: 1.5, speed: 250},
         {direction: "2", reversed: false, targetTime: 1.8, speed: 250},
         {direction: "0", reversed: false, targetTime: 2.1, speed: 250}
-    ],
-    nextSets: ["hAg6"]
+    ]
 };
 
 var hAg6 = {
     nextTime: 4.25,
+    clockwiseShift: true,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 250},
         {direction: "2", reversed: false, targetTime: 0.25, speed: 250},
@@ -84,12 +85,12 @@ var hAg6 = {
         {direction: "3", reversed: false, targetTime: 1.75, speed: 250},
         {direction: "0", reversed: false, targetTime: 2.0, speed: 250},
         {direction: "2", reversed: false, targetTime: 2.25, speed: 250}
-    ],
-    nextSets: ["hAg7"]
+    ]
 };
 
 var hAg7 = {
     nextTime: 4.0,
+    clockwiseShift: true,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 300},
         {direction: "2", reversed: false, targetTime: 0.25, speed: 300},
@@ -99,12 +100,12 @@ var hAg7 = {
         {direction: "0", reversed: false, targetTime: 1.25, speed: 300},
         {direction: "2", reversed: false, targetTime: 1.5, speed: 300},
         {direction: "0", reversed: false, targetTime: 1.75, speed: 300}
-    ],
-    nextSets: ["hAg8"]
+    ]
 };
 
 var hAg8 = {
     nextTime: 2.5,
+    clockwiseShift: true,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 300},
         {direction: "3", reversed: false, targetTime: 0.25, speed: 300},
@@ -113,12 +114,12 @@ var hAg8 = {
         {direction: "3", reversed: false, targetTime: 1.0, speed: 300},
         {direction: "0", reversed: false, targetTime: 1.25, speed: 300},
         {direction: "1", reversed: false, targetTime: 1.5, speed: 75}
-    ],
-    nextSets: ["hAg9"]
+    ]
 };
 
 var hAg9 = {
     nextTime: 3.6,
+    clockwiseShift: true,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 400},
         {direction: "1", reversed: false, targetTime: 0.2, speed: 320},
@@ -130,12 +131,12 @@ var hAg9 = {
         {direction: "2", reversed: false, targetTime: 2.0, speed: 300},
         {direction: "0", reversed: false, targetTime: 2.3, speed: 300},
         {direction: "2", reversed: false, targetTime: 2.6, speed: 300}
-    ],
-    nextSets: ["hAg10"]
+    ]
 };
 
 var hAg10 = {
     nextTime: 3.75,
+    clockwiseShift: true,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 200},
         {direction: "1", reversed: false, targetTime: 0.25, speed: 200},
@@ -149,8 +150,7 @@ var hAg10 = {
         {direction: "0", reversed: false, targetTime: 2.25, speed: 400},
         {direction: "3", reversed: false, targetTime: 2.5, speed: 400},
         {direction: "1", reversed: false, targetTime: 2.75, speed: 400}
-    ],
-    nextSets: ["hAg11"]
+    ]
 };
 
 var hAg11 = {
@@ -161,12 +161,12 @@ var hAg11 = {
         {direction: "3", reversed: false, targetTime: 0.8, speed: 200},
         {direction: "1", reversed: false, targetTime: 1.2, speed: 200},
         {direction: "3", reversed: true, targetTime: 1.6, speed: 300}
-    ],
-    nextSets: ["hAg12"]
+    ]
 };
 
 var hAg12 = {
     nextTime: 4.4,
+    clockwiseShift: true,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 200},
         {direction: "3", reversed: false, targetTime: 0.4, speed: 200},
@@ -176,12 +176,12 @@ var hAg12 = {
         {direction: "3", reversed: false, targetTime: 2.0, speed: 300},
         {direction: "2", reversed: false, targetTime: 2.4, speed: 300},
         {direction: "0", reversed: true, targetTime: 2.8, speed: 300}
-    ],
-    nextSets: ["hAg13"]
+    ]
 };
 
 var hAg13 = {
     nextTime: 4.4,
+    clockwiseShift: true,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 200},
         {direction: "0", reversed: false, targetTime: 0.4, speed: 200},
@@ -191,12 +191,12 @@ var hAg13 = {
         {direction: "2", reversed: true, targetTime: 2.4, speed: 300},
         {direction: "1", reversed: true, targetTime: 2.8, speed: 300},
         {direction: "0", reversed: true, targetTime: 3.2, speed: 300}
-    ],
-    nextSets: ["hAg14"]
+    ]
 };
 
 var hAg14 = {
     nextTime: 4.8,
+    clockwiseShift: true,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 200},
         {direction: "3", reversed: false, targetTime: 0.35, speed: 200},
@@ -209,12 +209,12 @@ var hAg14 = {
         {direction: "0", reversed: false, targetTime: 2.8, speed: 500},
         {direction: "3", reversed: false, targetTime: 3.3, speed: 500},
         {direction: "1", reversed: false, targetTime: 3.6, speed: 500}
-    ],
-    nextSets: ["hAg15"]
+    ]
 };
 
 var hAg15 = {
     nextTime: 4.7,
+    clockwiseShift: true,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 200},
         {direction: "2", reversed: false, targetTime: 0.35, speed: 200},
@@ -225,12 +225,12 @@ var hAg15 = {
         {direction: "1", reversed: false, targetTime: 2.9, speed: 300},
         {direction: "3", reversed: true, targetTime: 3.2, speed: 300},
         {direction: "1", reversed: false, targetTime: 3.5, speed: 300}
-    ],
-    nextSets: ["hAg16"]
+    ]
 };
 
 var hAg16 = {
     nextTime: 4.6,
+    clockwiseShift: true,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 500},
         {direction: "3", reversed: false, targetTime: 0.4, speed: 500},
@@ -242,12 +242,12 @@ var hAg16 = {
         {direction: "3", reversed: false, targetTime: 2.8, speed: 500},
         {direction: "3", reversed: false, targetTime: 3.2, speed: 500},
         {direction: "2", reversed: false, targetTime: 3.6, speed: 500}
-    ],
-    nextSets: ["hAg17"]
+    ]
 };
 
 var hAg17 = {
     nextTime: 4.5,
+    clockwiseShift: true,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 300},
         {direction: "1", reversed: false, targetTime: 0.32, speed: 300},
@@ -262,12 +262,12 @@ var hAg17 = {
         {direction: "1", reversed: true, targetTime: 2.88, speed: 300},
         {direction: "3", reversed: false, targetTime: 3.20, speed: 300},
         {direction: "1", reversed: true, targetTime: 3.52, speed: 300}
-    ],
-    nextSets: ["hAg18"]
+    ]
 };
 
 var hAg18 = {
     nextTime: 4.5,
+    clockwiseShift: true,
     arrows: [
         {direction: "3", reversed: true, targetTime: 0.0, speed: 300},
         {direction: "2", reversed: true, targetTime: 0.35, speed: 300},
@@ -281,12 +281,12 @@ var hAg18 = {
         {direction: "2", reversed: true, targetTime: 3.15, speed: 300},
         {direction: "1", reversed: true, targetTime: 3.5, speed: 300},
         {direction: "0", reversed: true, targetTime: 3.85, speed: 300}
-    ],
-    nextSets: ["hAg19"]
+    ]
 };
 
 var hAg19 = {
     nextTime: 3.5,
+    clockwiseShift: false,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 300},
         {direction: "?", reversed: false, targetTime: 0.3, speed: 300},
@@ -299,12 +299,12 @@ var hAg19 = {
         {direction: "?", reversed: false, targetTime: 2.1, speed: 300},
         {direction: "?", reversed: false, targetTime: 2.4, speed: 300},
         {direction: "?", reversed: false, targetTime: 2.7, speed: 300}
-    ],
-    nextSets: ["hAg20"]
+    ]
 };
 
 var hAg20 = {
     nextTime: 4.0,
+    clockwiseShift: false,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.00, speed: 500},
         {direction: "2", reversed: false, targetTime: 0.15, speed: 500},
@@ -328,12 +328,12 @@ var hAg20 = {
         {direction: "2", reversed: false, targetTime: 3.35, speed: 500},
         {direction: "2", reversed: false, targetTime: 3.50, speed: 500},
         {direction: "2", reversed: false, targetTime: 3.65, speed: 500}
-    ],
-    nextSets: ["hAg21"]
+    ]
 };
 
 var hAg21 = {
     nextTime: 5.0,
+    clockwiseShift: true,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 300},
         {direction: "1", reversed: false, targetTime: 0.25, speed: 300},
@@ -351,12 +351,12 @@ var hAg21 = {
         {direction: "3", reversed: false, targetTime: 3.75, speed: 300},
         {direction: "0", reversed: false, targetTime: 4.0, speed: 300},
         {direction: "1", reversed: false, targetTime: 4.25, speed: 300}
-    ],
-    nextSets: ["hAg22"]
+    ]
 };
 
 var hAg22 = {
     nextTime: 4.0,
+    clockwiseShift: false,
     arrows: [
         {direction: "1", reversed: true, targetTime: 0.0, speed: 500},
         {direction: "2", reversed: false, targetTime: 0.15, speed: 500},
@@ -376,12 +376,12 @@ var hAg22 = {
         {direction: "2", reversed: false, targetTime: 2.55, speed: 500},
         {direction: "2", reversed: false, targetTime: 2.7, speed: 500},
         {direction: "2", reversed: false, targetTime: 2.85, speed: 500}
-    ],
-    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26", "hAg27"]
+    ]
 };
 
 var hAg23 = {
     nextTime: 4.8,
+    clockwiseShift: true,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 300},
         {direction: "2", reversed: false, targetTime: 0.2, speed: 300},
@@ -399,12 +399,12 @@ var hAg23 = {
         {direction: "1", reversed: true, targetTime: 3.8, speed: 300},
         {direction: "1", reversed: false, targetTime: 4.0, speed: 300},
         {direction: "1", reversed: true, targetTime: 4.2, speed: 300}
-    ],
-    nextSets: ["hAg24", "hAg25", "hAg26", "hAg27"]
+    ]
 };
 
 var hAg24 = {
     nextTime: 5.5,
+    clockwiseShift: true,
     arrows: [
         {direction: "0", reversed: true, targetTime: 0.0, speed: 300},
         {direction: "1", reversed: true, targetTime: 0.3, speed: 300},
@@ -422,12 +422,12 @@ var hAg24 = {
         {direction: "2", reversed: true, targetTime: 3.9, speed: 300},
         {direction: "1", reversed: true, targetTime: 4.2, speed: 300},
         {direction: "3", reversed: true, targetTime: 4.5, speed: 300}
-    ],
-    nextSets: ["hAg23", "hAg25", "hAg26", "hAg27"]
+    ]
 };
 
 var hAg25 = {
     nextTime: 5.0,
+    clockwiseShift: false,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 400},
         {direction: "?", reversed: true, targetTime: 0.2, speed: 400},
@@ -445,12 +445,12 @@ var hAg25 = {
         {direction: "?", reversed: true, targetTime: 3.8, speed: 400},
         {direction: "?", reversed: false, targetTime: 4.2, speed: 400},
         {direction: "?", reversed: true, targetTime: 4.4, speed: 400}
-    ],
-    nextSets: ["hAg23", "hAg24", "hAg26", "hAg27"]
+    ]
 };
 
 var hAg26 = {
     nextTime: 4.2,
+    clockwiseShift: false,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 500},
         {direction: "?", reversed: false, targetTime: 0.3, speed: 500},
@@ -465,12 +465,12 @@ var hAg26 = {
         {direction: "?", reversed: false, targetTime: 3.0, speed: 500},
         {direction: "?", reversed: false, targetTime: 3.3, speed: 500},
         {direction: "?", reversed: false, targetTime: 3.6, speed: 500}
-    ],
-    nextSets: ["hAg23", "hAg24", "hAg25", "hAg27"]
+    ]
 };
 
 var hAg27 = {
     nextTime: 3.7,
+    clockwiseShift: false,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 500},
         {direction: "?", reversed: false, targetTime: 0.3, speed: 400},
@@ -485,6 +485,5 @@ var hAg27 = {
         {direction: "?", reversed: false, targetTime: 2.5, speed: 300},
         {direction: "?", reversed: false, targetTime: 2.7, speed: 200},
         {direction: "?", reversed: false, targetTime: 2.8, speed: 500}
-    ],
-    nextSets: ["hAg23", "hAg24", "hAg25", "hAg26"]
+    ]
 };

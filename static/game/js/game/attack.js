@@ -46,7 +46,7 @@ function addNextAttack(attack) {
         return;
     }
     
-    addArrowGroup(newAttack, currentAttackIdx);
+    addArrowGroup(newAttack);
     
     nextAttack = newAttack;
     

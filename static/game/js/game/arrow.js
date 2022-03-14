@@ -102,7 +102,7 @@ function lastArrowOfAttack() {
         String(currentAttackNumber).padStart(2, "0") + " / " + String(attacks.length).padStart(2, "0");
 }
 
-function addArrowGroup(arrowGroup, idx) {
+function addArrowGroup(arrowGroup) {
     if(attackQueue.length === 0) {
         return;
     }
@@ -110,6 +110,10 @@ function addArrowGroup(arrowGroup, idx) {
     // loads the _next_ arrow group when the current one comes into play.
     
     var offsetTime = attackQueue[0].time;
+    
+    var clockwiseShift = arrowGroup.clockwiseShift;
+    
+    var clockwiseShiftAmount = Math.floor(Math.random() * 4);
     
     for(var a = 0; a < arrowGroup.arrows.length; ++a) {
         
@@ -121,6 +125,10 @@ function addArrowGroup(arrowGroup, idx) {
         }
         else {
             direction = parseInt(direction);
+            
+            if(clockwiseShift) {
+                direction = (direction + clockwiseShiftAmount) % 4;
+            }
         }
         
         var time = offsetTime + ar.targetTime;
