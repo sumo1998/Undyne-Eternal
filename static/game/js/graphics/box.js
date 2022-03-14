@@ -1,0 +1,108 @@
+/**
+ * Represents the box surrounding the heart.
+ */
+class Box extends GraphicsObject {
+    
+    /**
+     * The speed at which to adjust the box boundaries (px/ms)
+     * @type {number}
+     */
+    static boxAdjustSpeed = 0.5;
+    
+    /**
+     * The thickness of the box.
+     */
+    #thickness;
+    
+    /**
+     * The x-position of the left boundary of the box.
+     */
+    #left;
+    
+    /**
+     * The x-position of the right boundary of the box.
+     */
+    #right;
+    
+    /**
+     * The y-position of the top boundary of the box.
+     */
+    #top;
+    
+    /**
+     * The y-position of the bottom boundary of the box.
+     */
+    #bottom;
+    
+    /**
+     * The destination x-position of the left boundary of the box.
+     */
+    #destLeft;
+    
+    /**
+     * The destination x-position of the right boundary of the box.
+     */
+    #destRight;
+    
+    /**
+     * The destination y-position of the top boundary of the box.
+     */
+    #destTop;
+    
+    /**
+     * The destination y-position of the bottom boundary of the box.
+     */
+    #destBottom;
+    
+    /**
+     * The graphics used to draw the box.
+     */
+    #graphics;
+    
+    /**
+     * Initializes a Box instance.
+     */
+    constructor() {
+        super();
+        this.#thickness = 3;
+        
+        this.#left = 16;
+        this.#right = 624;
+        this.#top = 240;
+        this.#bottom = 420;
+        
+        this.#destLeft = this.#left;
+        this.#destRight = this.#right;
+        this.#destTop = this.#top;
+        this.#destBottom = this.#bottom;
+        
+        this.#graphics = new PIXI.Graphics();
+        Main.runner.gameplayStage.addChild(this.#graphics);
+    }
+    
+    /**
+     * Updates the boundaries of the box.
+     * @param deltaMs The time that has passed since the last update of the box boundaries
+     */
+    update(deltaMs) {
+        this.#left = Functions.approach(this.#left, this.#destLeft, Box.boxAdjustSpeed * deltaMs);
+        this.#right = Functions.approach(this.#right, this.#destRight, Box.boxAdjustSpeed * deltaMs);
+        this.#top = Functions.approach(this.#top, this.#destTop, Box.boxAdjustSpeed * deltaMs);
+        this.#bottom = Functions.approach(this.#bottom, this.#destBottom, Box.boxAdjustSpeed * deltaMs);
+    }
+    
+    /**
+     * Renders the box.
+     */
+    render() {
+        this.#graphics.clear();
+        this.#graphics.beginFill(0x000000, 1);
+        this.#graphics.lineStyle(this.#thickness, 0xFFFFFF, 1);
+        this.#graphics.drawRect(
+            this.#left - this.#thickness / 2,
+            this.#top - this.#thickness / 2,
+            this.#right - this.#left + this.#thickness,
+            this.#bottom - this.#top + this.#thickness
+        );
+    }
+}
