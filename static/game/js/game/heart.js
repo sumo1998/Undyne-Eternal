@@ -126,7 +126,7 @@ Heart.prototype.move = function(deltaMs) {
         d.y = +speed * deltaMs;
     }
     
-    var f = vnorm(d) == 0 ? d : scalarMult(d, speed * deltaMs / vnorm(d));
+    var f = vnorm(d) === 0 ? d : scalarMult(d, speed * deltaMs / vnorm(d));
     
     this.posX = clamp(this.posX + f.x, box.left + heartSize / 2, box.right - heartSize / 2);
     this.posY = clamp(this.posY + f.y, box.top + heartSize / 2, box.bottom - heartSize / 2);
@@ -217,7 +217,7 @@ Heart.prototype.takeDamage = function(damage) {
     
     seDamage.play();
     this.hp = Math.max(0, this.hp - damage);
-    if(this.hp == 0) {
+    if(this.hp === 0) {
         gamestate.endGame();
     }
     

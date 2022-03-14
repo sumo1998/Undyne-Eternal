@@ -24,10 +24,6 @@ function Arrow(props) {
     this.sprite.rotation = Math.PI * (0.5 * this.direction + this.reversed - 0.5);
     this.sprite.tint = this.reversed ? 0xffdf23 : 0x2fd0ff;
     
-    if(attackQueue[0].type !== "arrow" && attackQueue[0].type !== "null") {
-        this.sprite.visible = false;
-    }
-    
     gameplayStage.addChild(this.sprite);
     
 }

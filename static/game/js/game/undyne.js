@@ -166,7 +166,7 @@ Undyne.prototype.advanceTextChars = function(textChars) {
     }
     
     var char = this.sbtext.text[Math.floor(textChars)];
-    if(!(char == " " || char == "\n")) {
+    if(!(char === " " || char === "\n")) {
         this.textSe.play();
     }
     this.speechBubbleText.text = this.sbtext.text.substr(0, Math.floor(textChars));
@@ -175,7 +175,7 @@ Undyne.prototype.advanceTextChars = function(textChars) {
 
 Undyne.prototype.advanceTextA = function() {
     
-    if(this.textState == "waiting") {
+    if(this.textState === "waiting") {
         this.selectNextText();
     }
     
@@ -183,7 +183,7 @@ Undyne.prototype.advanceTextA = function() {
 
 Undyne.prototype.advanceTextB = function() {
     
-    if(this.textState == "talking") {
+    if(this.textState === "talking") {
         this.speechBubbleText.text = this.sbtext.text;
         this.textState = "waiting";
     }
@@ -192,7 +192,7 @@ Undyne.prototype.advanceTextB = function() {
 
 Undyne.prototype.swingArm = function() {
     
-    if(this.animationState == "swingingArm") {
+    if(this.animationState === "swingingArm") {
         return;
     }
     
@@ -215,7 +215,7 @@ Undyne.prototype.update = function(deltaMs) {
     
     this.animationTime += deltaMs;
     
-    if(this.textState == "talking") {
+    if(this.textState === "talking") {
         var newTextChars = this.textChars + this.cps * deltaMs / 1000;
         if(Math.floor(newTextChars) > this.textChars) {
             this.advanceTextChars(newTextChars);
@@ -226,7 +226,7 @@ Undyne.prototype.update = function(deltaMs) {
         this.textChars = newTextChars;
     }
     
-    if(this.animationState == "breathing") {
+    if(this.animationState === "breathing") {
         
         this.bodySprite.position.y = 108 + 2 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
         this.headSprite.position.y = 48 + 1 * Math.sin(this.animationTime / 1200 * Math.PI * 2);
@@ -239,7 +239,7 @@ Undyne.prototype.update = function(deltaMs) {
         this.leftArmSprite.position.x = 369 + 2 * Math.sin(this.animationTime / 600 * Math.PI * 2);
         
     }
-    else if(this.animationState == "swingingArm") {
+    else if(this.animationState === "swingingArm") {
         
         if(this.animationTime < 300) {
             this.rightArmSprite.rotation =

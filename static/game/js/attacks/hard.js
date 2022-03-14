@@ -1,5 +1,4 @@
 var hAg1 = {
-    type: "arrow",
     nextTime: 3.2,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 100},
@@ -10,7 +9,6 @@ var hAg1 = {
 };
 
 var hAg2 = {
-    type: "arrow",
     nextTime: 4.5,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 150},
@@ -24,7 +22,6 @@ var hAg2 = {
 };
 
 var hAg3 = {
-    type: "arrow",
     nextTime: 4.8,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 200},
@@ -40,7 +37,6 @@ var hAg3 = {
 };
 
 var hAg4a = {
-    type: "arrow",
     nextTime: 4.85,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 250},
@@ -60,7 +56,6 @@ var hAg4a = {
 };
 
 var hAg4b = {
-    type: "arrow",
     nextTime: 4.85,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 250},
@@ -80,7 +75,6 @@ var hAg4b = {
 };
 
 var hAg5 = {
-    type: "arrow",
     nextTime: 4.1,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 250},
@@ -97,7 +91,6 @@ var hAg5 = {
 };
 
 var hAg6 = {
-    type: "arrow",
     nextTime: 4.25,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 250},
@@ -115,7 +108,6 @@ var hAg6 = {
 };
 
 var hAg7 = {
-    type: "arrow",
     nextTime: 4.0,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 300},
@@ -131,7 +123,6 @@ var hAg7 = {
 };
 
 var hAg8 = {
-    type: "arrow",
     nextTime: 2.5,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 300},
@@ -146,7 +137,6 @@ var hAg8 = {
 };
 
 var hAg9 = {
-    type: "arrow",
     nextTime: 3.6,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 400},
@@ -164,7 +154,6 @@ var hAg9 = {
 };
 
 var hAg10 = {
-    type: "arrow",
     nextTime: 3.75,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 200},
@@ -184,7 +173,6 @@ var hAg10 = {
 };
 
 var hAg11 = {
-    type: "arrow",
     nextTime: 3.2,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 200},
@@ -197,7 +185,6 @@ var hAg11 = {
 };
 
 var hAg12 = {
-    type: "arrow",
     nextTime: 4.4,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 200},
@@ -213,7 +200,6 @@ var hAg12 = {
 };
 
 var hAg13 = {
-    type: "arrow",
     nextTime: 4.4,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 200},
@@ -229,7 +215,6 @@ var hAg13 = {
 };
 
 var hAg14 = {
-    type: "arrow",
     nextTime: 4.8,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 200},
@@ -248,7 +233,6 @@ var hAg14 = {
 };
 
 var hAg15 = {
-    type: "arrow",
     nextTime: 4.7,
     arrows: [
         {direction: "3", reversed: false, targetTime: 0.0, speed: 200},
@@ -265,7 +249,6 @@ var hAg15 = {
 };
 
 var hAg16 = {
-    type: "arrow",
     nextTime: 4.6,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.0, speed: 500},
@@ -283,7 +266,6 @@ var hAg16 = {
 };
 
 var hAg17 = {
-    type: "arrow",
     nextTime: 4.5,
     arrows: [
         {direction: "1", reversed: false, targetTime: 0.0, speed: 300},
@@ -304,7 +286,6 @@ var hAg17 = {
 };
 
 var hAg18 = {
-    type: "arrow",
     nextTime: 4.5,
     arrows: [
         {direction: "3", reversed: true, targetTime: 0.0, speed: 300},
@@ -324,7 +305,6 @@ var hAg18 = {
 };
 
 var hAg19 = {
-    type: "arrow",
     nextTime: 3.5,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 300},
@@ -343,7 +323,6 @@ var hAg19 = {
 };
 
 var hAg20 = {
-    type: "arrow",
     nextTime: 4.0,
     arrows: [
         {direction: "2", reversed: false, targetTime: 0.00, speed: 500},
@@ -373,7 +352,6 @@ var hAg20 = {
 };
 
 var hAg21 = {
-    type: "arrow",
     nextTime: 5.0,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 300},
@@ -397,7 +375,6 @@ var hAg21 = {
 };
 
 var hAg22 = {
-    type: "arrow",
     nextTime: 4.0,
     arrows: [
         {direction: "1", reversed: true, targetTime: 0.0, speed: 500},
@@ -423,7 +400,6 @@ var hAg22 = {
 };
 
 var hAg23 = {
-    type: "arrow",
     nextTime: 4.8,
     arrows: [
         {direction: "0", reversed: false, targetTime: 0.0, speed: 300},
@@ -447,7 +423,6 @@ var hAg23 = {
 };
 
 var hAg24 = {
-    type: "arrow",
     nextTime: 5.5,
     arrows: [
         {direction: "0", reversed: true, targetTime: 0.0, speed: 300},
@@ -471,7 +446,6 @@ var hAg24 = {
 };
 
 var hAg25 = {
-    type: "arrow",
     nextTime: 5.0,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 400},
@@ -495,7 +469,6 @@ var hAg25 = {
 };
 
 var hAg26 = {
-    type: "arrow",
     nextTime: 4.2,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 500},
@@ -516,7 +489,6 @@ var hAg26 = {
 };
 
 var hAg27 = {
-    type: "arrow",
     nextTime: 3.7,
     arrows: [
         {direction: "?", reversed: false, targetTime: 0.0, speed: 500},

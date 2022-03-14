@@ -16,7 +16,7 @@ function initializeGame() {
 }
 
 function startGame() {
-    if(gameStarted == false) {
+    if(gameStarted === false) {
         gameStarted = true;
         
         gameplayStage.alpha = 0;
@@ -35,7 +35,7 @@ function stopGame() {
 // main game loop
 function update() {
     
-    if(gameStarted == true) {
+    if(gameStarted === true) {
         requestAnimationFrame(update);
     }
     

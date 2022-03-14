@@ -4,7 +4,6 @@ var attackQueueTime = 0;
 var attackQueue = [];
 
 function switchAttackMode() {
-    
     var borrowedTime = attackQueue[0].time;
     attackQueue.shift();
     
@@ -23,11 +22,9 @@ function switchAttackMode() {
     heart.setColour("green");
     
     addNextAttack();
-    
 }
 
 function addNextAttack(attack) {
-    
     var newAttack;
     
     if(attack) {
@@ -36,27 +33,18 @@ function addNextAttack(attack) {
     }
     else {
         attackQueueTime += nextAttack.nextTime;
-        var newAttack = attacks[nextAttack.nextSets[Math.floor(nextAttack.nextSets.length * Math.random())]];
+        newAttack = attacks[nextAttack.nextSets[Math.floor(nextAttack.nextSets.length * Math.random())]];
     }
     
-    switch(newAttack.type) {
-        case "arrow":
-            // add arrows two attacks in advance.
-            addArrowGroup(newAttack);
-            break;
-        default:
-            // for other types, a mode switch is required instead.
-            break;
-    }
+    addArrowGroup(newAttack);
     
     nextAttack = newAttack;
     
-    var attackInfo = {type: nextAttack.type, time: nextAttack.nextTime};
+    var attackInfo = {time: nextAttack.nextTime};
     
     if(newAttack.bufferTime) {
         attackInfo.bufferTime = newAttack.bufferTime;
     }
     
     attackQueue.push(attackInfo);
-    
 }

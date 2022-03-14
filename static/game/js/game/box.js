@@ -54,7 +54,7 @@ Box.prototype.adjustBounds = function(ms) {
         this.bottom = Math.max(this.destBottom, this.bottom - boxAdjustSpeed * ms);
     }
     
-    if(heart.colour == "red") {
+    if(heart.colour === "red") {
         if(heart.posX < this.left + heartSize / 2) {
             heart.setPosition(this.left + heartSize / 2, null);
         }

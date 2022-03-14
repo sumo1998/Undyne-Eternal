@@ -39,7 +39,7 @@ GameState.prototype.handleInput = function(key) {
                 break;
         }
     }
-    else if(this.state == "playing") {
+    else if(this.state === "playing") {
         switch(key) {
             case "left":
                 heart.setShieldDir(1);
@@ -88,18 +88,18 @@ GameState.prototype.restartGame = function(difficulty) {
         case "normal":
             // have a 2-second buffer before the first attack
             attackQueueTime = 2;
-            attackQueue = [{type: "null", time: 2}];
+            attackQueue = [{time: 2}];
             addNextAttack(ag1);
             break;
         case "hard":
             attackQueueTime = 2;
-            attackQueue = [{type: "null", time: 2}];
+            attackQueue = [{time: 2}];
             addNextAttack(hAg1);
             break;
         case "genocide":
             // genocide is timed to the music.
             attackQueueTime = 6.4;
-            attackQueue = [{type: "null", time: 6.4}];
+            attackQueue = [{time: 6.4}];
             addNextAttack(gAg1);
             break;
     }
@@ -236,7 +236,7 @@ GameState.prototype.update = function(deltaMs) {
     heart.update(deltaMs);
     undyne.update(deltaMs);
     
-    if(this.state == "playing") {
+    if(this.state === "playing") {
         this.elapsedTime += deltaMs;
         timeText.text = formatTimeLong(this.elapsedTime);
         
@@ -257,7 +257,7 @@ GameState.prototype.update = function(deltaMs) {
         }
         
     }
-    else if(this.state == "gameover") {
+    else if(this.state === "gameover") {
         rumble = {x: 0, y: 0};
     }
     else {

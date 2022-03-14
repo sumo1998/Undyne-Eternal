@@ -13,7 +13,7 @@ function registerSound(n) {
     return function() {
         soundsLoaded[n] = true;
         for(var i in soundsLoaded) {
-            if(soundsLoaded[i] == false) {
+            if(soundsLoaded[i] === false) {
                 return;
             }
         }
