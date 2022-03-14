@@ -4,7 +4,7 @@ function setUpRendering() {
     
     const gameWidth = 640, gameHeight = 480;
     renderer = PIXI.autoDetectRenderer(gameWidth, gameHeight,
-        {transparent: true, resolution: window.devicePixelRatio}
+        {transparent: true, resolution: 2, antialias: true, autoDensity: true}
     );
     
     gameplayStage = new PIXI.Container();

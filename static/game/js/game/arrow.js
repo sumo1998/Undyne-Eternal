@@ -45,6 +45,7 @@ Arrow.prototype.update = function(deltaMs) {
         // arrow hit the shield
         if(this.direction === (heart.shieldDir + (this.reversed ? 2 : 0)) % 4) {
             seArrowDing.play();
+            heart.shieldHitTimeRemaining = 250;
             this.removed = true;
         }
     }

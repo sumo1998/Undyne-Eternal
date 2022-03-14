@@ -6,6 +6,7 @@ graphicsLoader
     .add("arrow", "static/game/img/arrow.png")
     .add("heart", "static/game/img/heart.png")
     .add("shield", "static/game/img/shield.png")
+    .add("shieldHit", "static/game/img/shieldHit.png")
     
     .add("by", "static/game/img/by.png")
     .add("fairdyne", "static/game/img/fairdyne.png")
@@ -44,6 +45,7 @@ function processGraphics(resources) {
     heartTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
     
     shieldTexture = resources["shield"].texture;
+    shieldHitTexture = resources["shieldHit"].texture;
     undyneTexture = resources["undyne"].texture;
     
     byTexture = resources["by"].texture;

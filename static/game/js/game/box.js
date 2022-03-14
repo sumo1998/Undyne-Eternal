@@ -1,6 +1,6 @@
 function Box() {
     
-    this.thickness = 4;
+    this.thickness = 3;
     
     this.left = 16;
     this.right = 624;
@@ -14,7 +14,6 @@ function Box() {
     
     this.graphics = new PIXI.Graphics();
     gameplayStage.addChild(this.graphics);
-    
 }
 
 Box.prototype.update = function(ms) {

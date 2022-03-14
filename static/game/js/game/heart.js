@@ -1,5 +1,6 @@
 var heartTexture;
 var shieldTexture;
+var shieldHitTexture;
 var hpText;
 
 var heartColors = {
@@ -8,7 +9,6 @@ var heartColors = {
 };
 
 function Heart() {
-    
     this.maxHp = 4; // always starts with 4 HP
     this.hp = this.maxHp;
     this.invincibility = 0;
@@ -32,6 +32,8 @@ function Heart() {
     this.absShieldDir = 2;
     this.targetRotation = Math.PI * 2;
     
+    this.shieldHitTimeRemaining = 0;
+    
     this.sprite = new PIXI.Sprite(heartTexture);
     this.sprite.anchor.set(0.5, 0.5);
     this.sprite.position.set(this.posX, this.posY);
@@ -41,18 +43,28 @@ function Heart() {
     this.shieldSprite = new PIXI.Sprite(shieldTexture);
     this.shieldSprite.anchor.set(0.5, 1.4);
     this.shieldSprite.position.set(this.posX, this.posY);
-    this.shieldSprite.tint = 0xcdcdcd;
     this.shieldSprite.rotation = Math.PI / 2 * (2 + this.shieldDir);
     this.shieldSprite.visible = false;
+    
+    this.shieldHitSprite = new PIXI.Sprite(shieldHitTexture);
+    this.shieldHitSprite.anchor.set(0.5, 1.4);
+    this.shieldHitSprite.position.set(this.posX, this.posY);
+    this.shieldHitSprite.rotation = Math.PI / 2 * (2 + this.shieldDir);
+    this.shieldHitSprite.visible = false;
+    
+    const circle = new PIXI.Graphics();
+    circle.lineStyle(1, 0x00ff00, 1);
+    circle.drawCircle(320, 240, 24);
     
     this.graphics = new PIXI.Graphics();
     gameplayStage.addChild(this.graphics);
     
     gameplayStage.addChild(this.sprite);
     gameplayStage.addChild(this.shieldSprite);
+    gameplayStage.addChild(this.shieldHitSprite);
+    gameplayStage.addChild(circle);
     
     hpText.text = String(this.hp).padStart(2, "0") + " / " + String(this.maxHp).padStart(2, "0");
-    
 }
 
 Heart.prototype.setMaxHP = function(maxhp) {
@@ -69,12 +81,23 @@ Heart.prototype.update = function(deltaMs) {
     this.sprite.alpha = Math.cos(Math.PI * 2 * this.invincibility / 250) * 0.5 + 0.5;
     
     this.shieldSprite.rotation = 0.6 * this.shieldSprite.rotation + 0.4 * this.targetRotation;
+    this.shieldHitSprite.rotation = this.shieldSprite.rotation;
     
-    if(gamestate.state == "playing") {
-        if(this.colour == "green") {
+    if(gamestate.state === "playing") {
+        if(this.colour === "green") {
             this.recenter(deltaMs);
+            
+            if(this.shieldHitTimeRemaining > 0) {
+                this.shieldSprite.visible = false;
+                this.shieldHitSprite.visible = true;
+                this.shieldHitTimeRemaining -= deltaMs;
+            }
+            else {
+                this.shieldSprite.visible = true;
+                this.shieldHitSprite.visible = false;
+            }
         }
-        if(this.colour == "red") {
+        else if(this.colour === "red") {
             this.move(deltaMs);
         }
     }
@@ -145,6 +168,7 @@ Heart.prototype.setPosition = function(x, y) {
 Heart.prototype.setSpritePosition = function() {
     this.sprite.position.set(this.posX, this.posY);
     this.shieldSprite.position.set(this.posX, this.posY);
+    this.shieldHitSprite.position.set(this.posX, this.posY);
 };
 
 Heart.prototype.setColour = function(colour) {
@@ -155,6 +179,7 @@ Heart.prototype.setColour = function(colour) {
     switch(colour) {
         case "red":
             this.shieldSprite.visible = false;
+            this.shieldHitSprite.visible = false;
             break;
         case "green":
             this.shieldSprite.visible = true;
