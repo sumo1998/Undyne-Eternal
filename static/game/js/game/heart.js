@@ -156,10 +156,10 @@ Heart.prototype.recenter = function(deltaMs) {
 };
 
 Heart.prototype.setPosition = function(x, y) {
-    if(x != null) {
+    if(x !== null) {
         this.posX = x;
     }
-    if(y != null) {
+    if(y !== null) {
         this.posY = y;
     }
     this.setSpritePosition();

@@ -27,7 +27,7 @@ function GameState() {
 
 GameState.prototype.handleInput = function(key) {
     
-    if(undyne.textState != "none") {
+    if(undyne.textState !== "none") {
         switch(key) {
             case "A":
                 undyne.advanceTextA();
