@@ -11,6 +11,7 @@ function initializeGame() {
     gameplayStage.addChild(hpText);
     gameplayStage.addChild(timeText);
     gameplayStage.addChild(loveText);
+    gameplayStage.addChild(currentAttackText);
     
     startGame();
 }

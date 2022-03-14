@@ -13,6 +13,9 @@ function Arrow(props) {
     this.speed = props.speed || 0;
     // speed in px/s at which the arrows head toward the heart.
     
+    this.callback = props.callback || defaultCallback;
+    //the function to call when removed
+    
     // set up sprites
     this.sprite = new PIXI.Sprite(arrowTexture);
     this.sprite.anchor.x = 0.9;
@@ -47,6 +50,10 @@ Arrow.prototype.update = function(deltaMs) {
     }
     
     this.updatePosition();
+    
+    if(this.removed) {
+        this.callback();
+    }
 };
 
 Arrow.prototype.updatePosition = function() {
@@ -83,12 +90,22 @@ Arrow.prototype.updatePosition = function() {
     // update position
     this.sprite.position.x = (320 + deltaX);
     this.sprite.position.y = (240 + deltaY);
-    
 };
 
 var arrows = [];
 
-function addArrowGroup(arrowGroup) {
+function defaultCallback() {}
+
+function lastArrowOfAttack() {
+    currentAttackNumber = Math.min(currentAttackNumber + 1, attacks.length);
+    currentAttackText.text =
+        String(currentAttackNumber).padStart(2, "0") + " / " + String(attacks.length).padStart(2, "0");
+}
+
+function addArrowGroup(arrowGroup, idx) {
+    if(attackQueue.length === 0) {
+        return;
+    }
     
     // loads the _next_ arrow group when the current one comes into play.
     
@@ -112,7 +129,8 @@ function addArrowGroup(arrowGroup) {
             targetTime: time,
             direction: direction,
             reversed: ar.reversed,
-            speed: ar.speed
+            speed: ar.speed,
+            callback: a === arrowGroup.arrows.length - 1 ? lastArrowOfAttack : defaultCallback
         }));
     }
 }

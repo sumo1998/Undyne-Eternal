@@ -1,8 +1,8 @@
 var timeText;
 var loveText;
+var currentAttackText;
 
 function GameState() {
-    
     this.state = "playing";
     this.level = 1;
     
@@ -10,13 +10,21 @@ function GameState() {
     hpText.position.x = 300;
     hpText.position.y = 450;
     
-    timeText = new PIXI.extras.BitmapText("00:00.00", {font: "15px Numbers", align: "left"});
-    timeText.position.x = 500;
+    timeText = new PIXI.extras.BitmapText("00:00:00.00", {font: "15px Numbers", align: "right"});
+    timeText.anchor = new PIXI.Point(1, 0);
+    timeText.position.x = 523;
     timeText.position.y = 450;
     
     loveText = new PIXI.extras.BitmapText("LV " + this.level, {font: "15px Numbers", align: "left"});
     loveText.position.x = 150;
     loveText.position.y = 450;
+    
+    currentAttackText = new PIXI.extras.BitmapText(
+        String(currentAttackNumber).padStart(2, "0") + " / " + String(attacks.length).padStart(2, "0"),
+        {font: "15px Numbers", align: "right"}
+    );
+    currentAttackText.x = 0;
+    currentAttackText.y = 450;
     
     this.selectText = new PIXI.extras.BitmapText("", {font: "18px Undertale"});
     this.selectText.position.set(80, 260);
@@ -26,7 +34,6 @@ function GameState() {
 }
 
 GameState.prototype.handleInput = function(key) {
-    
     if(undyne.textState !== "none") {
         switch(key) {
             case "A":
@@ -57,7 +64,6 @@ GameState.prototype.handleInput = function(key) {
                 break;
         }
     }
-    
 };
 
 GameState.prototype.restartGame = function(difficulty) {
@@ -154,6 +160,8 @@ GameState.prototype.endGame = function() {
     
     undyne.queueText(endGameText(this.difficulty, this.elapsedTime), () => {
         this.state = "playing";
+        currentAttackIdx = 0;
+        currentAttackNumber = 1;
         gamestate.restartGame(difficulty);
     });
     
@@ -231,7 +239,6 @@ function endGameText(diff, survivalTime) {
 }
 
 GameState.prototype.update = function(deltaMs) {
-    
     box.update(deltaMs);
     heart.update(deltaMs);
     undyne.update(deltaMs);
@@ -265,7 +272,6 @@ GameState.prototype.update = function(deltaMs) {
     }
     
     gameplayStage.position.set(rumble.x, rumble.y);
-    
 };
 
 var gamestate;

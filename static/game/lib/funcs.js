@@ -1,20 +1,11 @@
 function formatTimeLong(ms) {
+    ms = Math.min(ms, 3599590);
     
-    var optDays = "", optHours = "";
-    
-    if(ms > 86400000) {
-        optDays = Math.floor(ms / 86400000) + "/";
-    }
-    if(ms > 3600000) {
-        optHours = String(Math.floor((ms % 86400000) / 3600000)).padStart(2, "0") + ":";
-    }
-    
-    var minutes = String(Math.floor((ms % 3600000) / 60000)).padStart(2, "0") + ":";
+    var minutes = String(Math.min(Math.floor((ms % 3600000) / 60000), 59)).padStart(2, "0") + ":";
     var seconds = String(Math.floor((ms % 60000) / 1000)).padStart(2, "0") + ".";
     var cs = String(Math.floor((ms % 1000) / 10)).padStart(2, "0");
     
-    return optDays + optHours + minutes + seconds + cs;
-    
+    return minutes + seconds + cs;
 }
 
 function clamp(v, start, end) {

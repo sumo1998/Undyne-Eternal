@@ -1,9 +1,15 @@
 var nextAttack = null;
 
+var currentAttackNumber = 1;
+
 var attackQueueTime = 0;
 var attackQueue = [];
 
 function switchAttackMode() {
+    if(attackQueue.length === 0) {
+        return;
+    }
+    
     var borrowedTime = attackQueue[0].time;
     attackQueue.shift();
     
@@ -31,12 +37,16 @@ function addNextAttack(attack) {
         attackQueueTime += attack.time;
         newAttack = attack;
     }
-    else {
+    else if(currentAttackIdx < attacks.length) {
         attackQueueTime += nextAttack.nextTime;
-        newAttack = attacks[nextAttack.nextSets[Math.floor(nextAttack.nextSets.length * Math.random())]];
+        newAttack = attacks[++currentAttackIdx];
+    }
+    else {
+        console.log("Finished");
+        return;
     }
     
-    addArrowGroup(newAttack);
+    addArrowGroup(newAttack, currentAttackIdx);
     
     nextAttack = newAttack;
     

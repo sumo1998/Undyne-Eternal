@@ -130,7 +130,6 @@ Undyne.prototype.queueText = function(textQueue, callback) {
 };
 
 Undyne.prototype.selectNextText = function() {
-    
     if(this.textQueue.length > 0) {
         this.sbtext = this.textQueue.shift();
         this.textChars = 0;
