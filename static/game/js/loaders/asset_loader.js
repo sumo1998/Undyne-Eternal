@@ -2,6 +2,7 @@
  * Represents an asset to be loaded.
  */
 class AssetLoader {
+    
     /**
      * Creates an AssetLoader instance.
      */

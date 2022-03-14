@@ -2,6 +2,7 @@
  * Loads the fonts for the game.
  */
 class FontLoader extends AssetLoader {
+    
     /**
      * Responsible for the loading of the fonts.
      */
@@ -13,19 +14,20 @@ class FontLoader extends AssetLoader {
     #loaded;
     
     /**
-     * Loads the provided fonts for PIXI
-     * @param fontNameDirectoryObject The names of the fonts to load and their corresponding directories
+     * Creates an instance of FontLoader.
      */
-    constructor(fontNameDirectoryObject) {
+    constructor() {
         super();
         this.#loaded = false;
         this.#fontLoader = new PIXI.loaders.Loader();
         
-        for(const fontName in fontNameDirectoryObject) {
-            this.#fontLoader.add(fontName, fontNameDirectoryObject[fontName]);
-        }
+        this.#fontLoader
+            .add("undertale", "static/game/fonts/undertale.fnt")
+            .add("numbers", "static/game/fonts/numbers.fnt")
+            .add("speechbubble", "static/game/fonts/speechbubble.fnt")
+            .on("complete", (loader, resources) => this.#setUpFonts(resources));
         
-        this.#fontLoader.on("complete", (loader, resources) => this.#setUpFonts(resources));
+        this.#fontLoader.load();
     }
     
     /**
