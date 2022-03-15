@@ -50,11 +50,6 @@ class SpeechBubble extends GraphicsObject {
     #textSfx;
     
     /**
-     * The number representing which of Undyne's faces should be displayed presently.
-     */
-    #undyneHead;
-    
-    /**
      * Initializes a SpeechBubble isntance.
      */
     constructor() {
@@ -64,7 +59,6 @@ class SpeechBubble extends GraphicsObject {
         this.#textQueue = [];
         this.#textQueueCallback = null;
         this.#numTextChars = 0;
-        this.#undyneHead = 1;
         this.#textSfx = Main.runner.assetManager.getAudio("undyneSpeakSfx");
         
         this.#sprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("speechBubble"));
@@ -103,11 +97,8 @@ class SpeechBubble extends GraphicsObject {
             this.#curText = this.#textQueue.shift();
             this.#numTextChars = 0;
             this.#textState = "talking";
-            
-            this.#undyneHead = this.#curText.head ? this.#curText.head : 1;
         }
         else {
-            this.#undyneHead = 1;
             this.#curText = null;
             this.#sprite.visible = false;
             this.#speechText.visible = false;
@@ -174,13 +165,5 @@ class SpeechBubble extends GraphicsObject {
             
             this.#numTextChars = newNumTextChars;
         }
-    }
-    
-    /**
-     * Returns the number representing which of Undyne's faces should be displayed presently.
-     * @return The number representing which of Undyne's faces should be displayed presently
-     */
-    get undyneHead() {
-        return this.#undyneHead;
     }
 }
