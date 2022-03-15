@@ -40,4 +40,17 @@ class MathUtility {
         const interpolateProportion = (value - clampStart) / (clampEnd - clampStart);
         return interpolateStart + (interpolateEnd - interpolateStart) * interpolateProportion;
     }
+    
+    /**
+     * Returns the result of restricting the given value in the range [start, end) by wrapping the value. That is, once
+     * the value is the ending value or beyond, it wraps around to the start, and when it goes below the starting
+     * value, it wraps around to the end.
+     * @param value The value to wrap
+     * @param start The start of the wrapping range
+     * @param end The end of the wrapping range
+     * @return The result of wrapping the given value in the range [start, end)
+     */
+    static wrap(value, start, end) {
+        return value + start - (end - start) * Math.floor(value / (end - start));
+    }
 }

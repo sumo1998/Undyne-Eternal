@@ -123,8 +123,8 @@ class Arrow extends GraphicsObject {
                 break;
         }
         
-        this.#sprite.position.x = Main.runner.gameWidth / 2 + deltaX;
-        this.#sprite.position.y = Main.runner.gameHeight / 2 + deltaY;
+        this.#sprite.position.x = 0.5 * Main.runner.gameWidth + deltaX;
+        this.#sprite.position.y = 0.5 * Main.runner.gameHeight + deltaY;
     }
     
     /**

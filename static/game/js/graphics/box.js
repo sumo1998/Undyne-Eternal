@@ -98,8 +98,8 @@ class Box extends GraphicsObject {
         this.#graphics.beginFill(0x000000, 1);
         this.#graphics.lineStyle(this.#thickness, 0xFFFFFF, 1);
         this.#graphics.drawRect(
-            this.#left - this.#thickness / 2,
-            this.#top - this.#thickness / 2,
+            this.#left - 0.5 * this.#thickness,
+            this.#top - 0.5 * this.#thickness,
             this.#right - this.#left + this.#thickness,
             this.#bottom - this.#top + this.#thickness
         );
