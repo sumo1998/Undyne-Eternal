@@ -1,11 +1,10 @@
 /**
- * Represents the box surrounding the heart.
+ * The box surrounding the heart.
  */
 class Box extends GraphicsObject {
     
     /**
-     * The speed at which to adjust the box boundaries (px/ms)
-     * @type {number}
+     * The speed at which to adjust the box boundaries (px/ms).
      */
     static boxAdjustSpeed = 0.5;
     
@@ -67,9 +66,9 @@ class Box extends GraphicsObject {
         this.#thickness = 3;
         
         this.#left = 16;
-        this.#right = 624;
+        this.#right = Main.runner.gameWidth - 16;
         this.#top = 240;
-        this.#bottom = 420;
+        this.#bottom = Main.runner.gameHeight - 240;
         
         this.#destLeft = this.#left;
         this.#destRight = this.#right;
