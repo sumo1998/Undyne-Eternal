@@ -1,0 +1,146 @@
+/**
+ * Undyne.
+ */
+class Undyne extends GraphicsObject {
+    
+    /**
+     * The amount of time that has passed since the start of the animation, resetting to 0 after every animation cycle.
+     */
+    #animationTime;
+    
+    /**
+     * Undyne's hair sprite.
+     */
+    #hairSprite;
+    
+    /**
+     * Undyne's head sprite.
+     */
+    #headSprite;
+    
+    /**
+     * Undyne's torso sprite.
+     */
+    #bodySprite;
+    
+    /**
+     * Undyne's right arm sprite.
+     */
+    #rightArmSprite;
+    
+    /**
+     * Undyne's left arm sprite.
+     */
+    #leftArmSprite;
+    
+    /**
+     * Undyne's skirt sprite.
+     */
+    #skirtSprite;
+    
+    /**
+     * Undyne's legs sprite.
+     */
+    #legsSprite;
+    
+    /**
+     * Handles the speech bubble.
+     */
+    #speechBubble;
+    
+    /**
+     * Handles the opacity of Undyne.
+     */
+    #opacityGraphics;
+    
+    /**
+     * Initializes an Undyne instance.
+     */
+    constructor() {
+        super();
+        this.#animationTime = 0;
+        
+        const undyneHairTextureArr = [];
+        for(let i = 0; i < 4; ++i) {
+            undyneHairTextureArr.push(Main.runner.assetManager.getTexture("undyneHair" + i));
+        }
+        
+        this.#hairSprite = new PIXI.extras.MovieClip(undyneHairTextureArr);
+        this.#hairSprite.anchor.set(1, 0.5);
+        this.#hairSprite.scale.set(2, 2);
+        this.#hairSprite.position.set(310, 40);
+        this.#hairSprite.animationSpeed = 4 / 30;
+        
+        this.#headSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneHead"));
+        this.#headSprite.anchor.set(0.5, 0.5);
+        this.#headSprite.scale.set(2, 2);
+        this.#headSprite.position.set(318, 48);
+        
+        this.#bodySprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneBreastplate"));
+        this.#bodySprite.anchor.set(0.5, 0.5);
+        this.#bodySprite.scale.set(2, 2);
+        this.#bodySprite.position.set(324, 108);
+        
+        this.#rightArmSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneRightArm"));
+        this.#rightArmSprite.anchor.set(1, 0);
+        this.#rightArmSprite.scale.set(2, 2);
+        this.#rightArmSprite.position.set(308, 98);
+        
+        this.#leftArmSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneLeftArm"));
+        this.#leftArmSprite.anchor.set(0.5, 0.5);
+        this.#leftArmSprite.scale.set(2, 2);
+        this.#leftArmSprite.position.set(369, 134);
+        
+        this.#skirtSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneSkirt"));
+        this.#skirtSprite.anchor.set(0.5, 0.5);
+        this.#skirtSprite.scale.set(2, 2);
+        this.#skirtSprite.position.set(320, 166);
+        
+        this.#legsSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneLegs"));
+        this.#legsSprite.anchor.set(0.5, 0.5);
+        this.#legsSprite.scale.set(2, 2);
+        this.#legsSprite.position.set(324, 210);
+        
+        this.#speechBubble = new SpeechBubble();
+        
+        this.#opacityGraphics = new PIXI.Graphics();
+        this.#opacityGraphics.alpha = 0;
+        this.#opacityGraphics.beginFill(0x000000, 1);
+        this.#opacityGraphics.drawRect(0, 0, 640, 480);
+        this.#opacityGraphics.endFill();
+        
+        Main.runner.gameplayStage.addChild(this.#hairSprite);
+        Main.runner.gameplayStage.addChild(this.#rightArmSprite);
+        Main.runner.gameplayStage.addChild(this.#leftArmSprite);
+        Main.runner.gameplayStage.addChild(this.#legsSprite);
+        Main.runner.gameplayStage.addChild(this.#skirtSprite);
+        Main.runner.gameplayStage.addChild(this.#bodySprite);
+        Main.runner.gameplayStage.addChild(this.#headSprite);
+        Main.runner.gameplayStage.addChild(this.#opacityGraphics);
+        
+        this.#hairSprite.play();
+    }
+    
+    /**
+     * Updates the Undyne and speech bubble animations.
+     * @param deltaMs The time that has passed since the last update of Undyne
+     */
+    update(deltaMs) {
+        this.#animationTime += deltaMs;
+        if(this.#animationTime > 1200) {
+            this.#animationTime -= 1200;
+        }
+        
+        this.#speechBubble.update(deltaMs);
+        
+        this.#bodySprite.position.y = 108 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#headSprite.position.y = 48 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#skirtSprite.position.y = 166 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        
+        this.#rightArmSprite.position.y = 98 + 4 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#rightArmSprite.position.x = 308 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        
+        this.#leftArmSprite.position.y = 134 + 4 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#leftArmSprite.position.x = 369 + 2 * Math.sin(this.#animationTime / 600 * Math.PI * 2);
+    }
+}
