@@ -47,6 +47,14 @@ class Arrow extends GraphicsObject {
      */
     #sprite;
     
+    /**
+     * Initializes an Arrow instance.
+     * @param direction The direction the arrow is coming from
+     * @param reversed True if the arrow is a reverse arrow
+     * @param targetTime The time remaining until the shield should destroy the arrow
+     * @param speed The speed of the arrow in px/s
+     * @param last True if this is the last arrow in an attack
+     */
     constructor(direction, reversed, targetTime, speed, last) {
         super();
         this.#direction = direction;
@@ -76,9 +84,14 @@ class Arrow extends GraphicsObject {
         Main.runner.gameplayStage.addChild(this.#sprite);
     }
     
+    /**
+     * Updates the position of the arrow.
+     * @param deltaMs The time that has passed since the last update of the arrow
+     */
     update(deltaMs) {
         this.#targetTime -= deltaMs;
         
+        //The changes in x and y from the last arrow position
         let deltaX = 0;
         let deltaY = 0;
         
@@ -114,22 +127,42 @@ class Arrow extends GraphicsObject {
         this.#sprite.position.y = Main.runner.gameHeight / 2 + deltaY;
     }
     
+    /**
+     * Returns the direction the arrow is coming from.
+     * @return The direction the arrow is coming from
+     */
     get direction() {
         return this.#direction;
     }
     
+    /**
+     * Returns true if the arrow is a reverse arrow.
+     * @return True if the arrow is a reverse arrow
+     */
     get reversed() {
         return this.#reversed;
     }
     
+    /**
+     * Returns the time remaining until the shield should destroy the arrow.
+     * @return The time remaining until the shield should destroy the arrow
+     */
     get targetTime() {
         return this.#targetTime;
     }
     
+    /**
+     * Returns the speed of the arrow in px/s.
+     * @return The speed of the arrow in px/s
+     */
     get speed() {
         return this.#speed;
     }
     
+    /**
+     * Returns true if this is the last arrow in an attack.
+     * @return True if this is the last arrow in an attack
+     */
     get last() {
         return this.#last;
     }
