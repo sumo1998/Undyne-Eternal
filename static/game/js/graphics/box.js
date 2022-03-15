@@ -84,10 +84,10 @@ class Box extends GraphicsObject {
      * @param deltaMs The time that has passed since the last update of the box boundaries
      */
     update(deltaMs) {
-        this.#left = Functions.approach(this.#left, this.#destLeft, Box.boxAdjustSpeed * deltaMs);
-        this.#right = Functions.approach(this.#right, this.#destRight, Box.boxAdjustSpeed * deltaMs);
-        this.#top = Functions.approach(this.#top, this.#destTop, Box.boxAdjustSpeed * deltaMs);
-        this.#bottom = Functions.approach(this.#bottom, this.#destBottom, Box.boxAdjustSpeed * deltaMs);
+        this.#left = MathUtility.approach(this.#left, this.#destLeft, Box.boxAdjustSpeed * deltaMs);
+        this.#right = MathUtility.approach(this.#right, this.#destRight, Box.boxAdjustSpeed * deltaMs);
+        this.#top = MathUtility.approach(this.#top, this.#destTop, Box.boxAdjustSpeed * deltaMs);
+        this.#bottom = MathUtility.approach(this.#bottom, this.#destBottom, Box.boxAdjustSpeed * deltaMs);
     }
     
     /**

@@ -86,7 +86,7 @@ class Arrow extends GraphicsObject {
         
         let rotation = 0;
         if(this.#reversed) {
-            rotation = Functions.clampInterpolate(
+            rotation = MathUtility.clampInterpolate(
                 distance, Arrow.rotationDistanceStart, Arrow.rotationDistanceEnd, 0, Math.PI
             );
         }
