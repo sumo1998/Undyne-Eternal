@@ -119,7 +119,7 @@ class SpeechBubble extends GraphicsObject {
         
         const wholeNumTextChars = Math.floor(numTextChars);
         
-        const nextChar = this.#curText.text[wholeNumTextChars];
+        const nextChar = this.#curText[wholeNumTextChars];
         if(nextChar !== " " && nextChar !== "\n") {
             this.#textSfx.play();
         }
@@ -141,7 +141,7 @@ class SpeechBubble extends GraphicsObject {
      */
     advanceTextX() {
         if(this.#textState === "talking") {
-            this.#speechText.text = this.#curText.text;
+            this.#speechText.text = this.#curText;
             this.#textState = "waiting";
         }
     }
@@ -159,7 +159,7 @@ class SpeechBubble extends GraphicsObject {
                 this.advanceTextChars(newNumTextChars);
             }
             
-            if(this.#numTextChars >= this.#curText.text.length) {
+            if(this.#numTextChars >= this.#curText.length) {
                 this.#textState = "waiting";
             }
             
