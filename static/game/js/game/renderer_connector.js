@@ -1,11 +1,16 @@
-class RenderingHandler {
-    #renderer;
+/**
+ * Connects the renderer to the page.
+ */
+class RendererConnector {
     
-    constructor() {
+    /**
+     * Adds the game renderer to the HTML page.
+     */
+    static addRenderer() {
         const gameWidth = Main.runner.gameWidth;
         const gameHeight = Main.runner.gameHeight;
         
-        this.#renderer = PIXI.autoDetectRenderer(
+        const renderer = PIXI.autoDetectRenderer(
             gameWidth,
             gameHeight,
             {
@@ -16,22 +21,24 @@ class RenderingHandler {
             }
         );
         
+        //The max proportion between the game width / the screen width and the game height / the screen height
         const maxScreenProportion = 0.625;
         
         const rendererMaxWidth = screen.width * maxScreenProportion;
         const rendererMaxHeight = screen.height * maxScreenProportion;
         
-        const gameDimensionMultiplayer = Math.min(rendererMaxWidth / gameWidth, rendererMaxHeight / gameHeight);
+        const gameDimensionMultiplier = Math.min(rendererMaxWidth / gameWidth, rendererMaxHeight / gameHeight);
         
-        const rendererWidth = gameDimensionMultiplayer * gameWidth;
-        const rendererHeight = gameDimensionMultiplayer * gameHeight;
+        const rendererWidth = gameDimensionMultiplier * gameWidth;
+        const rendererHeight = gameDimensionMultiplier * gameHeight;
         
-        // add the renderer view element to the DOM
-        this.#renderer.view.style.width = Math.round(rendererWidth) + "px";
-        this.#renderer.view.style.height = Math.round(rendererHeight) + "px";
+        //Add the renderer view element to the DOM
+        const rendererView = renderer.view;
+        rendererView.style.width = Math.round(rendererWidth) + "px";
+        rendererView.style.height = Math.round(rendererHeight) + "px";
         
-        this.#renderer.view.setAttribute("id", "game-renderer");
+        rendererView.setAttribute("id", "game-renderer");
         
-        document.body.appendChild(this.#renderer.view);
+        document.body.appendChild(rendererView);
     }
 }
