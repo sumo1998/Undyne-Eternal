@@ -122,7 +122,7 @@ class Undyne extends GraphicsObject {
     }
     
     /**
-     * Updates the Undyne and speech bubble animations.
+     * Updates Undyne and the speech bubble.
      * @param deltaMs The time that has passed since the last update of Undyne
      */
     update(deltaMs) {

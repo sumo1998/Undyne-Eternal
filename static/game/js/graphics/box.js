@@ -1,5 +1,5 @@
 /**
- * The box surrounding the heart.
+ * The box surrounding the heart and shield.
  */
 class Box extends GraphicsObject {
     
