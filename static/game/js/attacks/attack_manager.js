@@ -28,8 +28,12 @@ class AttackManager {
      */
     getNextAttack() {
         if(this.#currentAttackIdx < this.#attacks.length) {
-            return this.#attacks[++this.#currentAttackIdx];
+            return this.#attacks[this.#currentAttackIdx++];
         }
         return null;
+    }
+    
+    getNumAttacks() {
+        return this.#attacks.length;
     }
 }
