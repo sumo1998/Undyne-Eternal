@@ -11,7 +11,7 @@ class Player extends GraphicsObject {
     /**
      * The rate of rotation of the shield in radians per second.
      */
-    static radiansPerSec = 25;
+    static shieldRadiansPerSec = 25;
     
     /**
      * The color of the heart.
@@ -255,7 +255,7 @@ class Player extends GraphicsObject {
         this.#heartSprite.alpha = 0.5 * Math.cos(2 * Math.PI * this.#invincibilityTimeRemaining / 250) + 0.5;
         
         let newRotation = MathUtility.wrap(
-            this.#shieldSprite.rotation + Player.radiansPerSec * this.#rotationDirection * deltaMs / 1000,
+            this.#shieldSprite.rotation + Player.shieldRadiansPerSec * this.#rotationDirection * deltaMs / 1000,
             0,
             2 * Math.PI
         );
