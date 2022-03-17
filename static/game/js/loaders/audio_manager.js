@@ -19,34 +19,43 @@ class AudioManager extends AssetLoader {
     constructor() {
         super();
         this.#audioLoadedMap = {
-            "menuBgm": false,
-            "undyneBattleMusic": false,
-            "undyingBattleMusic": false,
+            "introBgm": false,
+            "undyneEasyBgm": false,
+            "undyneMediumBgm": false,
+            "undyneHardBgm": false,
             "arrowBlockedSfx": false,
             "arrowDamageSfx": false,
             "undyneSpeakSfx": false
         };
         
         //The music played while waiting for the user to play
-        const menuBgm = new Howl({
-            onload: () => this.#markAudioLoaded("menuBgm"),
-            src: ["static/game/audio/bgm/undyne.ogg", "static/game/audio/bgm/undyne.mp3"],
+        const introBgm = new Howl({
+            onload: () => this.#markAudioLoaded("introBgm"),
+            src: ["static/game/audio/bgm/intro.ogg", "static/game/audio/bgm/intro.mp3"],
             loop: true,
             volume: 0.7
         });
         
-        //The music that plays in the easy and medium modes
-        const undyneBattleMusic = new Howl({
-            onload: () => this.#markAudioLoaded("undyneBattleMusic"),
-            src: ["static/game/audio/bgm/undyne_boss.ogg", "static/game/audio/bgm/undyne_boss.mp3"],
+        //The music that plays in the easy mode
+        const undyneEasyBgm = new Howl({
+            onload: () => this.#markAudioLoaded("undyneEasyBgm"),
+            src: ["static/game/audio/bgm/undyne_easy.ogg", "static/game/audio/bgm/undyne_easy.mp3"],
+            loop: true,
+            volume: 0.7
+        });
+        
+        //The music that plays in the medium mode
+        const undyneMediumBgm = new Howl({
+            onload: () => this.#markAudioLoaded("undyneMediumBgm"),
+            src: ["static/game/audio/bgm/undyne_medium.ogg", "static/game/audio/bgm/undyne_medium.mp3"],
             loop: true,
             volume: 0.7
         });
         
         //The music that plays in the hard mode
-        const undyingBattleMusic = new Howl({
-            onload: () => this.#markAudioLoaded("undyingBattleMusic"),
-            src: ["static/game/audio/bgm/undying_boss.ogg", "static/game/audio/bgm/undying_boss.mp3"],
+        const undyneHardBgm = new Howl({
+            onload: () => this.#markAudioLoaded("undyneHardBgm"),
+            src: ["static/game/audio/bgm/undyne_hard.ogg", "static/game/audio/bgm/undyne_hard.mp3"],
             loop: true,
             volume: 0.7
         });
@@ -76,9 +85,10 @@ class AudioManager extends AssetLoader {
         });
         
         this.#audioMap = {
-            "menuBgm": menuBgm,
-            "undyneBattleMusic": undyneBattleMusic,
-            "undyingBattleMusic": undyingBattleMusic,
+            "introBgm": introBgm,
+            "undyneEasyBgm": undyneEasyBgm,
+            "undyneMediumBgm": undyneMediumBgm,
+            "undyneHardBgm": undyneHardBgm,
             "arrowBlockedSfx": arrowBlockedSfx,
             "arrowDamageSfx": arrowDamageSfx,
             "undyneSpeakSfx": undyneSpeakSfx
