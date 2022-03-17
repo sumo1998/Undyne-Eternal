@@ -19,12 +19,12 @@ class Player extends GraphicsObject {
     static heartGreenColor = 0x00ff00;
     
     /**
-     * The maximum hit points you can have.
+     * The maximum hit points the player can have.
      */
     #maxHp;
     
     /**
-     * The current number of hit points you have.
+     * The current number of hit points the player has.
      */
     #hp;
     
@@ -277,5 +277,21 @@ class Player extends GraphicsObject {
             this.#shieldSprite.visible = true;
             this.#shieldHitSprite.visible = false;
         }
+    }
+    
+    /**
+     * Returns the current number of hit points the player has.
+     * @return The current number of hit points the player has
+     */
+    get hp() {
+        return this.#hp;
+    }
+    
+    /**
+     * Returns the maximum hit points the player can have.
+     * @return The maximum hit points the player can have
+     */
+    get maxHp() {
+        return this.#maxHp;
     }
 }
