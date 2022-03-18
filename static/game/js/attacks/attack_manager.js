@@ -40,4 +40,11 @@ class AttackManager {
     get numAttacks() {
         return this.#attacks.length;
     }
+    
+    /**
+     * Resets the attacks of the current level to the beginning.
+     */
+    reset() {
+        this.#currentAttackIdx = 0;
+    }
 }

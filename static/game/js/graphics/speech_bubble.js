@@ -147,6 +147,21 @@ class SpeechBubble extends GraphicsObject {
     }
     
     /**
+     * Resets the fields to match the start of a new level.
+     */
+    reset() {
+        this.#curText = null;
+        this.#textState = "none";
+        this.#textQueue = [];
+        this.#textQueueCallback = null;
+        this.#numTextChars = 0;
+        this.#speechText = "";
+        
+        this.#sprite.visible = false;
+        this.#speechText.visible = false;
+    }
+    
+    /**
      * Updates the speech bubble.
      * @param deltaMs The time that has passed since the last update of the speech bubble
      */

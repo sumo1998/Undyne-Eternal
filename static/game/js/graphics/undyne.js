@@ -122,6 +122,23 @@ class Undyne extends GraphicsObject {
     }
     
     /**
+     * Resets the fields to match the start of a new level.
+     */
+    reset() {
+        this.#animationTime = 0;
+        this.#opacityGraphics.alpha = 0;
+        
+        this.#headSprite.position.set(318, 48);
+        this.#bodySprite.position.set(324, 108);
+        this.#rightArmSprite.position.set(308, 98);
+        this.#leftArmSprite.position.set(369, 134);
+        this.#skirtSprite.position.set(320, 166);
+        
+        this.#hairSprite.gotoAndPlay(0);
+        this.#speechBubble.reset();
+    }
+    
+    /**
      * Updates Undyne and the speech bubble.
      * @param deltaMs The time that has passed since the last update of Undyne
      */

@@ -240,6 +240,27 @@ class Player extends GraphicsObject {
     }
     
     /**
+     * Resets the fields to match the start of a new level.
+     */
+    reset() {
+        this.#invincibilityTimeRemaining = 0;
+        this.#hp = Player.#maxHp;
+        this.#shieldDir = 2;
+        this.#originalRotation = this.#getRotationFromDirection();
+        this.#targetRotation = this.#originalRotation;
+        this.#rotationDirection = 0;
+        this.#shieldHitTimeRemaining = 0;
+        
+        this.#shieldSprite.rotation = this.#originalRotation;
+        this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
+        
+        this.#heartSprite.visible = true;
+        this.#shieldSprite.visible = true;
+        this.#shieldHitSprite.visible = false;
+        this.#circle.visible = true;
+    }
+    
+    /**
      * If the player is not currently invincible, decreases the players HP and makes the player temporarily invincible.
      */
     takeDamage() {
