@@ -79,8 +79,10 @@ class Main {
      * Waits until the assets are loaded and then starts the game.
      */
     startGame() {
+        const thisTmp = this;
         if(!this.#assetManager.isLoaded()) {
-            setTimeout(this.startGame, 500);
+            setTimeout(() => thisTmp.startGame(), 500);
+            return;
         }
         
         this.#gameHandler = new GameHandler("easy");
@@ -89,19 +91,20 @@ class Main {
         KeyboardHandler.initialize(this.#gameHandler);
         
         this.#previousTime = performance.now();
-        requestAnimationFrame(this.#update);
+        requestAnimationFrame(() => thisTmp.update());
     }
     
     /**
      * Computes the change since the last update and updates the state of the game objects.
      */
-    #update() {
-        requestAnimationFrame(this.#update);
-        
+    update() {
         const currentTime = performance.now();
         const deltaMs = Math.max(currentTime - this.#previousTime, 0);
         
         this.#gameHandler.update(deltaMs);
+        
+        const thisTmp = this;
+        requestAnimationFrame(() => thisTmp.update());
     }
     
     /**
