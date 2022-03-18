@@ -143,4 +143,12 @@ class Undyne extends GraphicsObject {
         this.#leftArmSprite.position.y = 134 + 4 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
         this.#leftArmSprite.position.x = 369 + 2 * Math.sin(this.#animationTime / 600 * Math.PI * 2);
     }
+    
+    /**
+     * Returns the instance that handles the speech bubble.
+     * @return The instance that handles the speech bubble
+     */
+    get speechBubble() {
+        return this.#speechBubble;
+    }
 }
