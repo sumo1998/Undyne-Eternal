@@ -142,7 +142,7 @@ class Hud extends GraphicsObject {
         this.incrementAttackNumber();
         this.#updateHp();
         this.#elapsedTime = 0;
-        this.#updateTime();
+        this.#updateTime(0);
     }
     
     /**
