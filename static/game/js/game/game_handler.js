@@ -140,6 +140,7 @@ class GameHandler extends GraphicsObject {
         this.#attackRunner.reset();
         this.#player.reset();
         this.#hud.reset();
+        this.#undyne.reset();
         this.#box.setDestinationBounds(
             0.5 * Main.runner.gameWidth - Player.shieldDistance,
             0.5 * Main.runner.gameWidth + Player.shieldDistance,
@@ -163,6 +164,7 @@ class GameHandler extends GraphicsObject {
         this.#attackRunner.removeAllArrows();
         this.#player.endGameHideSprites();
         this.#player.setColor("red");
+        this.#undyne.greenRectangleManager.visible = false;
         this.#undyne.opacity = 1;
         
         this.#getBgm().stop();
@@ -176,10 +178,14 @@ class GameHandler extends GraphicsObject {
         );
     }
     
+    /**
+     * Runs when the user wins, making the attacks stop and having Undyne say something.
+     */
     win() {
         this.#state = "win";
         
         this.#attackRunner.removeAllArrows();
+        this.#undyne.greenRectangleManager.visible = false;
         this.#undyne.opacity = 1;
         
         this.#getBgm().stop();

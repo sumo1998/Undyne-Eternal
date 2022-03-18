@@ -155,7 +155,7 @@ class SpeechBubble extends GraphicsObject {
         this.#textQueue = [];
         this.#textQueueCallback = null;
         this.#numTextChars = 0;
-        this.#speechText = "";
+        this.#speechText.text = "";
         
         this.#sprite.visible = false;
         this.#speechText.visible = false;

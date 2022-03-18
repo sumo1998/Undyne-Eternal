@@ -132,6 +132,7 @@ class Undyne extends GraphicsObject {
      */
     reset() {
         this.opacity = 1;
+        this.#greenRectangleManager.reset();
         this.#speechBubble.reset();
     }
     
@@ -164,6 +165,14 @@ class Undyne extends GraphicsObject {
      */
     render() {
         this.#greenRectangleManager.render();
+    }
+    
+    /**
+     * Returns the instance that controls the green rectangles behind Undyne.
+     * @return The instance that controls the green rectangles behind Undyne
+     */
+    get greenRectangleManager() {
+        return this.#greenRectangleManager;
     }
     
     /**

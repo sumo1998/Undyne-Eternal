@@ -68,6 +68,14 @@ class GreenRectangleManager extends GraphicsObject {
     }
     
     /**
+     * Resets the fields to match the start of a new level.
+     */
+    reset() {
+        this.#animationTime = 0;
+        this.#graphics.visible = true;
+    }
+    
+    /**
      * Updates the green rectangles.
      * @param deltaMs The time that has passed since the last update of the green rectangles
      */
@@ -119,7 +127,7 @@ class GreenRectangleManager extends GraphicsObject {
      * Sets the visibility of the green boxes.
      * @param visibility The visibility of the green boxes
      */
-    set visibility(visibility) {
+    set visible(visibility) {
         this.#graphics.visible = visibility;
     }
 }
