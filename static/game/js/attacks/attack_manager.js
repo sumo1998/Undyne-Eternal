@@ -34,10 +34,10 @@ class AttackManager {
     }
     
     /**
-     * Returns the number of attacks.
-     * @return The number of attacks
+     * Returns the number of attacks in the level.
+     * @return The number of attacks in the level
      */
-    getNumAttacks() {
+    get numAttacks() {
         return this.#attacks.length;
     }
 }
