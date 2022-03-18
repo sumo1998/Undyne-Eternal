@@ -117,6 +117,14 @@ class AttackRunner extends GraphicsObject {
     }
     
     /**
+     * Returns true if there are no arrows currently loaded in the game.
+     * @return True if there are no arrows currently loaded in the game
+     */
+    arrowsEmpty() {
+        return this.#arrows.length === 0;
+    }
+    
+    /**
      * Resets the fields to match the start of a new level.
      */
     reset() {
