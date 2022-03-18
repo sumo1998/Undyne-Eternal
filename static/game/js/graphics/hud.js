@@ -168,4 +168,12 @@ class Hud extends GraphicsObject {
         this.#hpGraphics.drawRect(262, 447, this.hp * 28 / Player.maxHp, 21);
         this.#hpGraphics.endFill();
     }
+    
+    /**
+     * Returns the current attack number.
+     * @return The current attack number
+     */
+    get currentAttackNumber() {
+        return this.#currentAttackNumber;
+    }
 }
