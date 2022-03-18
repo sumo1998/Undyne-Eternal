@@ -138,7 +138,7 @@ class Player extends GraphicsObject {
         
         this.#shieldDir = 2;
         
-        this.#originalRotation = this.#getRotationFromDirection();
+        this.#originalRotation = Player.#getRotationFromDirection(this.#shieldDir);
         this.#targetRotation = this.#originalRotation;
         this.#rotationDirection = 0;
         
@@ -191,10 +191,11 @@ class Player extends GraphicsObject {
     /**
      * Using the current shield direction, computes the target shield rotation to a value between 0 and 2 pi where the
      * rotation is 0 radians when the shield's direction is 2.
+     * @param dir The new direction
      * @return The target shield rotation
      */
-    #getRotationFromDirection() {
-        return MathUtility.wrap(0.5 * Math.PI * (2 + this.#shieldDir), 0, 2 * Math.PI);
+    static #getRotationFromDirection(dir) {
+        return MathUtility.wrap(0.5 * Math.PI * (2 + dir), 0, 2 * Math.PI);
     }
     
     /**
@@ -211,13 +212,13 @@ class Player extends GraphicsObject {
      */
     set shieldDir(dir) {
         this.#originalRotation = this.#shieldSprite.rotation;
-        this.#targetRotation = this.#getRotationFromDirection();
-        
-        this.#shieldDir = dir;
+        this.#targetRotation = Player.#getRotationFromDirection(dir);
         
         if(dir === this.#shieldDir && this.#rotationDirection === 0) {
             return;
         }
+        
+        this.#shieldDir = dir;
         
         /*
          * Set the rotation direction based on the shortest distance between the original and target rotations.
@@ -252,7 +253,7 @@ class Player extends GraphicsObject {
         this.#invincibilityTimeRemaining = 0;
         this.#hp = Player.#maxHp;
         this.#shieldDir = 2;
-        this.#originalRotation = this.#getRotationFromDirection();
+        this.#originalRotation = Player.#getRotationFromDirection(this.#shieldDir);
         this.#targetRotation = this.#originalRotation;
         this.#rotationDirection = 0;
         this.#shieldHitTimeRemaining = 0;
