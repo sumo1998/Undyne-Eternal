@@ -47,7 +47,7 @@ class AttackRunner extends GraphicsObject {
      * @param nextAttack The attack from which to read the arrows
      */
     #addAttackArrows(nextAttack) {
-        //The time offset for each arrow
+        //The time offset for each arrow with 0 in the case of being empty
         const offsetTime = this.#attackTimeQueue[0] || 0;
         
         //True if a clockwise shift should be added to each arrow of this attack
@@ -164,6 +164,15 @@ class AttackRunner extends GraphicsObject {
                 this.#player.hitShield();
                 this.#removeArrow(curArrow, i);
             }
+        }
+        
+        if(this.#attackTimeQueue.length === 0) {
+            return;
+        }
+        
+        this.#attackTimeQueue[0] -= deltaMs;
+        if(this.#attackTimeQueue[0] <= 0) {
+            this.addNextAttack();
         }
     }
     
