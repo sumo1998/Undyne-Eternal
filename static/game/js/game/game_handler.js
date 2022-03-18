@@ -221,6 +221,7 @@ class GameHandler extends GraphicsObject {
     render() {
         this.#box.render();
         this.#hud.render();
+        this.#undyne.render();
         
         Main.runner.rendererManager.render(Main.runner.gameplayStage);
     }

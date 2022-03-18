@@ -6,45 +6,48 @@
     <title>Undyne Eternal</title>
     <link rel="stylesheet" href="{{ url_for("static", filename="game/css/game.css") }}">
     
+    <script type="text/javascript">
+        const exports = {};
+    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.9/pixi.min.js"
             integrity="sha512-Rd2qDH7zgdpNHORK5lMbVgqO93W0Fko9s6xn8J54zu5GmWO+jqNsc1Q84zePLYCQMHSokKGAI68EhbhgTCPHLw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
             integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/datastructures-js@10.2.0/index.js"
-            integrity="sha256-LZU2GcGGm44XvsPXTUHbrpqwVILRkWkJQzPu1W1q6y0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@datastructures-js/queue@4.1.3/src/queue.js"
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@datastructures-js/queue@4.1.3/src/queue.js"
             integrity="sha256-GHqIPmM6UOoa9i0OgbQ2yPPa0j9HSV32gFivt7WLq/U=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@datastructures-js/queue@4.1.3/index.js"
-            integrity="sha256-JXFvo3hVqhfHZm4wl/DASLD0k9X8zxnYs5qdU0Cn0BE=" crossorigin="anonymous"></script>
     
-    <script src="{{ url_for("static", filename="game/js/util/math_utility.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/util/math_utility.js") }}"></script>
     
-    <script src="{{ url_for("static", filename="game/js/loaders/asset_loader.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/loaders/audio_manager.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/loaders/font_loader.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/loaders/graphic_manager.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/loaders/asset_manager.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/loaders/asset_loader.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/loaders/audio_manager.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/loaders/font_loader.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/js/loaders/graphic_manager.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/loaders/asset_manager.js") }}"></script>
     
-    <script src="{{ url_for("static", filename="game/js/attacks/attack_manager.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/attacks/test_attacks.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/attacks/attack_parser.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/attacks/attack_manager.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/attacks/test_attacks.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/attacks/attack_parser.js") }}"></script>
     
-    <script src="{{ url_for("static", filename="game/js/graphics/graphics_object.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/graphics/arrow.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/graphics/box.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/graphics/speech_bubble.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/graphics/undyne.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/graphics/player.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/graphics/hud.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/js/graphics/graphics_object.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/graphics/arrow.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/graphics/box.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/graphics/speech_bubble.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/js/graphics/green_rectangle_manager.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/graphics/undyne.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/graphics/player.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/graphics/hud.js") }}"></script>
     
-    <script src="{{ url_for("static", filename="game/js/game/undyne_dialogue.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/game/renderer_manager.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/game/keyboard_handler.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/game/attack_runner.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/game/game_handler.js") }}"></script>
-    <script src="{{ url_for("static", filename="game/js/main.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/game/undyne_dialogue.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/game/renderer_manager.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/game/keyboard_handler.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/game/attack_runner.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/game/game_handler.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="game/js/main.js") }}"></script>
     
     <script type="text/javascript">
         window.addEventListener("load", () => {

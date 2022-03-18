@@ -49,6 +49,11 @@ class Undyne extends GraphicsObject {
     #speechBubble;
     
     /**
+     * Controls the green rectangles behind Undyne.
+     */
+    #greenRectangleManager;
+    
+    /**
      * Handles the opacity of Undyne.
      */
     #opacityGraphics;
@@ -101,6 +106,7 @@ class Undyne extends GraphicsObject {
         this.#legsSprite.scale.set(2, 2);
         this.#legsSprite.position.set(324, 210);
         
+        this.#greenRectangleManager = new GreenRectangleManager();
         this.#speechBubble = new SpeechBubble();
         
         this.#opacityGraphics = new PIXI.Graphics();
@@ -139,6 +145,7 @@ class Undyne extends GraphicsObject {
             this.#animationTime -= 1200;
         }
         
+        this.#greenRectangleManager.update(deltaMs);
         this.#speechBubble.update(deltaMs);
         
         this.#bodySprite.position.y = 111 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
@@ -150,6 +157,13 @@ class Undyne extends GraphicsObject {
         
         this.#leftArmSprite.position.y = 134 + 4 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
         this.#leftArmSprite.position.x = 369 + 2 * Math.sin(this.#animationTime / 600 * Math.PI * 2);
+    }
+    
+    /**
+     * Renders the green rectangles behind Undyne.
+     */
+    render() {
+        this.#greenRectangleManager.render();
     }
     
     /**
