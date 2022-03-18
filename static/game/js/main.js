@@ -100,6 +100,7 @@ class Main {
     update() {
         const currentTime = performance.now();
         const deltaMs = Math.max(currentTime - this.#previousTime, 0);
+        this.#previousTime = currentTime;
         
         this.#gameHandler.update(deltaMs);
         
