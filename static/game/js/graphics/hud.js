@@ -114,7 +114,7 @@ class Hud extends GraphicsObject {
      * Increments the current attack number and updates the current attack HUD text.
      */
     incrementAttackNumber() {
-        ++this.#currentAttackNumber;
+        this.#currentAttackNumber = Math.min(this.#currentAttackNumber + 1, this.#numAttacks);
         this.#currentAttackText.text = Hud.#formatTwoDigitFraction(this.#currentAttackNumber, this.#numAttacks);
     }
     
