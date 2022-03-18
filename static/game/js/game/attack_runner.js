@@ -154,7 +154,7 @@ class AttackRunner extends GraphicsObject {
             curArrow.update(deltaMs);
             
             //If the heart is hit
-            if(curArrow.targetTime * curArrow.speed < -Player.shieldDistance + Player.heartDistance) {
+            if((curArrow.targetTime / 1000) * curArrow.speed < -Player.shieldDistance + Player.heartDistance) {
                 this.#player.takeDamage();
                 this.#removeArrow(curArrow, i);
             }
