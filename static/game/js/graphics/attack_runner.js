@@ -105,11 +105,18 @@ class AttackRunner extends GraphicsObject {
         this.#attackTimeQueue.push(nextAttack.nextTime);
     }
     
+    removeAllArrows() {
+        for(let i = 0; i < this.#arrows.length; ++i) {
+            Main.runner.gameplayStage.removeChild(this.#arrows[i].sprite);
+        }
+        
+        this.#arrows = [];
+    }
+    
     /**
      * Resets the fields to match the start of a new level.
      */
     reset() {
-        this.#arrows = [];
         this.#attackTimeQueue = [];
         this.#attackManager.reset();
     }
@@ -127,13 +134,14 @@ class AttackRunner extends GraphicsObject {
     /**
      * Removes an arrow from the screen and array, also updates the attack number if it is the last arrow in an attack.
      * @param arrow The arrow to be removed
+     * @param idx The index associated with the current arrow
      */
-    #removeArrow(arrow) {
+    #removeArrow(arrow, idx) {
         if(arrow.last) {
             this.#hud.incrementAttackNumber();
         }
-        Main.runner.gameplayStage.removeChild(arrow);
-        this.#arrows.splice(i, 1);
+        Main.runner.gameplayStage.removeChild(arrow.sprite);
+        this.#arrows.splice(idx, 1);
     }
     
     /**
@@ -148,13 +156,13 @@ class AttackRunner extends GraphicsObject {
             //If the heart is hit
             if(curArrow.targetTime * curArrow.speed < -Player.shieldDistance + Player.heartDistance) {
                 this.#player.takeDamage();
-                this.#removeArrow(curArrow);
+                this.#removeArrow(curArrow, i);
             }
             //If the player is hit
             else if(curArrow.targetTime <= 0 && this.#arrowShieldSameSide(curArrow)) {
                 Main.runner.assetManager.getAudio("arrowBlockedSfx").play();
                 this.#player.hitShield();
-                this.#removeArrow(curArrow);
+                this.#removeArrow(curArrow, i);
             }
         }
     }
