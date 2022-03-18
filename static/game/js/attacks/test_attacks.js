@@ -6,7 +6,7 @@ class TestAttacks {
     /**
      * Returns the test attacks.
      */
-    static getTestAttacks() {
+    static get testAttacks() {
         const attack1 = {
             nextTime: 3200, clockwiseShift: false, arrows: [
                 {direction: "2", reversed: false, targetTime: 0, speed: 100},
