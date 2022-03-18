@@ -19,3 +19,27 @@ html, body {
     left: 0;
     right: 0;
 }
+
+/*
+ * The back-to-home-feed button
+ */
+#back-home-feed {
+    position: relative;
+    border-width: 0;
+    background-color: #0D7449;
+    color: #03FB3D;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    font-size: 17px;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+#back-home-feed:hover {
+    background-color: #0A5D3A;
+}
