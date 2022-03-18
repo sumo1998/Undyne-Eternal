@@ -21,7 +21,7 @@ class MathUtility {
     
     /**
      * Clamps value between clampStart and clampEnd and then uses the proportion of that clamped value between
-     * clampStart and clampEnd to linearly interpolate between interpolateStart and interpolateEnd
+     * clampStart and clampEnd to linearly interpolate between interpolateStart and interpolateEnd.
      * @param value The value to clamp and use in interpolation
      * @param clampStart The minimum clamp value
      * @param clampEnd The maximum clamp value
@@ -95,7 +95,7 @@ class MathUtility {
     
     /**
      * Returns a colon-separated time from the milliseconds that have the given max units, which can be hours, minutes,
-     * seconds, and cs
+     * seconds, and cs.
      * @param ms The number of milliseconds to format
      * @param maxUnit The maximum unit of time permitted, which can be "hours", "minutes", "seconds", or "cs"
      * @return A colon-separated time from the milliseconds that have the given max units, which can be hours, minutes,

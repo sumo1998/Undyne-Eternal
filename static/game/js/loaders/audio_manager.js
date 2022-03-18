@@ -105,7 +105,7 @@ class AudioManager extends AssetLoader {
     
     /**
      * Returns true if the audio is loaded.
-     * @returns True if the audio is loaded.
+     * @returns True if the audio is loaded
      */
     isLoaded() {
         for(const audioName in this.#audioLoadedMap) {
@@ -122,6 +122,6 @@ class AudioManager extends AssetLoader {
      * @returns The Howl instance with the given name associated to it
      */
     getAudio(audioName) {
-        return this.#audioMap[audio];
+        return this.#audioMap[audioName];
     }
 }
