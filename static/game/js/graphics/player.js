@@ -39,6 +39,11 @@ class Player extends GraphicsObject {
     static #shieldHitDuration = 250;
     
     /**
+     * The time the shifting of the screen from damage lasts.
+     */
+    static #damageShiftDuration = 100;
+    
+    /**
      * The current number of hit points the player has.
      */
     #hp;
@@ -122,6 +127,16 @@ class Player extends GraphicsObject {
     #updateShieldVisibility;
     
     /**
+     * The shift in the screen in the x and y directions that occurs when getting damaged.
+     */
+    #damageShift;
+    
+    /**
+     * The time remaining until the shifting of the screen from the damage stops.
+     */
+    #damageShiftTimeRemaining;
+    
+    /**
      * Initializes a Player instance.
      */
     constructor(difficulty) {
@@ -129,7 +144,10 @@ class Player extends GraphicsObject {
         
         this.#hp = Player.#maxHp;
         
+        this.#damageShift = 0;
+        
         this.#invincibilityTimeRemaining = 0;
+        this.#damageShiftTimeRemaining = 0;
         
         switch(difficulty) {
             case "easy":
@@ -267,6 +285,8 @@ class Player extends GraphicsObject {
      */
     reset() {
         this.#invincibilityTimeRemaining = 0;
+        this.#damageShift = 0;
+        this.#damageShiftTimeRemaining = 0;
         this.#hp = Player.#maxHp;
         this.#shieldDir = 2;
         this.#originalRotation = Player.#getRotationFromDirection(this.#shieldDir);
@@ -296,6 +316,7 @@ class Player extends GraphicsObject {
         }
         
         this.#invincibilityTimeRemaining = this.#maxInvincibilityTime;
+        this.#damageShiftTimeRemaining = Player.#damageShiftDuration;
         
         Main.runner.assetManager.getAudio("arrowDamageSfx").play();
         
@@ -349,9 +370,13 @@ class Player extends GraphicsObject {
      */
     update(deltaMs) {
         this.#invincibilityTimeRemaining = Math.max(this.#invincibilityTimeRemaining - deltaMs, 0);
+        this.#damageShiftTimeRemaining = Math.max(this.#damageShiftTimeRemaining - deltaMs, 0);
         
         //Uses cosine to fade the heart in and out (flashing) when invincible/damaged
         this.#heartSprite.alpha = 0.5 * Math.cos(2 * Math.PI * this.#invincibilityTimeRemaining / 250) + 0.5;
+        
+        //Use sine to shift around the screen for the damage shift
+        this.#damageShift = 2 * Math.sin(2 * Math.PI / 8 * this.#damageShiftTimeRemaining);
         
         let newRotation = MathUtility.wrap(
             this.#shieldSprite.rotation + Player.#shieldRadiansPerSec * this.#rotationDirection * deltaMs / 1000,
@@ -393,6 +418,14 @@ class Player extends GraphicsObject {
         else if(colorStr === "red") {
             this.#heartSprite.tint = Player.#heartRedColor;
         }
+    }
+    
+    /**
+     * Returns the shift in the screen in the x and y directions that occurs when getting damaged.
+     * @return The shift in the screen in the x and y directions that occurs when getting damaged.
+     */
+    get damageShift() {
+        return this.#damageShift;
     }
     
     /**

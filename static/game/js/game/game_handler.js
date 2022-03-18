@@ -41,16 +41,6 @@ class GameHandler extends GraphicsObject {
     #undyne;
     
     /**
-     * The shift in the screen in the x direction that occurs when getting damaged.
-     */
-    #damageShiftX;
-    
-    /**
-     * The shift in the screen in the y direction that occurs when getting damaged.
-     */
-    #damageShiftY;
-    
-    /**
      * Initializes a GameHandler instance.
      * @param difficulty The difficulty of the game
      */
@@ -73,9 +63,6 @@ class GameHandler extends GraphicsObject {
         }
         
         this.#difficulty = difficulty;
-        
-        this.#damageShiftX = 0;
-        this.#damageShiftY = 0;
         
         this.#undyne = new Undyne();
         this.#box = new Box();
@@ -135,8 +122,6 @@ class GameHandler extends GraphicsObject {
      */
     restartLevel() {
         this.#state = "playing";
-        this.#damageShiftX = 0;
-        this.#damageShiftY = 0;
         this.#attackRunner.reset();
         this.#player.reset();
         this.#hud.reset();
@@ -217,6 +202,8 @@ class GameHandler extends GraphicsObject {
                 this.win();
             }
         }
+        
+        Main.runner.gameplayStage.position.set(this.#player.damageShift, this.#player.damageShift);
         
         this.render();
     }
