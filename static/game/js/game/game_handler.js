@@ -149,7 +149,7 @@ class GameHandler extends GraphicsObject {
         
         this.#getBgm().play();
         
-        this.#undyne.opacity = 0.8;
+        this.#undyne.opacity = 0.2;
         
         this.#attackRunner.addNextAttack();
     }
