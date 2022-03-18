@@ -33,6 +33,10 @@ class AttackManager {
         return null;
     }
     
+    /**
+     * Returns the number of attacks.
+     * @return The number of attacks
+     */
     getNumAttacks() {
         return this.#attacks.length;
     }
