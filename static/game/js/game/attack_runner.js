@@ -36,7 +36,7 @@ class AttackRunner extends GraphicsObject {
     constructor(player, hud, attacks) {
         super();
         this.#arrows = [];
-        this.#attackTimeQueue = [];
+        this.#attackTimeQueue = [2000];
         this.#player = player;
         this.#hud = hud;
         this.#attackManager = new AttackManager(attacks);
@@ -88,7 +88,7 @@ class AttackRunner extends GraphicsObject {
      * Adds the next attack to the game.
      */
     addNextAttack() {
-        if(this.#attackTimeQueue.length !== 0) {
+        if(this.#attackTimeQueue.length >= 2) {
             const remainingAttackTime = this.#attackTimeQueue[0];
             this.#attackTimeQueue.shift();
             
@@ -117,7 +117,7 @@ class AttackRunner extends GraphicsObject {
      * Resets the fields to match the start of a new level.
      */
     reset() {
-        this.#attackTimeQueue = [];
+        this.#attackTimeQueue = [2000];
         this.#attackManager.reset();
     }
     
