@@ -175,6 +175,21 @@ class GameHandler extends GraphicsObject {
         );
     }
     
+    win() {
+        this.#attackRunner.removeAllArrows();
+        this.#player.endGameHideSprites();
+        this.#undyne.opacity = 1;
+        
+        this.#state = "win";
+        
+        this.#getBgm().stop();
+        
+        const thisTmp = this;
+        this.#undyne.speechBubble.queueText(
+            UndyneDialogue.getWinText(this.#difficulty), () => thisTmp.restartLevel()
+        );
+    }
+    
     /**
      * Updates the state of the game objects.
      */
