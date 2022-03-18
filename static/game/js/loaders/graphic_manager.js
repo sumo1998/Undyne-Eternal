@@ -32,7 +32,7 @@ class GraphicManager extends AssetLoader {
             .add("shield", "static/game/img/shield.png")
             .add("shieldHit", "static/game/img/shieldHit.png")
             
-            .add("speechbubble", "static/game/img/speechbubble.png")
+            .add("speechBubble", "static/game/img/speechbubble.png")
             .add("undyneBreastplate", "static/game/img/undyne_breastplate.png")
             .add("undyneHair0", "static/game/img/undyne_hair0.png")
             .add("undyneHair1", "static/game/img/undyne_hair1.png")
@@ -55,15 +55,15 @@ class GraphicManager extends AssetLoader {
      * @param resources The resources loaded by the graphics loader
      */
     #setUpGraphics(resources) {
-        resources["heart"].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+        resources["heart"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
         
-        resources["speechbubble"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+        resources["speechBubble"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
         
         for(let i = 0; i < 4; ++i) {
-            resources["undyneHair" + i].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+            resources["undyneHair" + i].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
         }
-    
-        resources["undyneHead"].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+        
+        resources["undyneHead"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
         resources["undyneBreastplate"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
         resources["undyneLeftArm"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
         resources["undyneLegs"].texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
