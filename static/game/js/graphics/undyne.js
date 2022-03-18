@@ -74,12 +74,12 @@ class Undyne extends GraphicsObject {
         this.#headSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneHead"));
         this.#headSprite.anchor.set(0.5, 0.5);
         this.#headSprite.scale.set(2, 2);
-        this.#headSprite.position.set(318, 48);
+        this.#headSprite.position.set(318, 51);
         
         this.#bodySprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneBreastplate"));
         this.#bodySprite.anchor.set(0.5, 0.5);
         this.#bodySprite.scale.set(2, 2);
-        this.#bodySprite.position.set(324, 108);
+        this.#bodySprite.position.set(324, 111);
         
         this.#rightArmSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneRightArm"));
         this.#rightArmSprite.anchor.set(1, 0);
@@ -94,7 +94,7 @@ class Undyne extends GraphicsObject {
         this.#skirtSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneSkirt"));
         this.#skirtSprite.anchor.set(0.5, 0.5);
         this.#skirtSprite.scale.set(2, 2);
-        this.#skirtSprite.position.set(320, 166);
+        this.#skirtSprite.position.set(320, 164);
         
         this.#legsSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneLegs"));
         this.#legsSprite.anchor.set(0.5, 0.5);
@@ -141,9 +141,9 @@ class Undyne extends GraphicsObject {
         
         this.#speechBubble.update(deltaMs);
         
-        this.#bodySprite.position.y = 108 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
-        this.#headSprite.position.y = 48 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
-        this.#skirtSprite.position.y = 166 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#bodySprite.position.y = 111 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#headSprite.position.y = 51 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#skirtSprite.position.y = 164 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
         
         this.#rightArmSprite.position.y = 98 + 4 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
         this.#rightArmSprite.position.x = 308 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
