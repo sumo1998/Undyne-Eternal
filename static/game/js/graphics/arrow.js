@@ -28,7 +28,7 @@ class Arrow extends GraphicsObject {
     #reversed;
     
     /**
-     * The time remaining until the shield should destroy the arrow.
+     * The time remaining until the shield should destroy the arrow in ms.
      */
     #targetTime;
     
@@ -95,7 +95,7 @@ class Arrow extends GraphicsObject {
         let deltaX = 0;
         let deltaY = 0;
         
-        const distance = this.#targetTime * this.#speed + Player.shieldDistance;
+        const distance = this.#targetTime / 1000 * this.#speed + Player.shieldDistance;
         
         let rotation = 0;
         if(this.#reversed) {
