@@ -5,4 +5,4 @@ from
 where 
     l.user_id = u.user_id 
 order by 
-    l.level_rating desc;
+    l.level_created_timestamp desc;

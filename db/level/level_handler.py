@@ -2,11 +2,6 @@ from flask import render_template_string
 from db import database_handler
 
 
-"""
-    Returns information for level with level_id = id
-    Parameters: 
-        id - Level id
-"""
 
 
 def get_level_info(id):
@@ -19,12 +14,6 @@ def get_level_info(id):
             res = cur.fetchall()
             return res
 
-
-"""
-    Returns comments information for level with level_id = id 
-    Parameters:
-        id - level id
-"""
 
 
 def get_level_comments(id):

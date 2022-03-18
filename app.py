@@ -29,9 +29,11 @@ def home_page():
     return "<h1>This is the homepage for the app</h1>"
 
 
-@app.route("/home_feed")
+@app.route("/home-feed")
 def feed():
-    res = home_handler.get_home_feed()
+    data = request.json
+    print("DATA: "+str(data))
+    res = home_handler.get_home_feed(data)
     return render_template("home/home_template.html", res=res)
 
 
@@ -49,49 +51,49 @@ def level(id):
     return render_template("level/level_template.html", levelInfo=level_info, levelComments=level_comments)
 
 
-@app.route("/addComment", methods=['POST'])
+@app.route("/add-comment", methods=['POST'])
 def add_comment():
     data = request.form
     level_handler.add_level_comment(data)
     return redirect(url_for("level", id=data['levelId']))
 
 
-@app.route("/updateComment", methods=['PATCH'])
+@app.route("/update-comment", methods=['PATCH'])
 def update_comment():
     data = request.form
     level_handler.update_level_comment(data)
     return redirect(url_for("level", id=data['levelId']))
 
 
-@app.route("/deleteComment", methods=['DELETE'])
+@app.route("/delete-comment", methods=['DELETE'])
 def delete_comment():
     data = request.form
     level_handler.delete_comment(data)
     return redirect(url_for("level", id=data['levelId']))
 
 
-@app.route("/updateLevel", methods=['PATCH'])
+@app.route("/update-level", methods=['PATCH'])
 def update_level():
     data = request.form
     level_handler.update_level(data)
     return redirect(url_for("level", id=data['levelId']))
 
 
-@app.route("/deleteLevel", methods=['DELETE'])
+@app.route("/delete-level", methods=['DELETE'])
 def delete_level():
     data = request.form
     level_handler.delete_level(data)
     return redirect(url_for("home_page"))
 
 
-@app.route("/addLevel", methods=['POST'])
+@app.route("/add-level", methods=['POST'])
 def add_level():
     data = request.form
     level_handler.add_level(data)
     return redirect(url_for("home_page"))
 
 
-@app.route("/updateUser", methods=['PATCH'])
+@app.route("/update-user", methods=['PATCH'])
 def update_user():
     data = request.form
     user_handler.update_user(data)
