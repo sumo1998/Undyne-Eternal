@@ -166,4 +166,12 @@ class Arrow extends GraphicsObject {
     get last() {
         return this.#last;
     }
+    
+    /**
+     * Returns the sprite for this specific arrow.
+     * @return The sprite for this specific arrow
+     */
+    get sprite() {
+        return this.#sprite;
+    }
 }
