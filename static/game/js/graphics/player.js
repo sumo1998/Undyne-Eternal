@@ -239,6 +239,12 @@ class Player extends GraphicsObject {
         this.#rotationDirection = clockwiseDistance <= counterClockwiseDistance + epsilon ? 1 : -1;
     }
     
+    endGameHideSprites() {
+        this.#shieldSprite.visible = false;
+        this.#shieldHitSprite.visible = false;
+        this.#circle.visible = true;
+    }
+    
     /**
      * Resets the fields to match the start of a new level.
      */
