@@ -240,6 +240,9 @@ class Player extends GraphicsObject {
         this.#rotationDirection = clockwiseDistance <= counterClockwiseDistance + epsilon ? 1 : -1;
     }
     
+    /**
+     * Hides the sprites that should not be visible on the game over screen.
+     */
     endGameHideSprites() {
         this.#shieldSprite.visible = false;
         this.#shieldHitSprite.visible = false;

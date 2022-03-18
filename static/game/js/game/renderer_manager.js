@@ -3,6 +3,9 @@
  */
 class RendererManager {
     
+    /**
+     * The renderer.
+     */
     #renderer;
     
     /**

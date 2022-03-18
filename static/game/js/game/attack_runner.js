@@ -105,6 +105,9 @@ class AttackRunner extends GraphicsObject {
         this.#attackTimeQueue.push(nextAttack.nextTime);
     }
     
+    /**
+     * Removes all of the arrows from the stage.
+     */
     removeAllArrows() {
         for(let i = 0; i < this.#arrows.length; ++i) {
             Main.runner.gameplayStage.removeChild(this.#arrows[i].sprite);
