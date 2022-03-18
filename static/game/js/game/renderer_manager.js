@@ -1,16 +1,18 @@
 /**
- * Connects the renderer to the page.
+ * Connects the renderer to the page and manages the renderer.
  */
-class RendererConnector {
+class RendererManager {
+    
+    #renderer;
     
     /**
      * Adds the game renderer to the HTML page.
      */
-    static addRenderer() {
+    constructor() {
         const gameWidth = Main.runner.gameWidth;
         const gameHeight = Main.runner.gameHeight;
         
-        const renderer = PIXI.autoDetectRenderer(
+        this.#renderer = PIXI.autoDetectRenderer(
             gameWidth,
             gameHeight,
             {
@@ -33,12 +35,19 @@ class RendererConnector {
         const rendererHeight = gameDimensionMultiplier * gameHeight;
         
         //Add the renderer view element to the DOM
-        const rendererView = renderer.view;
+        const rendererView = this.#renderer.view;
         rendererView.style.width = Math.round(rendererWidth) + "px";
         rendererView.style.height = Math.round(rendererHeight) + "px";
         
         rendererView.setAttribute("id", "game-renderer");
         
         document.body.appendChild(rendererView);
+    }
+    
+    /**
+     * Renders the given object.
+     */
+    render(displayObject) {
+        this.#renderer.render(displayObject);
     }
 }

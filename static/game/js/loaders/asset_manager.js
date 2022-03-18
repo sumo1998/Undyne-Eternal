@@ -1,5 +1,5 @@
 /**
- * Loads the assets for the game.
+ * Loads and manages the assets for the game.
  */
 class AssetManager extends AssetLoader {
     
