@@ -152,7 +152,6 @@ class GameHandler extends GraphicsObject {
         this.#undyne.opacity = 0.8;
         
         this.#attackRunner.addNextAttack();
-        this.#attackRunner.addNextAttack();
     }
     
     /**
