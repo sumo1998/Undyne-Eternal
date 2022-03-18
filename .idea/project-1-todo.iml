@@ -18,8 +18,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="pixi.js" level="application" />
     <orderEntry type="library" name="howler" level="application" />
-    <orderEntry type="library" name="datastructures-js" level="application" />
-    <orderEntry type="library" name="@datastructures-js/queue" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
