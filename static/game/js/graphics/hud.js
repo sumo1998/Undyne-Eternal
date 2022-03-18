@@ -166,7 +166,7 @@ class Hud extends GraphicsObject {
         this.#hpGraphics.lineStyle(0, 0xFFFFFF, 1);
         this.#hpGraphics.drawRect(262, 447, 28, 21);
         this.#hpGraphics.beginFill(yellow, 1);
-        this.#hpGraphics.drawRect(262, 447, this.hp * 28 / Player.maxHp, 21);
+        this.#hpGraphics.drawRect(262, 447, this.#player.hp * 28 / Player.maxHp, 21);
         this.#hpGraphics.endFill();
     }
     
