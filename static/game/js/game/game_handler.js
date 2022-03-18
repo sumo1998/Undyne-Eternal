@@ -77,17 +77,18 @@ class GameHandler extends GraphicsObject {
         this.#damageShiftX = 0;
         this.#damageShiftY = 0;
         
-        this.#attackRunner = new AttackRunner(this.#player, this.#hud, TestAttacks.testAttacks);
+        this.#undyne = new Undyne();
         this.#box = new Box();
+        this.#player = new Player(difficulty);
+        this.#hud = new Hud(TestAttacks.testAttacks.length, love, this.#player);
+        this.#attackRunner = new AttackRunner(this.#player, this.#hud, TestAttacks.testAttacks);
+        
         this.#box.setDestinationBounds(
             0.5 * Main.runner.gameWidth - Player.shieldDistance,
             0.5 * Main.runner.gameWidth + Player.shieldDistance,
             0.5 * Main.runner.gameHeight - Player.shieldDistance,
             0.5 * Main.runner.gameHeight + Player.shieldDistance
         );
-        this.#player = new Player(difficulty);
-        this.#hud = new Hud(this.#attackRunner.numAttacks, love, this.#player);
-        this.#undyne = new Undyne();
     }
     
     /**
