@@ -142,7 +142,9 @@ class GameHandler extends GraphicsObject {
         this.#hud.reset();
         this.#box.setDestinationBounds(
             0.5 * Main.runner.gameWidth - Player.shieldDistance,
-            0.5 * Main.runner.gameWidth + Player.shieldDistance
+            0.5 * Main.runner.gameWidth + Player.shieldDistance,
+            0.5 * Main.runner.gameHeight - Player.shieldDistance,
+            0.5 * Main.runner.gameHeight + Player.shieldDistance
         );
         
         this.#getBgm().play();
