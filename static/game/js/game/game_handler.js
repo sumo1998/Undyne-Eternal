@@ -158,11 +158,12 @@ class GameHandler extends GraphicsObject {
      * Runs when the user loses all of their HP, making the attacks stop and having Undyne say something.
      */
     gameOver() {
+        this.#state = "game over";
+        
         this.#attackRunner.removeAllArrows();
         this.#player.endGameHideSprites();
+        this.#player.setColor("red");
         this.#undyne.opacity = 1;
-        
-        this.#state = "game over";
         
         this.#getBgm().stop();
         
@@ -176,11 +177,10 @@ class GameHandler extends GraphicsObject {
     }
     
     win() {
-        this.#attackRunner.removeAllArrows();
-        this.#player.endGameHideSprites();
-        this.#undyne.opacity = 1;
-        
         this.#state = "win";
+        
+        this.#attackRunner.removeAllArrows();
+        this.#undyne.opacity = 1;
         
         this.#getBgm().stop();
         
@@ -194,11 +194,11 @@ class GameHandler extends GraphicsObject {
      * Updates the state of the game objects.
      */
     update(deltaMs) {
-        this.#box.update(deltaMs);
-        this.#player.update(deltaMs);
         this.#undyne.update(deltaMs);
+        this.#player.update(deltaMs);
         
         if(this.#state === "playing") {
+            this.#box.update(deltaMs);
             this.#hud.update(deltaMs);
             this.#attackRunner.update(deltaMs);
             

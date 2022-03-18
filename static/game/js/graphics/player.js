@@ -19,7 +19,12 @@ class Player extends GraphicsObject {
     static #shieldRadiansPerSec = 25;
     
     /**
-     * The color of the heart.
+     * The color of the heart with a game over.
+     */
+    static #heartRedColor = 0xff0000;
+    
+    /**
+     * The color of the heart when playing.
      */
     static #heartGreenColor = 0x00ff00;
     
@@ -112,6 +117,11 @@ class Player extends GraphicsObject {
     #circle;
     
     /**
+     * True if the visibility of the shields should be updated.
+     */
+    #updateShieldVisibility;
+    
+    /**
      * Initializes a Player instance.
      */
     constructor(difficulty) {
@@ -143,6 +153,8 @@ class Player extends GraphicsObject {
         this.#rotationDirection = 0;
         
         this.#shieldHitTimeRemaining = 0;
+        
+        this.#updateShieldVisibility = true;
         
         this.#heartSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("heart"));
         this.#heartSprite.anchor.set(0.5, 0.5);
@@ -246,7 +258,8 @@ class Player extends GraphicsObject {
     endGameHideSprites() {
         this.#shieldSprite.visible = false;
         this.#shieldHitSprite.visible = false;
-        this.#circle.visible = true;
+        this.#circle.visible = false;
+        this.#updateShieldVisibility = false;
     }
     
     /**
@@ -261,8 +274,12 @@ class Player extends GraphicsObject {
         this.#rotationDirection = 0;
         this.#shieldHitTimeRemaining = 0;
         
+        this.#updateShieldVisibility = false;
+        
         this.#shieldSprite.rotation = this.#originalRotation;
         this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
+        
+        this.#heartSprite.tint = Player.#heartGreenColor;
         
         this.#heartSprite.visible = true;
         this.#shieldSprite.visible = true;
@@ -350,6 +367,10 @@ class Player extends GraphicsObject {
         this.#shieldSprite.rotation = newRotation;
         this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
         
+        if(!this.#updateShieldVisibility) {
+            return;
+        }
+        
         if(this.#shieldHitTimeRemaining > 0) {
             this.#shieldSprite.visible = false;
             this.#shieldHitSprite.visible = true;
@@ -358,6 +379,19 @@ class Player extends GraphicsObject {
         else {
             this.#shieldSprite.visible = true;
             this.#shieldHitSprite.visible = false;
+        }
+    }
+    
+    /**
+     * Sets the color of the heart to the given color.
+     * @param colorStr The color of the heart
+     */
+    setColor(colorStr) {
+        if(colorStr === "green") {
+            this.#heartSprite.tint = Player.#heartGreenColor;
+        }
+        else if(colorStr === "red") {
+            this.#heartSprite.tint = Player.#heartRedColor;
         }
     }
     
