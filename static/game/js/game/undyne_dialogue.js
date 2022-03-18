@@ -41,7 +41,7 @@ class UndyneDialogue {
                  */
                 else if(currentAttackNumber !== 1 || numAttacks <= 3) {
                     return [
-                        "Is that the best you've got?",
+                        "Is that the best\nyou've got?",
                         "Pathetic. I know you\ncan do better!"
                     ];
                 }
