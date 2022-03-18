@@ -1,5 +1,5 @@
 /**
- * Handles the game overall.
+ * Handles the running of the game overall.
  */
 class GameHandler extends GraphicsObject {
     
