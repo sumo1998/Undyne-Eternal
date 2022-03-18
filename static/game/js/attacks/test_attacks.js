@@ -4,14 +4,9 @@
 class TestAttacks {
     
     /**
-     * Contains the array of test attacks.
+     * Returns the test attacks.
      */
-    #testAttacks;
-    
-    /**
-     * Creates a TestAttacks instance that contains all of the test attacks.
-     */
-    constructor() {
+    static getTestAttacks() {
         const attack1 = {
             nextTime: 3.2, clockwiseShift: false, arrows: [
                 {direction: "2", reversed: false, targetTime: 0.0, speed: 100},
@@ -449,7 +444,7 @@ class TestAttacks {
             ]
         };
         
-        this.#testAttacks = {
+        return [
             attack1,
             attack2,
             attack3,
@@ -477,14 +472,6 @@ class TestAttacks {
             attack25,
             attack26,
             attack27
-        };
-    }
-    
-    /**
-     * Returns the test attacks.
-     * @returns The test attacks.
-     */
-    getTestAttacks() {
-        return this.#testAttacks;
+        ];
     }
 }
