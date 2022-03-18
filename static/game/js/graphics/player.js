@@ -294,7 +294,7 @@ class Player extends GraphicsObject {
         this.#rotationDirection = 0;
         this.#shieldHitTimeRemaining = 0;
         
-        this.#updateShieldVisibility = false;
+        this.#updateShieldVisibility = true;
         
         this.#shieldSprite.rotation = this.#originalRotation;
         this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
