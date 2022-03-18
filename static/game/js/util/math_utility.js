@@ -20,6 +20,25 @@ class MathUtility {
     }
     
     /**
+     * Clamps the given value between clampStart and clampEnd.
+     * @param value The value to clamp
+     * @param clampStart The minimum clamp value
+     * @param clampEnd The maximum clamp value
+     * @return The result of clamping the value between clampStart and clampEnd
+     */
+    static clamp(value, clampStart, clampEnd) {
+        //Case where value is on the side of the start (either less than [start, end] or greater than [end, start])
+        if(value <= clampStart && clampStart <= clampEnd || clampEnd <= clampStart && clampStart <= value) {
+            return clampStart;
+        }
+        //Case where value is on the side of the end (either greater than [start, end] or less than [end, start])
+        else if(clampStart < clampEnd && clampEnd < value || value < clampEnd && clampEnd < clampStart) {
+            return clampEnd;
+        }
+        return value;
+    }
+    
+    /**
      * Clamps value between clampStart and clampEnd and then uses the proportion of that clamped value between
      * clampStart and clampEnd to linearly interpolate between interpolateStart and interpolateEnd.
      * @param value The value to clamp and use in interpolation
@@ -27,7 +46,9 @@ class MathUtility {
      * @param clampEnd The maximum clamp value
      * @param interpolateStart The minimum interpolate value
      * @param interpolateEnd The maximum interpolate value
-     * @return The result of clamping the value between clampEnd and clampStart and then using the proportion
+     * @return The result of clamping the value between clampStart and clampEnd and then using the proportion of that
+     *     clamped value between clampStart and clampEnd to linearly interpolate between interpolateStart and
+     *     interpolateEnd
      */
     static clampInterpolate(value, clampStart, clampEnd, interpolateStart, interpolateEnd) {
         //Case where value is on the side of the start (either less than [start, end] or greater than [end, start])
