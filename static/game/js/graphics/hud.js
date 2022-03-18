@@ -76,6 +76,7 @@ class Hud extends GraphicsObject {
         this.#loveText.position.y = 450;
         
         this.#hpGraphics = new PIXI.Graphics();
+        Main.runner.gameplayStage.addChild(this.#hpGraphics);
         
         this.#player = player;
         
