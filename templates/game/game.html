@@ -4,7 +4,7 @@
 <head>
     <meta charset=utf-8>
     <title>Undyne Eternal</title>
-    <link rel="stylesheet" href="/static/game/css/game.css">
+    <link rel="stylesheet" href="{{ url_for("static", filename="game/css/game.css") }}">
     
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.9/pixi.min.js"
             integrity="sha512-Rd2qDH7zgdpNHORK5lMbVgqO93W0Fko9s6xn8J54zu5GmWO+jqNsc1Q84zePLYCQMHSokKGAI68EhbhgTCPHLw=="
@@ -19,28 +19,37 @@
     <script src="https://cdn.jsdelivr.net/npm/@datastructures-js/queue@4.1.3/index.js"
             integrity="sha256-JXFvo3hVqhfHZm4wl/DASLD0k9X8zxnYs5qdU0Cn0BE=" crossorigin="anonymous"></script>
     
-    <script src="/static/game/js/vars.js"></script>
+    <script src="{{ url_for("static", filename="game/js/util/math_utility.js") }}"></script>
     
-    <script src="/static/game/js/preload.js"></script>
-    <script src="/static/game/js/rendering.js"></script>
-    <script src="/static/game/js/scene.js"></script>
+    <script src="{{ url_for("static", filename="game/js/loaders/asset_loader.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/loaders/audio_manager.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/loaders/font_loader.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/loaders/graphic_manager.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/loaders/asset_manager.js") }}"></script>
     
-    <script src="/static/game/js/game/gamestate.js"></script>
-    <script src="/static/game/js/game/box.js"></script>
-    <script src="/static/game/js/game/arrow.js"></script>
-    <script src="/static/game/js/game/heart.js"></script>
-    <script src="/static/game/js/game/undyne.js"></script>
-    <script src="/static/game/js/game/attack.js"></script>
+    <script src="{{ url_for("static", filename="game/js/attacks/attack_manager.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/attacks/test_attacks.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/attacks/attack_parser.js") }}"></script>
     
-    <script src="/static/game/js/attacks/testing.js"></script>
-    <script src="/static/game/js/attacks/attacks.js"></script>
+    <script src="{{ url_for("static", filename="game/js/graphics/graphics_object.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/graphics/arrow.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/graphics/box.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/graphics/speech_bubble.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/graphics/undyne.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/graphics/player.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/graphics/hud.js") }}"></script>
     
-    <script src="/static/game/js/loader/sounds.js"></script>
-    <script src="/static/game/js/loader/graphics.js"></script>
-    <script src="/static/game/js/loader/fonts.js"></script>
+    <script src="{{ url_for("static", filename="game/js/game/renderer_connector.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/game/keyboard_handler.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/game/attack_runner.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/game/game_handler.js") }}"></script>
+    <script src="{{ url_for("static", filename="game/js/game/main.js") }}"></script>
     
-    <script src="/static/game/js/input.js"></script>
-    <script src="/static/game/js/main.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", () => {
+            Main.runner = new Main();
+        });
+    </script>
 </head>
 
 <body></body>
