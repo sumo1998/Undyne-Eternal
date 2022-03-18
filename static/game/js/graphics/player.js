@@ -9,6 +9,11 @@ class Player extends GraphicsObject {
     static #shieldDistance = 32;
     
     /**
+     * The distance from the center of the screen to an edge of the heart.
+     */
+    static #heartDistance = 8;
+    
+    /**
      * The rate of rotation of the shield in radians per second.
      */
     static #shieldRadiansPerSec = 25;
@@ -19,9 +24,14 @@ class Player extends GraphicsObject {
     static #heartGreenColor = 0x00ff00;
     
     /**
-     * The maximum hit points the player can have.
+     * The maximum hit points the player can have
      */
-    #maxHp;
+    static #maxHp = 4;
+    
+    /**
+     * The duration that the shield is shown in the shield hit state (ms)
+     */
+    static #shieldHitDuration = 250;
     
     /**
      * The current number of hit points the player has.
@@ -107,8 +117,7 @@ class Player extends GraphicsObject {
     constructor(difficulty) {
         super();
         
-        this.#maxHp = 4;
-        this.#hp = this.#maxHp;
+        this.#hp = Player.#maxHp;
         
         this.#invincibilityTimeRemaining = 0;
         
@@ -172,8 +181,16 @@ class Player extends GraphicsObject {
     }
     
     /**
+     * Returns the distance from the center of the screen to an edge of the heart.
+     * @return The distance from the center of the screen to an edge of the heart
+     */
+    static get heartDistance() {
+        return this.#heartDistance;
+    }
+    
+    /**
      * Using the current shield direction, computes the target shield rotation to a value between 0 and 2 pi where the
-     * rotation is 0 radians when the shield's direction is 2
+     * rotation is 0 radians when the shield's direction is 2.
      * @return The target shield rotation
      */
     #getRotationFromDirection() {
@@ -181,10 +198,18 @@ class Player extends GraphicsObject {
     }
     
     /**
-     * Sets the shield's new direction to the given value
+     * Returns the direction the shield is facing.
+     * @return The direction the shield is facing
+     */
+    get shieldDir() {
+        return this.#shieldDir;
+    }
+    
+    /**
+     * Sets the shield's new direction to the given value.
      * @param dir The new direction the shield should face
      */
-    setShieldDir(dir) {
+    set shieldDir(dir) {
         this.#originalRotation = this.#shieldSprite.rotation;
         this.#targetRotation = this.#getRotationFromDirection();
         
@@ -227,6 +252,13 @@ class Player extends GraphicsObject {
         Main.runner.assetManager.getAudio("arrowDamageSfx").play();
         
         this.#hp = Math.max(0, this.#hp - 1);
+    }
+    
+    /**
+     * Sets the shield to the hit state.
+     */
+    hitShield() {
+        this.#shieldHitTimeRemaining = Player.#shieldHitDuration;
     }
     
     /**
@@ -307,10 +339,10 @@ class Player extends GraphicsObject {
     }
     
     /**
-     * Returns the maximum hit points the player can have.
+     * Returns the maximum hit points the player can have
      * @return The maximum hit points the player can have
      */
-    get maxHp() {
+    static get maxHp() {
         return this.#maxHp;
     }
 }
