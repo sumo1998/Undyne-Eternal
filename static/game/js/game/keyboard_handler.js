@@ -6,16 +6,16 @@ class KeyboardHandler {
     /**
      * The game handler.
      */
-    #gameHandler;
+    static #gameHandler;
     
     /**
      * Initializes a KeyboardHandler.
      * @param gameHandler The game handler
      */
-    constructor(gameHandler) {
-        this.#gameHandler = gameHandler;
-        document.addEventListener("keydown", this.onKeyDown);
-        document.addEventListener("keyup", this.onKeyUp);
+    static initialize(gameHandler) {
+        KeyboardHandler.#gameHandler = gameHandler;
+        document.addEventListener("keydown", KeyboardHandler.onKeyDown);
+        document.addEventListener("keyup", KeyboardHandler.onKeyUp);
     }
     
     /**
@@ -23,7 +23,7 @@ class KeyboardHandler {
      * @param key The string representing the key being pressed
      * @param pressedDown True if the key is being pressed down and false if it is being released
      */
-    handleKeyInput(key, pressedDown) {
+    static handleKeyInput(key, pressedDown) {
         if(pressedDown) {
             this.#gameHandler.handleKeyInput(key);
         }
@@ -33,7 +33,7 @@ class KeyboardHandler {
      * Called when a key is pressed down.
      * @param e The key down event
      */
-    onKeyDown(e) {
+    static onKeyDown(e) {
         //Prevents the arrow keys from doing their default action (e.g. moving the page around if zoomed)
         if(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
             e.preventDefault();
@@ -69,5 +69,5 @@ class KeyboardHandler {
      * Called when a key is released.
      * @param e The key up event
      */
-    onKeyUp(e) {}
+    static onKeyUp(e) {}
 }
