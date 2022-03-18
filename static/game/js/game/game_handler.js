@@ -188,6 +188,7 @@ class GameHandler extends GraphicsObject {
             this.#attackRunner.update(deltaMs);
             
             if(this.#player.hp === 0) {
+                this.render();
                 this.gameOver();
             }
         }
