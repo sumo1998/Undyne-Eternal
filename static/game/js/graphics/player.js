@@ -104,14 +104,25 @@ class Player extends GraphicsObject {
     /**
      * Initializes a Player instance.
      */
-    constructor() {
+    constructor(difficulty) {
         super();
         
         this.#maxHp = 4;
         this.#hp = this.#maxHp;
         
         this.#invincibilityTimeRemaining = 0;
-        this.#maxInvincibilityTime = 1000;
+        
+        switch(difficulty) {
+            case "easy":
+                this.#maxInvincibilityTime = 1000;
+                break;
+            case "medium":
+                this.#maxInvincibilityTime = 500;
+                break;
+            case "hard":
+                this.#maxInvincibilityTime = 100;
+                break;
+        }
         
         this.#posX = 0.5 * Main.runner.gameWidth;
         this.#posY = 0.5 * Main.runner.gameHeight;
