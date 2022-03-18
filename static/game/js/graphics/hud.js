@@ -1,5 +1,5 @@
 /**
- * The HUD of information displayed to the user, which consists of the current attack, the LOVE, the HP, and the time
+ * The HUD of information displayed to the user, which consists of the current attack, the LOVE, the HP, and the time.
  */
 class Hud extends GraphicsObject {
     
@@ -49,7 +49,7 @@ class Hud extends GraphicsObject {
     #timeText;
     
     /**
-     * The player
+     * The player.
      */
     #player;
     
@@ -121,7 +121,7 @@ class Hud extends GraphicsObject {
      * Updates the HP HUD text based on the current HP.
      */
     #updateHp() {
-        this.#hpText.text = Hud.#formatTwoDigitFraction(this.#player.hp, this.#player.maxHp);
+        this.#hpText.text = Hud.#formatTwoDigitFraction(this.#player.hp, Player.maxHp);
     }
     
     /**
@@ -154,7 +154,7 @@ class Hud extends GraphicsObject {
         this.#hpGraphics.lineStyle(0, 0xFFFFFF, 1);
         this.#hpGraphics.drawRect(262, 447, 28, 21);
         this.#hpGraphics.beginFill(yellow, 1);
-        this.#hpGraphics.drawRect(262, 447, this.hp * 28 / this.maxHp, 21);
+        this.#hpGraphics.drawRect(262, 447, this.hp * 28 / Player.maxHp, 21);
         this.#hpGraphics.endFill();
     }
 }
