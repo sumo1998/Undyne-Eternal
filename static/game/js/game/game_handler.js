@@ -166,11 +166,12 @@ class GameHandler extends GraphicsObject {
         
         this.#getBgm().stop();
         
+        const thisTmp = this;
         this.#undyne.speechBubble.queueText(
             UndyneDialogue.getGameOverText(
-                this.#hud.currentAttackNumber, this.#attackRunner.numAttacks(), this.#difficulty
+                this.#hud.currentAttackNumber, this.#attackRunner.numAttacks, this.#difficulty
             ),
-            this.restartLevel
+            () => thisTmp.restartLevel()
         );
     }
     
