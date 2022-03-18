@@ -41,27 +41,27 @@ class KeyboardHandler {
         
         //Left arrow key, A, and J are all counted as a left input
         if(e.keyCode === 37 || e.keyCode === 74 || e.keyCode === 65) {
-            this.handleKeyInput("left", true);
+            KeyboardHandler.handleKeyInput("left", true);
         }
         //Up arrow key, W, and I are all counted as an up input
         else if(e.keyCode === 38 || e.keyCode === 73 || e.keyCode === 87) {
-            this.handleKeyInput("up", true);
+            KeyboardHandler.handleKeyInput("up", true);
         }
         //Right arrow key, D, and L are all counted as a right input
         else if(e.keyCode === 39 || e.keyCode === 76 || e.keyCode === 68) {
-            this.handleKeyInput("right", true);
+            KeyboardHandler.handleKeyInput("right", true);
         }
         //Down arrow key, S, and K are all counted as a down input
         else if(e.keyCode === 40 || e.keyCode === 75 || e.keyCode === 83) {
-            this.handleKeyInput("down", true);
+            KeyboardHandler.handleKeyInput("down", true);
         }
         //Shift key and X are counted as the cancel/skip key
         else if(e.keyCode === 16 || e.keyCode === 88) {
-            this.handleKeyInput("X", true);
+            KeyboardHandler.handleKeyInput("X", true);
         }
         //Enter key and Z are counted as the confirmation key
         else if(e.keyCode === 13 || e.keyCode === 90) {
-            this.handleKeyInput("Z", true);
+            KeyboardHandler.handleKeyInput("Z", true);
         }
     }
     
