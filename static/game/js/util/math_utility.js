@@ -31,11 +31,11 @@ class MathUtility {
      */
     static clampInterpolate(value, clampStart, clampEnd, interpolateStart, interpolateEnd) {
         //Case where value is on the side of the start (either less than [start, end] or greater than [end, start])
-        if(value <= start && start <= end || end <= start && start <= value) {
+        if(value <= clampStart && clampStart <= clampEnd || clampEnd <= clampStart && clampStart <= value) {
             return interpolateStart;
         }
         //Case where value is on the side of the end (either greater than [start, end] or less than [end, start])
-        else if(start < end && end < value || value < end && end < start) {
+        else if(clampStart < clampEnd && clampEnd < value || value < clampEnd && clampEnd < clampStart) {
             return interpolateEnd;
         }
         const interpolateProportion = (value - clampStart) / (clampEnd - clampStart);
