@@ -36,7 +36,6 @@ def get_db_connection():
 
 @contextmanager
 def get_db_cursor(commit=False):
-    '''use commit = true to make lasing changes. Call this function in a with statement'''
     with get_db_connection() as connection:
       
       cursor = connection.cursor(cursor_factory=DictCursor)

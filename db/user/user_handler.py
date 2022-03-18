@@ -1,13 +1,6 @@
 from flask import render_template_string
 from db import database_handler
 
-"""
-    Returns info for user with user_id = id
-    Parameters:
-        id - user id
-"""
-
-
 def get_user_info(id):
     query = ""
     with open("./db/user/sql/user_info.sql") as f:
@@ -18,14 +11,6 @@ def get_user_info(id):
             res = cur.fetchall()
             return res
 
-
-"""
-    Returns info on all levels created by the user with user_id = id
-    Parameters:
-        id - user id
-"""
-
-
 def get_user_levels(id):
     query = ""
     with open("./db/user/sql/user_levels.sql") as f:
@@ -35,7 +20,6 @@ def get_user_levels(id):
             cur.execute(query, id)
             res = cur.fetchall()
             return res
-
 
 def update_user(data):
     uid = ""
