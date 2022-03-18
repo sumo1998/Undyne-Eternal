@@ -6,7 +6,7 @@ class SpeechBubble extends GraphicsObject {
     /**
      * The rate in characters per second at which the speech bubble text should advance.
      */
-    static charsPerSec = 25;
+    static #charsPerSec = 25;
     
     /**
      * The speech bubble sprite.
@@ -153,7 +153,7 @@ class SpeechBubble extends GraphicsObject {
     update(deltaMs) {
         if(this.#textState === "talking") {
             //Update the number of text characters based on the chars/sec by the amount of time that has passed
-            const newNumTextChars = this.#numTextChars + SpeechBubble.charsPerSec * deltaMs / 1000;
+            const newNumTextChars = this.#numTextChars + SpeechBubble.#charsPerSec * deltaMs / 1000;
             
             if(Math.floor(newNumTextChars) > this.#numTextChars) {
                 this.advanceTextChars(newNumTextChars);

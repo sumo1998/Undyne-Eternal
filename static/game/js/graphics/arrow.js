@@ -6,12 +6,12 @@ class Arrow extends GraphicsObject {
     /**
      * The distance at which a reverse arrow begins rotating.
      */
-    static rotationDistanceStart = 160;
+    static #rotationDistanceStart = 160;
     
     /**
      * The distance at which a reverse arrow finishes rotating.
      */
-    static rotationDistanceEnd = 80;
+    static #rotationDistanceEnd = 80;
     
     /**
      * The direction the arrow is coming from.
@@ -100,7 +100,7 @@ class Arrow extends GraphicsObject {
         let rotation = 0;
         if(this.#reversed) {
             rotation = MathUtility.clampInterpolate(
-                distance, Arrow.rotationDistanceStart, Arrow.rotationDistanceEnd, 0, Math.PI
+                distance, Arrow.#rotationDistanceStart, Arrow.#rotationDistanceEnd, 0, Math.PI
             );
         }
         

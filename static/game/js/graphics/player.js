@@ -6,17 +6,17 @@ class Player extends GraphicsObject {
     /**
      * The distance from the center of the screen to the shield.
      */
-    static shieldDistance = 32;
+    static #shieldDistance = 32;
     
     /**
      * The rate of rotation of the shield in radians per second.
      */
-    static shieldRadiansPerSec = 25;
+    static #shieldRadiansPerSec = 25;
     
     /**
      * The color of the heart.
      */
-    static heartGreenColor = 0x00ff00;
+    static #heartGreenColor = 0x00ff00;
     
     /**
      * The maximum hit points the player can have.
@@ -127,7 +127,7 @@ class Player extends GraphicsObject {
         this.#heartSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("heart"));
         this.#heartSprite.anchor.set(0.5, 0.5);
         this.#heartSprite.position.set(this.#posX, this.#posY);
-        this.#heartSprite.tint = Player.heartGreenColor;
+        this.#heartSprite.tint = Player.#heartGreenColor;
         this.#heartSprite.visible = false;
         
         this.#shieldSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("shield"));
@@ -150,6 +150,14 @@ class Player extends GraphicsObject {
         Main.runner.gameplayStage.addChild(this.#shieldSprite);
         Main.runner.gameplayStage.addChild(this.#shieldHitSprite);
         Main.runner.gameplayStage.addChild(this.#circle);
+    }
+    
+    /**
+     * Returns the distance from the center of the screen to the shield.
+     * @return The distance from the center of the screen to the shield
+     */
+    static get shieldDistance() {
+        return this.#shieldDistance;
     }
     
     /**
@@ -255,7 +263,7 @@ class Player extends GraphicsObject {
         this.#heartSprite.alpha = 0.5 * Math.cos(2 * Math.PI * this.#invincibilityTimeRemaining / 250) + 0.5;
         
         let newRotation = MathUtility.wrap(
-            this.#shieldSprite.rotation + Player.shieldRadiansPerSec * this.#rotationDirection * deltaMs / 1000,
+            this.#shieldSprite.rotation + Player.#shieldRadiansPerSec * this.#rotationDirection * deltaMs / 1000,
             0,
             2 * Math.PI
         );

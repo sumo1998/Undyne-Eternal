@@ -6,7 +6,7 @@ class Hud extends GraphicsObject {
     /**
      * The maximum time that the timer can display (59:59:59.99).
      */
-    static maxTime = 215999990;
+    static #maxTime = 215999990;
     
     /**
      * The current attack number.
@@ -129,7 +129,7 @@ class Hud extends GraphicsObject {
      * @param deltaMs The time that has passed since the last update of the HUD
      */
     #updateTime(deltaMs) {
-        this.#elapsedTime = Math.min(this.#elapsedTime + deltaMs, Hud.maxTime);
+        this.#elapsedTime = Math.min(this.#elapsedTime + deltaMs, Hud.#maxTime);
         this.#timeText.text = MathUtility.formatTime(this.#elapsedTime, "hours");
     }
     
