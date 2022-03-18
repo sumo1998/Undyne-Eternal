@@ -80,6 +80,20 @@ class Box extends GraphicsObject {
     }
     
     /**
+     * Sets the destination bounds of the box.
+     * @param destLeft The destination x-position of the left boundary of the box
+     * @param destRight The destination x-position of the right boundary of the box
+     * @param destTop The destination y-position of the top boundary of the box
+     * @param destBottom The destination y-position of the bottom boundary of the box
+     */
+    setDestinationBounds(destLeft, destRight, destTop, destBottom) {
+        this.#destLeft = destLeft;
+        this.#destRight = destRight;
+        this.#destTop = destTop;
+        this.#destBottom = destBottom;
+    }
+    
+    /**
      * Updates the boundaries of the box.
      * @param deltaMs The time that has passed since the last update of the box boundaries
      */
