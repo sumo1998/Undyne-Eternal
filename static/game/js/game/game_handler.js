@@ -206,10 +206,10 @@ class GameHandler extends GraphicsObject {
                 this.render();
                 this.gameOver();
             }
-        }
-        else if(this.#state === "game over") {
-            this.#damageShiftX = 0;
-            this.#damageShiftY = 0;
+            else if(this.#hud.currentAttackNumber === this.#attackRunner.numAttacks && this.#attackRunner) {
+                this.render();
+                this.win();
+            }
         }
         
         this.render();
