@@ -3,6 +3,9 @@
  */
 class GraphicManager extends AssetLoader {
     
+    /**
+     * The directory in which all game audio files are located.
+     */
     static #imgDir = "static/game/img/";
     
     /**
@@ -28,30 +31,38 @@ class GraphicManager extends AssetLoader {
         this.#loaded = false;
         this.#graphicLoader = new PIXI.loaders.Loader();
         
-        this.#graphicLoader
-            .add("arrow", "static/game/img/arrow.png")
-            .add("heart", "static/game/img/heart.png")
-            .add("shield", "static/game/img/shield.png")
-            .add("shieldHit", "static/game/img/shieldHit.png")
-            
-            .add("speechBubble", "static/game/img/speechbubble.png")
-            .add("undyneBreastplate", "static/game/img/undyne_breastplate.png")
-            .add("undyneHair0", "static/game/img/undyne_hair0.png")
-            .add("undyneHair1", "static/game/img/undyne_hair1.png")
-            .add("undyneHair2", "static/game/img/undyne_hair2.png")
-            .add("undyneHair3", "static/game/img/undyne_hair3.png")
-            .add("undyneHead", "static/game/img/undyne_head.png")
-            .add("undyneLeftArm", "static/game/img/undyne_left_arm.png")
-            .add("undyneLegs", "static/game/img/undyne_legs.png")
-            .add("undyneRightArm", "static/game/img/undyne_right_arm.png")
-            .add("undyneSkirt", "static/game/img/undyne_skirt.png")
-            
-            .add("startButton", "static/game/img/start_button.png")
-            .add("playAgainButton", "static/game/img/play_again_button.png")
-            
-            .on("complete", (loader, resources) => this.#setUpGraphics(resources));
+        this.#addImage("arrow", "arrow.png");
+        this.#addImage("heart", "heart.png");
+        this.#addImage("shield", "shield.png");
+        this.#addImage("shieldHit", "shieldHit.png");
+        
+        this.#addImage("speechBubble", "speechbubble.png");
+        this.#addImage("undyneBreastplate", "undyne_breastplate.png");
+        this.#addImage("undyneHair0", "undyne_hair0.png");
+        this.#addImage("undyneHair1", "undyne_hair1.png");
+        this.#addImage("undyneHair2", "undyne_hair2.png");
+        this.#addImage("undyneHair3", "undyne_hair3.png");
+        this.#addImage("undyneHead", "undyne_head.png");
+        this.#addImage("undyneLeftArm", "undyne_left_arm.png");
+        this.#addImage("undyneLegs", "undyne_legs.png");
+        this.#addImage("undyneRightArm", "undyne_right_arm.png");
+        this.#addImage("undyneSkirt", "undyne_skirt.png");
+        
+        this.#addImage("startButton", "start_button.png");
+        this.#addImage("playAgainButton", "play_again_button.png");
+        
+        this.#graphicLoader.on("complete", (loader, resources) => this.#setUpGraphics(resources));
         
         this.#graphicLoader.load();
+    }
+    
+    /**
+     * Adds the given image to the graphic loader.
+     * @param imgName The name mapped to the graphic for retrieval
+     * @param localImgPath The local image path
+     */
+    #addImage(imgName, localImgPath) {
+        this.#graphicLoader.add(imgName, GraphicManager.#imgDir + localImgPath);
     }
     
     /**

@@ -4,6 +4,11 @@
 class AudioManager extends AssetLoader {
     
     /**
+     * The directory in which all game audio files are located.
+     */
+    static #audioDir = "static/game/audio/";
+    
+    /**
      * The map of audio names to if they are loaded.
      */
     #audioLoadedMap;
@@ -29,60 +34,60 @@ class AudioManager extends AssetLoader {
         };
         
         //The music played while waiting for the user to play
-        const introBgm = new Howl({
-            onload: () => this.#markAudioLoaded("introBgm"),
-            src: ["static/game/audio/bgm/intro.ogg", "static/game/audio/bgm/intro.mp3"],
-            loop: true,
-            volume: 0.7
-        });
+        const introBgm = this.#getAudio(
+            "introBgm",
+            ["bgm/intro.ogg", "bgm/intro.mp3"],
+            true,
+            0.7
+        );
         
         //The music that plays in the easy mode
-        const undyneEasyBgm = new Howl({
-            onload: () => this.#markAudioLoaded("undyneEasyBgm"),
-            src: ["static/game/audio/bgm/undyne_easy.ogg", "static/game/audio/bgm/undyne_easy.mp3"],
-            loop: true,
-            volume: 0.7
-        });
+        const undyneEasyBgm = this.#getAudio(
+            "undyneEasyBgm",
+            ["bgm/undyne_easy.ogg", "bgm/undyne_easy.mp3"],
+            true,
+            0.7
+        );
         
         //The music that plays in the medium mode
-        const undyneMediumBgm = new Howl({
-            onload: () => this.#markAudioLoaded("undyneMediumBgm"),
-            src: ["static/game/audio/bgm/undyne_medium.ogg", "static/game/audio/bgm/undyne_medium.mp3"],
-            loop: true,
-            volume: 0.7
-        });
+        const undyneMediumBgm = this.#getAudio(
+            "undyneMediumBgm",
+            ["bgm/undyne_medium.ogg", "bgm/undyne_medium.mp3"],
+            true,
+            0.7
+        );
         
         //The music that plays in the hard mode
-        const undyneHardBgm = new Howl({
-            onload: () => this.#markAudioLoaded("undyneHardBgm"),
-            src: ["static/game/audio/bgm/undyne_hard.ogg", "static/game/audio/bgm/undyne_hard.mp3"],
-            loop: true,
-            volume: 0.7
-        });
+        const undyneHardBgm = this.#getAudio(
+            "undyneHardBgm",
+            ["bgm/undyne_hard.ogg", "bgm/undyne_hard.mp3"],
+            true,
+            0.7
+        );
         
         //The sfx that plays when the arrow is blocked by the shield
-        const arrowBlockedSfx = new Howl({
-            onload: () => this.#markAudioLoaded("arrowBlockedSfx"),
-            src: "static/game/audio/sfx/arrow_blocked.wav",
-            loop: false,
-            volume: 0.7
-        });
+        const arrowBlockedSfx = this.#getAudio(
+            "arrowBlockedSfx",
+            "sfx/arrow_blocked.wav",
+            false,
+            0.7
+        );
         
         //The sfx that plays when the heart is damaged by the arrow
-        const arrowDamageSfx = new Howl({
-            onload: () => this.#markAudioLoaded("arrowDamageSfx"),
-            src: "static/game/audio/sfx/arrow_damage.wav",
-            loop: false,
-            volume: 0.7
-        });
+        const arrowDamageSfx = this.#getAudio(
+            "arrowDamageSfx",
+            "sfx/arrow_damage.wav",
+            false,
+            0.7
+        );
         
         //The sfx that plays when undyne is speaking
-        const undyneSpeakSfx = new Howl({
-            onload: () => this.#markAudioLoaded("undyneSpeakSfx"),
-            src: "static/game/audio/sfx/undyne_speak.wav",
-            loop: false,
-            volume: 0.7
-        });
+        const undyneSpeakSfx = this.#getAudio(
+            "undyneSpeakSfx",
+            "sfx/undyne_speak.wav",
+            false,
+            0.7
+        );
         
         this.#audioMap = {
             "introBgm": introBgm,
@@ -93,6 +98,30 @@ class AudioManager extends AssetLoader {
             "arrowDamageSfx": arrowDamageSfx,
             "undyneSpeakSfx": undyneSpeakSfx
         };
+    }
+    
+    /**
+     * Returns the Howl instance with the given parameters.
+     * @param audioName The name mapped to the audio for retrieval
+     * @param localAudioPaths The string or array to the local audio path(s)
+     * @param loop True if the audio should loop
+     * @param volume The volume of the audio from 0 to 1
+     * @return The Howl instance with the given parameters
+     */
+    #getAudio(audioName, localAudioPaths, loop, volume) {
+        if(Array.isArray(localAudioPaths)) {
+            localAudioPaths = localAudioPaths.map(path => AudioManager.#audioDir + path);
+        }
+        else {
+            localAudioPaths = AudioManager.#audioDir + localAudioPaths;
+        }
+        
+        return new Howl({
+            "onload": () => this.#markAudioLoaded(audioName),
+            "src": localAudioPaths,
+            "loop": loop,
+            "volume": volume
+        });
     }
     
     /**
