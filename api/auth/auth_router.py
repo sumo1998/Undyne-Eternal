@@ -46,7 +46,7 @@ def login_user():
     if 'profile' in session:
         return redirect(url_for('home_page'))
     elif 'temp' in session:
-        return redirect(url_for('get_set_username_screen'))
+        return redirect(url_for('auth.get_set_username_screen'))
     return object_factory.get_auth_object().handle_login(url_for('auth.oauth_callback', _external=True))
 
 
