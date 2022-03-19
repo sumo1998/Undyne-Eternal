@@ -1,15 +1,16 @@
-from contextlib import contextmanager
-import logging
 import os
+from contextlib import contextmanager
 
-from flask import current_app, g
-
-import psycopg2
-from psycopg2.pool import ThreadedConnectionPool
+from dotenv import load_dotenv, find_dotenv
+from flask import current_app
 from psycopg2.extras import DictCursor
+from psycopg2.pool import ThreadedConnectionPool
 
+import utils
 
 pool = None
+load_dotenv(find_dotenv(utils.get_project_base_path()))
+
 
 def setup():
     global pool
@@ -38,11 +39,11 @@ def get_db_connection():
 def get_db_cursor(commit=False):
     '''use commit = true to make lasing changes. Call this function in a with statement'''
     with get_db_connection() as connection:
-      
-      cursor = connection.cursor(cursor_factory=DictCursor)
-      try:
-          yield cursor
-          if commit: 
-              connection.commit()
-      finally:
-          cursor.close()
+
+        cursor = connection.cursor(cursor_factory=DictCursor)
+        try:
+            yield cursor
+            if commit:
+                connection.commit()
+        finally:
+            cursor.close()

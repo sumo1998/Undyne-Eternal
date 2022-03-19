@@ -12,6 +12,7 @@ authlib = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+email-validator = "*"
 
 [dev-packages]
 
