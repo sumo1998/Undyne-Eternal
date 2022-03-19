@@ -25,11 +25,14 @@ def set_username():
 
 @auth_blueprint.route('/user-name', methods=['GET'])
 def get_set_username_screen():
+    if 'temp' not in session:
+        return redirect(url_for('auth.login_user'))
     # return render_template('set_username_template.html')
     return "<h1>This page is to get user name data if not exists</h1><br><br>\n" + json.dumps(session['temp'], indent=4)
 
 
 @auth_blueprint.route('/user')
+@utils.requires_auth
 def user_info():
     return jsonify(session['profile'])
 
