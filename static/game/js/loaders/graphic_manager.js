@@ -3,6 +3,8 @@
  */
 class GraphicManager extends AssetLoader {
     
+    static #imgDir = "static/game/img/";
+    
     /**
      * Responsible for the loading of the graphics.
      */
@@ -43,6 +45,9 @@ class GraphicManager extends AssetLoader {
             .add("undyneLegs", "static/game/img/undyne_legs.png")
             .add("undyneRightArm", "static/game/img/undyne_right_arm.png")
             .add("undyneSkirt", "static/game/img/undyne_skirt.png")
+            
+            .add("startButton", "static/game/img/start_button.png")
+            .add("playAgainButton", "static/game/img/play_again_button.png")
             
             .on("complete", (loader, resources) => this.#setUpGraphics(resources));
         
