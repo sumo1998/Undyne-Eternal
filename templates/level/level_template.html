@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends "parent_template.html" %}
 {% import "./components/level_page.html" as level_page %}
 {% import "./components/comment.html" as comments %}
@@ -11,6 +10,15 @@
                         level_info[0][6]) }}
         <div class="reviews pure-u-2-6">
             <h1>Ratings and Reviews</h1>
+        <form id="comment-editor" action="{{ url_for('add_comment') }}" method="post">
+            <label>Your Rating (1-5): <input id="rating-picker" name="rating" type="number" min="1" max="5" required=""></label>
+            <textarea id="comment-textarea" placeholder="Enter comment here" name="comment" minlength="1" required=""></textarea>
+            <input type="hidden" id="levelID" name="level" value="{{ level_info[0][0] }}">
+            <input type="hidden" id="userID" name="user" value="{{ level_info[0][6] }}">
+            <br>
+            <button id="post-comment" type="submit"
+                    class="pure-button normal button gray-button">Post</button>
+        </form>
             {% for comment in level_comments %}
                 <div>{{ comments.comment_in_level(level_comments[0][1], level_comments[0][3], level_comments[0][4], level_comments[0][0]) }}</div>
             {% endfor %}

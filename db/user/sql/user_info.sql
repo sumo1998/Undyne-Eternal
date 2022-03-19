@@ -1,3 +1,2 @@
-select *
-from usr
-where user_id = '{{user_id}}';
+
+select * from usr where user_id = %s;

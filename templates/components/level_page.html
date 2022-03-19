@@ -1,5 +1,5 @@
 {% macro level_in_page(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="", avatar="",user_id=0) -%}
-
+{% import "./components/user_avatar.html" as user_avatar %}
     <div class="post-page pure-u-1-6">
         <div class="pure-u-1-1">
             <h1 class="post-page-title">{{ title }}</h1>
@@ -15,14 +15,8 @@
                 {{ difficulty | upper }}
             </div>
             <div class="post-page-user">
-                {% if avatar == "" %}
-                    <p><span class="fa fa-user"></span>
-                        <a href="{{ url_for('user', id=user_id) }}">{{ username }}</a></p>
-                {% else %}
-                    <p><img src="{{ avatar }}"> <a class="text-links"
-                                                       href="{{ url_for('user', id=user_id) }}">{{ username }}</a></p>
-
-                {% endif %}
+                {{ user_avatar.user_avatar(avatar, username, user_id) }}
+                <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
             </div>
         </div>
 
@@ -32,15 +26,15 @@
             </p>
         </div>
 
-        <div class="{{ difficulty }} post-page-play-level">
+        <div class="{{ difficulty }} post-page-play-level button">
             <p class="button-text">
                 Play level
             </p>
         </div>
-        <div class="post-page-play-level gray-button">
-            <div class="button-text">
+        <div class="post-page-play-level button gray-button" onclick="toggleCommentEditor()">
+            <p class="button-text">
                 Write a review
-            </div>
+            </p>
         </div>
     </div>
 {%- endmacro %}

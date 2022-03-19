@@ -1,6 +1,17 @@
-{% macro user_in_profile(username="Username", avatar="", level_count=0, average_rating=0) -%}
+{% macro user_in_profile(username="Username", avatar="", level_count=0, average_rating=0, user_id=0) -%}
     {% import "./components/user_avatar.html" as user_avatar %}
     <div class="user-page pure-u-1-5">
+        <div id="avatar-modal">
+            <div id="modal-content">
+                <span id="close">&times;</span>
+                <h1>Upload Avatar {{ user_id }}, {{ username }}, {{ avatar }}</h1>
+                <form onsubmit="patchAvatar('{{ user_id }}', '{{ username }}')">
+                    <input id="avatar-link-input" type="text" placeholder="Enter link to avatar here" minlength="5" required>
+                    <button type="submit"
+                            class="pure-button normal button gray-button" id="avatar-upload-button">Submit</button>
+                </form>
+            </div>
+        </div>
         <div class="user-page-title">
             {{ user_avatar.user_avatar(avatar, username, user_id, True) }}
             <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
