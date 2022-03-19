@@ -12,11 +12,6 @@ auth_blueprint = Blueprint('auth', __name__, template_folder=f"{project_base_pat
                            static_folder=f"templates/auth/static", root_path=project_base_path)
 
 
-@auth_blueprint.route('/register')
-def register_user():
-    return render_template('auth_template.html')
-
-
 @auth_blueprint.route('/user-name', methods=['POST'])
 def set_username():
     data = request.form
@@ -34,15 +29,24 @@ def get_set_username_screen():
     return "<h1>This page is to get user name data if not exists</h1><br><br>\n" + json.dumps(session['temp'], indent=4)
 
 
+@auth_blueprint.route('/user')
+def user_info():
+    return jsonify(session['profile'])
+
+
 @auth_blueprint.route('/callback')
 def oauth_callback():
     if object_factory.get_auth_object().handle_callbacks():
-        return redirect(url_for('auth.user_data'))
+        return redirect(url_for('auth.user_info'))
     return redirect(url_for('auth.get_set_username_screen'))
 
 
 @auth_blueprint.route('/login')
 def login_user():
+    if 'profile' in session:
+        return redirect(url_for('home_page'))
+    elif 'temp' in session:
+        return redirect(url_for('get_set_username_screen'))
     return object_factory.get_auth_object().handle_login(url_for('auth.oauth_callback', _external=True))
 
 
