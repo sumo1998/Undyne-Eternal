@@ -34,9 +34,9 @@ class GraphicManager extends AssetLoader {
         this.#addImage("arrow", "arrow.png");
         this.#addImage("heart", "heart.png");
         this.#addImage("shield", "shield.png");
-        this.#addImage("shieldHit", "shieldHit.png");
+        this.#addImage("shieldHit", "shield_hit.png");
         
-        this.#addImage("speechBubble", "speechbubble.png");
+        this.#addImage("speechBubble", "speech_bubble.png");
         this.#addImage("undyneBreastplate", "undyne_breastplate.png");
         this.#addImage("undyneHair0", "undyne_hair0.png");
         this.#addImage("undyneHair1", "undyne_hair1.png");
