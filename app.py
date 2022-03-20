@@ -9,6 +9,8 @@ from flask import Flask, render_template, redirect, url_for, request, jsonify
 from dotenv import load_dotenv, find_dotenv
 from factory import object_factory
 
+load_dotenv(find_dotenv())
+
 from db.home import home_handler
 from db.user import user_handler
 from db.level import level_handler

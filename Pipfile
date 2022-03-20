@@ -1,3 +1,4 @@
+
 [[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
@@ -11,9 +12,8 @@ requests = "*"
 authlib = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
-werkzeug = "*"
-psycopg2-binary = "*"
 gunicorn = "*"
+email-validator = "*"
 
 [dev-packages]
 
