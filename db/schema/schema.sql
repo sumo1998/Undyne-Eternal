@@ -19,15 +19,6 @@ create table levels (
         references usr(user_id) on delete cascade
 );
 
-/*
-create table level_description (
-  lvl_id int,
-  description jsonb,
-  constraint fk_level
-    FOREIGN KEY(lvl_id)
-        references levels(level_id)
-);
-*/
 create table comments (
     comment_id serial primary key,
     comment_rating float not null,
