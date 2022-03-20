@@ -86,7 +86,6 @@ class Main {
         }
         
         this.#gameHandler = new GameHandler("easy");
-        this.#gameHandler.restartLevel();
         
         KeyboardHandler.initialize(this.#gameHandler);
         

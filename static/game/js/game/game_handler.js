@@ -41,6 +41,11 @@ class GameHandler extends GraphicsObject {
     #undyne;
     
     /**
+     * The button used to start the game.
+     */
+    #startButton;
+    
+    /**
      * The button used to permit the player to repeat the level after a game over or win.
      */
     #playAgainButton;
@@ -52,7 +57,7 @@ class GameHandler extends GraphicsObject {
     constructor(difficulty) {
         super();
         
-        this.#state = "playing";
+        this.#state = "init";
         
         let love = 0;
         switch(difficulty) {
@@ -77,18 +82,28 @@ class GameHandler extends GraphicsObject {
         this.#hud = new Hud(TestAttacks.testAttacks.length, love, this.#player);
         this.#attackRunner = new AttackRunner(this.#player, this.#hud, TestAttacks.testAttacks);
         
-        const playAgainButtonWidth = 197;
         const thisTmp = this;
+        
+        const startButtonWidth = 113;
+        this.#startButton = new Button(
+            0.5 * (Main.runner.gameWidth - startButtonWidth),
+            0.5 * Main.runner.gameHeight + 85,
+            startButtonWidth,
+            53,
+            "startButton",
+            () => {thisTmp.restartLevel();},
+            "startButtonHover",
+            300
+        );
+        
+        const playAgainButtonWidth = 197;
         this.#playAgainButton = new Button(
             0.5 * (Main.runner.gameWidth - playAgainButtonWidth),
             0.5 * Main.runner.gameHeight + 85,
             playAgainButtonWidth,
             53,
             "playAgainButton",
-            () => {
-                console.log("Test");
-                thisTmp.restartLevel();
-            },
+            () => {thisTmp.restartLevel();},
             "playAgainButtonHover",
             300
         );
@@ -146,6 +161,7 @@ class GameHandler extends GraphicsObject {
      */
     restartLevel() {
         this.#state = "playing";
+        this.#startButton.visible = false;
         this.#playAgainButton.visible = false;
         this.#attackRunner.reset();
         this.#player.reset();
@@ -176,8 +192,8 @@ class GameHandler extends GraphicsObject {
         
         this.#attackRunner.removeAllArrows();
         this.#player.hideShieldSprites();
-        this.#undyne.swingArm();
         this.#undyne.greenRectangleManager.visible = false;
+        this.#undyne.swingArm();
         this.#undyne.opacity = 1;
         
         this.#getBgm().stop();
@@ -207,6 +223,7 @@ class GameHandler extends GraphicsObject {
         this.#undyne.update(deltaMs);
         this.#player.update(deltaMs);
         this.#box.update(deltaMs);
+        this.#startButton.update(deltaMs);
         this.#playAgainButton.update(deltaMs);
         
         if(this.#state === "playing" && this.#undyne.animationState !== "swinging arm") {

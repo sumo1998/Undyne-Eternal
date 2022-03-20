@@ -75,15 +75,13 @@ class Hud extends GraphicsObject {
         this.#loveText.position.x = 150;
         this.#loveText.position.y = 450;
         
-        this.#hpGraphics = new PIXI.Graphics();
-        Main.runner.gameplayStage.addChild(this.#hpGraphics);
-        
         this.#player = player;
         
         // noinspection JSCheckFunctionSignatures
         this.#hpText = new PIXI.extras.BitmapText("", {font: "15px Numbers", align: "right"});
         this.#hpText.position.x = 300;
         this.#hpText.position.y = 450;
+        this.#updateHp();
         
         this.#elapsedTime = 0;
         
@@ -94,10 +92,13 @@ class Hud extends GraphicsObject {
         this.#timeText.position.x = 523;
         this.#timeText.position.y = 450;
         
+        this.#hpGraphics = new PIXI.Graphics();
+        
         Main.runner.gameplayStage.addChild(this.#currentAttackText);
         Main.runner.gameplayStage.addChild(this.#loveText);
         Main.runner.gameplayStage.addChild(this.#hpText);
         Main.runner.gameplayStage.addChild(this.#timeText);
+        Main.runner.gameplayStage.addChild(this.#hpGraphics);
     }
     
     /**

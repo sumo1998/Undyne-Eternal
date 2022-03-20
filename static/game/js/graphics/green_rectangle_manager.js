@@ -64,6 +64,7 @@ class GreenRectangleManager extends GraphicsObject {
             0.5 * (Main.runner.gameWidth - GreenRectangleManager.#numRectangles
                 * GreenRectangleManager.#rectangleWidth);
         this.#graphics = new PIXI.Graphics();
+        this.#graphics.visible = false;
         Main.runner.gameplayStage.addChild(this.#graphics);
     }
     

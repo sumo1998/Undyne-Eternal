@@ -167,8 +167,7 @@ class Player extends GraphicsObject {
         this.#heartSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("heart"));
         this.#heartSprite.anchor.set(0.5, 0.5);
         this.#heartSprite.position.set(posX, posY);
-        this.#heartSprite.tint = Player.#heartGreenColor;
-        this.#heartSprite.visible = false;
+        this.#heartSprite.tint = Player.#heartRedColor;
         
         this.#shieldSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("shield"));
         this.#shieldSprite.anchor.set(0.5, 1.4);
@@ -185,6 +184,7 @@ class Player extends GraphicsObject {
         this.#circle = new PIXI.Graphics();
         this.#circle.lineStyle(1, 0x00ff00, 1);
         this.#circle.drawCircle(320, 240, 24);
+        this.#circle.visible = false;
         
         Main.runner.gameplayStage.addChild(this.#heartSprite);
         Main.runner.gameplayStage.addChild(this.#shieldSprite);
