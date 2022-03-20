@@ -2,9 +2,11 @@
 # Removed the structure of "client" module and just added a common templates folder
 # Made it like this to make the structure conform to what flask expects. Just a little less manual path specification
 # But if the project grows bigger, we can change the structure to be more modular
+import os
 
 from api.auth import auth_router
 from flask import Flask, render_template, redirect, url_for, request, jsonify
+from dotenv import load_dotenv, find_dotenv
 from factory import object_factory
 
 from db.home import home_handler
@@ -12,10 +14,12 @@ from db.user import user_handler
 from db.level import level_handler
 from db import database_handler
 
+load_dotenv(find_dotenv())
+
 app = Flask(__name__)
-app.secret_key = '21344'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-object_factory.get_auth_object(app)
+app.secret_key = os.getenv('APP_SECRET')
+object_factory._create_auth_object(app)
 
 app.register_blueprint(auth_router.auth_blueprint)
 
