@@ -1,6 +1,6 @@
 {% macro level_in_page(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="", avatar="",user_id=0) -%}
-{% import "./components/user_avatar.html" as user_avatar %}
-    <div class="post-page pure-u-1-6">
+    {% import "./components/user_avatar.html" as user_avatar %}
+    <div class="post-page pure-u-1-6" id="post-page-info">
         <div class="pure-u-1-1">
             <h1 class="post-page-title">{{ title }}</h1>
             <div class="post-page-stars">
@@ -31,10 +31,22 @@
                 Play level
             </p>
         </div>
-        <div class="post-page-play-level button gray-button" onclick="toggleCommentEditor()">
+        <div id="write-review" class="post-page-play-level button gray-button">
             <p class="button-text">
                 Write a review
             </p>
         </div>
+        <script>
+            $(document).ready(function() {
+                $("#write-review").on("click", function() {
+                    if($("#new-comment").css("display") == "none" || $("#new-comment").css("visibility") == "hidden") {
+                        $("#new-comment").css("display", "inline-block");
+                    }
+                });
+                $("#close-editor").on("click", function() {
+                    $("#new-comment").hide();
+                });
+            });
+        </script>
     </div>
 {%- endmacro %}

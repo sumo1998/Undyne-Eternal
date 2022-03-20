@@ -1,3 +1,3 @@
-insert into comments(user_id,level_id,comment_rating,comment_desc)
+insert into comments(user_id,level_id,comment_rating,comment_desc, comment_timestamp)
 values
-    (%s,%s,%s,%s);
+    (%s,%s,%s,%s,current_timestamp);

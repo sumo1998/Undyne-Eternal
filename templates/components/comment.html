@@ -1,23 +1,81 @@
-{% macro comment_in_level(username="Username", rating=0, description="", user_id=0) -%}
-    <div class="post-page post-page-comment">
+{% macro comment_in_level(username="Username", rating=0, description="", user_id=0, comment_id=0, level_id=0) -%}
+    {% import "./components/user_avatar.html" as user_avatar %}
+    <div id="{{ comment_id }}" class="post-page post-page-comment">
         <div class="pure-u-1-1">
-            <div class="comment"><span class="fa fa-user"></span> <a class="text-links"
-                                                                     href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
-            </div>
-            <div class="post-page-stars">
-                {%- for star in range(rating |int) %}
-                    <span class="fa fa-star checked"></span>
-                {%- endfor %}
-                {%- for star in range((5 - rating|int)) %}
-                    <span class="fa fa-star-o"></span>
-                {%- endfor %}
+            <div class="comment-wrapper">
+                <div class="comment">{{ user_avatar.user_avatar(avatar, username, user_id) }}
+                    <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
+                    <div class="icon-wrapper">
+                        <i id="edit-comment{{ comment_id }}" class="button fa fa-pencil"></i>
+                    </div>
+                    <div class="icon-wrapper">
+                        <i id="delete-comment{{ comment_id }}" class="button fa fa-trash"></i>
+                    </div>
+
+                </div>
+
+                <div class="post-page-stars">
+                    {%- for star in range(rating |int) %}
+                        <span class="fa fa-star checked"></span>
+                    {%- endfor %}
+                    {%- for star in range((5 - rating|int)) %}
+                        <span class="fa fa-star-o"></span>
+                    {%- endfor %}
+                </div>
+                <div class="comment comment-content">
+                    <p>
+                        {{ description }}
+                    </p>
+                </div>
             </div>
         </div>
 
-        <div class="comment comment-content">
-            <p>
-                {{ description }}
-            </p>
-        </div>
+        <script type="application/javascript">
+            $(document).ready(function() {
+                $('#delete-comment{{ comment_id }}').on("click", function(e) {
+                    $.ajax({
+                        cache: false,
+                        data: {
+                            commentId: {{ comment_id }},
+                            levelId: {{ level_id }}
+                        },
+                        type: "DELETE",
+                        url: "/deleteComment",
+                        success: function() {
+                            window.location.replace(`/level/{{level_id}}`);
+                        }
+                    });
+                    $("{{ comment_id }}").remove();
+                });
+                $('#edit-comment{{ comment_id }}').on("click", function(e) {
+                    $("#{{ comment_id }}").hide();
+                    $("#comment-editor{{ comment_id }}").show();
+                    $('#comment-textarea{{ comment_id }}').val(function(i, text) {
+                        return "{{ description }}";
+                    });
+                    {#$("#comment-textarea{{ comment_id }}").append("{{ description }}");#}
+                    $("#rating-picker{{ comment_id }}").val("{{ rating|int }}");
+                });
+                $("#comment-editor{{ comment_id }}").on("submit", function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        cache: false,
+                        data: $("#comment-editor{{ comment_id }}").serialize(),
+                        type: "PATCH",
+                        url: "/updateComment",
+                        success: function() {
+                            window.location.replace(`/level/{{ level_id }}`);
+                        }
+                    });
+                });
+                $("#close-editor{{ comment_id }}").on("click", function(e) {
+                    e.preventDefault();
+                    $("#comment-editor{{ comment_id }}").hide();
+                    $("#comment-textarea{{ comment_id }}").val("");
+                    $("#rating-picker{{ comment_id }}").val("");
+                    $("#{{ comment_id }}").show();
+                });
+            });
+        </script>
     </div>
 {%- endmacro %}

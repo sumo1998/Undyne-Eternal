@@ -15,10 +15,10 @@
                     <span class="fa fa-star-o"></span>
                 {%- endfor %}
             </div>
-        <div class="user">
-            {{ user_avatar.user_avatar(avatar, username, user_id) }}
-            <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
-        </div>
+            <div class="user">
+                {{ user_avatar.user_avatar(avatar, username, user_id) }}
+                <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
+            </div>
 
         </div>
         <div class="post-description pure-u-1-2">
@@ -28,7 +28,7 @@
         </div>
         <a class="play-level {{ difficulty }} pure-u-2-24 button">
             <p class="button-text">
-                Play level
+                Play<br>level
             </p>
         </a>
     </div>

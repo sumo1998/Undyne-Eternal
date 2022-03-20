@@ -10,17 +10,38 @@
                         level_info[0][6]) }}
         <div class="reviews pure-u-2-6">
             <h1>Ratings and Reviews</h1>
-        <form id="comment-editor" action="{{ url_for('add_comment') }}" method="post">
-            <label>Your Rating (1-5): <input id="rating-picker" name="rating" type="number" min="1" max="5" required=""></label>
-            <textarea id="comment-textarea" placeholder="Enter comment here" name="comment" minlength="1" required=""></textarea>
-            <input type="hidden" id="levelID" name="level" value="{{ level_info[0][0] }}">
-            <input type="hidden" id="userID" name="user" value="{{ level_info[0][6] }}">
-            <br>
-            <button id="post-comment" type="submit"
-                    class="pure-button normal button gray-button">Post</button>
-        </form>
+            <form id="new-comment" class="comment-editor" action="{{ url_for('add_comment') }}" method="post"
+                  style="display: none">
+                <label>Your Rating (1-5): <input class="rating-picker" name="rating" type="number" min="1" max="5"
+                                                 required=""></label>
+                <textarea class="comment-textarea" placeholder="Enter comment here" name="comment" minlength="1"
+                          required=""></textarea>
+                <input type="hidden" id="levelID" name="level" value="{{ level_info[0][0] }}">
+                <input type="hidden" id="userID" name="user" value="{{ level_info[0][6] }}">
+                <button id="post-comment" type="submit"
+                        class="pure-button normal button gray-button">Post
+                </button>
+                <button id="close-editor" type="submit"
+                        class="pure-button normal button hard">Close
+                </button>
+            </form>
             {% for comment in level_comments %}
-                <div>{{ comments.comment_in_level(level_comments[0][1], level_comments[0][3], level_comments[0][4], level_comments[0][0]) }}</div>
+                {{ comments.comment_in_level(comment[1], comment[3], comment[4], comment[0], comment[2], level_info[0][0]) }}
+                <form id="comment-editor{{ comment[2] }}" class="comment-editor" style="display: none">
+                    <label>Your Rating (1-5): <input id="rating-picker{{ comment[2] }}" class="rating-picker"
+                                                     name="rating" type="number" min="1" max="5"
+                                                     required=""></label>
+                    <textarea id="comment-textarea{{ comment[2] }}" class="comment-textarea"
+                              placeholder="Enter comment here" name="comment" minlength="1"
+                              required=""></textarea>
+                    <input type="hidden" id="levelID" name="comment_id" value="{{ comment[2] }}">
+                    <button id="post-comment" type="submit"
+                            class="pure-button normal button gray-button">Post
+                    </button>
+                    <button id="close-editor{{ comment[2] }}" type="submit"
+                            class="pure-button normal button hard">Close
+                    </button>
+                </form>
             {% endfor %}
         </div>
     </div>

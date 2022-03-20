@@ -1,12 +1,12 @@
 {% macro user_avatar(img="", username="username", user_id=0, editable=False) -%}
-        {% if editable %}
-                <object data="{{ img }}" type="image/jpg" class="avatar" id="avatar-wrapper">
-                    <img src="../static/img/user.png" class="avatar"/>
-                    <div id="edit-avatar">Change avatar</div>
-                </object>
-        {% else %}
-                <object data="{{ img }}" type="image/jpg" class="avatar">
-                    <img src="../static/img/user.png" class="avatar"/>
-                </object>
-        {% endif %}
+    {% if editable %}
+        <object data="{{ img }}" type="image/jpg" class="avatar" id="avatar-wrapper">
+            <img src="../static/img/user.png" class="avatar"/>
+            <div id="edit-avatar">Change avatar</div>
+        </object>
+    {% else %}
+        <object data="{{ img }}" type="image/jpg" class="avatar">
+            <img src="../static/img/user.png" class="avatar"/>
+        </object>
+    {% endif %}
 {%- endmacro %}

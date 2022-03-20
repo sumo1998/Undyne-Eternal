@@ -6,9 +6,11 @@
                 <span id="close">&times;</span>
                 <h1>Upload Avatar {{ user_id }}, {{ username }}, {{ avatar }}</h1>
                 <form onsubmit="patchAvatar('{{ user_id }}', '{{ username }}')">
-                    <input id="avatar-link-input" type="text" placeholder="Enter link to avatar here" minlength="5" required>
+                    <input id="avatar-link-input" type="text" placeholder="Enter link to avatar here" minlength="5"
+                           required>
                     <button type="submit"
-                            class="pure-button normal button gray-button" id="avatar-upload-button">Submit</button>
+                            class="pure-button normal button gray-button" id="avatar-upload-button">Submit
+                    </button>
                 </form>
             </div>
         </div>

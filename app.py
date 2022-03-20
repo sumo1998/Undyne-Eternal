@@ -4,7 +4,7 @@
 # But if the project grows bigger, we can change the structure to be more modular
 
 from api.auth import auth_router
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from factory import object_factory
 
 from db.home import home_handler
@@ -55,6 +55,7 @@ def user(id):
 def level(id):
     level_info = level_handler.get_level_info(id)
     level_comments = level_handler.get_level_comments(id)
+    print(level_comments)
     return render_template("level/level_template.html", level_info=level_info, level_comments=level_comments)
 
 
@@ -73,15 +74,20 @@ def add_comment():
 @app.route("/updateComment", methods=['PATCH'])
 def update_comment():
     data = request.form
+    data = {
+        "commentBody": request.form.get("comment"),
+        "commentRating": request.form.get("rating"),
+        "commentId": request.form.get("comment_id")
+    }
     level_handler.update_level_comment(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return jsonify({"result": "success"})
 
 
 @app.route("/deleteComment", methods=['DELETE'])
 def delete_comment():
     data = request.form
     level_handler.delete_comment(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return jsonify({"result": "success"})
 
 
 @app.route("/updateLevel", methods=['PATCH'])
