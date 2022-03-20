@@ -44,6 +44,21 @@ class Undyne extends GraphicsObject {
     #animationTime;
     
     /**
+     * The current animation state of Undyne, which can be breathing or swinging her arm.
+     */
+    #animationState;
+    
+    /**
+     * The original color of the heart when swinging the arm.
+     */
+    #swingArmOriginalHeartColor;
+    
+    /**
+     * The player.
+     */
+    #player;
+    
+    /**
      * Undyne's hair sprite.
      */
     #hairSprite;
@@ -98,7 +113,10 @@ class Undyne extends GraphicsObject {
      */
     constructor() {
         super();
+        
         this.#animationTime = 0;
+        
+        this.#animationState = "breathing";
         
         const undyneHairTextureArr = [];
         for(let i = 0; i < 4; ++i) {
@@ -163,6 +181,46 @@ class Undyne extends GraphicsObject {
     }
     
     /**
+     * Sets the player to the given player.
+     * @param player The player to store
+     */
+    set player(player) {
+        this.#player = player;
+    }
+    
+    /**
+     * Returns Undyne's animation state.
+     */
+    get animationState() {
+        return this.#animationState;
+    }
+    
+    /**
+     * Changes Undyne's animation mode to the swinging arm state.
+     */
+    swingArm() {
+        if(this.#animationState === "swinging arm") {
+            return;
+        }
+        
+        this.#animationState = "swinging arm";
+        
+        this.#swingArmOriginalHeartColor = this.#player.heartColor;
+        
+        this.#bodySprite.position.y = Undyne.#bodyDefaultPos.y;
+        this.#headSprite.position.y = Undyne.#headDefaultPos.y;
+        this.#skirtSprite.position.y = Undyne.#skirtDefaultPos.y;
+        this.#rightArmSprite.position.set(Undyne.#rightArmDefaultPos.x, Undyne.#rightArmDefaultPos.y);
+        this.#leftArmSprite.position.set(Undyne.#leftArmDefaultPos.x, Undyne.#leftArmDefaultPos.y);
+        
+        this.#animationTime = 0;
+        
+        //Put right arm in front of all the other sprites
+        Main.runner.gameplayStage.removeChild(this.#rightArmSprite);
+        Main.runner.gameplayStage.addChild(this.#rightArmSprite);
+    }
+    
+    /**
      * Resets the fields to match the start of a new level.
      */
     reset() {
@@ -172,27 +230,114 @@ class Undyne extends GraphicsObject {
     }
     
     /**
-     * Updates Undyne and the speech bubble.
-     * @param deltaMs The time that has passed since the last update of Undyne
+     * Performs the normal Undyne breathing animation.
      */
-    update(deltaMs) {
-        this.#animationTime += deltaMs;
+    breathingAnimation() {
+        //Wraps to 0 after each breathing animation cycle (every 1200 ms)
         if(this.#animationTime > 1200) {
             this.#animationTime -= 1200;
         }
         
+        const undyneAnimationSineAngle = this.#animationTime / 1200 * Math.PI * 2;
+        
+        this.#bodySprite.position.y = Undyne.#bodyDefaultPos.y + 2 * Math.sin(undyneAnimationSineAngle);
+        this.#headSprite.position.y = Undyne.#headDefaultPos.y + Math.sin(undyneAnimationSineAngle);
+        this.#skirtSprite.position.y = Undyne.#skirtDefaultPos.y + Math.sin(undyneAnimationSineAngle);
+        
+        this.#rightArmSprite.position.x = Undyne.#rightArmDefaultPos.x + 2 * Math.sin(undyneAnimationSineAngle);
+        this.#rightArmSprite.position.y = Undyne.#rightArmDefaultPos.y + 4 * Math.sin(undyneAnimationSineAngle);
+        
+        this.#leftArmSprite.position.x = Undyne.#rightArmDefaultPos.x + 2 * Math.sin(2 * undyneAnimationSineAngle);
+        this.#leftArmSprite.position.y = Undyne.#leftArmDefaultPos.y + 4 * Math.sin(undyneAnimationSineAngle);
+    }
+    
+    /**
+     * Performs the Undyne swinging arm animation.
+     */
+    swingingArmAnimation() {
+        //The start and end of the right arm rotation angle
+        let rotationStartingAngle;
+        let rotationEndingAngle;
+        
+        //The start and end of the current rotation animation of the right arm
+        let rotationStartTime;
+        let rotationEndTime;
+        
+        if(this.#animationTime < 300) {
+            rotationStartingAngle = 0;
+            rotationEndingAngle = 40;
+            rotationStartTime = 0;
+            rotationEndTime = 200;
+        }
+        else if(this.#animationTime < 600) {
+            rotationStartingAngle = 40;
+            rotationEndingAngle = -60;
+            rotationStartTime = 300;
+            rotationEndTime = 400;
+        }
+        else if(this.#animationTime < 750) {
+            rotationStartingAngle = -60;
+            rotationEndingAngle = 0;
+            rotationStartTime = 600;
+            rotationEndTime = 650;
+        }
+        
+        //Uses fourth power interpolation for the rotation
+        if(this.#animationTime < 600) {
+            const animationProportion =
+                MathUtility.clampInterpolate(this.#animationTime, rotationStartTime, rotationEndTime, 0, 1);
+            const quadraticAnimationProportion = Math.pow(animationProportion, 4);
+            this.#rightArmSprite.rotation = Math.PI / 180
+                * MathUtility.interpolate(quadraticAnimationProportion, rotationStartingAngle, rotationEndingAngle);
+        }
+        //Uses linear interpolation for the rotation
+        else if(this.#animationTime < 750) {
+            this.#rightArmSprite.rotation =
+                Math.PI / 180 * MathUtility.clampInterpolate(
+                    this.#animationTime,
+                    rotationStartTime,
+                    rotationEndTime,
+                    rotationStartingAngle,
+                    rotationEndingAngle
+                );
+        }
+        else {
+            //Put right arm in behind all the other sprites
+            Main.runner.gameplayStage.removeChild(this.#rightArmSprite);
+            Main.runner.gameplayStage.addChildAt(this.#rightArmSprite, 0);
+            
+            this.#animationState = "breathing";
+            this.#animationState = 0;
+        }
+        
+        if(this.#animationTime >= 394 && this.#player.heartColor === this.#swingArmOriginalHeartColor) {
+            if(this.#swingArmOriginalHeartColor === "green") {
+                this.#player.heartColor = "red";
+                this.#player.hideShieldSprites();
+            }
+            else {
+                this.#player.heartColor = "green";
+                this.#player.showShieldSprites();
+            }
+        }
+    }
+    
+    /**
+     * Updates Undyne and the speech bubble.
+     * @param deltaMs The time that has passed since the last update of Undyne
+     */
+    update(deltaMs) {
         this.#greenRectangleManager.update(deltaMs);
         this.#speechBubble.update(deltaMs);
         
-        this.#bodySprite.position.y = 111 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
-        this.#headSprite.position.y = 51 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
-        this.#skirtSprite.position.y = 164 + Math.sin(this.#animationTime / 1200 * Math.PI * 2);
+        this.#animationTime += deltaMs;
         
-        this.#rightArmSprite.position.y = 98 + 4 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
-        this.#rightArmSprite.position.x = 308 + 2 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
-        
-        this.#leftArmSprite.position.y = 134 + 4 * Math.sin(this.#animationTime / 1200 * Math.PI * 2);
-        this.#leftArmSprite.position.x = 369 + 2 * Math.sin(this.#animationTime / 600 * Math.PI * 2);
+        if(this.#animationState === "breathing") {
+            this.breathingAnimation();
+        }
+        else if(this.#animationState === "swinging arm") {
+            this.swingingArmAnimation();
+        }
     }
     
     /**
