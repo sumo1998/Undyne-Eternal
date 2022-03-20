@@ -49,6 +49,7 @@ class GraphicManager extends AssetLoader {
         this.#addImage("undyneSkirt", "undyne_skirt.png");
         
         this.#addImage("startButton", "start_button.png");
+        this.#addImage("startButtonHover", "start_button_hover.png");
         this.#addImage("playAgainButton", "play_again_button.png");
         this.#addImage("playAgainButtonHover", "play_again_button_hover.png");
         
