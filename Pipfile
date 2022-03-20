@@ -10,9 +10,12 @@ six = "*"
 requests = "*"
 authlib = "*"
 python-dotenv = "*"
+psycopg2-binary = "*"
+uplink = "*"
 werkzeug = "*"
+
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3"

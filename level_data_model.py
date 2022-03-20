@@ -23,7 +23,7 @@ class Arrow(BaseModel):
         :return: None
         :raises ValueError: Raised if the delay is invalid
         """
-        if delay <= 0:
+        if delay < 0:
             raise ValueError("The delay must be a positive integer.")
         elif len(str(delay)) > 4:
             raise ValueError("The delay can only be up to 4 digits in length.")
@@ -73,7 +73,7 @@ class LevelData(BaseModel):
     attacks: List[Attack]
     title: str
     description: str
-    difficulty: Literal["Easy", "Medium", "Hard"]
+    difficulty: Literal["easy", "medium", "hard"]
     is_public: bool = Field(alias = "isPublic")
     
     @validator("attacks")

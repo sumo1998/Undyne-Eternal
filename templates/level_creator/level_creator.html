@@ -13,6 +13,7 @@
     <script>
         let levelJson = {{ level_json|tojson }};
         let flaskUrl = "{{ url_for("save_level") }}";
+        let levelId = {{ is_new_level }};
     </script>
 
     <title>{{ level_json['title'] }}</title>

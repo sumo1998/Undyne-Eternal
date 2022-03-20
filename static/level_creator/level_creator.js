@@ -106,7 +106,6 @@ function addArrow(
 
 function deleteArrow(deleteArrowButton) {
     let indices = getAttackAndArrowIndicesFromArrowElement(deleteArrowButton);
-    alert(indices);
     levelJson["attacks"][indices[0]]["arrows"].splice(indices[1], 1);
     deleteArrowButton.parentNode.remove();
 }
@@ -339,7 +338,7 @@ function addHeaderDifficultySelection(diffAndVisibilityDiv) {
     difficulty.classList.add("headerLabel");
     diffAndVisibilityDiv.append(difficulty);
     
-    let array = ["Easy", "Medium", "Hard"];
+    let array = ["easy", "medium", "hard"];
     
     let selectList = document.createElement("select");
     selectList.classList.add("directionSelect", "diffSelect");
