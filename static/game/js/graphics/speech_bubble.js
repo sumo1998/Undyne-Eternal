@@ -35,6 +35,11 @@ class SpeechBubble extends GraphicsObject {
     #numTextChars;
     
     /**
+     * Undyne.
+     */
+    #undyne;
+    
+    /**
      * The speech bubble sprite.
      */
     #sprite;
@@ -72,11 +77,25 @@ class SpeechBubble extends GraphicsObject {
     }
     
     /**
+     * Sets undyne.
+     * @param undyne Undyne
+     */
+    set undyne(undyne) {
+        this.#undyne = undyne;
+    }
+    
+    /**
      * Adds the given text queue to the current queue and updates the callback function.
      * @param textQueue The queue of speech bubble messages and optionally Undyne faces to add to the current queue
      * @param callback The new callback function to call after the text queue has finished
      */
     queueText(textQueue, callback) {
+        const thisTmp = this;
+        if(this.#undyne.animationState === "swinging arm") {
+            setTimeout(() => thisTmp.queueText(textQueue, callback), 250);
+            return;
+        }
+        
         this.#textQueue = this.#textQueue.concat(textQueue);
         this.#textQueueCallback = callback;
         this.#sprite.visible = true;
