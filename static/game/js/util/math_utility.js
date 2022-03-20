@@ -39,6 +39,17 @@ class MathUtility {
     }
     
     /**
+     * Linearly interpolates between interpolateStart and interpolateEnd by the given proportion.
+     * @param proportion The proportion to interpolate between interpolateStart and interpolateEnd
+     * @param interpolateStart The starting value of the interpolation
+     * @param interpolateEnd The ending value of the interpolation
+     * @return The result of interpolating between interpolateStart and interpolateEnd by the given proportion
+     */
+    static interpolate(proportion, interpolateStart, interpolateEnd) {
+        return interpolateStart + (interpolateEnd - interpolateStart) * proportion;
+    }
+    
+    /**
      * Clamps value between clampStart and clampEnd and then uses the proportion of that clamped value between
      * clampStart and clampEnd to linearly interpolate between interpolateStart and interpolateEnd.
      * @param value The value to clamp and use in interpolation
