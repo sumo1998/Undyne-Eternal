@@ -3,7 +3,7 @@
 # Made it like this to make the structure conform to what flask expects. Just a little less manual path specification
 # But if the project grows bigger, we can change the structure to be more modular
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 
 from api.auth import auth_router
 from factory import object_factory
@@ -31,7 +31,6 @@ def game():
 @app.route("/level-creator/")
 def level_creator():
     level_id = request.args.get("id")
-    
     new_level = {
         "title": "Untitled",
         "description": "Add a description",
@@ -39,44 +38,42 @@ def level_creator():
         "isPublic": False,
         "attacks": []
     }
-    # From database
-    level_json = {
-        "attacks": [
-            {
-                "attackDelay": 1000,
-                "clockwiseShift": True,
-                "arrows": [
-                    {"direction": "U", "reversed": False, "delay": 1, "speed": 9},
-                    {"direction": "D", "reversed": False, "delay": 2, "speed": 8},
-                    {"direction": "R", "reversed": False, "delay": 3, "speed": 7},
-                    {"direction": "L", "reversed": False, "delay": 4, "speed": 6},
-                    {"direction": "?", "reversed": False, "delay": 5, "speed": 5}
-                ]
-            },
-            {
-                "attackDelay": 345,
-                "clockwiseShift": False,
-                "arrows": [
-                    {"direction": "?", "reversed": True, "delay": 6, "speed": 4},
-                    {"direction": "L", "reversed": True, "delay": 7, "speed": 3},
-                    {"direction": "R", "reversed": True, "delay": 8, "speed": 2},
-                    {"direction": "D", "reversed": True, "delay": 9, "speed": 1},
-                    {"direction": "U", "reversed": True, "delay": 10, "speed": 1}
-                ]
-            }
-        ],
-        # Add from database
-        "title": "From Flask", "description": "What is the max # of characters?", "difficulty": "Hard",
-        "isPublic": True
-    }
-    
     send = {}
+    # From database
     if level_id is not None:
-        send = level_json
+        send = {
+            "attacks": [
+                {
+                    "attackDelay": 1000,
+                    "clockwiseShift": True,
+                    "arrows": [
+                        {"direction": "U", "reversed": False, "delay": 1, "speed": 9},
+                        {"direction": "D", "reversed": False, "delay": 2, "speed": 8},
+                        {"direction": "R", "reversed": False, "delay": 3, "speed": 7},
+                        {"direction": "L", "reversed": False, "delay": 4, "speed": 6},
+                        {"direction": "?", "reversed": False, "delay": 5, "speed": 5}
+                    ]
+                },
+                {
+                    "attackDelay": 345,
+                    "clockwiseShift": False,
+                    "arrows": [
+                        {"direction": "?", "reversed": True, "delay": 6, "speed": 4},
+                        {"direction": "L", "reversed": True, "delay": 7, "speed": 3},
+                        {"direction": "R", "reversed": True, "delay": 8, "speed": 2},
+                        {"direction": "D", "reversed": True, "delay": 9, "speed": 1},
+                        {"direction": "U", "reversed": True, "delay": 10, "speed": 1}
+                    ]
+                }
+            ],
+            # Add from database
+            "title": "From Flask", "description": "What is the max # of characters?", "difficulty": "Hard",
+            "isPublic": True
+        }
     else:
         send = new_level
     
-    return render_template("level_creator/level_creator.html", level_json = send)
+    return render_template("level_creator/level_creator.html", level_json = send, level_id = level_id)
 
 
 @app.route("/save-level/", methods = ["POST"])
