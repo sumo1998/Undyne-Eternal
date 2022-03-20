@@ -155,7 +155,8 @@ class UndyneDialogue {
             case "medium":
                 return [
                     "Heh... You're tough.",
-                    "What the hell are\nhumans made out of!?"
+                    "What the hell are\nhumans made out of!?",
+                    "That was pretty\ngood, punk."
                 ];
             case "hard":
                 return [
