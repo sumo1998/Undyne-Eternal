@@ -32,72 +32,72 @@ def home_page():
 @app.route("/home-feed")
 def feed():
     data = request.json
-    print("DATA: "+str(data))
+    print("DATA: " + str(data))
     res = home_handler.get_home_feed(data)
-    return render_template("home/home_template.html", res=res)
+    return render_template("home/home_template.html", res = res)
 
 
 @app.route("/user/<id>")
 def user(id):
     user_info = user_handler.get_user_info(id)
     user_levels = user_handler.get_user_levels(id)
-    return render_template("profile/profile_template.html", userInfo=user_info, userLevels=user_levels)
+    return render_template("profile/profile_template.html", userInfo = user_info, userLevels = user_levels)
 
 
 @app.route("/level/<id>")
 def level(id):
     level_info = level_handler.get_level_info(id)
     level_comments = level_handler.get_level_comments(id)
-    return render_template("level/level_template.html", levelInfo=level_info, levelComments=level_comments)
+    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
 
-@app.route("/add-comment", methods=['POST'])
+@app.route("/add-comment", methods = ['POST'])
 def add_comment():
     data = request.form
     level_handler.add_level_comment(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return redirect(url_for("level", id = data['levelId']))
 
 
-@app.route("/update-comment", methods=['PATCH'])
+@app.route("/update-comment", methods = ['PATCH'])
 def update_comment():
     data = request.form
     level_handler.update_level_comment(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return redirect(url_for("level", id = data['levelId']))
 
 
-@app.route("/delete-comment", methods=['DELETE'])
+@app.route("/delete-comment", methods = ['DELETE'])
 def delete_comment():
     data = request.form
     level_handler.delete_comment(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return redirect(url_for("level", id = data['levelId']))
 
 
-@app.route("/update-level", methods=['PATCH'])
+@app.route("/update-level", methods = ['PATCH'])
 def update_level():
     data = request.form
     level_handler.update_level(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return redirect(url_for("level", id = data['levelId']))
 
 
-@app.route("/delete-level", methods=['DELETE'])
+@app.route("/delete-level", methods = ['DELETE'])
 def delete_level():
     data = request.form
     level_handler.delete_level(data)
     return redirect(url_for("home_page"))
 
 
-@app.route("/add-level", methods=['POST'])
+@app.route("/add-level", methods = ['POST'])
 def add_level():
     data = request.form
     level_handler.add_level(data)
     return redirect(url_for("home_page"))
 
 
-@app.route("/update-user", methods=['PATCH'])
+@app.route("/update-user", methods = ['PATCH'])
 def update_user():
     data = request.form
     user_handler.update_user(data)
-    return redirect(url_for("user", id=data["userId"]))
+    return redirect(url_for("user", id = data["userId"]))
 
 
 if __name__ == '__main__':
