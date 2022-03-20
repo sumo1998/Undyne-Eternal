@@ -425,17 +425,37 @@ function save() {
     tempJson["description"] = document.getElementById("descriptionInput").value;
     tempJson["difficulty"] = document.getElementById("difficulty").value;
     tempJson["isPublic"] = document.getElementById("isPublicCheckbox").checked;
+    if(isNewLevel) {
+        $.ajax({
+            type: "POST",
+            url: addLevelUrl,
+            contentType: "application/json",
+            data: JSON.stringify(tempJson),
+            dataType: "json",
+            success: function(response) {
+                let message = response["response"];
+                alert(message);
+                if(message === "Saved!") {
+                    isNewLevel = false;
+                }
+            }
+        });
+    }
+    else {
+        $.ajax({
+            type: "PATCH",
+            url: updateLevelUrl,
+            contentType: "application/json",
+            data: JSON.stringify(tempJson),
+            dataType: "json",
+            success: function(response) {
+                let message = response["response"];
+                alert(message);
+            }
+        });
+    }
     
-    $.ajax({
-        type: "POST",
-        url: flaskUrl,
-        contentType: "application/json",
-        data: JSON.stringify(tempJson),
-        dataType: "json",
-        success: function(response) {
-            alert(response["response"]);
-        }
-    });
+    
 }
 
 function getArrowSymbol(direction) {

@@ -15,6 +15,8 @@ from db.user import user_handler
 from db.level import level_handler
 from db import database_handler
 
+import json
+
 app = Flask(__name__)
 app.secret_key = "21344"
 object_factory.get_auth_object(app)
@@ -50,7 +52,7 @@ def level_creator():
     session['level_id'] = None
     send = {}
     if level_id is not None:
-        level_data = level_handler.get_level_info((1,))
+        level_data = level_handler.get_level_info(level_id)
         session['level_id'] = level_id
         send = level_data[0]['level_description']
         send['title'] = level_data[0]['level_name']
@@ -61,27 +63,6 @@ def level_creator():
         send = new_level
     
     return render_template("level_creator/level_creator.html", level_json = send, is_new_level = level_id is None)
-
-
-@app.route("/save-level/", methods = ["POST"])
-def save_level():
-    level_data = request.get_json()
-    try:
-        LevelData(**level_data)
-    except pydantic.ValidationError as e:
-        response = str(e).replace("(type=value_error)", "")
-        return jsonify(response = response)
-    
-    attack_data = {
-        "attacks": level_data["attacks"]
-    }
-    title = level_data["title"]
-    description = level_data["description"]
-    difficulty = level_data["difficulty"]
-    is_public = level_data["isPublic"]
-    response = "Saved!"
-    
-    return jsonify(response = response)
 
 
 @app.route("/home-feed")
@@ -129,9 +110,35 @@ def delete_comment():
 
 @app.route("/update-level", methods = ['PATCH'])
 def update_level():
-    data = request.form
-    level_handler.update_level(data)
-    return redirect(url_for("level", id = data['levelId']))
+    current_level_data = level_handler.get_level_info(session['level_id'])
+    level_data = request.get_json()
+    try:
+        LevelData(**level_data)
+    except pydantic.ValidationError as e:
+        response = str(e).replace("(type=value_error)", "")
+        return jsonify(response = response)
+    
+    attack_data = {
+        "attacks": level_data["attacks"]
+    }
+    title = level_data["title"]
+    description = level_data["description"]
+    difficulty = level_data["difficulty"]
+    is_public = level_data["isPublic"]
+    
+    update = {
+        "userId": 1,
+        "levelId": session['level_id'],
+        "levelName": title,
+        "levelRating": current_level_data[0]['level_rating'],
+        "levelSummary": description,
+        "levelDescription": json.dumps(attack_data),
+        "levelDiff": difficulty
+    }
+    level_handler.update_level(update)
+    
+    response = "Saved!"
+    return jsonify(response = response)
 
 
 @app.route("/delete-level", methods = ['DELETE'])
@@ -145,7 +152,7 @@ def delete_level():
 def add_level():
     data = request.form
     level_handler.add_level(data)
-    return redirect(url_for("home_page"))
+    return jsonify(response = "Saved!")
 
 
 @app.route("/update-user", methods = ['PATCH'])
