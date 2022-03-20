@@ -66,8 +66,8 @@ class GraphicManager extends AssetLoader {
     }
     
     /**
-     * Sets the graphics textures up after loading by setting certain graphics to use pixellated scaling and by adding
-     * all of the textures into the texture map.
+     * Sets the graphics textures up after loading by setting certain graphics to use pixelated scaling and by adding
+     * all the textures into the texture map.
      * @param resources The resources loaded by the graphics loader
      */
     #setUpGraphics(resources) {

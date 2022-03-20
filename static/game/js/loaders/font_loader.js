@@ -28,7 +28,7 @@ class FontLoader extends AssetLoader {
         
         this.#addFont("undertale", "undertale.fnt");
         this.#addFont("numbers", "numbers.fnt");
-        this.#addFont("speechbubble", "speechbubble.fnt");
+        this.#addFont("speechBubble", "speech_bubble.fnt");
         
         this.#fontLoader.on("complete", (loader, resources) => this.#setUpFonts(resources));
         
@@ -45,7 +45,7 @@ class FontLoader extends AssetLoader {
     }
     
     /**
-     * Sets the fonts up when loaded to use the NEAREST scale mode for Pixellated scaling.
+     * Sets the fonts up when loaded to use the NEAREST scale mode for pixelated scaling.
      * @param resources The resources loaded by the font loader
      */
     #setUpFonts(resources) {

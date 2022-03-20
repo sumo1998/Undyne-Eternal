@@ -45,7 +45,7 @@ class SpeechBubble extends GraphicsObject {
     #speechText;
     
     /**
-     * Initializes a SpeechBubble isntance.
+     * Initializes a SpeechBubble instance.
      */
     constructor() {
         super();
@@ -60,6 +60,7 @@ class SpeechBubble extends GraphicsObject {
         this.#sprite.position.set(400, 60);
         this.#sprite.visible = false;
         
+        // noinspection JSCheckFunctionSignatures
         this.#speechText = new PIXI.extras.BitmapText("", {font: "12px SpeechBubble", align: "left"});
         this.#speechText.maxWidth = 180;
         this.#speechText.position.set(442, 24);

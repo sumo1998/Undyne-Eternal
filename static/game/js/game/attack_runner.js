@@ -106,7 +106,7 @@ class AttackRunner extends GraphicsObject {
     }
     
     /**
-     * Removes all of the arrows from the stage.
+     * Removes all the arrows from the stage.
      */
     removeAllArrows() {
         for(let i = 0; i < this.#arrows.length; ++i) {
