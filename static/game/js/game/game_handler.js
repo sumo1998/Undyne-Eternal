@@ -141,10 +141,12 @@ class GameHandler extends GraphicsObject {
     }
     
     /**
-     * Runs when the user loses all of their HP, making the attacks stop and having Undyne say something.
+     * Runs when the game is ended either by the player losing all HP or the player winning, prompting Undyne to speak
+     * some dialogue and then the play again button showing
+     * @param endState The ending state, which can be "game over" or "win"
      */
-    gameOver() {
-        this.#state = "game over";
+    endGame(endState) {
+        this.#state = endState;
         
         this.#attackRunner.removeAllArrows();
         this.#player.endGameHideSprites();
@@ -155,29 +157,20 @@ class GameHandler extends GraphicsObject {
         this.#getBgm().stop();
         
         const thisTmp = this;
-        this.#undyne.speechBubble.queueText(
-            UndyneDialogue.getGameOverText(
+        
+        let queueText;
+        if(endState === "game over") {
+            queueText = UndyneDialogue.getGameOverText(
                 this.#hud.currentAttackNumber, this.#attackRunner.numAttacks, this.#difficulty
-            ),
-            () => thisTmp.restartLevel()
-        );
-    }
-    
-    /**
-     * Runs when the user wins, making the attacks stop and having Undyne say something.
-     */
-    win() {
-        this.#state = "win";
+            );
+        }
+        else if(endState === "win") {
+            queueText = UndyneDialogue.getWinText(this.#difficulty);
+        }
         
-        this.#attackRunner.removeAllArrows();
-        this.#undyne.greenRectangleManager.visible = false;
-        this.#undyne.opacity = 1;
-        
-        this.#getBgm().stop();
-        
-        const thisTmp = this;
         this.#undyne.speechBubble.queueText(
-            UndyneDialogue.getWinText(this.#difficulty), () => thisTmp.restartLevel()
+            queueText,
+            () => {thisTmp.#playAgainButton.visible = true;}
         );
     }
     
@@ -195,11 +188,11 @@ class GameHandler extends GraphicsObject {
             
             if(this.#player.hp === 0) {
                 this.render();
-                this.gameOver();
+                this.endGame("game over");
             }
             else if(this.#hud.currentAttackNumber === this.#attackRunner.numAttacks && this.#attackRunner) {
                 this.render();
-                this.win();
+                this.endGame("win");
             }
         }
         
