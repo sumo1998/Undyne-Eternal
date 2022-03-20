@@ -261,13 +261,22 @@ class Player extends GraphicsObject {
     }
     
     /**
-     * Hides the sprites that should not be visible on the game over screen.
+     * Hides the sprites that should not be visible when in red mode.
      */
-    endGameHideSprites() {
+    hideShieldSprites() {
         this.#shieldSprite.visible = false;
         this.#shieldHitSprite.visible = false;
         this.#circle.visible = false;
         this.#updateShieldVisibility = false;
+    }
+    
+    /**
+     * Shows the sprites that should be visible when in green mode.
+     */
+    showShieldSprites() {
+        this.#shieldSprite.visible = true;
+        this.#circle.visible = true;
+        this.#updateShieldVisibility = true;
     }
     
     /**
@@ -290,12 +299,12 @@ class Player extends GraphicsObject {
         this.#shieldSprite.rotation = this.#originalRotation;
         this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
         
-        this.#heartSprite.tint = Player.#heartGreenColor;
+        this.#heartSprite.tint = Player.#heartRedColor;
         
         this.#heartSprite.visible = true;
-        this.#shieldSprite.visible = true;
+        this.#shieldSprite.visible = false;
         this.#shieldHitSprite.visible = false;
-        this.#circle.visible = true;
+        this.#circle.visible = false;
     }
     
     /**
@@ -383,7 +392,7 @@ class Player extends GraphicsObject {
         this.#shieldSprite.rotation = newRotation;
         this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
         
-        if(!this.#updateShieldVisibility) {
+        if(!this.#updateShieldVisibility || this.#heartSprite.tint === Player.#heartRedColor) {
             return;
         }
         
@@ -399,16 +408,27 @@ class Player extends GraphicsObject {
     }
     
     /**
-     * Sets the color of the heart to the given color.
-     * @param colorStr The color of the heart
+     * Sets the color of the heart to the color in the given string.
+     * @param colorStr The color string of the heart
      */
-    setColor(colorStr) {
+    set heartColor(colorStr) {
         if(colorStr === "green") {
             this.#heartSprite.tint = Player.#heartGreenColor;
         }
         else if(colorStr === "red") {
             this.#heartSprite.tint = Player.#heartRedColor;
         }
+    }
+    
+    /**
+     * Returns the color of the heart in string form.
+     * @return The color string of the heart
+     */
+    get heartColor() {
+        if(this.#heartSprite.tint === Player.#heartGreenColor) {
+            return "green";
+        }
+        return "red";
     }
     
     /**
