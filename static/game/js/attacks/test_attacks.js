@@ -8,7 +8,9 @@ class TestAttacks {
      */
     static get testAttacks() {
         const attack1 = {
-            nextTime: 3200, clockwiseShift: false, arrows: [
+            nextTime: 3200,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "2", reversed: false, targetTime: 0, speed: 100},
                 {direction: "2", reversed: false, targetTime: 600, speed: 100},
                 {direction: "2", reversed: false, targetTime: 1200, speed: 100}
@@ -16,7 +18,9 @@ class TestAttacks {
         };
         
         const attack2 = {
-            nextTime: 4500, clockwiseShift: false, arrows: [
+            nextTime: 4500,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "2", reversed: false, targetTime: 0, speed: 150},
                 {direction: "2", reversed: false, targetTime: 500, speed: 150},
                 {direction: "1", reversed: false, targetTime: 1000, speed: 150},
@@ -27,7 +31,9 @@ class TestAttacks {
         };
         
         const attack3 = {
-            nextTime: 4800, clockwiseShift: true, arrows: [
+            nextTime: 4800,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "1", reversed: false, targetTime: 0, speed: 200},
                 {direction: "3", reversed: false, targetTime: 400, speed: 200},
                 {direction: "1", reversed: false, targetTime: 800, speed: 200},
@@ -40,7 +46,9 @@ class TestAttacks {
         };
         
         const attack4 = {
-            nextTime: 4850, clockwiseShift: true, arrows: [
+            nextTime: 4850,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "0", reversed: false, targetTime: 0, speed: 250},
                 {direction: "1", reversed: false, targetTime: 300, speed: 250},
                 {direction: "2", reversed: false, targetTime: 600, speed: 250},
@@ -57,7 +65,9 @@ class TestAttacks {
         };
         
         const attack5 = {
-            nextTime: 4100, clockwiseShift: true, arrows: [
+            nextTime: 4100,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "3", reversed: false, targetTime: 0, speed: 250},
                 {direction: "2", reversed: false, targetTime: 300, speed: 250},
                 {direction: "2", reversed: false, targetTime: 450, speed: 250},
@@ -71,7 +81,9 @@ class TestAttacks {
         };
         
         const attack6 = {
-            nextTime: 4250, clockwiseShift: true, arrows: [
+            nextTime: 4250,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "1", reversed: false, targetTime: 0, speed: 250},
                 {direction: "2", reversed: false, targetTime: 250, speed: 250},
                 {direction: "0", reversed: false, targetTime: 500, speed: 250},
@@ -86,7 +98,9 @@ class TestAttacks {
         };
         
         const attack7 = {
-            nextTime: 4000, clockwiseShift: true, arrows: [
+            nextTime: 4000,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "0", reversed: false, targetTime: 0, speed: 300},
                 {direction: "2", reversed: false, targetTime: 250, speed: 300},
                 {direction: "0", reversed: false, targetTime: 500, speed: 300},
@@ -99,7 +113,9 @@ class TestAttacks {
         };
         
         const attack8 = {
-            nextTime: 2500, clockwiseShift: true, arrows: [
+            nextTime: 2500,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "2", reversed: false, targetTime: 0, speed: 300},
                 {direction: "3", reversed: false, targetTime: 250, speed: 300},
                 {direction: "0", reversed: false, targetTime: 500, speed: 300},
@@ -111,7 +127,9 @@ class TestAttacks {
         };
         
         const attack9 = {
-            nextTime: 3600, clockwiseShift: true, arrows: [
+            nextTime: 3600,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "1", reversed: false, targetTime: 0, speed: 400},
                 {direction: "1", reversed: false, targetTime: 200, speed: 320},
                 {direction: "1", reversed: false, targetTime: 500, speed: 240},
@@ -126,7 +144,9 @@ class TestAttacks {
         };
         
         const attack10 = {
-            nextTime: 3750, clockwiseShift: true, arrows: [
+            nextTime: 3750,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "3", reversed: false, targetTime: 0, speed: 200},
                 {direction: "1", reversed: false, targetTime: 250, speed: 200},
                 {direction: "3", reversed: false, targetTime: 500, speed: 200},
@@ -143,7 +163,8 @@ class TestAttacks {
         };
         
         const attack11 = {
-            nextTime: 3200, arrows: [
+            nextTime: 3200,
+            arrows: [
                 {direction: "3", reversed: false, targetTime: 0, speed: 200},
                 {direction: "1", reversed: false, targetTime: 400, speed: 200},
                 {direction: "3", reversed: false, targetTime: 800, speed: 200},
@@ -153,7 +174,9 @@ class TestAttacks {
         };
         
         const attack12 = {
-            nextTime: 4400, clockwiseShift: true, arrows: [
+            nextTime: 4400,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "1", reversed: false, targetTime: 0, speed: 200},
                 {direction: "3", reversed: false, targetTime: 400, speed: 200},
                 {direction: "0", reversed: true, targetTime: 800, speed: 200},
@@ -166,7 +189,9 @@ class TestAttacks {
         };
         
         const attack13 = {
-            nextTime: 4400, clockwiseShift: true, arrows: [
+            nextTime: 4400,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "1", reversed: false, targetTime: 0, speed: 200},
                 {direction: "0", reversed: false, targetTime: 400, speed: 200},
                 {direction: "3", reversed: false, targetTime: 800, speed: 200},
@@ -179,7 +204,9 @@ class TestAttacks {
         };
         
         const attack14 = {
-            nextTime: 4800, clockwiseShift: true, arrows: [
+            nextTime: 4800,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "3", reversed: false, targetTime: 0, speed: 200},
                 {direction: "3", reversed: false, targetTime: 350, speed: 200},
                 {direction: "1", reversed: false, targetTime: 700, speed: 200},
@@ -195,7 +222,9 @@ class TestAttacks {
         };
         
         const attack15 = {
-            nextTime: 4700, clockwiseShift: true, arrows: [
+            nextTime: 4700,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "3", reversed: false, targetTime: 0, speed: 200},
                 {direction: "2", reversed: false, targetTime: 350, speed: 200},
                 {direction: "2", reversed: false, targetTime: 700, speed: 200},
@@ -209,7 +238,9 @@ class TestAttacks {
         };
         
         const attack16 = {
-            nextTime: 4600, clockwiseShift: true, arrows: [
+            nextTime: 4600,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "2", reversed: false, targetTime: 0, speed: 500},
                 {direction: "3", reversed: false, targetTime: 400, speed: 500},
                 {direction: "3", reversed: false, targetTime: 800, speed: 500},
@@ -224,7 +255,9 @@ class TestAttacks {
         };
         
         const attack17 = {
-            nextTime: 4500, clockwiseShift: true, arrows: [
+            nextTime: 4500,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "1", reversed: false, targetTime: 0, speed: 300},
                 {direction: "1", reversed: false, targetTime: 320, speed: 300},
                 {direction: "1", reversed: false, targetTime: 640, speed: 300},
@@ -242,7 +275,9 @@ class TestAttacks {
         };
         
         const attack18 = {
-            nextTime: 4500, clockwiseShift: true, arrows: [
+            nextTime: 4500,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "3", reversed: true, targetTime: 0, speed: 300},
                 {direction: "2", reversed: true, targetTime: 350, speed: 300},
                 {direction: "1", reversed: true, targetTime: 700, speed: 300},
@@ -259,7 +294,9 @@ class TestAttacks {
         };
         
         const attack19 = {
-            nextTime: 3500, clockwiseShift: false, arrows: [
+            nextTime: 3500,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "?", reversed: false, targetTime: 0, speed: 300},
                 {direction: "?", reversed: false, targetTime: 300, speed: 300},
                 {direction: "?", reversed: false, targetTime: 600, speed: 300},
@@ -275,7 +312,9 @@ class TestAttacks {
         };
         
         const attack20 = {
-            nextTime: 4000, clockwiseShift: false, arrows: [
+            nextTime: 4000,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "2", reversed: false, targetTime: 0, speed: 500},
                 {direction: "2", reversed: false, targetTime: 150, speed: 500},
                 {direction: "2", reversed: false, targetTime: 300, speed: 500},
@@ -302,7 +341,9 @@ class TestAttacks {
         };
         
         const attack21 = {
-            nextTime: 5000, clockwiseShift: true, arrows: [
+            nextTime: 5000,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "0", reversed: false, targetTime: 0, speed: 300},
                 {direction: "1", reversed: false, targetTime: 250, speed: 300},
                 {direction: "2", reversed: false, targetTime: 500, speed: 300},
@@ -323,7 +364,9 @@ class TestAttacks {
         };
         
         const attack22 = {
-            nextTime: 4000, clockwiseShift: false, arrows: [
+            nextTime: 4000,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "1", reversed: true, targetTime: 0, speed: 500},
                 {direction: "2", reversed: false, targetTime: 150, speed: 500},
                 {direction: "2", reversed: false, targetTime: 300, speed: 500},
@@ -346,7 +389,9 @@ class TestAttacks {
         };
         
         const attack23 = {
-            nextTime: 4800, clockwiseShift: true, arrows: [
+            nextTime: 4800,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "0", reversed: false, targetTime: 0, speed: 300},
                 {direction: "2", reversed: false, targetTime: 200, speed: 300},
                 {direction: "0", reversed: false, targetTime: 400, speed: 300},
@@ -367,7 +412,9 @@ class TestAttacks {
         };
         
         const attack24 = {
-            nextTime: 5500, clockwiseShift: true, arrows: [
+            nextTime: 5500,
+            clockwiseShift: true,
+            arrows: [
                 {direction: "0", reversed: true, targetTime: 0, speed: 300},
                 {direction: "1", reversed: true, targetTime: 300, speed: 300},
                 {direction: "2", reversed: true, targetTime: 600, speed: 300},
@@ -388,7 +435,9 @@ class TestAttacks {
         };
         
         const attack25 = {
-            nextTime: 5000, clockwiseShift: false, arrows: [
+            nextTime: 5000,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "?", reversed: false, targetTime: 0, speed: 400},
                 {direction: "?", reversed: true, targetTime: 200, speed: 400},
                 {direction: "?", reversed: false, targetTime: 600, speed: 400},
@@ -409,7 +458,9 @@ class TestAttacks {
         };
         
         const attack26 = {
-            nextTime: 4200, clockwiseShift: false, arrows: [
+            nextTime: 4200,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "?", reversed: false, targetTime: 0, speed: 500},
                 {direction: "?", reversed: false, targetTime: 300, speed: 500},
                 {direction: "?", reversed: false, targetTime: 600, speed: 500},
@@ -427,7 +478,9 @@ class TestAttacks {
         };
         
         const attack27 = {
-            nextTime: 3700, clockwiseShift: false, arrows: [
+            nextTime: 3700,
+            clockwiseShift: false,
+            arrows: [
                 {direction: "?", reversed: false, targetTime: 0, speed: 500},
                 {direction: "?", reversed: false, targetTime: 300, speed: 400},
                 {direction: "?", reversed: false, targetTime: 600, speed: 300},
