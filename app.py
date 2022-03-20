@@ -39,7 +39,6 @@ def game():
 @app.route("/home-feed")
 def feed():
     data = request.json
-    print("DATA: " + str(data))
     res = home_handler.get_home_feed(data)
     return render_template("home/home_template.html", res = res)
 
