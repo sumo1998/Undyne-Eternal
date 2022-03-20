@@ -41,6 +41,11 @@ class GameHandler extends GraphicsObject {
     #undyne;
     
     /**
+     * The button used to permit the player to repeat the level after a game over or win.
+     */
+    #playAgainButton;
+    
+    /**
      * Initializes a GameHandler instance.
      * @param difficulty The difficulty of the game
      */
@@ -67,8 +72,27 @@ class GameHandler extends GraphicsObject {
         this.#undyne = new Undyne();
         this.#box = new Box();
         this.#player = new Player(difficulty);
+        this.#undyne.player = this.#player;
+        this.#undyne.speechBubble.undyne = this.#undyne;
         this.#hud = new Hud(TestAttacks.testAttacks.length, love, this.#player);
         this.#attackRunner = new AttackRunner(this.#player, this.#hud, TestAttacks.testAttacks);
+        
+        const playAgainButtonWidth = 197;
+        const thisTmp = this;
+        this.#playAgainButton = new Button(
+            0.5 * (Main.runner.gameWidth - playAgainButtonWidth),
+            0.5 * Main.runner.gameHeight + 85,
+            playAgainButtonWidth,
+            53,
+            "playAgainButton",
+            () => {
+                console.log("Test");
+                thisTmp.restartLevel();
+            },
+            "playAgainButtonHover",
+            300
+        );
+        this.#playAgainButton.visible = false;
         
         this.#box.setDestinationBounds(
             0.5 * Main.runner.gameWidth - Player.shieldDistance,
@@ -90,7 +114,7 @@ class GameHandler extends GraphicsObject {
             this.#undyne.speechBubble.advanceTextZ();
         }
         
-        if(this.#state === "playing") {
+        if(this.#state === "playing" && this.#player.heartColor === "green") {
             switch(key) {
                 case "left":
                     this.#player.shieldDir = 1;
@@ -122,10 +146,12 @@ class GameHandler extends GraphicsObject {
      */
     restartLevel() {
         this.#state = "playing";
+        this.#playAgainButton.visible = false;
         this.#attackRunner.reset();
         this.#player.reset();
         this.#hud.reset();
         this.#undyne.reset();
+        this.#undyne.swingArm();
         this.#box.setDestinationBounds(
             0.5 * Main.runner.gameWidth - Player.shieldDistance,
             0.5 * Main.runner.gameWidth + Player.shieldDistance,
@@ -149,8 +175,8 @@ class GameHandler extends GraphicsObject {
         this.#state = endState;
         
         this.#attackRunner.removeAllArrows();
-        this.#player.endGameHideSprites();
-        this.#player.setColor("red");
+        this.#player.hideShieldSprites();
+        this.#undyne.swingArm();
         this.#undyne.greenRectangleManager.visible = false;
         this.#undyne.opacity = 1;
         
@@ -180,9 +206,10 @@ class GameHandler extends GraphicsObject {
     update(deltaMs) {
         this.#undyne.update(deltaMs);
         this.#player.update(deltaMs);
+        this.#box.update(deltaMs);
+        this.#playAgainButton.update(deltaMs);
         
-        if(this.#state === "playing") {
-            this.#box.update(deltaMs);
+        if(this.#state === "playing" && this.#undyne.animationState !== "swinging arm") {
             this.#hud.update(deltaMs);
             this.#attackRunner.update(deltaMs);
             
@@ -190,7 +217,8 @@ class GameHandler extends GraphicsObject {
                 this.render();
                 this.endGame("game over");
             }
-            else if(this.#hud.currentAttackNumber === this.#attackRunner.numAttacks && this.#attackRunner) {
+            else if(this.#hud.currentAttackNumber === this.#attackRunner.numAttacks
+                && this.#attackRunner.arrowsEmpty()) {
                 this.render();
                 this.endGame("win");
             }
