@@ -44,14 +44,14 @@ class GreenRectangleManager extends GraphicsObject {
     #xOffset;
     
     /**
-     * The graphics to draw the rectangles.
-     */
-    #graphics;
-    
-    /**
      * The time used to animate the rectangles, resetting after each period.
      */
     #animationTime;
+    
+    /**
+     * The graphics to draw the rectangles.
+     */
+    #graphics;
     
     /**
      * Initializes a GreenRectangleManager instance.

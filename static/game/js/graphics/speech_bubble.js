@@ -9,16 +9,6 @@ class SpeechBubble extends GraphicsObject {
     static #charsPerSec = 25;
     
     /**
-     * The speech bubble sprite.
-     */
-    #sprite;
-    
-    /**
-     * The speech bubble text graphics.
-     */
-    #speechText;
-    
-    /**
      * Contains the current speech bubble message being rendered and optionally the face that Undyne should be
      * expressing.
      */
@@ -45,9 +35,14 @@ class SpeechBubble extends GraphicsObject {
     #numTextChars;
     
     /**
-     * The text sound effect to play for each character being read.
+     * The speech bubble sprite.
      */
-    #textSfx;
+    #sprite;
+    
+    /**
+     * The speech bubble text graphics.
+     */
+    #speechText;
     
     /**
      * Initializes a SpeechBubble isntance.
@@ -59,7 +54,6 @@ class SpeechBubble extends GraphicsObject {
         this.#textQueue = [];
         this.#textQueueCallback = null;
         this.#numTextChars = 0;
-        this.#textSfx = Main.runner.assetManager.getAudio("undyneSpeakSfx");
         
         this.#sprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("speechBubble"));
         this.#sprite.anchor.set(0, 0.5);
@@ -121,7 +115,7 @@ class SpeechBubble extends GraphicsObject {
         
         const nextChar = this.#curText[wholeNumTextChars];
         if(nextChar !== " " && nextChar !== "\n") {
-            this.#textSfx.play();
+            Main.runner.assetManager.getAudio("undyneSpeakSfx").play();
         }
         
         this.#speechText.text = this.#curText.substring(0, wholeNumTextChars);

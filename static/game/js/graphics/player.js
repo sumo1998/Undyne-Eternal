@@ -59,16 +59,6 @@ class Player extends GraphicsObject {
     #maxInvincibilityTime;
     
     /**
-     * The x position of the player.
-     */
-    #posX;
-    
-    /**
-     * The y position of the player.
-     */
-    #posY;
-    
-    /**
      * The direction the shield is facing. These values are equivalent to the values of the arrows that would be
      * blocked by the shield direction.
      * 0: Counters arrows coming from the bottom
@@ -102,6 +92,21 @@ class Player extends GraphicsObject {
     #shieldHitTimeRemaining;
     
     /**
+     * True if the visibility of the shields should be updated.
+     */
+    #updateShieldVisibility;
+    
+    /**
+     * The shift in the screen in the x and y directions that occurs when getting damaged.
+     */
+    #damageShift;
+    
+    /**
+     * The time remaining until the shifting of the screen from the damage stops.
+     */
+    #damageShiftTimeRemaining;
+    
+    /**
      * The heart sprite.
      */
     #heartSprite;
@@ -120,21 +125,6 @@ class Player extends GraphicsObject {
      * The green circle about which the shield rotates.
      */
     #circle;
-    
-    /**
-     * True if the visibility of the shields should be updated.
-     */
-    #updateShieldVisibility;
-    
-    /**
-     * The shift in the screen in the x and y directions that occurs when getting damaged.
-     */
-    #damageShift;
-    
-    /**
-     * The time remaining until the shifting of the screen from the damage stops.
-     */
-    #damageShiftTimeRemaining;
     
     /**
      * Initializes a Player instance.
@@ -161,8 +151,8 @@ class Player extends GraphicsObject {
                 break;
         }
         
-        this.#posX = 0.5 * Main.runner.gameWidth;
-        this.#posY = 0.5 * Main.runner.gameHeight;
+        const posX = 0.5 * Main.runner.gameWidth;
+        const posY = 0.5 * Main.runner.gameHeight;
         
         this.#shieldDir = 2;
         
@@ -176,19 +166,19 @@ class Player extends GraphicsObject {
         
         this.#heartSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("heart"));
         this.#heartSprite.anchor.set(0.5, 0.5);
-        this.#heartSprite.position.set(this.#posX, this.#posY);
+        this.#heartSprite.position.set(posX, posY);
         this.#heartSprite.tint = Player.#heartGreenColor;
         this.#heartSprite.visible = false;
         
         this.#shieldSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("shield"));
         this.#shieldSprite.anchor.set(0.5, 1.4);
-        this.#shieldSprite.position.set(this.#posX, this.#posY);
+        this.#shieldSprite.position.set(posX, posY);
         this.#shieldSprite.rotation = this.#originalRotation;
         this.#shieldSprite.visible = false;
         
         this.#shieldHitSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("shieldHit"));
         this.#shieldHitSprite.anchor.set(0.5, 1.4);
-        this.#shieldHitSprite.position.set(this.#posX, this.#posY);
+        this.#shieldHitSprite.position.set(posX, posY);
         this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
         this.#shieldHitSprite.visible = false;
         
@@ -284,10 +274,8 @@ class Player extends GraphicsObject {
      * Resets the fields to match the start of a new level.
      */
     reset() {
-        this.#invincibilityTimeRemaining = 0;
-        this.#damageShift = 0;
-        this.#damageShiftTimeRemaining = 0;
         this.#hp = Player.#maxHp;
+        this.#invincibilityTimeRemaining = 0;
         this.#shieldDir = 2;
         this.#originalRotation = Player.#getRotationFromDirection(this.#shieldDir);
         this.#targetRotation = this.#originalRotation;
@@ -295,6 +283,9 @@ class Player extends GraphicsObject {
         this.#shieldHitTimeRemaining = 0;
         
         this.#updateShieldVisibility = true;
+        
+        this.#damageShift = 0;
+        this.#damageShiftTimeRemaining = 0;
         
         this.#shieldSprite.rotation = this.#originalRotation;
         this.#shieldHitSprite.rotation = this.#shieldSprite.rotation;
