@@ -247,7 +247,7 @@ class Undyne extends GraphicsObject {
         this.#rightArmSprite.position.x = Undyne.#rightArmDefaultPos.x + 2 * Math.sin(undyneAnimationSineAngle);
         this.#rightArmSprite.position.y = Undyne.#rightArmDefaultPos.y + 4 * Math.sin(undyneAnimationSineAngle);
         
-        this.#leftArmSprite.position.x = Undyne.#rightArmDefaultPos.x + 2 * Math.sin(2 * undyneAnimationSineAngle);
+        this.#leftArmSprite.position.x = Undyne.#leftArmDefaultPos.x + 2 * Math.sin(2 * undyneAnimationSineAngle);
         this.#leftArmSprite.position.y = Undyne.#leftArmDefaultPos.y + 4 * Math.sin(undyneAnimationSineAngle);
     }
     
@@ -292,14 +292,13 @@ class Undyne extends GraphicsObject {
         }
         //Uses linear interpolation for the rotation
         else if(this.#animationTime < 750) {
-            this.#rightArmSprite.rotation =
-                Math.PI / 180 * MathUtility.clampInterpolate(
-                    this.#animationTime,
-                    rotationStartTime,
-                    rotationEndTime,
-                    rotationStartingAngle,
-                    rotationEndingAngle
-                );
+            this.#rightArmSprite.rotation = Math.PI / 180 * MathUtility.clampInterpolate(
+                this.#animationTime,
+                rotationStartTime,
+                rotationEndTime,
+                rotationStartingAngle,
+                rotationEndingAngle
+            );
         }
         else {
             //Put right arm in behind all the other sprites
@@ -307,7 +306,7 @@ class Undyne extends GraphicsObject {
             Main.runner.gameplayStage.addChildAt(this.#rightArmSprite, 0);
             
             this.#animationState = "breathing";
-            this.#animationState = 0;
+            this.#animationTime = 0;
         }
         
         if(this.#animationTime >= 394 && this.#player.heartColor === this.#swingArmOriginalHeartColor) {
