@@ -19,6 +19,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/checkstyle-idea.xml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -27,11 +28,11 @@
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
+.idea/**/dataSources.xml
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
-.idea
 
 # Gradle
 .idea/**/gradle.xml

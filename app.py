@@ -3,7 +3,10 @@
 # Made it like this to make the structure conform to what flask expects. Just a little less manual path specification
 # But if the project grows bigger, we can change the structure to be more modular
 
+
 from flask import Flask, render_template, redirect, url_for, request
+from api.auth import auth_router
+
 from factory import object_factory
 
 from db.home import home_handler
@@ -14,7 +17,6 @@ from db import database_handler
 app = Flask(__name__)
 app.secret_key = '21344'
 object_factory.get_auth_object(app)
-from api.auth import auth_router
 
 app.register_blueprint(auth_router.auth_blueprint)
 
@@ -26,7 +28,12 @@ def init():
 
 @app.route("/")
 def home_page():
-    return "<h1>This is the homepage for the app</h1>"
+    return "<h1>This is the homepage for the app</h1><a href='game'>Click here</a>"
+
+
+@app.route("/game")
+def game():
+    return render_template("game/game.html")
 
 
 @app.route("/home-feed")

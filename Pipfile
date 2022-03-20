@@ -12,6 +12,8 @@ authlib = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
 uplink = "*"
+werkzeug = "*"
+
 
 [dev-packages]
 
