@@ -4,6 +4,41 @@
 class Undyne extends GraphicsObject {
     
     /**
+     * Undyne's hair's default position.
+     */
+    static #hairDefaultPos = new PIXI.Point(310, 40);
+    
+    /**
+     * Undyne's head's default position.
+     */
+    static #headDefaultPos = new PIXI.Point(318, 51);
+    
+    /**
+     * Undyne's body's default position.
+     */
+    static #bodyDefaultPos = new PIXI.Point(324, 111);
+    
+    /**
+     * Undyne's right arm's default position.
+     */
+    static #rightArmDefaultPos = new PIXI.Point(308, 98);
+    
+    /**
+     * Undyne's left arm's default position.
+     */
+    static #leftArmDefaultPos = new PIXI.Point(369, 134);
+    
+    /**
+     * Undyne's skirt's default position.
+     */
+    static #skirtDefaultPos = new PIXI.Point(320, 164);
+    
+    /**
+     * Undyne's legs' default position.
+     */
+    static #legsDefaultPos = new PIXI.Point(324, 210);
+    
+    /**
      * The amount of time that has passed since the start of the animation, resetting to 0 after every animation cycle.
      */
     #animationTime;
@@ -73,38 +108,38 @@ class Undyne extends GraphicsObject {
         this.#hairSprite = new PIXI.extras.MovieClip(undyneHairTextureArr);
         this.#hairSprite.anchor.set(1, 0.5);
         this.#hairSprite.scale.set(2, 2);
-        this.#hairSprite.position.set(310, 40);
+        this.#hairSprite.position.set(Undyne.#hairDefaultPos.x, Undyne.#hairDefaultPos.y);
         this.#hairSprite.animationSpeed = 4 / 30;
         
         this.#headSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneHead"));
         this.#headSprite.anchor.set(0.5, 0.5);
         this.#headSprite.scale.set(2, 2);
-        this.#headSprite.position.set(318, 51);
+        this.#headSprite.position.set(Undyne.#headDefaultPos.x, Undyne.#headDefaultPos.y);
         
         this.#bodySprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneBreastplate"));
         this.#bodySprite.anchor.set(0.5, 0.5);
         this.#bodySprite.scale.set(2, 2);
-        this.#bodySprite.position.set(324, 111);
+        this.#bodySprite.position.set(Undyne.#bodyDefaultPos.x, Undyne.#bodyDefaultPos.y);
         
         this.#rightArmSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneRightArm"));
         this.#rightArmSprite.anchor.set(1, 0);
         this.#rightArmSprite.scale.set(2, 2);
-        this.#rightArmSprite.position.set(308, 98);
+        this.#rightArmSprite.position.set(Undyne.#rightArmDefaultPos.x, Undyne.#rightArmDefaultPos.y);
         
         this.#leftArmSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneLeftArm"));
         this.#leftArmSprite.anchor.set(0.5, 0.5);
         this.#leftArmSprite.scale.set(2, 2);
-        this.#leftArmSprite.position.set(369, 134);
+        this.#leftArmSprite.position.set(Undyne.#leftArmDefaultPos.x, Undyne.#leftArmDefaultPos.y);
         
         this.#skirtSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneSkirt"));
         this.#skirtSprite.anchor.set(0.5, 0.5);
         this.#skirtSprite.scale.set(2, 2);
-        this.#skirtSprite.position.set(320, 164);
+        this.#skirtSprite.position.set(Undyne.#skirtDefaultPos.x, Undyne.#skirtDefaultPos.y);
         
         this.#legsSprite = new PIXI.Sprite(Main.runner.assetManager.getTexture("undyneLegs"));
         this.#legsSprite.anchor.set(0.5, 0.5);
         this.#legsSprite.scale.set(2, 2);
-        this.#legsSprite.position.set(324, 210);
+        this.#legsSprite.position.set(Undyne.#legsDefaultPos.x, Undyne.#legsDefaultPos.y);
         
         this.#greenRectangleManager = new GreenRectangleManager();
         this.#speechBubble = new SpeechBubble();
