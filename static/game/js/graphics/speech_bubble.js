@@ -90,9 +90,8 @@ class SpeechBubble extends GraphicsObject {
      * @param callback The new callback function to call after the text queue has finished
      */
     queueText(textQueue, callback) {
-        const thisTmp = this;
         if(this.#undyne.animationState === "swinging arm") {
-            setTimeout(() => thisTmp.queueText(textQueue, callback), 250);
+            setTimeout(() => this.queueText(textQueue, callback), 250);
             return;
         }
         

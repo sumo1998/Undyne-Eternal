@@ -80,9 +80,8 @@ class Main {
      * @param levelDataJson The level data in JSON format to parse
      */
     startGame(levelDataJson) {
-        const thisTmp = this;
         if(!this.#assetManager.isLoaded()) {
-            setTimeout(() => thisTmp.startGame(levelDataJson), 500);
+            setTimeout(() => this.startGame(levelDataJson), 500);
             return;
         }
         
@@ -91,7 +90,7 @@ class Main {
         KeyboardHandler.initialize(this.#gameHandler);
         
         this.#previousTime = performance.now();
-        requestAnimationFrame(() => thisTmp.update());
+        requestAnimationFrame(() => this.update());
     }
     
     /**
@@ -104,8 +103,7 @@ class Main {
         
         this.#gameHandler.update(deltaMs);
         
-        const thisTmp = this;
-        requestAnimationFrame(() => thisTmp.update());
+        requestAnimationFrame(() => this.update());
     }
     
     /**

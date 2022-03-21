@@ -85,8 +85,6 @@ class GameHandler extends GraphicsObject {
         this.#hud = new Hud(attacks.length, love, this.#player);
         this.#attackRunner = new AttackRunner(this.#player, this.#hud, attacks);
         
-        const thisTmp = this;
-        
         const startButtonWidth = 113;
         this.#startButton = new Button(
             0.5 * (Main.runner.gameWidth - startButtonWidth),
@@ -94,7 +92,7 @@ class GameHandler extends GraphicsObject {
             startButtonWidth,
             53,
             "startButton",
-            () => {thisTmp.restartLevel();},
+            () => {this.restartLevel();},
             "startButtonHover",
             300
         );
@@ -106,7 +104,7 @@ class GameHandler extends GraphicsObject {
             playAgainButtonWidth,
             53,
             "playAgainButton",
-            () => {thisTmp.restartLevel();},
+            () => {this.restartLevel();},
             "playAgainButtonHover",
             300
         );
@@ -201,8 +199,6 @@ class GameHandler extends GraphicsObject {
         
         this.#getBgm().stop();
         
-        const thisTmp = this;
-        
         let queueText;
         if(endState === "game over") {
             queueText = UndyneDialogue.getGameOverText(
@@ -215,7 +211,7 @@ class GameHandler extends GraphicsObject {
         
         this.#undyne.speechBubble.queueText(
             queueText,
-            () => {thisTmp.#playAgainButton.visible = true;}
+            () => {this.#playAgainButton.visible = true;}
         );
     }
     

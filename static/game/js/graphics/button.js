@@ -67,9 +67,8 @@ class Button extends GraphicsObject {
             this.#hoverTime = 0;
             this.#hovering = false;
             
-            const thisTmp = this;
-            this.#sprite.on("mouseover", () => {thisTmp.#hovering = true;});
-            this.#sprite.on("mouseout", () => {thisTmp.#hovering = false;});
+            this.#sprite.on("mouseover", () => {this.#hovering = true;});
+            this.#sprite.on("mouseout", () => {this.#hovering = false;});
             
             Main.runner.gameplayStage.addChild(this.#hoverSprite);
         }
