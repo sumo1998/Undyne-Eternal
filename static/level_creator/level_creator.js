@@ -2,6 +2,11 @@ let attackCount;
 
 initializeLevelCreator();
 
+/**
+ * Adds a select element to an arrow.
+ * @param arrow The arrow div the element is being added to
+ * @param arrowDirection The direction of the initial selection
+ */
 function addDirectionSelection(arrow, arrowDirection) {
     let direction = document.createElement("label");
     direction.textContent = "Direction: ";
@@ -26,6 +31,11 @@ function addDirectionSelection(arrow, arrowDirection) {
     }
 }
 
+/**
+ *
+ * @param arrow
+ * @param delayTime
+ */
 function addArrowDelayInput(arrow, delayTime) {
     let delay = document.createElement("label");
     delay.textContent = "Delay: ";
@@ -40,6 +50,11 @@ function addArrowDelayInput(arrow, delayTime) {
     arrow.append(delayTimeInput);
 }
 
+/**
+ *
+ * @param arrow
+ * @param speedValue
+ */
 function addArrowSpeedInput(arrow, speedValue) {
     let speed = document.createElement("label");
     speed.textContent = "Speed: ";
@@ -54,6 +69,11 @@ function addArrowSpeedInput(arrow, speedValue) {
     arrow.append(numberInputSpeed);
 }
 
+/**
+ *
+ * @param arrow
+ * @param reversed
+ */
 function addArrowReverseCheckBox(arrow, reversed) {
     let reverse = document.createElement("label");
     reverse.textContent = "Reverse: ";
@@ -71,6 +91,10 @@ function addArrowReverseCheckBox(arrow, reversed) {
     arrow.appendChild(checkbox);
 }
 
+/**
+ *
+ * @param arrow
+ */
 function addArrowDeleteButton(arrow) {
     let deleteArrow = document.createElement("button");
     deleteArrow.setAttribute("onClick", "deleteArrow(this)");
@@ -80,6 +104,15 @@ function addArrowDeleteButton(arrow) {
     arrow.append(deleteArrow);
 }
 
+/**
+ *
+ * @param button
+ * @param arrowDirection
+ * @param delayTime
+ * @param speedValue
+ * @param reversed
+ * @param fromJson
+ */
 function addArrow(
     button, arrowDirection = "R", delayTime = "10", speedValue = "30", reversed = false, fromJson = false) {
     if(button.parentNode.children.length > 50) {
@@ -104,12 +137,20 @@ function addArrow(
     addArrowDeleteButton(arrow);
 }
 
+/**
+ *
+ * @param deleteArrowButton
+ */
 function deleteArrow(deleteArrowButton) {
     let indices = getAttackAndArrowIndicesFromArrowElement(deleteArrowButton);
     levelJson["attacks"][indices[0]]["arrows"].splice(indices[1], 1);
     deleteArrowButton.parentNode.remove();
 }
 
+/**
+ *
+ * @param deleteAttackButton
+ */
 function deleteAttack(deleteAttackButton) {
     let attack = deleteAttackButton.parentNode.parentNode;
     let deletedAttack = getAttackIndexFromAttackTitleElement(deleteAttackButton);
@@ -125,6 +166,10 @@ function deleteAttack(deleteAttackButton) {
     });
 }
 
+/**
+ *
+ * @param randomCWShiftButton
+ */
 function randomClockwiseShift(randomCWShiftButton) {
     let attackIndex = getAttackIndexFromAttackTitleElement(randomCWShiftButton);
     if(randomCWShiftButton.classList.contains("randomClockwiseShiftOff")) {
@@ -139,6 +184,10 @@ function randomClockwiseShift(randomCWShiftButton) {
     }
 }
 
+/**
+ *
+ * @param toggleButton
+ */
 function toggleVisibility(toggleButton) {
     let body = toggleButton.parentNode.nextSibling;
     if(body.style.display === "none") {
@@ -151,6 +200,10 @@ function toggleVisibility(toggleButton) {
     }
 }
 
+/**
+ *
+ * @param attackTitleContainer
+ */
 function addToggleVisibilityButton(attackTitleContainer) {
     let toggleVisibility = document.createElement("button");
     toggleVisibility.setAttribute("onClick", "toggleVisibility(this)");
@@ -159,6 +212,10 @@ function addToggleVisibilityButton(attackTitleContainer) {
     attackTitleContainer.append(toggleVisibility);
 }
 
+/**
+ *
+ * @param attackTitleContainer
+ */
 function addAttackTitle(attackTitleContainer) {
     let h2 = document.createElement("h1");
     h2.setAttribute("class", "attackTitle");
@@ -166,6 +223,11 @@ function addAttackTitle(attackTitleContainer) {
     attackTitleContainer.append(h2);
 }
 
+/**
+ *
+ * @param attackTitleContainer
+ * @param randomClockwiseShift
+ */
 function addRandomCWShiftButton(attackTitleContainer, randomClockwiseShift) {
     let randomClockwiseShiftButton = document.createElement("button");
     randomClockwiseShiftButton.setAttribute("onClick", "randomClockwiseShift(this)");
@@ -178,6 +240,11 @@ function addRandomCWShiftButton(attackTitleContainer, randomClockwiseShift) {
     attackTitleContainer.append(randomClockwiseShiftButton);
 }
 
+/**
+ *
+ * @param attackTitleContainer
+ * @param attackDelay
+ */
 function addAttackDelayInput(attackTitleContainer, attackDelay) {
     let delay = document.createElement("label");
     delay.textContent = "Delay: ";
@@ -193,6 +260,10 @@ function addAttackDelayInput(attackTitleContainer, attackDelay) {
     attackTitleContainer.append(delayTimeInput);
 }
 
+/**
+ *
+ * @param attackTitleContainer
+ */
 function addDeleteAttackButton(attackTitleContainer) {
     let deleteAttack = document.createElement("button");
     deleteAttack.setAttribute("onClick", "deleteAttack(this)");
@@ -201,6 +272,11 @@ function addDeleteAttackButton(attackTitleContainer) {
     attackTitleContainer.append(deleteAttack);
 }
 
+/**
+ *
+ * @param attackBodyContainer
+ * @returns {HTMLButtonElement}
+ */
 function addAddArrowButton(attackBodyContainer) {
     let addArrowButton = document.createElement("button");
     addArrowButton.setAttribute("onClick", "addArrow(this)");
@@ -210,6 +286,13 @@ function addAddArrowButton(attackBodyContainer) {
     return addArrowButton;
 }
 
+/**
+ *
+ * @param randomClockwiseShift
+ * @param attackDelay
+ * @param fromJson
+ * @returns {HTMLButtonElement|null}
+ */
 function addAttack(randomClockwiseShift = false, attackDelay = "10", fromJson = false) {
     if(attackCount >= 40) {
         alert("Maximum number of attacks reached");
@@ -241,6 +324,11 @@ function addAttack(randomClockwiseShift = false, attackDelay = "10", fromJson = 
     return addArrowButton;
 }
 
+/**
+ *
+ * @param input
+ * @param max
+ */
 function filterCharactersAndUpdateJson(input, max) {
     limitCharacters(input, max);
     input.value = input.value.replace(/\D/g, "");
@@ -259,37 +347,67 @@ function filterCharactersAndUpdateJson(input, max) {
     }
 }
 
+/**
+ *
+ * @param input
+ * @param max
+ */
 function limitCharacters(input, max) {
     if(input.value.length > max) {
         input.value = input.value.substring(0, input.value.length - 1);
     }
 }
 
+/**
+ *
+ * @param input
+ */
 function updateAttackDelay(input) {
     let attackIndex = getAttackIndexFromAttackTitleElement(input);
     levelJson["attacks"][attackIndex]["attackDelay"] = input.value;
 }
 
+/**
+ *
+ * @param input
+ */
 function updateArrowDelay(input) {
     let indices = getAttackAndArrowIndicesFromArrowElement(input);
     levelJson["attacks"][indices[0]]["arrows"][indices[1]]["delay"] = input.value;
 }
 
+/**
+ *
+ * @param input
+ */
 function updateSpeed(input) {
     let indices = getAttackAndArrowIndicesFromArrowElement(input);
     levelJson["attacks"][indices[0]]["arrows"][indices[1]]["speed"] = input.value;
 }
 
+/**
+ *
+ * @param checkbox
+ */
 function updateReverseCheckBox(checkbox) {
     let indices = getAttackAndArrowIndicesFromArrowElement(checkbox);
     levelJson["attacks"][indices[0]]["arrows"][indices[1]]["reversed"] = checkbox.checked;
 }
 
+/**
+ *
+ * @param selection
+ */
 function updateDirectionSelection(selection) {
     let indices = getAttackAndArrowIndicesFromArrowElement(selection);
     levelJson["attacks"][indices[0]]["arrows"][indices[1]]["direction"] = getArrowLetter(selection.value);
 }
 
+/**
+ *
+ * @param arrowElement
+ * @returns {number[]}
+ */
 function getAttackAndArrowIndicesFromArrowElement(arrowElement) {
     let child = arrowElement.parentNode;
     let parent = child.parentNode;
@@ -298,12 +416,21 @@ function getAttackAndArrowIndicesFromArrowElement(arrowElement) {
     return [attackIndex, arrowIndex];
 }
 
+/**
+ *
+ * @param attackTitleElement
+ * @returns {number}
+ */
 function getAttackIndexFromAttackTitleElement(attackTitleElement) {
     let attack = attackTitleElement.parentNode.parentNode;
     let attacksContainer = attack.parentNode;
     return Array.prototype.indexOf.call(attacksContainer.children, attack);
 }
 
+/**
+ *
+ * @param attackCreatorHeading
+ */
 function addHeaderTitleInput(attackCreatorHeading) {
     let title = document.createElement("label");
     title.textContent = "Title: ";
@@ -318,6 +445,10 @@ function addHeaderTitleInput(attackCreatorHeading) {
     attackCreatorHeading.append(titleInput);
 }
 
+/**
+ *
+ * @param attackCreatorHeading
+ */
 function addHeaderDescriptionInput(attackCreatorHeading) {
     let description = document.createElement("label");
     description.textContent = "Description: ";
@@ -332,6 +463,10 @@ function addHeaderDescriptionInput(attackCreatorHeading) {
     attackCreatorHeading.append(descriptionInput);
 }
 
+/**
+ *
+ * @param diffAndVisibilityDiv
+ */
 function addHeaderDifficultySelection(diffAndVisibilityDiv) {
     let difficulty = document.createElement("label");
     difficulty.textContent = "Difficulty: ";
@@ -353,6 +488,10 @@ function addHeaderDifficultySelection(diffAndVisibilityDiv) {
     }
 }
 
+/**
+ *
+ * @param diffAndVisibilityDiv
+ */
 function addHeaderVisibilityCheckBox(diffAndVisibilityDiv) {
     let isPublic = document.createElement("label");
     isPublic.textContent = "Public: ";
@@ -366,6 +505,10 @@ function addHeaderVisibilityCheckBox(diffAndVisibilityDiv) {
     diffAndVisibilityDiv.appendChild(isPublicCheckbox);
 }
 
+/**
+ *
+ * @param attackCreatorHeading
+ */
 function addHeaderLevelSaveButton(attackCreatorHeading) {
     let saveButton = document.createElement("button");
     saveButton.classList.add("saveLevelButton");
@@ -374,6 +517,9 @@ function addHeaderLevelSaveButton(attackCreatorHeading) {
     attackCreatorHeading.append(saveButton);
 }
 
+/**
+ *
+ */
 function createHeaderElements() {
     let attackCreatorHeading = document.createElement("div");
     attackCreatorHeading.classList.add("attackCreatorHeading");
@@ -396,12 +542,18 @@ function createHeaderElements() {
     document.body.insertBefore(heading, document.body.firstChild);
 }
 
+/**
+ *
+ */
 function initializeLevelCreator() {
     attackCount = 0;
     createHeaderElements();
     populateLevelCreator();
 }
 
+/**
+ *
+ */
 function populateLevelCreator() {
     document.getElementById("titleInput").value = levelJson["title"];
     document.getElementById("descriptionInput").value = levelJson["description"];
@@ -419,6 +571,9 @@ function populateLevelCreator() {
     }
 }
 
+/**
+ *
+ */
 function save() {
     let tempJson = levelJson;
     tempJson["title"] = document.getElementById("titleInput").value;
@@ -457,6 +612,11 @@ function save() {
     
 }
 
+/**
+ *
+ * @param direction
+ * @returns {string|null}
+ */
 function getArrowSymbol(direction) {
     switch(direction) {
         case "U":
@@ -473,6 +633,11 @@ function getArrowSymbol(direction) {
     return null;
 }
 
+/**
+ *
+ * @param direction
+ * @returns {string|null}
+ */
 function getArrowLetter(direction) {
     switch(direction) {
         case "↑":
