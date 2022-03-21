@@ -39,32 +39,6 @@ def game():
     return render_template("game/game.html")
 
 
-@app.route("/level-creator/")
-def level_creator():
-    level_id = request.args.get("id")
-    new_level = {
-        "title": "Untitled",
-        "description": "Add a description",
-        "difficulty": "easy",
-        "isPublic": False,
-        "attacks": []
-    }
-    session['level_id'] = None
-    send = {}
-    if level_id is not None:
-        level_data = level_handler.get_level_info(level_id)
-        session['level_id'] = level_id
-        send = level_data[0]['level_description']
-        send['title'] = level_data[0]['level_name']
-        send['description'] = level_data[0]['level_summary']
-        send['difficulty'] = level_data[0]['level_diff']
-        send['isPublic'] = level_data[0]['level_published']
-    else:
-        send = new_level
-    
-    return render_template("level_creator/level_creator.html", level_json = send, is_new_level = level_id is None)
-
-
 @app.route("/home-feed")
 def feed():
     data = request.json
@@ -107,6 +81,32 @@ def delete_comment():
     return redirect(url_for("level", id = data['levelId']))
 
 
+@app.route("/level-creator/")
+def level_creator():
+    level_id = request.args.get("id")
+    new_level = {
+        "title": "Untitled",
+        "description": "Add a description",
+        "difficulty": "easy",
+        "isPublic": False,
+        "attacks": []
+    }
+    session['level_id'] = None
+    send = {}
+    if level_id is not None:
+        level_data = level_handler.get_level_info(level_id)
+        session['level_id'] = level_id
+        send = level_data[0]['level_description']
+        send['title'] = level_data[0]['level_name']
+        send['description'] = level_data[0]['level_summary']
+        send['difficulty'] = level_data[0]['level_diff']
+        send['isPublic'] = level_data[0]['level_published']
+    else:
+        send = new_level
+    
+    return render_template("level_creator/level_creator.html", level_json = send, is_new_level = level_id is None)
+
+
 @app.route("/update-level", methods = ['PATCH'])
 def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
@@ -136,7 +136,6 @@ def update_level():
         "levelPublished": is_public
     }
     level_handler.update_level(update)
-    
     response = "Saved!"
     return jsonify(response = response)
 
