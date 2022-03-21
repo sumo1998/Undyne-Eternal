@@ -66,6 +66,7 @@ class Hud extends GraphicsObject {
      */
     constructor(numAttacks, love, player) {
         super();
+        
         this.#currentAttackNumber = 0;
         this.#numAttacks = numAttacks;
         

@@ -39,6 +39,11 @@ class Undyne extends GraphicsObject {
     static #legsDefaultPos = new PIXI.Point(324, 210);
     
     /**
+     * The difficulty of the game.
+     */
+    #difficulty;
+    
+    /**
      * The amount of time that has passed since the start of the animation, resetting to 0 after every animation cycle.
      */
     #animationTime;
@@ -111,8 +116,10 @@ class Undyne extends GraphicsObject {
     /**
      * Initializes an Undyne instance.
      */
-    constructor() {
+    constructor(difficulty) {
         super();
+        
+        this.#difficulty = difficulty;
         
         this.#animationTime = 0;
         
@@ -178,6 +185,15 @@ class Undyne extends GraphicsObject {
         Main.runner.gameplayStage.addChild(this.#opacityGraphics);
         
         this.#hairSprite.play();
+    }
+    
+    /**
+     * Returns the background music associated with the current difficulty.
+     * @return The background music associated with the current difficulty
+     */
+    static getBgm(difficulty) {
+        const capitalFirstLetterDifficulty = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+        return Main.runner.assetManager.getAudio("undyne" + capitalFirstLetterDifficulty + "Bgm");
     }
     
     /**
@@ -316,6 +332,7 @@ class Undyne extends GraphicsObject {
             }
             else {
                 this.#player.heartColor = "green";
+                Undyne.getBgm(this.#difficulty).play();
                 this.#player.showShieldSprites();
             }
         }

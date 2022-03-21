@@ -79,7 +79,7 @@ class GameHandler extends GraphicsObject {
         
         const attacks = AttackParser.parse(levelDataJson);
         
-        this.#undyne = new Undyne();
+        this.#undyne = new Undyne(difficulty);
         this.#box = new Box();
         this.#player = new Player(difficulty);
         this.#undyne.player = this.#player;
@@ -170,8 +170,6 @@ class GameHandler extends GraphicsObject {
             0.5 * Main.runner.gameHeight + Player.shieldDistance
         );
         
-        this.#getBgm().play();
-        
         this.#undyne.opacity = 0.2;
         
         this.#attackRunner.addNextAttack();
@@ -191,7 +189,7 @@ class GameHandler extends GraphicsObject {
         this.#undyne.swingArm();
         this.#undyne.opacity = 1;
         
-        this.#getBgm().stop();
+        Undyne.getBgm(this.#difficulty).stop();
         
         let queueText;
         if(endState === "game over") {
