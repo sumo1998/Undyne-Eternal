@@ -1,5 +1,5 @@
-drop table comments cascade;
-drop table levels cascade;
-drop table usr cascade;
-drop type diff_t;
-drop extension pg_trgm;
+DROP TABLE comments CASCADE;
+DROP TABLE levels CASCADE;
+DROP TABLE usr CASCADE;
+DROP TYPE DIFF_T;
+DROP EXTENSION pg_trgm;

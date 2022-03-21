@@ -10,14 +10,10 @@ BASE_PATH = f"{os.path.dirname(os.path.realpath(__file__))}/sql"
 
 
 def check_if_user_in_db(user_id, user_email = None) -> Optional[auth_models.UserModel]:
-    query = ''
     with open(f"{BASE_PATH}/getUserData.sql") as file:
-        query = render_template_string(
-            ' '.join(file.readlines()), user_id = user_id, user_email = user_email,
-            check_email = bool(user_email)
-        )
+        query = render_template_string(file.read(), check_email = bool(user_email))
         with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query)
+            cur.execute(query, dict(user_id = user_id, user_email = user_email))
             res = cur.fetchall()
             # If we are getting more than one match for this, something has gone wrong
             assert len(res) <= 1
@@ -32,21 +28,16 @@ def check_if_user_in_db(user_id, user_email = None) -> Optional[auth_models.User
 
 
 def check_if_username_is_unique(user_name) -> bool:
-    query = ''
     with open(f"{BASE_PATH}/checkIfUsernameUnique.sql") as file:
-        query = render_template_string(' '.join(file.readlines()), user_name = user_name)
+        query = file.read()
         with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query)
+            cur.execute(query, (user_name,))
             res = cur.fetchall()
             return bool(res)
 
 
 def write_userdata_to_db(user_data: auth_models.UserModel):
     with open(f"{BASE_PATH}/insertUserData.sql") as file:
-        query = render_template_string(
-            ' '.join(file.readlines()), user_id = user_data.user_id,
-            user_email = user_data.user_email,
-            user_name = user_data.user_name, user_avatar = user_data.user_avatar
-        )
+        query = file.read()
         with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query)
+            cur.execute(query, user_data.dict())

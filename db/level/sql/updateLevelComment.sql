@@ -1,5 +1,4 @@
-update comments
-set comment_desc=%s,
+UPDATE comments
+SET comment_desc=%s,
     comment_rating=%s
-where
-    comment_id=%s;
+WHERE comment_id =% s;
