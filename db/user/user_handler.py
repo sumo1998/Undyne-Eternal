@@ -1,4 +1,3 @@
-from flask import render_template_string
 from db import database_handler
 
 """
@@ -12,7 +11,7 @@ def get_user_info(id):
     query = ""
     with open("./db/user/sql/user_info.sql") as f:
         query = f.read()
-
+        
         with database_handler.get_db_cursor() as cur:
             cur.execute(query, id)
             res = cur.fetchall()
@@ -30,7 +29,7 @@ def get_user_levels(id):
     query = ""
     with open("./db/user/sql/user_levels.sql") as f:
         query = f.read()
-
+        
         with database_handler.get_db_cursor() as cur:
             cur.execute(query, id)
             res = cur.fetchall()
@@ -41,7 +40,7 @@ def update_user(data):
     uid = ""
     user_name = ""
     user_avatar = ""
-
+    
     for key in data:
         if key == "userId":
             uid = int(data[key])
@@ -49,7 +48,7 @@ def update_user(data):
             user_name = data[key]
         elif key == "userAvatar":
             user_avatar = data[key]
-
+    
     query = ""
     with open('./db/user/sql/updateUser.sql') as f:
         query = f.read()
@@ -57,4 +56,3 @@ def update_user(data):
         with database_handler.get_db_cursor(True) as cur:
             cur.execute(query, (user_name, user_avatar, uid))
             print("Executed query")
-    

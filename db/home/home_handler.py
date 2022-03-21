@@ -13,4 +13,3 @@ def get_home_feed():
         cur.execute(query)
         res = cur.fetchall()
         return res
-

@@ -1,1 +1,3 @@
-delete from levels where level_id=%s;
+delete
+from levels
+where level_id =%s;
