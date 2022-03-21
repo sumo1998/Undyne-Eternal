@@ -60,6 +60,8 @@ class GameHandler extends GraphicsObject {
         
         this.#state = "init";
         
+        Main.runner.assetManager.getAudio("introBgm").play();
+        
         let love = 0;
         switch(difficulty) {
             case "easy":
@@ -149,18 +151,10 @@ class GameHandler extends GraphicsObject {
     }
     
     /**
-     * Returns the background music associated with the current difficulty.
-     * @return The background music associated with the current difficulty
-     */
-    #getBgm() {
-        const capitalFirstLetterDifficulty = this.#difficulty.charAt(0).toUpperCase() + this.#difficulty.slice(1);
-        return Main.runner.assetManager.getAudio("undyne" + capitalFirstLetterDifficulty + "Bgm");
-    }
-    
-    /**
      * Restarts the current level.
      */
     restartLevel() {
+        Main.runner.assetManager.getAudio("introBgm").stop();
         this.#state = "playing";
         this.#startButton.visible = false;
         this.#playAgainButton.visible = false;
