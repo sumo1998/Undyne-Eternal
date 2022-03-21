@@ -166,7 +166,7 @@ function addAttackTitle(attackTitleContainer) {
     attackTitleContainer.append(h2);
 }
 
-function addRandomCWShiftButton(attackTitleContainer) {
+function addRandomCWShiftButton(attackTitleContainer, randomClockwiseShift) {
     let randomClockwiseShiftButton = document.createElement("button");
     randomClockwiseShiftButton.setAttribute("onClick", "randomClockwiseShift(this)");
     let randomClockwiseShiftClass = "randomClockwiseShiftOff";
@@ -230,7 +230,7 @@ function addAttack(randomClockwiseShift = false, attackDelay = "10", fromJson = 
     
     addToggleVisibilityButton(attackTitleContainer);
     addAttackTitle(attackTitleContainer);
-    addRandomCWShiftButton(attackTitleContainer);
+    addRandomCWShiftButton(attackTitleContainer, randomClockwiseShift);
     addAttackDelayInput(attackTitleContainer, attackDelay);
     addDeleteAttackButton(attackTitleContainer);
     attack.append(attackTitleContainer);
@@ -454,7 +454,6 @@ function save() {
             }
         });
     }
-    
     
 }
 

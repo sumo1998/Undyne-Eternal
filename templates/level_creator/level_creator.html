@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="/static/level_creator/level_creator.css">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script>
         let levelJson = {{ level_json|tojson }};
         let addLevelUrl = "{{ url_for("add_level") }}";

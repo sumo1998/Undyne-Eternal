@@ -45,7 +45,7 @@ def level_creator():
     new_level = {
         "title": "Untitled",
         "description": "Add a description",
-        "difficulty": "Easy",
+        "difficulty": "easy",
         "isPublic": False,
         "attacks": []
     }
