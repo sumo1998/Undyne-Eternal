@@ -54,7 +54,8 @@
                     {{ level_data_json | tojson }}
                 {% else %}
                     ""
-                {% endif %}
+                {% endif %},
+                "{{ difficulty }}"
             );
         });
     </script>

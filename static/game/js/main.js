@@ -78,10 +78,11 @@ class Main {
     /**
      * Waits until the assets are loaded and then starts the game.
      * @param levelDataJson The level data in JSON format to parse
+     * @param difficulty The difficulty of the game
      */
-    startGame(levelDataJson) {
+    startGame(levelDataJson, difficulty) {
         if(!this.#assetManager.isLoaded()) {
-            setTimeout(() => this.startGame(levelDataJson), 500);
+            setTimeout(() => this.startGame(levelDataJson, difficulty), 500);
             return;
         }
         
@@ -93,7 +94,7 @@ class Main {
             "click", () => Main.runner.assetManager.getAudio("buttonSelectSfx").play()
         );
         
-        this.#gameHandler = new GameHandler("easy", levelDataJson);
+        this.#gameHandler = new GameHandler(difficulty, levelDataJson);
         
         KeyboardHandler.initialize(this.#gameHandler);
         
