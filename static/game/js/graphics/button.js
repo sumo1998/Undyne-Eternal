@@ -39,7 +39,7 @@ class Button extends GraphicsObject {
      * @param transitionMs The time it will take to transition between the normal button sprite and the hover sprite
      * @param buttonAction The action to take on button click/touch
      */
-    constructor(x, y, width, height, imageName, buttonAction, imageHoverName, transitionMs) {
+    constructor(x, y, width, height, imageName, buttonAction, imageHoverName, hoverAction, transitionMs) {
         super();
         
         this.#sprite = new PIXI.Sprite(Main.runner.assetManager.getTexture(imageName));
@@ -67,7 +67,10 @@ class Button extends GraphicsObject {
             this.#hoverTime = 0;
             this.#hovering = false;
             
-            this.#sprite.on("mouseover", () => {this.#hovering = true;});
+            this.#sprite.on("mouseover", () => {
+                hoverAction();
+                this.#hovering = true;
+            });
             this.#sprite.on("mouseout", () => {this.#hovering = false;});
             
             Main.runner.gameplayStage.addChild(this.#hoverSprite);

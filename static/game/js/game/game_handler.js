@@ -96,6 +96,7 @@ class GameHandler extends GraphicsObject {
             "startButton",
             this.restartLevel.bind(this),
             "startButtonHover",
+            () => Main.runner.assetManager.getAudio("buttonHoverSfx").play(),
             300
         );
         
@@ -108,6 +109,7 @@ class GameHandler extends GraphicsObject {
             "playAgainButton",
             this.restartLevel.bind(this),
             "playAgainButtonHover",
+            () => Main.runner.assetManager.getAudio("buttonHoverSfx").play(),
             300
         );
         this.#playAgainButton.visible = false;
@@ -155,6 +157,7 @@ class GameHandler extends GraphicsObject {
      */
     restartLevel() {
         Main.runner.assetManager.getAudio("introBgm").stop();
+        Main.runner.assetManager.getAudio("buttonSelectSfx").play();
         this.#state = "playing";
         this.#startButton.visible = false;
         this.#playAgainButton.visible = false;

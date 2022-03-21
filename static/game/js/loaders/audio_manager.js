@@ -30,7 +30,9 @@ class AudioManager extends AssetLoader {
             "undyneHardBgm": false,
             "arrowBlockedSfx": false,
             "arrowDamageSfx": false,
-            "undyneSpeakSfx": false
+            "undyneSpeakSfx": false,
+            "buttonHoverSfx": false,
+            "buttonSelectSfx": false
         };
         
         //The music played while waiting for the user to play
@@ -89,6 +91,22 @@ class AudioManager extends AssetLoader {
             0.7
         );
         
+        //The sfx that plays when undyne is speaking
+        const buttonHoverSfx = this.#getAudio(
+            "buttonHoverSfx",
+            "sfx/button_hover.wav",
+            false,
+            0.7
+        );
+        
+        //The sfx that plays when undyne is speaking
+        const buttonSelectSfx = this.#getAudio(
+            "buttonSelectSfx",
+            "sfx/button_select.wav",
+            false,
+            0.7
+        );
+        
         this.#audioMap = {
             "introBgm": introBgm,
             "undyneEasyBgm": undyneEasyBgm,
@@ -96,7 +114,9 @@ class AudioManager extends AssetLoader {
             "undyneHardBgm": undyneHardBgm,
             "arrowBlockedSfx": arrowBlockedSfx,
             "arrowDamageSfx": arrowDamageSfx,
-            "undyneSpeakSfx": undyneSpeakSfx
+            "undyneSpeakSfx": undyneSpeakSfx,
+            "buttonHoverSfx": buttonHoverSfx,
+            "buttonSelectSfx": buttonSelectSfx
         };
     }
     

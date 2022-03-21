@@ -85,6 +85,14 @@ class Main {
             return;
         }
         
+        const backToHomeFeedButton = document.querySelector("#back-home-feed");
+        backToHomeFeedButton.addEventListener(
+            "mouseover", () => Main.runner.assetManager.getAudio("buttonHoverSfx").play()
+        );
+        backToHomeFeedButton.addEventListener(
+            "click", () => Main.runner.assetManager.getAudio("buttonSelectSfx").play()
+        );
+        
         this.#gameHandler = new GameHandler("easy", levelDataJson);
         
         KeyboardHandler.initialize(this.#gameHandler);
