@@ -69,7 +69,7 @@ def build_query(params):
     from 
         levels as l,usr as u
     where 
-        l.user_id = u.user_id """
+        l.user_id = u.user_id and l.level_published = true """
     
     # Add difficulty params
     difficulty = params['filters']['difficulty']

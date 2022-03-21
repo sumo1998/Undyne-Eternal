@@ -3,6 +3,6 @@ select
 from 
     levels as l,usr as u
 where 
-    l.user_id = u.user_id 
+    l.user_id = u.user_id and l.level_published = true
 order by 
     l.level_created_timestamp desc;

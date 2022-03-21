@@ -58,7 +58,7 @@ def level_creator():
         send['title'] = level_data[0]['level_name']
         send['description'] = level_data[0]['level_summary']
         send['difficulty'] = level_data[0]['level_diff']
-        # send['isPublic'] = level_data[0]['level_diff']
+        send['isPublic'] = level_data[0]['level_published']
     else:
         send = new_level
     
@@ -68,7 +68,6 @@ def level_creator():
 @app.route("/home-feed")
 def feed():
     data = request.json
-    print("DATA: " + str(data))
     res = home_handler.get_home_feed(data)
     return render_template("home/home_template.html", res = res)
 
@@ -133,7 +132,8 @@ def update_level():
         "levelRating": current_level_data[0]['level_rating'],
         "levelSummary": description,
         "levelDescription": json.dumps(attack_data),
-        "levelDiff": difficulty
+        "levelDiff": difficulty,
+        "levelPublished": is_public
     }
     level_handler.update_level(update)
     
