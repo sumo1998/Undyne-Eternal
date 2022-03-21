@@ -1,15 +1,16 @@
 import os
+from dotenv import load_dotenv, find_dotenv
 from contextlib import contextmanager
 
-from dotenv import load_dotenv, find_dotenv
 from flask import current_app
 from psycopg2.extras import DictCursor
 from psycopg2.pool import ThreadedConnectionPool
-
 import utils
 
 pool = None
+
 load_dotenv(find_dotenv(utils.get_project_base_path()))
+
 
 
 def setup():
