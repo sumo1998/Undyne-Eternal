@@ -19,6 +19,11 @@ class Hud extends GraphicsObject {
     #numAttacks;
     
     /**
+     * Contains the instructions on the controls.
+     */
+    #instructionsTest;
+    
+    /**
      * The HUD text showing the current attack number out of the total number of attacks.
      */
     #currentAttackText;
@@ -65,14 +70,22 @@ class Hud extends GraphicsObject {
         this.#numAttacks = numAttacks;
         
         // noinspection JSCheckFunctionSignatures
+        this.#instructionsTest = new PIXI.extras.BitmapText(
+            "Press Z/Enter to confirm, X/Shift to Skip,\nand arrow keys/WASD/IJKL to move",
+            {font: "10px Undertale", align: "center"}
+        );
+        this.#instructionsTest.x = 0.5 * Main.runner.gameWidth - 0.5 * this.#instructionsTest.width;
+        this.#instructionsTest.y = 392;
+        
+        // noinspection JSCheckFunctionSignatures
         this.#currentAttackText = new PIXI.extras.BitmapText("", {font: "15px Numbers", align: "right"});
         this.incrementAttackNumber();
-        this.#currentAttackText.x = 0;
+        this.#currentAttackText.x = 20;
         this.#currentAttackText.y = 450;
         
         // noinspection JSCheckFunctionSignatures
         this.#loveText = new PIXI.extras.BitmapText("LV " + love, {font: "15px Numbers", align: "left"});
-        this.#loveText.position.x = 150;
+        this.#loveText.position.x = 170;
         this.#loveText.position.y = 450;
         
         this.#player = player;
@@ -89,11 +102,12 @@ class Hud extends GraphicsObject {
         this.#timeText = new PIXI.extras.BitmapText("", {font: "15px Numbers", align: "right"});
         this.#updateTime(0);
         this.#timeText.anchor = new PIXI.Point(1, 0);
-        this.#timeText.position.x = 523;
+        this.#timeText.position.x = 458;
         this.#timeText.position.y = 450;
         
         this.#hpGraphics = new PIXI.Graphics();
-        
+    
+        Main.runner.gameplayStage.addChild(this.#instructionsTest);
         Main.runner.gameplayStage.addChild(this.#currentAttackText);
         Main.runner.gameplayStage.addChild(this.#loveText);
         Main.runner.gameplayStage.addChild(this.#hpText);
@@ -139,6 +153,7 @@ class Hud extends GraphicsObject {
      * Resets the fields to match the start of a new level.
      */
     reset() {
+        this.#instructionsTest.visible = false;
         this.#currentAttackNumber = 0;
         this.incrementAttackNumber();
         this.#updateHp();
