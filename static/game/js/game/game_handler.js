@@ -92,7 +92,7 @@ class GameHandler extends GraphicsObject {
             startButtonWidth,
             53,
             "startButton",
-            () => {this.restartLevel();},
+            this.restartLevel.bind(this),
             "startButtonHover",
             300
         );
@@ -104,7 +104,7 @@ class GameHandler extends GraphicsObject {
             playAgainButtonWidth,
             53,
             "playAgainButton",
-            () => {this.restartLevel();},
+            this.restartLevel.bind(this),
             "playAgainButtonHover",
             300
         );

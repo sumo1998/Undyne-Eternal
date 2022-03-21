@@ -90,7 +90,7 @@ class Main {
         KeyboardHandler.initialize(this.#gameHandler);
         
         this.#previousTime = performance.now();
-        requestAnimationFrame(() => this.update());
+        requestAnimationFrame(this.update.bind(this));
     }
     
     /**
@@ -103,7 +103,7 @@ class Main {
         
         this.#gameHandler.update(deltaMs);
         
-        requestAnimationFrame(() => this.update());
+        requestAnimationFrame(this.update.bind(this));
     }
     
     /**

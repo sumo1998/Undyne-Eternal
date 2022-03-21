@@ -117,7 +117,7 @@ class AudioManager extends AssetLoader {
         }
         
         return new Howl({
-            "onload": () => this.#markAudioLoaded(audioName),
+            "onload": this.#markAudioLoaded.bind(this, audioName),
             "src": localAudioPaths,
             "loop": loop,
             "volume": volume
