@@ -88,12 +88,13 @@ class MathUtility {
     }
     
     /**
-     * Returns a time component in the form "XX:" where XX is 2-digits and 0-padded.
+     * Returns a time component in the form XX plus a symbol where XX is 2-digits and 0-padded.
      * @param num The number to format
-     * @return A time component in the form "XX:" where XX is 2-digits and 0-padded
+     * @param symbol The symbol to add to the padded time part
+     * @return A time component in the form XX plus a symbol where XX is 2-digits and 0-padded
      */
-    static #formatTimePart(num) {
-        return String(num).padStart(2, "0") + ":";
+    static #formatTimePart(num, symbol) {
+        return String(num).padStart(2, "0") + symbol;
     }
     
     /**
@@ -152,20 +153,21 @@ class MathUtility {
                 result = this.#computeTimeUnitsAndRemainder(ms, msInHour, 59);
                 const numHours = result.numUnits;
                 ms = result.remainingMs;
-                hours = MathUtility.#formatTimePart(numHours);
+                hours = MathUtility.#formatTimePart(numHours, ":");
             case "minutes":
                 result = this.#computeTimeUnitsAndRemainder(ms, msInMin, 59);
                 const numMin = result.numUnits;
                 ms = result.remainingMs;
-                minutes = MathUtility.#formatTimePart(numMin);
+                minutes = MathUtility.#formatTimePart(numMin, ":");
             case "seconds":
                 result = this.#computeTimeUnitsAndRemainder(ms, msInSec, 59);
                 const numSec = result.numUnits;
-                seconds = MathUtility.#formatTimePart(numSec);
+                ms = result.remainingMs; 
+                seconds = MathUtility.#formatTimePart(numSec, ".");
             case "cs":
                 result = this.#computeTimeUnitsAndRemainder(ms, msInCs, 99);
                 const numCs = result.numUnits;
-                cs = MathUtility.#formatTimePart(numCs);
+                cs = MathUtility.#formatTimePart(numCs, "");
                 break;
         }
         
