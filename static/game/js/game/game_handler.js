@@ -60,7 +60,10 @@ class GameHandler extends GraphicsObject {
         
         this.#state = "init";
         
-        Main.runner.assetManager.getAudio("introBgm").play();
+        //Play the intro bgm only if the level data JSON is valid
+        if(levelDataJson !== "") {
+            Main.runner.assetManager.getAudio("introBgm").play();
+        }
         
         let love = 0;
         switch(difficulty) {
@@ -77,7 +80,8 @@ class GameHandler extends GraphicsObject {
         
         this.#difficulty = difficulty;
         
-        const attacks = AttackParser.parse(levelDataJson);
+        //Parse the attacks if the level data JSON is valid; else, use an empty array as default
+        const attacks = levelDataJson === "" ? [] : AttackParser.parse(levelDataJson);
         
         this.#undyne = new Undyne(difficulty);
         this.#box = new Box();
@@ -120,6 +124,45 @@ class GameHandler extends GraphicsObject {
             0.5 * Main.runner.gameHeight - Player.shieldDistance,
             0.5 * Main.runner.gameHeight + Player.shieldDistance
         );
+        
+        //If the level data JSON is invalid
+        if(levelDataJson === "") {
+            this.#startButton.visible = false;
+            this.#hud.badLevelMode();
+            this.#handleEmptyLevelData();
+        }
+    }
+    
+    /**
+     * Handles the case of invalid level data, queuing an Undyne response depending on whether or not levelId was
+     * provided and redirecting to the home feed.
+     */
+    #handleEmptyLevelData() {
+        //Retrieves the URL query parameters
+        // noinspection JSCheckFunctionSignatures
+        const params = new Proxy(
+            new URLSearchParams(window.location.search),
+            {
+                get: (searchParams, prop) => searchParams.get(prop)
+            }
+        );
+        
+        // noinspection JSUnresolvedVariable
+        if(params.levelId) {
+            this.#undyne.speechBubble.queueText([
+                "...",
+                "Do YOU think this is\na VALID level?",
+                "Well it isn't.",
+                "Get out of here!"
+            ], () => {location.href = "/";});
+        }
+        else {
+            this.#undyne.speechBubble.queueText([
+                "What the HELL do you\nthink you are doing,\npunk?",
+                "You can't get here\nwithout choosing a\nlevel.",
+                "Get out of here!"
+            ], () => {location.href = "/";});
+        }
     }
     
     /**

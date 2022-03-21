@@ -75,14 +75,14 @@ class Hud extends GraphicsObject {
             "Press Z/Enter to confirm, X/Shift to Skip,\nand arrow keys/WASD/IJKL to move",
             {font: "10px Undertale", align: "center"}
         );
-        this.#instructionsTest.x = 0.5 * Main.runner.gameWidth - 0.5 * this.#instructionsTest.width;
-        this.#instructionsTest.y = 392;
+        this.#instructionsTest.position.x = 0.5 * Main.runner.gameWidth - 0.5 * this.#instructionsTest.width;
+        this.#instructionsTest.position.y = 392;
         
         // noinspection JSCheckFunctionSignatures
         this.#currentAttackText = new PIXI.extras.BitmapText("", {font: "15px Numbers", align: "right"});
         this.incrementAttackNumber();
-        this.#currentAttackText.x = 20;
-        this.#currentAttackText.y = 450;
+        this.#currentAttackText.position.x = 20;
+        this.#currentAttackText.position.y = 450;
         
         // noinspection JSCheckFunctionSignatures
         this.#loveText = new PIXI.extras.BitmapText("LV " + love, {font: "15px Numbers", align: "left"});
@@ -107,7 +107,7 @@ class Hud extends GraphicsObject {
         this.#timeText.position.y = 450;
         
         this.#hpGraphics = new PIXI.Graphics();
-    
+        
         Main.runner.gameplayStage.addChild(this.#instructionsTest);
         Main.runner.gameplayStage.addChild(this.#currentAttackText);
         Main.runner.gameplayStage.addChild(this.#loveText);
@@ -148,6 +148,19 @@ class Hud extends GraphicsObject {
     #updateTime(deltaMs) {
         this.#elapsedTime = Math.min(this.#elapsedTime + deltaMs, Hud.#maxTime);
         this.#timeText.text = MathUtility.formatTime(this.#elapsedTime, "hours");
+    }
+    
+    /**
+     * The mode of the HUD when no level or an invalid level is provided, which is everything hidden except for a
+     * shifted-up instructions text.
+     */
+    badLevelMode() {
+        this.#instructionsTest.position.y = 300;
+        this.#currentAttackText.visible = false;
+        this.#loveText.visible = false;
+        this.#hpText.visible = false;
+        this.#hpGraphics.visible = false;
+        this.#timeText.visible = false;
     }
     
     /**
