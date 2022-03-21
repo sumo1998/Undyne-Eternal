@@ -4,8 +4,9 @@
 # But if the project grows bigger, we can change the structure to be more modular
 import os
 
+from flask import Flask, render_template, redirect, url_for, request
 from api.auth import auth_router
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, session
 from dotenv import load_dotenv, find_dotenv
 from factory import object_factory
 
@@ -33,14 +34,21 @@ def init():
 
 @app.route("/")
 def home_page():
-    return redirect(url_for("feed"))
+    return redirect(url_for("feed_get"))
 
 
 
-@app.route("/home_feed")
-def feed():
-    res = home_handler.get_home_feed()
-    return render_template("home/home_template.html", res=res)
+@app.route("/search", methods=['POST'])
+def feed_search():
+    data = request.get_json()
+    res = home_handler.get_home_feed(data)
+    return render_template("home/search_results.html", res = res)
+
+@app.route("/home-feed", methods=['GET'])
+def feed_get():
+    data = request.get_json()
+    res = home_handler.get_home_feed(data)
+    return render_template("home/home_template.html", res = res)
 
 
 @app.route("/game")
@@ -53,19 +61,24 @@ def user(id):
     user_info = user_handler.get_user_info(id)
     user_levels = user_handler.get_user_levels(id)
     level_count = len(user_levels)
-    print(user_info)
-    return render_template("profile/profile_template.html", user_info = user_info, user_levels = user_levels, level_count=level_count)
+    test_session = {"profile": {
+        "user_id": 3
+    }};
+    return render_template("profile/profile_template.html", user_info = user_info, user_levels = user_levels, level_count=level_count,
+                            session=test_session)
 
 
 @app.route("/level/<id>")
 def level(id):
     level_info = level_handler.get_level_info(id)
     level_comments = level_handler.get_level_comments(id)
-    print(level_comments)
-    return render_template("level/level_template.html", level_info=level_info, level_comments=level_comments)
+    test_session = {"profile": {
+        "user_id": 1
+    }};
+    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments, session=test_session)
 
 
-@app.route("/addComment", methods=['POST'])
+@app.route("/add-comment", methods = ['POST'])
 def add_comment():
     data = {
         "userId": request.form.get('user'),
@@ -74,10 +87,10 @@ def add_comment():
         "commentRating": request.form.get('rating')
     }
     level_handler.add_level_comment(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return redirect(url_for("level", id = data['levelId']))
 
 
-@app.route("/updateComment", methods=['PATCH'])
+@app.route("/update-comment", methods = ['PATCH'])
 def update_comment():
     data = request.form
     data = {
@@ -89,39 +102,39 @@ def update_comment():
     return jsonify({"result": "success"})
 
 
-@app.route("/deleteComment", methods=['DELETE'])
+@app.route("/delete-comment", methods = ['DELETE'])
 def delete_comment():
     data = request.form
     level_handler.delete_comment(data)
     return jsonify({"result": "success"})
 
 
-@app.route("/updateLevel", methods=['PATCH'])
+@app.route("/update-level", methods = ['PATCH'])
 def update_level():
     data = request.form
     level_handler.update_level(data)
-    return redirect(url_for("level", id=data['levelId']))
+    return redirect(url_for("level", id = data['levelId']))
 
 
-@app.route("/deleteLevel", methods=['DELETE'])
+@app.route("/delete-level", methods = ['DELETE'])
 def delete_level():
     data = request.form
     level_handler.delete_level(data)
     return redirect(url_for("home_page"))
 
 
-@app.route("/addLevel", methods=['POST'])
+@app.route("/add-level", methods = ['POST'])
 def add_level():
     data = request.form
     level_handler.add_level(data)
     return redirect(url_for("home_page"))
 
 
-@app.route("/updateUser", methods=['PATCH'])
+@app.route("/update-user", methods = ['PATCH'])
 def update_user():
     data = request.json
     user_handler.update_user(data)
-    return redirect(url_for("user", id=data["userId"]))
+    return redirect(url_for("user", id = data["userId"]))
 
 
 if __name__ == '__main__':

@@ -1,15 +1,8 @@
-from flask import render_template_string
 from db import database_handler
-
-"""
-    Returns info for user with user_id = id
-    Parameters:
-        id - user id
-"""
+from db.user.user_pydantic import UpdateUser
 
 
 def get_user_info(id):
-    query = ""
     with open("./db/user/sql/user_info.sql") as f:
         query = f.read()
         
@@ -19,15 +12,7 @@ def get_user_info(id):
             return res
 
 
-"""
-    Returns info on all levels created by the user with user_id = id
-    Parameters:
-        id - user id
-"""
-
-
 def get_user_levels(id):
-    query = ""
     with open("./db/user/sql/user_levels.sql") as f:
         query = f.read()
         
@@ -38,19 +23,12 @@ def get_user_levels(id):
 
 
 def update_user(data):
-    uid = ""
-    user_name = ""
-    user_avatar = ""
+    dt = UpdateUser(**data)
+    d = data
+    uid = d['userId']
+    user_name = d['userName']
+    user_avatar = d['userAvatar']
     
-    for key in data:
-        if key == "userId":
-            uid = int(data[key])
-        elif key == "userName":
-            user_name = data[key]
-        elif key == "userAvatar":
-            user_avatar = data[key]
-    
-    query = ""
     with open('./db/user/sql/updateUser.sql') as f:
         query = f.read()
         

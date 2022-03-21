@@ -254,6 +254,7 @@ p {
 }
 
 #search-bar {
+    position: relative;
     color: #CFCFCF;
     background-color: #242424;
     border: solid;
@@ -323,6 +324,7 @@ p {
     transition: 0.3s;
     transform: scale(0.909, 0.909);
     cursor: pointer;
+    user-select: none;
 }
 
 .button:hover {
@@ -501,4 +503,37 @@ i.fa-trash {
     right: 0px;
 }
 
+#sort-filter {
+    display: none;
+    flex-direction: column;
+    margin: 1em auto;
+    padding: 0.5em;
+    font-size: 1.5em;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #303030;
+}
+
+#sort-filter > * {
+    margin: 0;
+}
+
+.options {
+    background-color: black;
+    color: white;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #303030;
+}
+
+#sortnfilter {
+    position: relative;
+    left: -6em;
+    user-select: none;
+}
+
+#sortnfilter:hover {
+    color:#00A1FF;
+    cursor: pointer;
+}
 

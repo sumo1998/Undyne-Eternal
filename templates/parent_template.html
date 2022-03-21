@@ -19,8 +19,12 @@
             <a class="logo pure-menu-item" href="{{ url_for('home_page') }}">
                 <img class="logo-img" src="{{ url_for('static',filename='img/undyne_logo.png') }}">
             </a>
-            
-            <input class="pure-menu-item" id="search-bar" type="text" placeholder="Search">
+            <div id="searcharea">
+                <input class="pure-menu-item" id="search-bar" type="text" placeholder="Search">
+                <br>
+                <a id="sortnfilter">Sort & Filter</a>
+            </div>
+
             <div class="nav-right pure-menu-item">
                 <span class="launch-game launch-game-text button">Level Editor</span>
                 <object data="{{ img }}" type="image/jpg" class="avatar-nav">
@@ -28,6 +32,45 @@
                 </object>
             </div>
         </div>
+
+
+        <script defer>
+            $(document).ready(function() {
+                $("#search-bar").keypress(function(e) {
+                    var keycode = (e.keyCode ? e.keyCode : e.which);
+                    if(keycode == "13") {
+                        //e.preventDefault();
+                        var data = {
+                            search: $("#search-bar").val(),
+                            filters: {
+                                difficulty: ["easy", "medium", "hard"],
+                                rating: [0, 5],
+                                timespan: "alltime"
+                            },
+                            sorting: "rating"
+                        };
+                        $.ajax({
+                            "cache": false,
+                            "data": JSON.stringify(data),
+                            "contentType": "application/json;charset=UTF-8",
+                            "type": "POST",
+                            "url": "/search",
+                            "success": function(response) {
+                                //document.write(response);
+                                $("#content").html(response);
+                            }
+                        });
+                    }
+                });
+                $("#sortnfilter").on("click", function() {
+                    if($("#sort-filter").css("display") == "none" || $("#sort-filter").css("visibility") == "hidden") {
+                        $("#sort-filter").css("display", "flex");
+                    } else {
+                        $("#sort-filter").hide();
+                    }
+                });
+            });
+        </script>
     </div>
     <div id="content">
         {% block content %}

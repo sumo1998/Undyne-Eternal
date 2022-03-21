@@ -1,12 +1,8 @@
+
 from flask import render_template_string
 from db import database_handler
 
-
-"""
-    Returns information for level with level_id = id
-    Parameters:
-        id - Level id
-"""
+from db.level.level_pydantic import AddComment,UpdateComment, DeleteComment, UpdateLevel, AddLevel, DeleteLevel
 
 
 def get_level_info(id):
@@ -19,12 +15,6 @@ def get_level_info(id):
             res = cur.fetchall()
             return res
 
-
-"""
-    Returns comments information for level with level_id = id
-    Parameters:
-        id - level id
-"""
 
 
 def get_level_comments(id):
@@ -39,21 +29,12 @@ def get_level_comments(id):
 
 
 def add_level_comment(data):
-    
-    uid = ""
-    body = ""
-    rating = ""
-    lid = ""
-    for key in data:
-        if key == "userId":
-            uid = int(data[key])
-        elif key == "commentBody":
-            body = data[key]
-        elif key == "levelId":
-            lid = int(data[key])
-        elif key == "commentRating":
-            rating = float(data[key])
-    
+    dt = AddComment(**data)
+    d = data
+    uid = d['userId']
+    body = d['commentBody']
+    rating = d['commentRating']
+    lid = d['levelId']
     query = ""
     with open('./db/level/sql/addLevelComment.sql') as f:
         query = f.read()
@@ -61,20 +42,22 @@ def add_level_comment(data):
         with database_handler.get_db_cursor(True) as cur:
             cur.execute(query, (uid, lid, rating, body))
             print("Executed query")
+    
+    with open('./db/level/sql/updateLevelRating.sql') as f:
+        query = f.read()
+        
+        with database_handler.get_db_cursor(True) as cur:
+            cur.execute(query, (lid,lid))
+            print("Executed query")
+
 
 
 def update_level_comment(data):
-    body = ""
-    rating = ""
-    comment_id = ""
-    for key in data:
-        if key == "commentBody":
-            body = data[key]
-        elif key == "commentRating":
-            rating = float(data[key])
-        elif key == "commentId":
-            comment_id = int(data[key])
-    
+    dt = UpdateComment(**data)
+    body = data['commentBody']
+    rating = data['commentRating']
+    comment_id = data['commentId']
+    print("DICT: "+str(data))
     query = ""
     with open('./db/level/sql/updateLevelComment.sql') as f:
         query = f.read()
@@ -85,7 +68,8 @@ def update_level_comment(data):
 
 
 def delete_comment(data):
-    comment_id = int(data["commentId"])
+    dt = DeleteComment(**data)
+    comment_id = data['commentId']
     query = ""
     with open('./db/level/sql/deleteComment.sql') as f:
         query = f.read()
@@ -96,26 +80,14 @@ def delete_comment(data):
 
 
 def update_level(data):
-    lid = ""
-    level_name = ""
-    level_rating = ""
-    level_summary = ""
-    level_description = ""
-    level_diff = ""
-    
-    for key in data:
-        if key == "levelName":
-            level_name = data[key]
-        elif key == "levelId":
-            lid = int(data[key])
-        elif key == "levelRating":
-            level_rating = float(data[key])
-        elif key == "levelSummary":
-            level_summary = data[key]
-        elif key == "levelDescription":
-            level_description = data[key]
-        elif key == "levelDiff":
-            level_diff = data[key]
+    dt = UpdateLevel(**data)
+    d = data
+    lid = d['levelId']
+    level_name = d['levelName']
+    level_rating = d['levelRating']
+    level_summary = d['levelSummary']
+    level_description = d['levelDescription']
+    level_diff = d['levelDiff']
     
     query = ""
     with open('./db/level/sql/updateLevel.sql') as f:
@@ -127,7 +99,9 @@ def update_level(data):
 
 
 def delete_level(data):
-    lid = data['levelId']
+    dt = DeleteLevel(**data)
+    d = data
+    lid = d['levelId']
     query = ""
     with open('./db/level/sql/deleteLevel.sql') as f:
         query = f.read()
@@ -138,26 +112,14 @@ def delete_level(data):
 
 
 def add_level(data):
-    uid = ""
-    level_name = ""
-    level_rating = ""
-    level_summary = ""
-    level_description = ""
-    level_diff = ""
-    
-    for key in data:
-        if key == "userId":
-            uid = int(data[key])
-        elif key == "levelName":
-            level_name = data[key]
-        elif key == "levelRating":
-            level_rating = float(data[key])
-        elif key == "levelSummary":
-            level_summary = data[key]
-        elif key == "levelDescription":
-            level_description = data[key]
-        elif key == "levelDiff":
-            level_diff = data[key]
+    dt = AddLevel(**data)
+    d = data
+    uid = d['userId']
+    level_name = d['levelName']
+    level_rating = d['levelRating']
+    level_summary = d['levelSummary']
+    level_description = d['levelDescription']
+    level_diff = d['levelDiff']
     
     query = ""
     with open('./db/level/sql/addLevel.sql') as f:

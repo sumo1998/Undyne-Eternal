@@ -6,6 +6,7 @@
 {% block title %}: {{ user_info[0][1] }}{% endblock %}
 {% block content %}
     {# if session's user id matches user id then have edit and log out functionality, use _auth components #}
+    {% if session and session["profile"]["user_id"]|default('NONE') == user_info[0][0] %}
     <div>{{ user_profile_auth.user_in_profile(user_info[0][1],
     user_info[0][2],
     level_count, user_info[0][3], user_info[0][0]) }}
@@ -21,6 +22,7 @@
         {% endif %}
     </div>
     {# else: #}
+    {% else %}
     <div>{{ user_profile.user_in_profile(user_info[0][1],
     user_info[0][2],
     level_count, user_info[0][3]) }}
@@ -37,5 +39,6 @@
     </div>
 
     {# endif #}
+    {% endif %}
 
 {% endblock %}
