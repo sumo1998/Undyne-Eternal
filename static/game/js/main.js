@@ -77,15 +77,16 @@ class Main {
     
     /**
      * Waits until the assets are loaded and then starts the game.
+     * @param levelDataJson The level data in JSON format to parse
      */
-    startGame() {
+    startGame(levelDataJson) {
         const thisTmp = this;
         if(!this.#assetManager.isLoaded()) {
-            setTimeout(() => thisTmp.startGame(), 500);
+            setTimeout(() => thisTmp.startGame(levelDataJson), 500);
             return;
         }
         
-        this.#gameHandler = new GameHandler("easy");
+        this.#gameHandler = new GameHandler("easy", levelDataJson);
         
         KeyboardHandler.initialize(this.#gameHandler);
         

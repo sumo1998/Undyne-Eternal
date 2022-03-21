@@ -53,8 +53,9 @@ class GameHandler extends GraphicsObject {
     /**
      * Initializes a GameHandler instance.
      * @param difficulty The difficulty of the game
+     * @param levelDataJson The level data in JSON format to parse
      */
-    constructor(difficulty) {
+    constructor(difficulty, levelDataJson) {
         super();
         
         this.#state = "init";
@@ -74,13 +75,15 @@ class GameHandler extends GraphicsObject {
         
         this.#difficulty = difficulty;
         
+        const attacks = AttackParser.parse(levelDataJson);
+        
         this.#undyne = new Undyne();
         this.#box = new Box();
         this.#player = new Player(difficulty);
         this.#undyne.player = this.#player;
         this.#undyne.speechBubble.undyne = this.#undyne;
-        this.#hud = new Hud(TestAttacks.testAttacks.length, love, this.#player);
-        this.#attackRunner = new AttackRunner(this.#player, this.#hud, TestAttacks.testAttacks);
+        this.#hud = new Hud(attacks.length, love, this.#player);
+        this.#attackRunner = new AttackRunner(this.#player, this.#hud, attacks);
         
         const thisTmp = this;
         
