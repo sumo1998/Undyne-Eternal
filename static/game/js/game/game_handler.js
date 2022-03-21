@@ -226,8 +226,8 @@ class GameHandler extends GraphicsObject {
         this.#playAgainButton.update(deltaMs);
         
         if(this.#state === "playing" && this.#undyne.animationState !== "swinging arm") {
-            this.#hud.update(deltaMs);
             this.#attackRunner.update(deltaMs);
+            this.#hud.update(deltaMs);
             
             if(this.#player.hp === 0) {
                 this.render();
