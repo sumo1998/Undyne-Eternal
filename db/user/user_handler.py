@@ -1,4 +1,3 @@
-from flask import render_template_string
 from db import database_handler
 from db.user.user_pydantic import UpdateUser
 

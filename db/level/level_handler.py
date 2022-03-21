@@ -1,4 +1,3 @@
-from flask import render_template_string
 from db import database_handler
 
 from db.level.level_pydantic import AddComment, UpdateComment, DeleteComment, UpdateLevel, AddLevel, DeleteLevel
@@ -59,7 +58,7 @@ def update_level_comment(data):
     
     with open('./db/level/sql/updateLevelRating.sql') as f:
         query = f.read()
-    
+        
         with database_handler.get_db_cursor(True) as cur:
             cur.execute(query, (lid, lid))
 
