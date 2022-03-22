@@ -106,7 +106,7 @@ def game():
     level_data_json = json.loads(level_data_json)
     difficulty = "easy"
     
-    return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = True)
+    return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
 
 
 if __name__ == '__main__':
