@@ -23,7 +23,7 @@ class Attack(BaseModel):
     
     attack_delay: conint(ge = 0, le = 9999) = Field(alias = "attackDelay")
     clockwise_shift: bool = Field(alias = "clockwiseShift")
-    arrows: List[Arrow]
+    arrows: conlist(Arrow, min_items = 1, max_items = 50)
 
 
 class LevelData(BaseModel):
@@ -36,19 +36,3 @@ class LevelData(BaseModel):
     description: constr(min_length = 3, max_length = 200)
     difficulty: Literal["easy", "medium", "hard"]
     is_public: bool = Field(alias = "isPublic")
-    
-    @validator("attacks")
-    def validate_attacks(cls, attacks: List[Attack]) -> List[Attack]:
-        """
-        Tests that each attack has between 0 and 50 arrows.
-        :param attacks: The list of attacks
-        :return: attacks: The list of attacks
-        :raises ValueError: Raised if the attacks list is invalid
-        """
-        
-        for i in range(len(attacks)):
-            if len(attacks[i].arrows) == 0:
-                raise ValueError(f"Attack {i + 1} must have at least one arrow.")
-            if len(attacks[i].arrows) > 50:
-                raise ValueError(f"Attack {i + 1} can only have between 1 and 50 arrows")
-        return attacks

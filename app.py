@@ -122,17 +122,16 @@ def update_level():
         response = str(e).replace("(type=value_error)", "")
         return jsonify(response = response)
     
-    client_level_data = {
+    attacks = {
         "attacks": client_level_data['attacks']
     }
-    
     update = {
         "userId": session['user_id'],
         "levelId": session['level_id'],
         "levelName": level_data.title,
         "levelRating": current_level_data[0]['level_rating'],
         "levelSummary": level_data.description,
-        "levelDescription": json.dumps(client_level_data),
+        "levelDescription": json.dumps(attacks),
         "levelDiff": level_data.difficulty,
         "levelPublished": level_data.is_public
     }
@@ -163,7 +162,7 @@ def add_level():
         response = str(e).replace("(type=value_error)", "")
         return jsonify(response = response)
     
-    client_level_data = {
+    attacks = {
         "attacks": client_level_data['attacks']
     }
     
@@ -173,7 +172,7 @@ def add_level():
         "levelName": level_data.title,
         "levelRating": 0,
         "levelSummary": level_data.description,
-        "levelDescription": json.dumps(client_level_data),
+        "levelDescription": json.dumps(attacks),
         "levelDiff": level_data.difficulty,
         "levelPublished": level_data.is_public
     }
