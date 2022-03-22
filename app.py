@@ -30,12 +30,17 @@ def init():
 
 @app.route("/")
 def home_page():
+    return redirect(url_for("feed"))
+
+
+@app.route("/home-feed")
+def feed():
     return "<h1>This is the homepage for the app</h1><a href='game'>Click here</a>"
 
 
 @app.route("/game")
 def game():
-    return render_template("game/game.html")
+    return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
 
 
 @app.route("/home-feed")
