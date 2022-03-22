@@ -10,7 +10,13 @@ six = "*"
 requests = "*"
 authlib = "*"
 python-dotenv = "*"
+psycopg2-binary = "*"
+gunicorn = "*"
+email-validator = "*"
+uplink = "*"
 werkzeug = "*"
+firebase-admin = "*"
+google-cloud-storage = "*"
 
 [dev-packages]
 

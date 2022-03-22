@@ -1,0 +1,37 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer></script>
+
+    <script src="/static/level_creator/level_creator.js" defer></script>
+
+    <link rel="stylesheet" href="/static/level_creator/level_creator.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        let levelJson = {{ level_json|tojson }};
+        let addLevelUrl = "{{ url_for("add_level") }}";
+        let updateLevelUrl = "{{ url_for("update_level") }}";
+        let isNewLevel = {{ is_new_level|tojson }};
+    </script>
+
+    <title>{{ level_json['title'] }}</title>
+
+</head>
+<body>
+    <button class="exitButton uiButton">Exit</button>
+
+    <div class="attacks"></div>
+    <div class="spacer"></div>
+
+    <button onclick="addAttack()" id="addAttackButton" class="uiButton">Add Attack</button>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+</body>
+</html>
