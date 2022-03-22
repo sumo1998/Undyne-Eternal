@@ -6,35 +6,78 @@
     <title>Undyne Eternal</title>
     <link rel="stylesheet" href="{{ url_for("static", filename="game/css/game.css") }}">
     
-    <script data-main="/static/game/jsmin/config.min"
-            src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
-            integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.9/pixi.min.js"
+            integrity="sha512-Rd2qDH7zgdpNHORK5lMbVgqO93W0Fko9s6xn8J54zu5GmWO+jqNsc1Q84zePLYCQMHSokKGAI68EhbhgTCPHLw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+            integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/util/math_utility.min.js") }}"></script>
+    
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/loaders/asset_loader.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/loaders/audio_manager.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/loaders/font_loader.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/loaders/graphic_manager.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/loaders/asset_manager.min.js") }}"></script>
+    
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/attacks/attack_manager.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/attacks/test_attacks.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/attacks/attack_parser.min.js") }}"></script>
+    
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/graphics_object.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/arrow.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/box.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/speech_bubble.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/green_rectangle_manager.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/undyne.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/player.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/hud.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/graphics/button.min.js") }}"></script>
+    
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/game/undyne_dialogue.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/game/renderer_manager.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/game/keyboard_handler.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/game/attack_runner.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/game/game_handler.min.js") }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="game/jsmin/main.min.js") }}"></script>
     
     <script type="text/javascript">
         window.addEventListener("load", () => {
-            //Require PIXI, Howler, and the base (extended) classes first
-            require(["pixi", "howler", "assetLoader", "graphicsObject"], () => {
-                //Require all other classes
-                require([
-                    "mathUtility", "audioManager", "fontLoader", "graphicManager", "assetManager",
-                    "attackManager", "testAttacks", "attackParser", "arrow", "box", "speechBubble",
-                    "greenRectangleManager", "undyne", "player", "hud", "button", "undyneDialogue", "rendererManager",
-                    "keyboardHandler", "attackRunner", "gameHandler", "main"
-                ], () => {
-                    Main.initializeMain();
-                    Main.runner.load();
-                    Main.runner.startGame(
-                        {% if level_data_json | length %}
-                            {{ level_data_json | tojson }}
-                        {% else %}
-                            ""
-                        {% endif %},
-                        "{{ difficulty }}"
-                    );
-                });
-            });
+            Main.initializeMain();
+            Main.runner.load();
+            Main.runner.startGame(
+                {% if level_data_json | length %}
+                    {{ level_data_json | tojson }}
+                {% else %}
+                    ""
+                {% endif %},
+                "{{ difficulty }}"
+            );
         });
     </script>
 </head>
