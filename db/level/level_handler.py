@@ -16,7 +16,7 @@ def get_level_comments(level_id):
 
 def add_level_comment(comment_data: CommentData):
     query_file_paths = [f'{BASE_PATH}/addLevelComment.sql', f'{BASE_PATH}/updateLevelRating.sql']
-    database_handler.execute_query_from_files(query_file_paths, comment_data.dict())
+    return database_handler.execute_query_from_files(query_file_paths, comment_data.dict(), get_result = True)[0]
 
 
 def update_level_comment(comment_data: CommentData):
@@ -37,4 +37,5 @@ def delete_level(level_id):
 
 
 def add_level(level_data: LevelData):
-    database_handler.execute_query_from_files(f'{BASE_PATH}/addLevel.sql', level_data.dict())
+    return database_handler.execute_query_from_files(f'{BASE_PATH}/addLevel.sql', level_data.dict(), get_result = True)[
+        0]

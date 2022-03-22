@@ -61,4 +61,4 @@ def execute_query_from_files(file_paths: Union[str, List[str]], parameters, get_
                 cursor.execute(query, parameters)
                 if get_result:
                     res = cursor.fetchall()
-        return res
+        return res if get_result else None
