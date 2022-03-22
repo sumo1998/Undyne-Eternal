@@ -27,6 +27,7 @@ app.register_blueprint(auth_router.auth_blueprint)
 @app.before_first_request
 def init():
     database_handler.setup()
+    session['user_id'] = 6
 
 
 @app.route("/")
@@ -83,18 +84,14 @@ def delete_comment():
 
 @app.route("/level-creator/")
 def level_creator():
+    if session['user_id'] is None:
+        return feed()
     level_id = request.args.get("id")
-    new_level = {
-        "title": "Untitled",
-        "description": "Add a description",
-        "difficulty": "easy",
-        "isPublic": False,
-        "attacks": []
-    }
     session['level_id'] = None
-    send = {}
     if level_id is not None:
         level_data = level_handler.get_level_info(level_id)
+        if session['user_id'] != level_data[0][0]:
+            return feed()
         session['level_id'] = level_id
         send = level_data[0]['level_description']
         send['title'] = level_data[0]['level_name']
@@ -102,7 +99,13 @@ def level_creator():
         send['difficulty'] = level_data[0]['level_diff']
         send['isPublic'] = level_data[0]['level_published']
     else:
-        send = new_level
+        send = {
+            "title": "Untitled",
+            "description": "Add a description",
+            "difficulty": "easy",
+            "isPublic": False,
+            "attacks": []
+        }
     
     return render_template("level_creator/level_creator.html", level_json = send, is_new_level = level_id is None)
 
@@ -110,6 +113,8 @@ def level_creator():
 @app.route("/update-level", methods = ['PATCH'])
 def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
+    if session['user_id'] != current_level_data[0][0]:
+        return feed()
     level_data = request.get_json()
     try:
         LevelData(**level_data)
@@ -126,7 +131,6 @@ def update_level():
     is_public = level_data["isPublic"]
     
     update = {
-        "userId": 1,
         "levelId": session['level_id'],
         "levelName": title,
         "levelRating": current_level_data[0]['level_rating'],
@@ -142,15 +146,44 @@ def update_level():
 
 @app.route("/delete-level", methods = ['DELETE'])
 def delete_level():
-    data = request.form
+    level_id = request.args.get("id")
+    level_data = level_handler.get_level_info(level_id)
+    if session['user_id'] != level_data[0][0]:
+        return None
+    data = {
+        "levelId": level_id
+    }
     level_handler.delete_level(data)
-    return redirect(url_for("home_page"))
+    return user(session['user_id'])
 
 
 @app.route("/add-level", methods = ['POST'])
 def add_level():
-    data = request.form
-    level_handler.add_level(data)
+    level_data = request.get_json()
+    try:
+        LevelData(**level_data)
+    except pydantic.ValidationError as e:
+        response = str(e).replace("(type=value_error)", "")
+        return jsonify(response = response)
+    
+    attack_data = {
+        "attacks": level_data["attacks"]
+    }
+    title = level_data["title"]
+    description = level_data["description"]
+    difficulty = level_data["difficulty"]
+    is_public = level_data["isPublic"]
+    
+    add = {
+        "userId": session['user_id'],
+        "levelName": title,
+        "levelRating": 0,
+        "levelSummary": description,
+        "levelDescription": json.dumps(attack_data),
+        "levelDiff": difficulty,
+        "levelPublished": is_public
+    }
+    level_handler.add_level(add)
     return jsonify(response = "Saved!")
 
 
