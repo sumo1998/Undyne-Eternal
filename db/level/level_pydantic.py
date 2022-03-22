@@ -1,4 +1,5 @@
 from pydantic import BaseModel, validator, Field
+import json
 
 
 class CommentBase(BaseModel):
@@ -32,11 +33,32 @@ class AddComment(CommentBase):
 
 class UpdateComment(CommentBase):
     commentId: int
+    levelId: int
+    
+    @validator('commentId')
+    def check_comment_id(cls, value):
+        if value < 0:
+            raise ValueError("invalid comment id")
+
+    @validator('levelId')
+    def check_lid(cls, value):
+        if value < 0:
+            raise ValueError("invalid lid")
 
 
 class DeleteComment(BaseModel):
     commentId: int
     levelId: int
+    
+    @validator('commentId')
+    def check_comment_id(cls, value):
+        if value < 0:
+            raise ValueError("invalid comment id")
+    
+    @validator('levelId')
+    def check_lid(cls, value):
+        if value < 0:
+            raise ValueError("invalid lid")
 
 
 class LevelBase(BaseModel):
@@ -46,6 +68,12 @@ class LevelBase(BaseModel):
     levelDescription: str
     levelDiff: str
     userId: int
+    levelPublished: bool
+    
+    @validator('levelName')
+    def check_level_name(cls, value):
+        if value == "":
+            raise ValueError("Level Name empty")
     
     @validator('userId')
     def check_uid(cls, value):
@@ -57,6 +85,13 @@ class LevelBase(BaseModel):
         allowed_values = ["easy", "medium", "hard"]
         if value not in allowed_values:
             raise ValueError("invalid level difficulty")
+    
+    @validator('levelDescription')
+    def check_level_description(cls, value):
+        try:
+            json.loads(value)
+        except ValueError:
+            raise ValueError("Invalid level description")
 
 
 class UpdateLevel(LevelBase):

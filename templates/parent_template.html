@@ -21,52 +21,67 @@
             </a>
             <div id="searcharea">
                 <input class="pure-menu-item" id="search-bar" type="text" placeholder="Search">
+                <button id="search-button" class="pure-button gray-button"><i class="fa fa-search"></i></button>
                 <br>
                 <a id="sortnfilter">Sort & Filter</a>
             </div>
 
             <div class="nav-right pure-menu-item">
-                <span class="launch-game launch-game-text button">Level Editor</span>
-                <object data="{{ img }}" type="image/jpg" class="avatar-nav">
+                {% if session['profile'] %}
+                    <a class="launch-game launch-game-text button">Level Editor</a>
+                <object data="{{ session['profile']['user_avatar'] }}" type="image/jpg" class="avatar-nav">
                     <img src="../static/img/user.png" class="avatar-nav"/>
                 </object>
+                {% else %}
+                    <a class="launch-game launch-game-text button">Log in</a>
+                <object data="" type="image/jpg" class="avatar-nav">
+                    <img src="../static/img/user.png" class="avatar-nav"/>
+                </object>
+                {% endif %}
             </div>
         </div>
 
 
         <script defer>
             $(document).ready(function() {
+                var search = function() {
+                    var data = {
+                        search: $("#search-bar").val(),
+                        filters: {
+                            difficulty: ["easy", "medium", "hard"],
+                            rating: [0, 5],
+                            timespan: "alltime"
+                        },
+                        sorting: "rating"
+                    };
+                    $.ajax({
+                        "cache": false,
+                        "data": JSON.stringify(data),
+                        "contentType": "application/json;charset=UTF-8",
+                        "type": "POST",
+                        "url": "/search",
+                        "success": function(response) {
+                            //document.write(response);
+                            $("#content").html(response);
+                        }
+                    });
+                }
                 $("#search-bar").keypress(function(e) {
                     var keycode = (e.keyCode ? e.keyCode : e.which);
                     if(keycode == "13") {
-                        //e.preventDefault();
-                        var data = {
-                            search: $("#search-bar").val(),
-                            filters: {
-                                difficulty: ["easy", "medium", "hard"],
-                                rating: [0, 5],
-                                timespan: "alltime"
-                            },
-                            sorting: "rating"
-                        };
-                        $.ajax({
-                            "cache": false,
-                            "data": JSON.stringify(data),
-                            "contentType": "application/json;charset=UTF-8",
-                            "type": "POST",
-                            "url": "/search",
-                            "success": function(response) {
-                                //document.write(response);
-                                $("#content").html(response);
-                            }
-                        });
+                        search();
                     }
                 });
+                $("#search-button").on('click', function() {
+                    search();
+                })
                 $("#sortnfilter").on("click", function() {
                     if($("#sort-filter").css("display") == "none" || $("#sort-filter").css("visibility") == "hidden") {
                         $("#sort-filter").css("display", "flex");
+                        $("#search-button").css("display", "none");
                     } else {
                         $("#sort-filter").hide();
+                        $("#search-button").show();
                     }
                 });
             });

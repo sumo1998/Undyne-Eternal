@@ -48,7 +48,11 @@ def feed_search():
 def feed_get():
     data = request.get_json()
     res = home_handler.get_home_feed(data)
-    return render_template("home/home_template.html", res = res)
+    test_session = {"profile": {
+        "user_id": 1,
+        "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"
+    }};
+    return render_template("home/home_template.html", res = res, session=test_session)
 
 
 @app.route("/game")
@@ -62,7 +66,8 @@ def user(id):
     user_levels = user_handler.get_user_levels(id)
     level_count = len(user_levels)
     test_session = {"profile": {
-        "user_id": 3
+        "user_id": 1,
+        "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"
     }};
     return render_template("profile/profile_template.html", user_info = user_info, user_levels = user_levels, level_count=level_count,
                             session=test_session)
@@ -73,7 +78,8 @@ def level(id):
     level_info = level_handler.get_level_info(id)
     level_comments = level_handler.get_level_comments(id)
     test_session = {"profile": {
-        "user_id": 1
+        "user_id": 1,
+        "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"
     }};
     return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments, session=test_session)
 

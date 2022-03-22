@@ -1,4 +1,4 @@
-{% macro comment_in_level(username="Username", rating=0, description="", user_id=0, comment_id=0, level_id=0, session=None) -%}
+{% macro comment_in_level(username="Username", rating=0, description="", user_id=0, comment_id=0, level_id=0, avatar="", session=None) -%}
     {% import "./components/user_avatar.html" as user_avatar %}
     <div id="{{ comment_id }}" class="post-page post-page-comment">
         <div class="pure-u-1-1">

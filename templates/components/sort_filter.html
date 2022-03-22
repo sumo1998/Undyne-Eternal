@@ -4,25 +4,32 @@
     <div id="difficulty-options" class="pure-u-2-4">
         <h3>Difficulty</h3>
         <label for="easy" class="pure-radio easy">
-            <input id="easy" type="checkbox" name="difficulty" class="diff-check"> Easy
+            <input id="easy" type="checkbox" name="difficulty" class="diff-check" autocomplete="off"> Easy
         </label>
         <br>
         <label for="medium" class="pure-radio medium">
-            <input id="medium" type="checkbox" name="difficulty" class="diff-check"> Medium
+            <input id="medium" type="checkbox" name="difficulty" class="diff-check" autocomplete="off"> Medium
         </label>
         <br>
         <label for="hard" class="pure-radio hard">
-            <input id="hard" type="checkbox" name="difficulty" class="diff-check"> Hard
+            <input id="hard" type="checkbox" name="difficulty" class="diff-check" autocomplete="off"> Hard
         </label>
     </div>
     <div id="rating-options" class="pure-u-2-4">
         <h3>Rating</h3>
-        <label for="low-rating" class="pure-radio">From
-            <input id="low-rating" type="number" name="rating" class="rating-picker" required="" min="1" max="5">
+        <label for="low-rating" class="pure-radio"><input id="unrated" type="checkbox" name="rating" class="rating-type" autocomplete="off">
+            Search for unrated levels
         </label>
-        <label for="high-rating" class="pure-radio">to
-            <input id="high-rating" type="number" name="rating" class="rating-picker" required="" min="1" max="5">
-        </label>
+        <br>
+        <div id="rating-range">
+            <label for="low-rating" class="pure-radio">From
+                <input id="low-rating" type="number" name="rating" class="rating-picker" required="" min="1" max="5">
+            </label>
+            <label for="high-rating" class="pure-radio">to
+                <input id="high-rating" type="number" name="rating" class="rating-picker" required="" min="1" max="5">
+            </label>
+        </div>
+
     </div>
     <div id="timespan" name="timespan" class="pure-u-2-4">
         <h3>Time</h3>
@@ -41,13 +48,20 @@
             <option value="rating">Rating</option>
         </select>
     </div>
-    <br>
     <button id="submit-sortnfilter" type="submit"
-            class="pure-button pure-u-1-3 normal button gray-button">Search
-    </button>
+            class="pure-button pure-u-1-3 normal button gray-button">Search</button>
 </form>
     <script>
     $(document).ready(function() {
+        $("#unrated").on('change', function() {
+            if ($("#unrated").is(":checked")) {
+                $("#rating-range").hide();
+                $("#low-rating").removeAttr("required");
+                $("#high-rating").removeAttr("required");
+            } else {
+                $("#rating-range").show();
+            }
+        });
         $("#sort-filter").on('submit', function(e) {
             e.preventDefault();
             var atleastone = false;
@@ -66,11 +80,17 @@
                 alert("The value of the left rating must be less than the right.");
                 return;
             }
+            var rating = [];
+            if ($("#unrated").is(":checked")) {
+                rating = [0,0];
+            } else {
+                rating = [parseInt($("#low-rating").val(), 10), parseInt($("#high-rating").val(), 10)]
+            }
             var data = {
                 search: $("#search-bar").val(),
                 filters: {
                     difficulty: chosenDifficulties,
-                    rating: [parseInt($("#low-rating").val(), 10), parseInt($("#high-rating").val(), 10)],
+                    rating: rating,
                     timespan: $("#timespan-options").val()
                 },
                 sorting: $("#sort-options").val()

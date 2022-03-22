@@ -1,6 +1,6 @@
 
 select
-    u.user_id, u.user_name,
+    u.user_id, u.user_name, u.user_avatar,
     c.comment_id,c.comment_rating, c.comment_desc
 from
     levels as l, comments as c, usr as u
