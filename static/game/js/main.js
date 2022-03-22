@@ -86,6 +86,7 @@ class Main {
             return;
         }
         
+        //Adds the hover and click SFX to the back home feed button
         const backToHomeFeedButton = document.querySelector("#back-home-feed");
         backToHomeFeedButton.addEventListener(
             "mouseover", () => Main.runner.assetManager.getAudio("buttonHoverSfx").play()
@@ -97,6 +98,9 @@ class Main {
         this.#gameHandler = new GameHandler(difficulty, levelDataJson);
         
         KeyboardHandler.initialize(this.#gameHandler);
+        
+        //Remove the loading message now that the game is about to start
+        document.getElementById("loading-container").remove();
         
         this.#previousTime = performance.now();
         requestAnimationFrame(this.update.bind(this));
