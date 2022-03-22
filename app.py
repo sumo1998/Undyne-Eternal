@@ -115,6 +115,7 @@ def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
     if session['user_id'] != current_level_data[0][0]:
         return feed()
+    
     client_level_data = request.get_json()
     try:
         level_data = LevelData(**client_level_data)
@@ -155,6 +156,9 @@ def delete_level():
 
 @app.route("/add-level", methods = ['POST'])
 def add_level():
+    if session['user_id'] is None:
+        return feed()
+    
     client_level_data = request.get_json()
     try:
         level_data = LevelData(**client_level_data)
