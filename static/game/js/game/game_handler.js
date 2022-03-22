@@ -134,8 +134,8 @@ class GameHandler extends GraphicsObject {
     }
     
     /**
-     * Handles the case of invalid level data, queuing an Undyne response depending on whether or not levelId was
-     * provided and redirecting to the home feed.
+     * Handles the case of invalid level data, queuing an Undyne response depending on whether or not id was
+     * provided and redirects to the home feed.
      */
     #handleEmptyLevelData() {
         //Retrieves the URL query parameters
@@ -147,8 +147,7 @@ class GameHandler extends GraphicsObject {
             }
         );
         
-        // noinspection JSUnresolvedVariable
-        if(params.levelId) {
+        if(params.id) {
             this.#undyne.speechBubble.queueText([
                 "...",
                 "Do YOU think this is\na VALID level?",

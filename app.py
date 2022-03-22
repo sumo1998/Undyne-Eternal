@@ -29,7 +29,7 @@ def feed():
 
 @app.route("/game")
 def game():
-    level_id = request.args.get("levelId")
+    level_id = request.args.get("id")
     level_data_json = """
     {"attacks": [
         {
