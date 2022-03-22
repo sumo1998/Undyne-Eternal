@@ -1,14 +1,16 @@
 import os
 
 from dotenv import load_dotenv, find_dotenv
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session
 
 import auth_router
+import utils
 from db import database_handler
 from db.home import home_handler
 from db.level import level_handler
 from db.user import user_handler
 from factory import object_factory
+from firebase_handler import Firebase
 
 load_dotenv(find_dotenv())
 
@@ -18,6 +20,7 @@ app.secret_key = os.getenv('APP_SECRET')
 object_factory._create_auth_object(app)
 
 app.register_blueprint(auth_router.auth_blueprint)
+firebase_object = Firebase()
 
 
 @app.before_first_request
@@ -106,6 +109,12 @@ def update_user():
     data = request.form
     user_handler.update_user(data)
     return redirect(url_for("user", id = data["userId"]))
+
+
+@app.route("/get-upload-path", methods = ['GET'])
+@utils.requires_auth
+def get_upload_path():
+    return firebase_object.get_signed_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
 
 
 if __name__ == '__main__':

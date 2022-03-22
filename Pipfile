@@ -15,7 +15,8 @@ gunicorn = "*"
 email-validator = "*"
 uplink = "*"
 werkzeug = "*"
-
+firebase-admin = "*"
+google-cloud-storage = "*"
 
 [dev-packages]
 
