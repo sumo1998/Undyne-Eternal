@@ -4,7 +4,7 @@ const sri = {
 };
 
 requirejs.config({
-    "baseUrl": "/static/game/jsMin",
+    "baseUrl": "/static/game/jsmin",
     "paths": {
         "pixi": "https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.9/pixi.min",
         "howler": "https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min",
