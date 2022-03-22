@@ -169,10 +169,8 @@ def add_level():
     attacks = {
         "attacks": client_level_data['attacks']
     }
-    
     add = {
         "userId": session['user_id'],
-        "levelId": session['level_id'],
         "levelName": level_data.title,
         "levelRating": 0,
         "levelSummary": level_data.description,
