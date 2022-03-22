@@ -82,7 +82,7 @@ class Main {
      */
     startGame(levelDataJson, difficulty) {
         if(!this.#assetManager.isLoaded()) {
-            setTimeout(() => this.startGame(levelDataJson, difficulty), 500);
+            setTimeout(() => this.startGame(levelDataJson, difficulty), 100);
             return;
         }
         
