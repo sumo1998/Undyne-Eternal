@@ -32,13 +32,13 @@
                 Play level
             </p>
         </div>
-    {% if session %}
-        <div id="write-review" class="post-page-play-level button gray-button">
-            <p class="button-text">
-                Write a review
-            </p>
-        </div>
-    {% endif %}
+        {% if session %}
+            <div id="write-review" class="post-page-play-level button gray-button">
+                <p class="button-text">
+                    Write a review
+                </p>
+            </div>
+        {% endif %}
         <script>
             $(document).ready(function() {
                 $("#write-review").on("click", function() {

@@ -29,18 +29,17 @@
             <div class="nav-right pure-menu-item">
                 {% if session['profile'] %}
                     <a class="launch-game launch-game-text button">Level Editor</a>
-                <object data="{{ session['profile']['user_avatar'] }}" type="image/jpg" class="avatar-nav">
-                    <img src="../static/img/user.png" class="avatar-nav"/>
-                </object>
+                    <object data="{{ session['profile']['user_avatar'] }}" type="image/jpg" class="avatar-nav">
+                        <img src="../static/img/user.png" class="avatar-nav"/>
+                    </object>
                 {% else %}
                     <a class="launch-game launch-game-text button">Log in</a>
-                <object data="" type="image/jpg" class="avatar-nav">
-                    <img src="../static/img/user.png" class="avatar-nav"/>
-                </object>
+                    <object data="" type="image/jpg" class="avatar-nav">
+                        <img src="../static/img/user.png" class="avatar-nav"/>
+                    </object>
                 {% endif %}
             </div>
         </div>
-
 
         <script defer>
             $(document).ready(function() {
@@ -65,21 +64,22 @@
                             $("#content").html(response);
                         }
                     });
-                }
+                };
                 $("#search-bar").keypress(function(e) {
                     var keycode = (e.keyCode ? e.keyCode : e.which);
                     if(keycode == "13") {
                         search();
                     }
                 });
-                $("#search-button").on('click', function() {
+                $("#search-button").on("click", function() {
                     search();
-                })
+                });
                 $("#sortnfilter").on("click", function() {
                     if($("#sort-filter").css("display") == "none" || $("#sort-filter").css("visibility") == "hidden") {
                         $("#sort-filter").css("display", "flex");
                         $("#search-button").css("display", "none");
-                    } else {
+                    }
+                    else {
                         $("#sort-filter").hide();
                         $("#search-button").show();
                     }

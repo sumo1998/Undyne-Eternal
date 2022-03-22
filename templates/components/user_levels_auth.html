@@ -4,7 +4,7 @@ published=false) -%}
         <div class="pure-u-1-2">
             {% if published == false %}
                 <div id="private">
-                <i class="fa fa-lock "></i>
+                    <i class="fa fa-lock "></i>
                     PRIVATE
                 </div>
             {% endif %}
@@ -57,10 +57,10 @@ published=false) -%}
                 </p>
             </a>
         </div>
-    <script>
-        var date = "{{ timestamp }}".slice(0, 10);
-        $("#timestamp{{ level_id }}").text("Created: " + date);
-        console.log("hellow world");
-    </script>
+        <script>
+            var date = "{{ timestamp }}".slice(0, 10);
+            $("#timestamp{{ level_id }}").text("Created: " + date);
+            console.log("hellow world");
+        </script>
     </div>
 {%- endmacro %}

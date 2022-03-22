@@ -36,10 +36,10 @@
                 Play<br>level
             </p>
         </a>
-    <script defer>
-        $(document).ready(function() {
-            $("#timestamp").val(new Date({{timestamp}}).toString());
-        });
-    </script>
+        <script defer>
+            $(document).ready(function() {
+                $("#timestamp").val(new Date({{timestamp}}).toString());
+            });
+        </script>
     </div>
 {%- endmacro %}
