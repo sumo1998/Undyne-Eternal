@@ -28,16 +28,13 @@ def check_if_user_in_db(user_id, user_email = None) -> Optional[auth_models.User
 
 
 def check_if_username_is_unique(user_name) -> bool:
-    with open(f"{BASE_PATH}/checkIfUsernameUnique.sql") as file:
-        query = file.read()
-        with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query, (user_name,))
-            res = cur.fetchall()
-            return bool(res)
+    return bool(
+        database_handler.execute_query_from_files(
+            f"{BASE_PATH}/checkIfUsernameUnique.sql", (user_name,),
+            get_result = True
+        )
+    )
 
 
 def write_userdata_to_db(user_data: auth_models.UserModel):
-    with open(f"{BASE_PATH}/insertUserData.sql") as file:
-        query = file.read()
-        with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query, user_data.dict())
+    database_handler.execute_query_from_files(f"{BASE_PATH}/insertUserData.sql", user_data.dict())

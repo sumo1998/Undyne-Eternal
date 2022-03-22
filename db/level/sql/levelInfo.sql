@@ -9,7 +9,7 @@ SELECT l.level_id,
        u.user_name,
        u.user_avatar
 FROM levels AS l,
-     usr AS u
+     user_info AS u
 WHERE l.user_id = u.user_id
-  AND l.level_id = % s
+  AND l.level_id = %s
 ORDER BY l.level_rating DESC;

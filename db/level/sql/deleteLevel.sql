@@ -1,3 +1,3 @@
 DELETE
 FROM levels
-WHERE level_id =% s;
+WHERE level_id = %s;

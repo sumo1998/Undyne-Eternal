@@ -1,3 +1,3 @@
 DELETE
 FROM comments
-WHERE comment_id =% s;
+WHERE comment_id = %s;

@@ -1,6 +1,6 @@
 from flask import Flask
 
-from api.auth.auth_handler import Auth
+from auth_handler import Auth
 
 """
 Some of the things like auth and db might need access to the base level flask app object

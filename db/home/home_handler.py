@@ -9,8 +9,9 @@ BASE_PATH = f"{os.path.dirname(os.path.realpath(__file__))}/sql"
 def build_query(search_data: SearchData):
     query = f"SELECT l.level_id,l.level_name,l.level_rating,l.level_summary," \
             f"l.level_description,l.level_diff,u.user_id,u.user_name,u.user_avatar " \
-            f"FROM levels AS l,usr AS u " \
-            f"WHERE l.user_id = u.user_id AND l.level_published = TRUE AND (l.level_rating >= %(low_rating)s AND l.level_rating <= %(high_rating)s)"
+            f"FROM levels AS l,user_info AS u " \
+            f"WHERE l.user_id = u.user_id AND l.level_published = TRUE " \
+            f"AND (l.level_rating >= %(low_rating)s AND l.level_rating <= %(high_rating)s) "
     
     # Add difficulty params
     if search_data.filters.difficulty:
@@ -22,7 +23,7 @@ def build_query(search_data: SearchData):
     
     # Add search
     if search_data.search:
-        query = query + f" and level_ts @@ to_tsquery('english','%(search)s:*')"
+        query = query + f" and level_ts @@ plainto_tsquery('english','%(search)s:*')"
     
     # Add sorting
     query = query + " order by "
@@ -35,12 +36,7 @@ def build_query(search_data: SearchData):
 
 
 def get_homefeed():
-    with database_handler.get_db_cursor(True) as cur:
-        with open(f"{BASE_PATH}/homeFeed.sql") as f:
-            query = f.read()
-            cur.execute(query)
-            res = cur.fetchall()
-            return res
+    return database_handler.execute_query_from_files(f"{BASE_PATH}/homeFeed.sql", [], get_result = True)
 
 
 def get_homefeed_with_filters(data):

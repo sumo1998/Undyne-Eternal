@@ -1,21 +1,16 @@
-# Have changed the structure from what we discussed
-# Removed the structure of "client" module and just added a common templates folder
-# Made it like this to make the structure conform to what flask expects. Just a little less manual path specification
-# But if the project grows bigger, we can change the structure to be more modular
 import os
 
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template, redirect, url_for, request
 
-from api.auth import auth_router
+import auth_router
+from db import database_handler
+from db.home import home_handler
+from db.level import level_handler
+from db.user import user_handler
 from factory import object_factory
 
 load_dotenv(find_dotenv())
-
-from db.home import home_handler
-from db.user import user_handler
-from db.level import level_handler
-from db import database_handler
 
 app = Flask(__name__)
 

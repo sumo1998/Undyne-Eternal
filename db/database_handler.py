@@ -1,16 +1,17 @@
 import os
-from dotenv import load_dotenv, find_dotenv
 from contextlib import contextmanager
+from typing import Union, List
 
+from dotenv import load_dotenv, find_dotenv
 from flask import current_app
 from psycopg2.extras import DictCursor
 from psycopg2.pool import ThreadedConnectionPool
+
 import utils
 
 pool = None
 
 load_dotenv(find_dotenv(utils.get_project_base_path()))
-
 
 
 def setup():
@@ -37,8 +38,8 @@ def get_db_connection():
 
 
 @contextmanager
-def get_db_cursor(commit = False):
-    '''use commit = true to make lasing changes. Call this function in a with statement'''
+def get_db_cursor(commit = False) -> DictCursor:
+    """use commit = true to make lasing changes. Call this function in a with statement"""
     with get_db_connection() as connection:
         
         cursor = connection.cursor(cursor_factory = DictCursor)
@@ -48,3 +49,16 @@ def get_db_cursor(commit = False):
                 connection.commit()
         finally:
             cursor.close()
+
+
+def execute_query_from_files(file_paths: Union[str, List[str]], parameters, get_result = False):
+    with get_db_cursor(commit = True) as cursor:
+        if isinstance(file_paths, str):
+            file_paths = [file_paths]
+        for file_path in file_paths:
+            with open(file_path) as file:
+                query = file.read()
+                cursor.execute(query, parameters)
+                if get_result:
+                    res = cursor.fetchall()
+        return res
