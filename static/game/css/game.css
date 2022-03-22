@@ -6,8 +6,79 @@ html, body {
     font-family: "8-bit Operator Mono", sans-serif;
 }
 
+@keyframes flicker-animation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes flicker-animation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes flicker-animation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes flicker-animation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#loading-container {
+    /*
+     * Centers the loading text (credit: https://stackoverflow.com/a/23703655)
+     */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    
+    /*
+     * Flicker animation for loading text (credit: https://stackoverflow.com/a/23985078)
+     */
+    -webkit-animation: flicker-animation 3s infinite;
+    -moz-animation: flicker-animation 3s infinite;
+    -o-animation: flicker-animation 3s infinite;
+    animation: flicker-animation 3s infinite;
+}
+
+#loading-container > p {
+    font-size: 50px;
+}
+
 /* 
- * Centers the game on the page (credit: https://stackoverflow.com/a/7782251/5547232)
+ * Centers the game on the page (credit: https://stackoverflow.com/a/7782251)
  */
 #game-renderer {
     padding: 0;

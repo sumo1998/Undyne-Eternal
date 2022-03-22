@@ -23,22 +23,12 @@ class AudioManager extends AssetLoader {
      */
     constructor() {
         super();
-        this.#audioLoadedMap = {
-            "introBgm": false,
-            "undyneEasyBgm": false,
-            "undyneMediumBgm": false,
-            "undyneHardBgm": false,
-            "arrowBlockedSfx": false,
-            "arrowDamageSfx": false,
-            "undyneSpeakSfx": false,
-            "buttonHoverSfx": false,
-            "buttonSelectSfx": false
-        };
+        this.#audioLoadedMap = {};
         
         //The music played while waiting for the user to play
         const introBgm = this.#getAudio(
             "introBgm",
-            ["bgm/intro.ogg", "bgm/intro.mp3"],
+            ["bgm/intro.mp3"],
             true,
             0.7
         );
@@ -46,25 +36,28 @@ class AudioManager extends AssetLoader {
         //The music that plays in the easy mode
         const undyneEasyBgm = this.#getAudio(
             "undyneEasyBgm",
-            ["bgm/undyne_easy.ogg", "bgm/undyne_easy.mp3"],
+            ["bgm/undyne_easy.mp3"],
             true,
-            0.7
+            0.7,
+            true
         );
         
         //The music that plays in the medium mode
         const undyneMediumBgm = this.#getAudio(
             "undyneMediumBgm",
-            ["bgm/undyne_medium.ogg", "bgm/undyne_medium.mp3"],
+            ["bgm/undyne_medium.mp3"],
             true,
-            0.7
+            0.7,
+            true
         );
         
         //The music that plays in the hard mode
         const undyneHardBgm = this.#getAudio(
             "undyneHardBgm",
-            ["bgm/undyne_hard.ogg", "bgm/undyne_hard.mp3"],
+            ["bgm/undyne_hard.mp3"],
             true,
-            0.7
+            0.7,
+            true
         );
         
         //The sfx that plays when the arrow is blocked by the shield
@@ -126,14 +119,29 @@ class AudioManager extends AssetLoader {
      * @param localAudioPaths The string or array to the local audio path(s)
      * @param loop True if the audio should loop
      * @param volume The volume of the audio from 0 to 1
+     * @param buffer True if the audio is long and should be buffered.
      * @return The Howl instance with the given parameters
      */
-    #getAudio(audioName, localAudioPaths, loop, volume) {
+    #getAudio(audioName, localAudioPaths, loop, volume, buffer = false) {
         if(Array.isArray(localAudioPaths)) {
             localAudioPaths = localAudioPaths.map(path => AudioManager.#audioDir + path);
         }
         else {
             localAudioPaths = AudioManager.#audioDir + localAudioPaths;
+        }
+        
+        this.#audioLoadedMap[audioName] = false;
+        
+        if(buffer) {
+            const audio = new Howl({
+                "src": localAudioPaths,
+                "loop": loop,
+                "volume": volume,
+                "buffer": true,
+                "html5": true
+            });
+            this.#markAudioLoaded(audioName);
+            return audio;
         }
         
         return new Howl({
