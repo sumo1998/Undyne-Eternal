@@ -12,8 +12,8 @@ class Arrow(BaseModel):
     
     direction: Literal["U", "D", "L", "R", "?"]
     reversed: bool
-    delay: conint(gt = 0, lt = 9999)
-    speed: conint(gt = 1, lt = 999)
+    delay: conint(ge = 0, le = 9999)
+    speed: conint(ge = 1, le = 999)
 
 
 class Attack(BaseModel):
@@ -21,7 +21,7 @@ class Attack(BaseModel):
     Represents an attack in the level data.
     """
     
-    attack_delay: conint(gt = 0, lt = 9999) = Field(alias = "attackDelay")
+    attack_delay: conint(ge = 0, le = 9999) = Field(alias = "attackDelay")
     clockwise_shift: bool = Field(alias = "clockwiseShift")
     arrows: List[Arrow]
 

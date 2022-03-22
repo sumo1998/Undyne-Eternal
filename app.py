@@ -27,7 +27,7 @@ app.register_blueprint(auth_router.auth_blueprint)
 @app.before_first_request
 def init():
     database_handler.setup()
-    session['user_id'] = 6
+    session['user_id'] = 1
 
 
 @app.route("/")
@@ -115,29 +115,26 @@ def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
     if session['user_id'] != current_level_data[0][0]:
         return feed()
-    level_data = request.get_json()
+    client_level_data = request.get_json()
     try:
-        LevelData(**level_data)
+        level_data = LevelData(**client_level_data)
     except pydantic.ValidationError as e:
         response = str(e).replace("(type=value_error)", "")
         return jsonify(response = response)
     
-    attack_data = {
-        "attacks": level_data["attacks"]
+    client_level_data = {
+        "attacks": client_level_data['attacks']
     }
-    title = level_data["title"]
-    description = level_data["description"]
-    difficulty = level_data["difficulty"]
-    is_public = level_data["isPublic"]
     
     update = {
+        "userId": session['user_id'],
         "levelId": session['level_id'],
-        "levelName": title,
+        "levelName": level_data.title,
         "levelRating": current_level_data[0]['level_rating'],
-        "levelSummary": description,
-        "levelDescription": json.dumps(attack_data),
-        "levelDiff": difficulty,
-        "levelPublished": is_public
+        "levelSummary": level_data.description,
+        "levelDescription": json.dumps(client_level_data),
+        "levelDiff": level_data.difficulty,
+        "levelPublished": level_data.is_public
     }
     level_handler.update_level(update)
     response = "Saved!"
@@ -159,29 +156,26 @@ def delete_level():
 
 @app.route("/add-level", methods = ['POST'])
 def add_level():
-    level_data = request.get_json()
+    client_level_data = request.get_json()
     try:
-        LevelData(**level_data)
+        level_data = LevelData(**client_level_data)
     except pydantic.ValidationError as e:
         response = str(e).replace("(type=value_error)", "")
         return jsonify(response = response)
     
-    attack_data = {
-        "attacks": level_data["attacks"]
+    client_level_data = {
+        "attacks": client_level_data['attacks']
     }
-    title = level_data["title"]
-    description = level_data["description"]
-    difficulty = level_data["difficulty"]
-    is_public = level_data["isPublic"]
     
     add = {
         "userId": session['user_id'],
-        "levelName": title,
+        "levelId": session['level_id'],
+        "levelName": level_data.title,
         "levelRating": 0,
-        "levelSummary": description,
-        "levelDescription": json.dumps(attack_data),
-        "levelDiff": difficulty,
-        "levelPublished": is_public
+        "levelSummary": level_data.description,
+        "levelDescription": json.dumps(client_level_data),
+        "levelDiff": level_data.difficulty,
+        "levelPublished": level_data.is_public
     }
     level_handler.add_level(add)
     return jsonify(response = "Saved!")
