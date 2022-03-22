@@ -92,6 +92,7 @@ def level_creator():
         level_data = level_handler.get_level_info(level_id)
         if session['user_id'] != level_data[0][0]:
             return feed()
+        
         session['level_id'] = level_id
         send = level_data[0]['level_description']
         send['title'] = level_data[0]['level_name']
