@@ -4,57 +4,43 @@
 <head>
     <meta charset=utf-8>
     <title>Undyne Eternal</title>
-    <link rel="stylesheet" href="/static/game/css/undertale.css">
+    <link rel="stylesheet" href="{{ url_for("static", filename="game/css/game.css") }}">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.9/pixi.min.js"
-            integrity="sha512-Rd2qDH7zgdpNHORK5lMbVgqO93W0Fko9s6xn8J54zu5GmWO+jqNsc1Q84zePLYCQMHSokKGAI68EhbhgTCPHLw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
-            integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/static/game/lib/funcs.js"></script>
+    <script data-main="/static/game/jsmin/config.min"
+            src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+            integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
     
-    <script src="/static/game/js/vars.js"></script>
-    
-    <script src="/static/game/js/preload.js"></script>
-    <script src="/static/game/js/rendering.js"></script>
-    <script src="/static/game/js/scene.js"></script>
-    
-    <script src="/static/game/js/game/gamestate.js"></script>
-    <script src="/static/game/js/game/box.js"></script>
-    <script src="/static/game/js/game/arrow.js"></script>
-    <script src="/static/game/js/game/spear.js"></script>
-    <script src="/static/game/js/game/pike.js"></script>
-    <script src="/static/game/js/game/circlespear.js"></script>
-    <script src="/static/game/js/game/swarmspear.js"></script>
-    <script src="/static/game/js/game/heart.js"></script>
-    <script src="/static/game/js/game/undyne.js"></script>
-    <script src="/static/game/js/game/attack.js"></script>
-    
-    <script src="/static/game/js/attacks/normal.js"></script>
-    <script src="/static/game/js/attacks/hard.js"></script>
-    <script src="/static/game/js/attacks/genocide.js"></script>
-    <script src="/static/game/js/attacks/genocide2.js"></script>
-    <script src="/static/game/js/attacks/testing.js"></script>
-    <script src="/static/game/js/attacks/attacks.js"></script>
-    
-    <script src="/static/game/js/loader/sounds.js"></script>
-    <script src="/static/game/js/loader/graphics.js"></script>
-    <script src="/static/game/js/loader/fonts.js"></script>
-    
-    <script src="/static/game/js/input.js"></script>
-    <script src="/static/game/js/main.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", () => {
+            //Require PIXI, Howler, and the base (extended) classes first
+            require(["pixi", "howler", "assetLoader", "graphicsObject"], () => {
+                //Require all other classes
+                require([
+                    "mathUtility", "audioManager", "fontLoader", "graphicManager", "assetManager",
+                    "attackManager", "testAttacks", "attackParser", "arrow", "box", "speechBubble",
+                    "greenRectangleManager", "undyne", "player", "hud", "button", "undyneDialogue", "rendererManager",
+                    "keyboardHandler", "attackRunner", "gameHandler", "main"
+                ], () => {
+                    Main.initializeMain();
+                    Main.runner.load();
+                    Main.runner.startGame(
+                        {% if level_data_json | length %}
+                            {{ level_data_json | tojson }}
+                        {% else %}
+                            ""
+                        {% endif %},
+                        "{{ difficulty }}"
+                    );
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
-    <div class="bottom-credits">
-        <p>
-            <span>Based on fairdyne by <a href="https://github.com/joezeng">Joe Zeng</a></span>
-        </p>
-        <p>
-            <span>Which is based on Undertale &copy; 2015 by Toby Fox.</span>
-        </p>
-    </div>
+    <a id="back-home-feed" href="{{ url_for("feed") }}" target="_self">Back to Home Feed</a>
 </body>
 
 </html>
