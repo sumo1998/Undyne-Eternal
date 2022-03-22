@@ -1,23 +1,22 @@
+import json
 import os
 
+import pydantic
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 
 import auth_router
 import utils
 from db import database_handler
-
-import pydantic
-from level_data_model import LevelData
 from db.home import home_handler
-from db.level import level_handler
+from db.level import level_handler, level_models
+from db.level.level_models import CommentData
 from db.user import user_handler
 from factory import object_factory
 from firebase_handler import Firebase
-import json
+from level_data_model import LevelData
 
 load_dotenv(find_dotenv())
-
 
 app = Flask(__name__)
 
@@ -40,6 +39,82 @@ def home_page():
 
 @app.route("/game")
 def game():
+    level_data_json = """
+    {"attacks": [
+        {
+            "attackDelay": 3200,
+            "clockwiseShift": false,
+            "arrows": [
+                {"direction": "?", "reversed": false, "delay": 0, "speed": 100},
+                {"direction": "?", "reversed": false, "delay": 600, "speed": 100},
+                {"direction": "?", "reversed": false, "delay": 600, "speed": 100}
+            ]
+        },
+        {
+            "attackDelay": 4500,
+            "clockwiseShift": false,
+            "arrows": [
+                {"direction": "U", "reversed": false, "delay": 0, "speed": 150},
+                {"direction": "U", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "L", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "L", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "R", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "R", "reversed": false, "delay": 500, "speed": 150}
+            ]
+        },
+        {
+            "attackDelay": 4800,
+            "clockwiseShift": true,
+            "arrows": [
+                {"direction": "L", "reversed": false, "delay": 0, "speed": 200},
+                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "D", "reversed": false, "delay": 400, "speed": 200}
+            ]
+        },
+        {
+            "attackDelay": 4850,
+            "clockwiseShift": true,
+            "arrows": [
+                {"direction": "D", "reversed": false, "delay": 0, "speed": 250},
+                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 150, "speed": 250}
+            ]
+        },
+        {
+            "attackDelay": 4100,
+            "clockwiseShift": true,
+            "arrows": [
+                {"direction": "R", "reversed": false, "delay": 0, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 300, "speed": 250}
+            ]
+        }
+    ]}
+    """
+    
+    level_data_json = json.loads(level_data_json)
+    difficulty = "easy"
+    
     return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
 
 
@@ -49,7 +124,7 @@ def feed():
     if data is None:
         res = home_handler.get_homefeed()
     else:
-        res = home_handler.get_homefeed_with_filters(**data)
+        res = home_handler.get_homefeed_with_filters(data)
     return render_template("home/home_template.html", res = res)
 
 
@@ -61,30 +136,30 @@ def user(id):
 
 
 @app.route("/level/<id>")
-def level(id):
-    level_info = level_handler.get_level_info(id)
-    level_comments = level_handler.get_level_comments(id)
+def level(level_id):
+    level_info = level_handler.get_level_info(level_id)
+    level_comments = level_handler.get_level_comments(level_id)
     return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
 
 @app.route("/add-comment", methods = ['POST'])
 def add_comment():
     data = request.form
-    level_handler.add_level_comment(data)
+    level_handler.add_level_comment(CommentData(**data))
     return redirect(url_for("level", id = data['levelId']))
 
 
 @app.route("/update-comment", methods = ['PATCH'])
 def update_comment():
     data = request.form
-    level_handler.update_level_comment(data)
+    level_handler.update_level_comment(CommentData(**data))
     return redirect(url_for("level", id = data['levelId']))
 
 
 @app.route("/delete-comment", methods = ['DELETE'])
 def delete_comment():
     data = request.form
-    level_handler.delete_comment(data)
+    level_handler.delete_comment(data['levelId'])
     return redirect(url_for("level", id = data['levelId']))
 
 
@@ -118,10 +193,9 @@ def level_creator():
 
 
 @app.route("/update-level", methods = ['PATCH'])
+@utils.requires_auth
 def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
-    if session['user_id'] != current_level_data[0][0]:
-        return feed()
     
     client_level_data = request.get_json()
     try:
@@ -134,7 +208,6 @@ def update_level():
         "attacks": client_level_data['attacks']
     }
     update = {
-        "userId": session['user_id'],
         "levelId": session['level_id'],
         "levelName": level_data.title,
         "levelRating": current_level_data[0]['level_rating'],
@@ -143,7 +216,7 @@ def update_level():
         "levelDiff": level_data.difficulty,
         "levelPublished": level_data.is_public
     }
-    level_handler.update_level(update)
+    level_handler.update_level(level_models.LevelData(**update))
     response = "Saved!"
     return jsonify(response = response)
 
@@ -152,20 +225,16 @@ def update_level():
 def delete_level():
     level_id = request.args.get("id")
     level_data = level_handler.get_level_info(level_id)
-    if session['user_id'] != level_data[0][0]:
+    if session['profile']['user_id'] != level_data[0][0]:
         return None
-    data = {
-        "levelId": level_id
-    }
-    level_handler.delete_level(data)
+    
+    level_handler.delete_level(level_id)
     return user(session['user_id'])
 
 
 @app.route("/add-level", methods = ['POST'])
+@utils.requires_auth
 def add_level():
-    if session['user_id'] is None:
-        return feed()
-    
     client_level_data = request.get_json()
     try:
         level_data = LevelData(**client_level_data)
@@ -173,20 +242,22 @@ def add_level():
         response = str(e).replace("(type=value_error)", "")
         return jsonify(response = response)
     
-    attacks = {
-        "attacks": client_level_data['attacks']
-    }
     add = {
         "userId": session['user_id'],
         "levelName": level_data.title,
         "levelRating": 0,
         "levelSummary": level_data.description,
-        "levelDescription": json.dumps(attacks),
+        "levelDescription": json.dumps(
+            {
+                "attacks": client_level_data['attacks']
+            }
+        ),
         "levelDiff": level_data.difficulty,
         "levelPublished": level_data.is_public
     }
-    level_handler.add_level(add)
-    return jsonify(response = "Saved!")
+    return jsonify(
+        response = level_handler.add_level(level_models.LevelData(**add))
+    )
 
 
 @app.route("/update-user", methods = ['PATCH'])

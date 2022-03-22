@@ -44,7 +44,7 @@ def user_info():
 @auth_blueprint.route('/callback')
 def oauth_callback():
     if object_factory.get_auth_object().handle_callbacks():
-        return redirect(url_for('auth.user_info'))
+        return redirect(url_for('home_page'))
     return redirect(url_for('auth.get_set_username_screen'))
 
 

@@ -34,7 +34,7 @@ class Firebase:
     
     def get_signed_url(self, file_name):
         return self.__get_storage_bucket().blob(file_name).generate_signed_url(
-            expiration = timedelta(days = 5),
+            expiration = timedelta(minutes = 10),
             method = "PUT",
-            content_type = "image/jpeg",
+            content_type = f"image/jpeg",
         )
