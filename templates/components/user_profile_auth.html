@@ -1,0 +1,74 @@
+{% macro user_in_profile(username="Username", avatar="", level_count=0, average_rating=0, user_id=0) -%}
+    {% import "./components/user_avatar.html" as user_avatar %}
+    <div id="avatar-upload" class="user-page pure-u-1-5">
+    <form id="avatar-upload-form">
+        <h2>Select Profile Picture:</h2>
+        <input type="file" accept="image/png, image/jpeg, image/jpg" required="" id="avatar-file">
+        <button class="pure-button gray-button button" type="submit" id="avatar-upload-button">Submit</button>
+    </form>
+    </div>
+    <div class="user-page pure-u-1-5">
+        <div class="user-page-title">
+            {{ user_avatar.user_avatar(avatar, username, user_id, True) }}
+            <a class="text-links">{{ username }}</a>
+        </div>
+        <div class="user-level-info">
+            <p class="user-stats">Levels made: {{ level_count }}</p>
+            <p class="user-stats">Average rating: {{ average_rating }}</p>
+        </div>
+        <a class="medium post-page-play-level button" href="{{ url_for('auth.logout_user') }}">
+            <p class="button-text">
+                Log out
+            </p>
+        </a>
+    <script>
+        $(document).ready(function() {
+            $("#profile{{ username }}").on('click', function() {
+                if($("#avatar-upload").css("display") == "none" || $("#avatar-upload").css("visibility") == "hidden") {
+                    $("#avatar-upload").css("display", "block");
+                } else {
+                    $("#avatar-upload").hide();
+                }
+            });
+            $("#avatar-upload-form").on('submit', function(e) {
+                e.preventDefault();
+                var fileType = "";
+                if ($("#avatar-file").prop('files')[0].type === "image/jpg" || $("#avatar-file").prop('files')[0].type === "image/jpeg") {
+                    fileType = "jpeg";
+                } else {
+                    fileType = "png";
+                }
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: `/get-upload-path?fileType=${fileType}`,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        link = response;
+                        $.ajax({
+                            cache: false,
+                            data: $("#avatar-file").prop('files')[0],
+                            type: "PUT",
+                            url: link,
+                            contentType: false,
+                            processData: false,
+                            success: function() {
+                                $.ajax({
+                                    cache: false,
+                                    type: "POST",
+                                    url: "/upload-completed",
+                                    data: {},
+                                    success: function(response) {
+                                        window.location.replace(`/user/{{ username }}`);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    </div>
+{%- endmacro %}

@@ -1,13 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    <h1> User info</h1>
-    {{userInfo}}
-    <h1> User levels </h1>
-    {{userLevels}}
-</body>
-</html>
+{% extends "parent_template.html" %}
+{% import "./components/user_profile.html" as user_profile %}
+{% import "./components/user_levels.html" as level_template %}
+{% import "./components/user_profile_auth.html" as user_profile_auth %}
+{% import "./components/user_levels_auth.html" as level_template_auth %}
+{% import "./components/sort_filter.html" as form %}
+{% block title %}: {{ user_info[0][1] }}{% endblock %}
+{% block content %}
+    {{ form.sortFilter() }}
+    {# if session's user id matches user id then have edit and log out functionality, use _auth components #}
+    {% if session["profile"] and session["profile"]["user_id"]|default('NONE') == user_info[0][0] %}
+        <div>{{ user_profile_auth.user_in_profile(user_info[0][1],
+    user_info[0][3],
+    level_count, user_info[0][4], user_info[0][0]) }}
+        </div>
+        <div>
+            {% if user_levels|length > 0 %}
+                <h1 class="user-levels pure-u-1-3">Your levels:</h1>
+                {% for level in user_levels %}
+                    <div>{{ level_template_auth.level_in_feed(level.level_name, level.level_rating, level.level_diff, level.level_summary,
+     level.user_name, level.user_avatar, level.level_id, level.user_id, level.level_created_timestamp, level.level_published) }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {# else: #}
+    {% else %}
+        <div>{{ user_profile.user_in_profile(user_info[0][1],
+    user_info[0][3],
+    level_count, user_info[0][4]) }}
+        </div>
+        <div>
+            {% if user_levels|length > 0 %}
+                <h1 class="user-levels pure-u-1-3">{{ user_info[0][1] }}'s levels:</h1>
+                {% for level in user_levels %}
+                    {% if level.level_published %}
+                        <div>{{ level_template.level_in_feed(level.level_name, level.level_rating, level.level_diff, level.level_summary,
+     level.user_name, level.user_avatar, level.level_id, level.user_id, level.level_created_timestamp) }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {# endif #}
+    {% endif %}
+
+{% endblock %}

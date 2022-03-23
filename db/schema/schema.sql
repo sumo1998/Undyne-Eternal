@@ -41,6 +41,7 @@ CREATE TABLE comments (
     user_id           TEXT,
     level_id          INT,
     comment_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, level_id),
     CONSTRAINT fk_user
         FOREIGN KEY (user_id)
             REFERENCES user_info (user_id) ON DELETE CASCADE,

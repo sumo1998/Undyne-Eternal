@@ -15,7 +15,9 @@ def build_query(search_data: SearchData):
     
     # Add difficulty params
     if search_data.filters.difficulty:
-        query = query + f" and ( l.level_diff = {'or l.level_diff = '.join(search_data.filters.difficulty)} )"
+        quoted_difficulty_conditions = " or l.level_diff = " \
+            .join(f"'{difficulty}'" for difficulty in search_data.filters.difficulty)
+        query = query + f" and ( l.level_diff = {quoted_difficulty_conditions} )"
     
     # Add timespan
     if search_data.filters.timespan:
@@ -23,7 +25,20 @@ def build_query(search_data: SearchData):
     
     # Add search
     if search_data.search:
-        query = query + f" and level_ts @@ plainto_tsquery('english','%(search)s:*')"
+        search_query = ""
+        for word in search_data.search.split(" "):
+            word.replace(" ", "")
+            if word == "":
+                continue
+            else:
+                if search_query == "":
+                    search_query = " and level_ts @@ to_tsquery('english','" + word + ":*"
+                else:
+                    search_query = search_query + " | " + word + ":* "
+        
+        if search_query != "":
+            search_query = search_query + " ')"
+            query = query + search_query
     
     # Add sorting
     query = query + " order by "
@@ -36,7 +51,7 @@ def build_query(search_data: SearchData):
 
 
 def get_homefeed():
-    return database_handler.execute_query_from_files(f"{BASE_PATH}/homeFeed.sql", [], get_result = True)
+    return database_handler.execute_query_from_files(f"{BASE_PATH}/home_feed.sql", [], get_result = True)
 
 
 def get_homefeed_with_filters(data):

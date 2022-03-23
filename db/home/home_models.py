@@ -8,7 +8,7 @@ class FilterData(BaseModel):
     rating: conlist(conint(ge = 0, le = 5), min_items = 2, max_items = 2) = [0, 5]
     timespan: Literal["day", "week", "month", "year", "alltime"] = 0
     
-    @validator('rating')
+    @validator("rating")
     def fix_rating_order(cls, value):
         # If rating is out of order, fix it
         return sorted(value)
@@ -16,11 +16,11 @@ class FilterData(BaseModel):
     @validator("timespan")
     def convert_timespan_value_to_days(cls, value):
         return {
-            'day': 1,
-            'week': 7,
-            'month': 30,
-            'year': 365,
-            'alltime': 0
+            "day": 1,
+            "week": 7,
+            "month": 30,
+            "year": 365,
+            "alltime": 0
         }[value]
 
 

@@ -1,0 +1,45 @@
+{% macro level_in_feed(title="Title", rating=0, difficulty="medium", description="", username="Username", avatar="",level_id=0, user_id=0, timestamp="") -%}
+    <div class="post pure-u-1-3">
+        <div class="pure-u-1-2">
+            <h1 class="post-title">
+                <a class="text-links" href="{{ url_for('level', level_id=level_id) }}">{{ title }}</a></h1>
+            <div class="difficulty {{ difficulty }}">
+                {{ difficulty | upper }}
+            </div>
+            <div class="stars">
+                {%- for star in range(rating |int) %}
+                    <span class="fa fa-star checked"></span>
+                {%- endfor %}
+                {%- for star in range((5 - rating|int)) %}
+                    <span class="fa fa-star-o"></span>
+                {%- endfor %}
+            </div>
+            <div class="user">
+                {% if avatar == "" %}
+                    <p><span class="fa fa-user"></span>
+                        <a class="home-feed-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a></p>
+                {% else %}
+                    <p><img src="{{ avatar }}">
+                        <a class="home-feed-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a></p>
+
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="post-description pure-u-1-2">
+            <p>
+                {{ description }}
+            </p>
+        </div>
+        <a class="play-level {{ difficulty }} pure-u-2-24 button">
+            <p class="button-text">
+                Play<br>level
+            </p>
+        </a>
+        <script defer>
+            $(document).ready(function() {
+                $("#timestamp").val(new Date({{timestamp}}).toString());
+            });
+        </script>
+    </div>
+{%- endmacro %}

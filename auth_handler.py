@@ -25,14 +25,14 @@ class Auth:
     def _get_app(self) -> Optional[LocalProxy]:
         if self.__registered_app is None:
             self.__registered_app = oauth.register(
-                'auth0',
-                client_id = os.getenv('CLIENT_ID'),
-                client_secret = os.getenv('CLIENT_SECRET'),
+                "auth0",
+                client_id = os.getenv("CLIENT_ID"),
+                client_secret = os.getenv("CLIENT_SECRET"),
                 api_base_url = f"https://{os.getenv('DOMAIN')}",
                 access_token_url = f"https://{os.getenv('DOMAIN')}/oauth/token",
                 authorize_url = f"https://{os.getenv('DOMAIN')}/authorize",
                 client_kwargs = {
-                    'scope': 'openid profile email',
+                    "scope": "openid profile email",
                 },
                 server_metadata_url = f"https://{os.getenv('DOMAIN')}/.well-known/openid-configuration",
                 fetch_token = self.fetch_token,

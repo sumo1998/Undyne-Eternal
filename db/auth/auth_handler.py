@@ -10,7 +10,7 @@ BASE_PATH = f"{os.path.dirname(os.path.realpath(__file__))}/sql"
 
 
 def check_if_user_in_db(user_id, user_email = None) -> Optional[auth_models.UserModel]:
-    with open(f"{BASE_PATH}/getUserData.sql") as file:
+    with open(f"{BASE_PATH}/get_user_data.sql") as file:
         query = render_template_string(file.read(), check_email = bool(user_email))
         with database_handler.get_db_cursor(True) as cur:
             cur.execute(query, dict(user_id = user_id, user_email = user_email))
@@ -27,14 +27,14 @@ def check_if_user_in_db(user_id, user_email = None) -> Optional[auth_models.User
                 return None
 
 
-def check_if_username_is_unique(user_name) -> bool:
+def check_if_username_exists(user_name) -> bool:
     return bool(
         database_handler.execute_query_from_files(
-            f"{BASE_PATH}/checkIfUsernameUnique.sql", (user_name,),
+            f"{BASE_PATH}/check_if_username_unique.sql", (user_name,),
             get_result = True
         )
     )
 
 
 def write_userdata_to_db(user_data: auth_models.UserModel):
-    database_handler.execute_query_from_files(f"{BASE_PATH}/insertUserData.sql", user_data.dict())
+    database_handler.execute_query_from_files(f"{BASE_PATH}/insert_user_data.sql", user_data.dict())
