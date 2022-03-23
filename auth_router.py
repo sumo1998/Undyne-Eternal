@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, redirect, url_for, session, jsonify, request, abort
+from flask import Blueprint, redirect, url_for, session, jsonify, request, abort, render_template
 
 import utils
 from db.auth import auth_handler, auth_models
@@ -9,32 +9,28 @@ from factory import object_factory
 project_base_path = utils.get_project_base_path()
 
 auth_blueprint = Blueprint(
-    'auth', __name__, template_folder = f"{project_base_path}/templates/auth",
-    static_folder = f"templates/auth/static", root_path = project_base_path
+    'auth', __name__
 )
 
 
 @auth_blueprint.route('/user-name', methods = ['POST'])
 def set_username():
     data = request.form
-    session['temp']['nickname'] = data['userName']
-    if auth_handler.check_if_username_exists(data['userName']):
+    if auth_handler.check_if_username_exists(data['username']):
         abort(401)
+    session['temp']['nickname'] = data['username'][:20]
     user_data = auth_models.UserModel(**session.pop('temp'))
     auth_handler.write_userdata_to_db(user_data)
     # Only after user info is set, we allow user to continue
     session['profile'] = user_data.dict()
-    return jsonify(session['profile'])
+    return redirect(url_for("feed"))
 
 
 @auth_blueprint.route('/user-name', methods = ['GET'])
 def get_set_username_screen():
     if 'temp' not in session:
         return redirect(url_for('auth.login_user'))
-    # return render_template('set_username_template.html')
-    return "<h1>This page is to get user name data if not exists</h1><br><br>\n" + json.dumps(
-        session['temp'], indent = 4
-    )
+    return render_template("auth/set_username.html")
 
 
 @auth_blueprint.route('/user')

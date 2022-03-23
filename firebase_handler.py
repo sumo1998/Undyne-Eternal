@@ -2,11 +2,11 @@ import os
 from datetime import timedelta
 
 import firebase_admin
+import requests
 from dotenv import load_dotenv, find_dotenv
 from firebase_admin import credentials
 from firebase_admin.storage import bucket
 from google.cloud.storage.bucket import Bucket
-import requests
 
 load_dotenv(find_dotenv())
 
@@ -33,11 +33,11 @@ class Firebase:
     def __get_storage_bucket(self) -> Bucket:
         return bucket(name = self.__bucket_name, app = self.__app)
     
-    def get_signed_url(self, file_name):
+    def get_signed_url(self, file_name, file_type = 'jpeg'):
         return self.__get_storage_bucket().blob(file_name).generate_signed_url(
             expiration = timedelta(minutes = 10),
             method = "PUT",
-            content_type = f"image/jpeg",
+            content_type = f"image/{file_type}",
         )
     
     def get_file_url(self, file_name):
