@@ -35,9 +35,16 @@ def init():
 
 @app.route("/")
 def home_page():
-    return redirect(url_for("feed_get"))
+    return redirect(url_for("feed"))
 
-
+@app.route("/home-feed")
+def feed():
+    data = request.json
+    if data is None:
+        res = home_handler.get_homefeed()
+    else:
+        res = home_handler.get_homefeed_with_filters(data)
+    return render_template("home/home_template.html", res = res)
 
 @app.route("/search", methods=['POST'])
 def feed_search():
@@ -126,15 +133,6 @@ def game():
     
     return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
 
-
-@app.route("/home-feed")
-def feed():
-    data = request.json
-    if data is None:
-        res = home_handler.get_homefeed()
-    else:
-        res = home_handler.get_homefeed_with_filters(data)
-    return render_template("home/home_template.html", res = res)
 
 
 @app.route("/user/<id>")
