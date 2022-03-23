@@ -37,7 +37,8 @@ class CommentBase(BaseModel):
 
 
 class CommentData(CommentBase):
-    user_id: str = ''
+    comment_id: conint(gt = 0) = Field(1, alias = "commentId")
+    user_id: str = Field('', alias = "userId")
     level_id: conint(gt = 0) = Field(alias = "levelId")
     
     @validator('user_id')

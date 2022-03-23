@@ -12,10 +12,8 @@ from db.home import home_handler
 from db.level import level_handler, level_models
 from db.level.level_models import CommentData
 from db.user import user_handler
-from dotenv import load_dotenv, find_dotenv
 from factory import object_factory
 from firebase_handler import Firebase
-from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 from level_data_model import LevelData
 
 load_dotenv(find_dotenv())
@@ -141,7 +139,6 @@ def game():
     return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
 
 
-
 @app.route("/user/<id>")
 def user(id):
     user_info = user_handler.get_user_info(id)
@@ -155,25 +152,26 @@ def user(id):
         return ""
 
 
-@app.route("/level/<level_id>")
-def level(level_id):
-    level_info = level_handler.get_level_info(level_id)
-    level_comments = level_handler.get_level_comments(level_id)
-    print(level_comments)
+@app.route("/level/<id>")
+def level(id):
+    level_info = level_handler.get_level_info(id)
+    level_comments = level_handler.get_level_comments(id)
     return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
 
 @app.route("/add-comment", methods = ['POST'])
 def add_comment():
-    comment_data = CommentData(**{
-        "user_id": request.form.get('user'),
-        "commentBody": request.form.get('comment'),
-        "levelId": request.form.get('level'),
-        "commentRating": request.form.get('rating')
-    })
+    comment_data = CommentData(
+        **{
+            "userId": request.form.get('user'),
+            "commentBody": request.form.get('comment'),
+            "levelId": request.form.get('level'),
+            "commentRating": request.form.get('rating')
+        }
+    )
     level_handler.add_level_comment(comment_data)
-
-    return redirect(url_for("level", level_id = comment_data.level_id))
+    
+    return redirect(url_for("level", id = comment_data.level_id))
 
 
 @app.route("/update-comment", methods = ['PATCH'])
@@ -181,8 +179,7 @@ def update_comment():
     data = {
         "commentBody": request.form.get("comment"),
         "commentRating": request.form.get("rating"),
-        "commentId": request.form.get("comment_id"),
-        "levelId": request.form.get("level_id")
+        "commentId": request.form.get("comment_id")
     }
     level_handler.update_level_comment(CommentData(**data))
     return jsonify({"result": "success"})
@@ -191,7 +188,7 @@ def update_comment():
 @app.route("/delete-comment", methods = ['DELETE'])
 def delete_comment():
     data = request.form
-    level_handler.delete_comment(data["commentId"])
+    level_handler.delete_comment(data)
     return jsonify({"result": "success"})
 
 
@@ -254,15 +251,15 @@ def update_level():
 
 
 @app.route("/delete-level", methods = ['DELETE'])
+@utils.requires_auth
 def delete_level():
-    level_id = request.form['id']
+    level_id = request.args.get("id")
     level_data = level_handler.get_level_info(level_id)
-    print(level_data)
     if session['profile']['user_id'] != level_data[0][7]:
         return redirect(url_for('home'))
     
     level_handler.delete_level(level_id)
-    return jsonify({"result": "success", "username": level_data[0][8]})
+    return user(session['profile']['user_id'])
 
 
 @app.route("/add-level", methods = ['POST'])
@@ -297,7 +294,7 @@ def add_level():
 @app.route("/update-user", methods = ['PATCH'])
 def update_user():
     data = request.get_json()
-    user_handler.update_user(data)
+    user_handler.update_user_avatar(data)
     return redirect(url_for("user", id = data["userId"]))
 
 
@@ -305,6 +302,14 @@ def update_user():
 @utils.requires_auth
 def get_upload_path():
     return firebase_object.get_signed_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
+
+
+@app.route("/upload-completed", methods = ["POST"])
+@utils.requires_auth
+def upload_completed():
+    file_url = firebase_object.get_file_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
+    user_handler.update_user_avatar(file_url)
+    return redirect(url_for("user", id = session['profile']['user_id']))
 
 
 if __name__ == '__main__':
