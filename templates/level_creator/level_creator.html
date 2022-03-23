@@ -3,22 +3,22 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
+    
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer></script>
-
+    
     <script src="/static/level_creator/level_creator.js" defer></script>
-
+    
     <link rel="stylesheet" href="/static/level_creator/level_creator.css">
-
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <script>
         let levelJson = {{ level_json|tojson }};
         let addLevelUrl = "{{ url_for("add_level") }}";
         let updateLevelUrl = "{{ url_for("update_level") }}";
         let isNewLevel = {{ is_new_level|tojson }};
     </script>
-
+    
     <title>{{ level_json['title'] }}</title>
 
 </head>
@@ -26,12 +26,12 @@
     <button class="exit-button ui-button" type="button"
             onclick="window.location.href='{{ url_for("user" , id = user_name) }}';">Exit
     </button>
-
+    
     <div class="attacks"></div>
     <div class="spacer"></div>
-
+    
     <button onclick="addAttack()" id="add-attack-button" class="ui-button">Add Attack</button>
-
+    
     <div class="spacer"></div>
     <div class="spacer"></div>
 

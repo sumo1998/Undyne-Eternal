@@ -421,12 +421,12 @@ p {
     background-color: black;
     margin: 10% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #888888;
     width: 80%;
 }
 
 #close {
-    color: #aaa;
+    color: #AAAAAA;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -469,7 +469,7 @@ p {
     resize: none;
     position: relative;
     width: 15em;
-    margin:5px;
+    margin: 5px;
 }
 
 .rating-picker {
@@ -528,7 +528,7 @@ i.fa-trash {
     position: relative;
     left: -6em;
     user-select: none;
-    color:#00A1FF;
+    color: #00A1FF;
 }
 
 #sortnfilter:hover {
@@ -553,8 +553,8 @@ i.fa-trash {
 }
 
 #private {
-    background-color: #75746f;
-    color: #c9c8bf;
+    background-color: #75746F;
+    color: #C9C8BF;
     display: inline-block;
     padding: 1px 7px;
     border-radius: 10px;
@@ -573,15 +573,17 @@ i.fa-trash {
 #avatar-upload-button {
     margin: 20px 0px;
 }
-.error-page-div{
+
+.error-page-div {
     width: 100%;
 }
-.error-page-inner-div{
+
+.error-page-inner-div {
     width: 50%;
     margin: 3% auto;
 }
 
-.error-page-image{
+.error-page-image {
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -589,13 +591,13 @@ i.fa-trash {
     height: 15vh;
 }
 
-.error-page-title{
+.error-page-title {
     font-size: 3vw;
     text-align: center;
     display: block;
 }
 
-.error-page-sub-title{
+.error-page-sub-title {
     font-size: 2vw;
     text-align: center;
     display: block;

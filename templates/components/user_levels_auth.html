@@ -22,7 +22,7 @@ published=false) -%}
                 {%- endfor %}
             </div>
             <p class="level-timestamp" id="timestamp{{ level_id }}"></p>
-
+            
             <div class="user">
                 {% if avatar == "" %}
                     <p><span class="fa fa-user"></span>
@@ -30,9 +30,9 @@ published=false) -%}
                 {% else %}
                     <p><img src="{{ avatar }}">
                         <a class="home-feed-links">{{ username }}</a></p>
-
+                
                 {% endif %}
-
+            
             </div>
         </div>
         <div class="post-description pure-u-1-2">
@@ -51,24 +51,24 @@ published=false) -%}
                     Edit
                 </p>
             </a>
-                <a id="delete-level-button{{ level_id }}" class="play-level-feed-auth hard button">
-                    <p class="button-text">
-                        Delete
-                    </p>
-                </a>
+            <a id="delete-level-button{{ level_id }}" class="play-level-feed-auth hard button">
+                <p class="button-text">
+                    Delete
+                </p>
+            </a>
         </div>
         <script>
             var date = "{{ timestamp }}".slice(0, 10);
             $("#timestamp{{ level_id }}").text("Created: " + date);
-            $(document).ready(function(){
-                $("#delete-level-button{{ level_id }}").click(function(e){
+            $(document).ready(function() {
+                $("#delete-level-button{{ level_id }}").click(function(e) {
                     e.preventDefault();
                     $.ajax({
                         cache: false,
                         type: "DELETE",
                         url: `/delete-level?id={{ level_id }}`,
                         success: function(response) {
-                            window.location.replace(`/user/${response['user_name']}`);
+                            window.location.replace(`/user/${response["user_name"]}`);
                         }
                     });
                 });

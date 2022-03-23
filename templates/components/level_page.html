@@ -20,19 +20,19 @@
                 <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
             </div>
         </div>
-
+        
         <div class="post-page-description">
             <p>
                 {{ description }}
             </p>
         </div>
-
+        
         <a class="{{ difficulty }} post-page-play-level button" href="{{ url_for('game',id=level_id) }}">
             <p class="button-text">
                 Play level
             </p>
         </a>
-        {% if (session['profile']) and (session['profile']['user_name'] != username ) and (session['profile']['user_name'] not in commenters)%}
+        {% if (session['profile']) and (session['profile']['user_name'] != username ) and (session['profile']['user_name'] not in commenters) %}
             <div id="write-review" class="post-page-play-level button gray-button">
                 <p class="button-text">
                     Write a review

@@ -13,9 +13,9 @@
                             <i id="delete-comment{{ comment_id }}" class="button fa fa-trash"></i>
                         </div>
                     {% endif %}
-
+                
                 </div>
-
+                
                 <div class="post-page-stars">
                     {%- for star in range(rating |int) %}
                         <span class="fa fa-star checked"></span>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-
+        
         <script type="application/javascript">
             $(document).ready(function() {
                 $('#delete-comment{{ comment_id }}').on("click", function(e) {

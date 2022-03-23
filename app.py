@@ -95,7 +95,10 @@ def level(level_id):
     level_info = level_handler.get_level_info(level_id)
     level_comments = level_handler.get_level_comments(level_id)
     level_commenters = [l[1] for l in level_comments]
-    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments, commenters=level_commenters)
+    return render_template(
+        "level/level_template.html", levelInfo = level_info, levelComments = level_comments,
+        commenters = level_commenters
+    )
 
 
 @app.route("/add-comment", methods = ["POST"])
@@ -270,8 +273,8 @@ def upload_completed():
 @app.errorhandler(404)
 def resource_not_found(e):
     data = {
-        "error_code" : 404,
-        "error_message" : "Resource Not Found! "
+        "error_code": 404,
+        "error_message": "Resource Not Found! "
     }
     return render_template("error/error.html", data = data)
 
@@ -279,8 +282,8 @@ def resource_not_found(e):
 @app.errorhandler(403)
 def forbidden_resource(e):
     data = {
-        "error_code" : 403,
-        "error_message" : "Page Forbidden! "
+        "error_code": 403,
+        "error_message": "Page Forbidden! "
     }
     return render_template("error/error.html", data = data)
 
@@ -288,8 +291,8 @@ def forbidden_resource(e):
 @app.errorhandler(500)
 def server_error(e):
     data = {
-        "error_code" : 500,
-        "error_message" : "Server error!"
+        "error_code": 500,
+        "error_message": "Server error!"
     }
     return render_template("error/error.html", data = data)
 
@@ -297,8 +300,8 @@ def server_error(e):
 @app.errorhandler(502)
 def server_error(e):
     data = {
-        "error_code" : 502,
-        "error_message" : "Bad Gateway!"
+        "error_code": 502,
+        "error_message": "Bad Gateway!"
     }
     return render_template("error/error.html", data = data)
 

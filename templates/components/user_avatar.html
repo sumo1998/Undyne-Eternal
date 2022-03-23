@@ -1,7 +1,9 @@
 {% macro user_avatar(img="", username="username", user_id=0, editable=False) -%}
     {% if editable %}
-            <img class="avatar editable-avatar" id="profile{{ username }}" src="{{ img }}" alt="Not Found" onerror="this.src='../static/img/user.png'">
+        <img class="avatar editable-avatar" id="profile{{ username }}" src="{{ img }}" alt="Not Found"
+             onerror="this.src='../static/img/user.png'">
     {% else %}
-        <img class="avatar" id="profile{{ username }}" src="{{ img }}" alt="Not Found" onerror="this.src='../static/img/user.png'">
+        <img class="avatar" id="profile{{ username }}" src="{{ img }}" alt="Not Found"
+             onerror="this.src='../static/img/user.png'">
     {% endif %}
 {%- endmacro %}

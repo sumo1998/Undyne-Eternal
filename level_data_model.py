@@ -1,8 +1,6 @@
-import json
-from typing import Literal, List
+from typing import Literal
 
-import pydantic
-from pydantic import BaseModel, validator, Field, conint, constr, conlist
+from pydantic import BaseModel, Field, conint, constr, conlist
 
 
 class Arrow(BaseModel):

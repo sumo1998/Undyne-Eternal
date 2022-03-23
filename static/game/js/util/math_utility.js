@@ -162,7 +162,7 @@ class MathUtility {
             case "seconds":
                 result = this.#computeTimeUnitsAndRemainder(ms, msInSec, 59);
                 const numSec = result.numUnits;
-                ms = result.remainingMs; 
+                ms = result.remainingMs;
                 seconds = MathUtility.#formatTimePart(numSec, ".");
             case "cs":
                 result = this.#computeTimeUnitsAndRemainder(ms, msInCs, 99);

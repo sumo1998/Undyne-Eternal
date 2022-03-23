@@ -20,7 +20,7 @@ class AttackParser {
             
             for(let j = 0; j < arrows.length; ++j) {
                 const curArrow = arrows[j];
-    
+                
                 curArrow["delay"] = parseInt(curArrow["delay"]);
                 
                 //Sequentially add the delays to make the target times and remove the delays
