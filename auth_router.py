@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, redirect, url_for, session, jsonify, request
+from flask import Blueprint, redirect, url_for, session, jsonify, request, abort
 
 import utils
 from db.auth import auth_handler, auth_models
@@ -18,6 +18,8 @@ auth_blueprint = Blueprint(
 def set_username():
     data = request.form
     session['temp']['nickname'] = data['userName']
+    if auth_handler.check_if_username_exists(data['userName']):
+        abort(401)
     user_data = auth_models.UserModel(**session.pop('temp'))
     auth_handler.write_userdata_to_db(user_data)
     # Only after user info is set, we allow user to continue

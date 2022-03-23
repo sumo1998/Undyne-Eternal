@@ -27,7 +27,7 @@ def check_if_user_in_db(user_id, user_email = None) -> Optional[auth_models.User
                 return None
 
 
-def check_if_username_is_unique(user_name) -> bool:
+def check_if_username_exists(user_name) -> bool:
     return bool(
         database_handler.execute_query_from_files(
             f"{BASE_PATH}/checkIfUsernameUnique.sql", (user_name,),
