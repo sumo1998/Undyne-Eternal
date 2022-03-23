@@ -289,7 +289,8 @@ def add_level():
     }
     session['level_id'] = level_handler.add_level(level_models.LevelData(**add))[0]
     return jsonify(
-        response = "Saved!"
+        response = "Saved!",
+        level_url = url_for("level_creator", id = session['level_id'])
     )
 
 
