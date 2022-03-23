@@ -94,7 +94,8 @@ def user(id):
 def level(level_id):
     level_info = level_handler.get_level_info(level_id)
     level_comments = level_handler.get_level_comments(level_id)
-    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
+    level_commenters = [l[1] for l in level_comments]
+    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments, commenters=level_commenters)
 
 
 @app.route("/add-comment", methods = ["POST"])
@@ -264,6 +265,42 @@ def upload_completed():
     user_handler.update_user_avatar(file_url)
     session['profile']['user_avatar'] = file_url
     return redirect(url_for("user", id = session['profile']['user_id']))
+
+
+@app.errorhandler(404)
+def resource_not_found(e):
+    data = {
+        "error_code" : 404,
+        "error_message" : "Resource Not Found! "
+    }
+    return render_template("error/error.html", data = data)
+
+
+@app.errorhandler(403)
+def forbidden_resource(e):
+    data = {
+        "error_code" : 403,
+        "error_message" : "Page Forbidden! "
+    }
+    return render_template("error/error.html", data = data)
+
+
+@app.errorhandler(500)
+def server_error(e):
+    data = {
+        "error_code" : 500,
+        "error_message" : "Server error!"
+    }
+    return render_template("error/error.html", data = data)
+
+
+@app.errorhandler(502)
+def server_error(e):
+    data = {
+        "error_code" : 502,
+        "error_message" : "Bad Gateway!"
+    }
+    return render_template("error/error.html", data = data)
 
 
 if __name__ == '__main__':
