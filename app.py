@@ -197,13 +197,13 @@ def delete_comment():
 @utils.requires_auth
 def level_creator():
     if session["profile"]["user_id"] is None:
-        return feed()
+        return redirect(url_for('home'))
     level_id = request.args.get("id")
     session["level_id"] = None
     if level_id is not None:
         level_data = level_handler.get_level_info(level_id)
         if session["profile"]["user_id"] != level_data[0][7]:
-            return feed()
+            return redirect(url_for('home'))
         
         session["level_id"] = level_id
         send = level_data[0]["level_description"]
@@ -230,6 +230,9 @@ def level_creator():
 @utils.requires_auth
 def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
+
+    if session['profile']['user_id'] != current_level_data[0][7]:
+        return redirect(url_for('home'))
     
     client_level_data = request.get_json()
     try:
@@ -292,7 +295,8 @@ def add_level():
     }
     session['level_id'] = level_handler.add_level(level_models.LevelData(**add))[0]
     return jsonify(
-        response = "Saved!"
+        response = "Saved!",
+        level_url = url_for("level_creator", id = session['level_id'])
     )
 
 
