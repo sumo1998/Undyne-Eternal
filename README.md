@@ -39,13 +39,23 @@ along with a very brief caption:**
 
 ![home](static/readme/home.png)
 
-![level](static/readme/home.png)
+The home feed in which you can see all of the posted levels and search, sort, and filter.
 
-![user](static/readme/home.png)
+![level](static/readme/level.png)
 
-![creator](static/readme/home.png)
+The page you see when you click on a level. Here you can, play the level, write a review with a rating, or play the level.
 
-![game](static/readme/home.png)
+![user](static/readme/user.png)
+
+The page you see when on your own profile, which is also similar to the view of others' profiles. Here, you can view, play, edit, or delete your levels and view a couple user metrics.
+
+![creator](static/readme/creator.png)
+
+This is the level creator where you can build levels to play and share with others.
+
+![game](static/readme/game.png)
+
+This is the game page where you can play anyone's levels.
 
 ## Mockup
 
