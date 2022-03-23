@@ -251,15 +251,15 @@ def update_level():
 
 
 @app.route("/delete-level", methods = ['DELETE'])
+@utils.requires_auth
 def delete_level():
-    level_id = request.form['id']
+    level_id = request.args.get("id")
     level_data = level_handler.get_level_info(level_id)
-    print(level_data)
     if session['profile']['user_id'] != level_data[0][7]:
         return redirect(url_for('home'))
     
     level_handler.delete_level(level_id)
-    return jsonify({"result": "success", "username": level_data[0][8]})
+    return user(session['profile']['user_id'])
 
 
 @app.route("/add-level", methods = ['POST'])

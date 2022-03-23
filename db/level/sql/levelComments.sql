@@ -2,7 +2,8 @@ SELECT u.user_id,
        u.user_name,
        c.comment_id,
        c.comment_rating,
-       c.comment_desc
+       c.comment_desc,
+       u.user_avatar
 FROM levels AS l,
      comments AS c,
      user_info AS u

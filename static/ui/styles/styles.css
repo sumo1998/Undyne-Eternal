@@ -400,44 +400,6 @@ p {
     margin: 10px 5px;
 }
 
-#edit-avatar {
-    position: absolute;
-    top: -12px;
-    bottom: 0;
-    left: -0.5px;
-    right: 0;
-    width: 3.4em;
-    height: 3.4em;
-    padding-top: 10px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    visibility: hidden;
-    opacity: 0;
-    font-size: 0.3em;
-    text-align: center;
-    transition: opacity .2s, visibility .2s;
-}
-
-#avatar-wrapper:hover #edit-avatar {
-    visibility: visible;
-    opacity: 1;
-    cursor: pointer;
-}
-
-#avatar-modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
-
 #modal-content {
     background-color: black;
     margin: 10% auto;
@@ -582,3 +544,15 @@ i.fa-trash {
     font-size: 1.5em;
 }
 
+.avatar:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#avatar-upload {
+    display: none;
+}
+
+#avatar-upload-button {
+    margin: 20px 0px;
+}
