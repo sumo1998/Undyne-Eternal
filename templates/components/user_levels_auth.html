@@ -9,7 +9,7 @@ published=false) -%}
                 </div>
             {% endif %}
             <h1 class="post-title">
-                <a class="text-links" href="{{ url_for('level', id=level_id) }}">{{ title }}</a></h1>
+                <a class="text-links" href="{{ url_for('level', level_id=level_id) }}">{{ title }}</a></h1>
             <div class="difficulty {{ difficulty }}">
                 {{ difficulty | upper }}
             </div>
@@ -46,16 +46,18 @@ published=false) -%}
                     Play
                 </p>
             </a>
-            <a class="play-level-feed-auth gray-button button">
+            <a class="play-level-feed-auth gray-button button" href="{{ url_for('level_creator', level_id=level_id) }}">
                 <p class="button-text">
                     Edit
                 </p>
             </a>
-            <a class="play-level-feed-auth hard button">
-                <p class="button-text">
-                    Delete
-                </p>
-            </a>
+            <form id="delete-level" method="delete" action="{{ url_for('delete_comment',id=level_id) }}">
+                <a class="play-level-feed-auth hard button" href="javascript:$('#delete-level').submit();">
+                    <p class="button-text">
+                        Delete
+                    </p>
+                </a>
+            </form>
         </div>
         <script>
             var date = "{{ timestamp }}".slice(0, 10);

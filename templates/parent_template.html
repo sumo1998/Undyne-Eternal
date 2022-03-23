@@ -29,11 +29,13 @@
             <div class="nav-right pure-menu-item">
                 {% if session['profile'] %}
                     <a class="launch-game launch-game-text button">Level Editor</a>
-                    <object data="{{ session['profile']['user_avatar'] }}" type="image/jpg" class="avatar-nav">
-                        <img src="../static/img/user.png" class="avatar-nav"/>
-                    </object>
+                    <a href="{{ url_for('user',id=session['profile']['user_name']) }}" style="display: inline-block" class="button">
+                        <object data="{{ session['profile']['user_avatar'] }}" type="image/jpg" class="avatar-nav">
+                            <img src="../static/img/user.png" class="avatar-nav"/>
+                        </object>
+                    </a>
                 {% else %}
-                    <a class="launch-game launch-game-text button">Log in</a>
+                    <a class="launch-game launch-game-text button" href="{{ url_for('login_user') }}">Log in</a>
                     <object data="" type="image/jpg" class="avatar-nav">
                         <img src="../static/img/user.png" class="avatar-nav"/>
                     </object>

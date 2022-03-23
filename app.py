@@ -43,7 +43,7 @@ def feed():
         res = home_handler.get_homefeed()
     else:
         res = home_handler.get_homefeed_with_filters(data)
-    return render_template("home/home_template.html", res = res)
+    return render_template("home/home_template.html", res = res, session={"profile":{"user_name":"bowbow", "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"}})
 
 @app.route("/search", methods=['POST'])
 def feed_search():
@@ -143,9 +143,10 @@ def user(id):
                             session=test_session)
 
 
-@app.route("/level/<id>")
+@app.route("/level/<level_id>")
 def level(level_id):
     level_info = level_handler.get_level_info(level_id)
+    print(level_info)
     level_comments = level_handler.get_level_comments(level_id)
     return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
