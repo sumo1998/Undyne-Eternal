@@ -188,8 +188,9 @@ def update_comment():
 
 @app.route("/delete-comment", methods = ["DELETE"])
 def delete_comment():
-    data = request.form
-    level_handler.delete_comment(data)
+    comment_id = request.form.get('commentId')
+    level_id = request.form.get('levelId')
+    level_handler.delete_comment(comment_id, level_id)
     return jsonify({"result": "success"})
 
 
@@ -197,13 +198,13 @@ def delete_comment():
 @utils.requires_auth
 def level_creator():
     if session["profile"]["user_id"] is None:
-        return feed()
+        return redirect(url_for('home'))
     level_id = request.args.get("id")
     session["level_id"] = None
     if level_id is not None:
         level_data = level_handler.get_level_info(level_id)
         if session["profile"]["user_id"] != level_data[0][7]:
-            return feed()
+            return redirect(url_for('home'))
         
         session["level_id"] = level_id
         send = level_data[0]["level_description"]
@@ -220,13 +221,19 @@ def level_creator():
             "attacks": []
         }
     
-    return render_template("level_creator/level_creator.html", level_json = send, is_new_level = level_id is None)
+    return render_template(
+        "level_creator/level_creator.html", level_json = send, is_new_level = level_id is None,
+        user_name = session['profile']['user_name']
+    )
 
 
 @app.route("/update-level", methods = ['PATCH'])
 @utils.requires_auth
 def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
+    
+    if session['profile']['user_id'] != current_level_data[0][7]:
+        return redirect(url_for('home'))
     
     client_level_data = request.get_json()
     try:
@@ -261,7 +268,7 @@ def delete_level():
         return redirect(url_for('home'))
     
     level_handler.delete_level(level_id)
-    return user(session['profile']['user_id'])
+    return session['profile']
 
 
 @app.route("/add-level", methods = ['POST'])
@@ -289,7 +296,8 @@ def add_level():
     }
     session['level_id'] = level_handler.add_level(level_models.LevelData(**add))[0]
     return jsonify(
-        response = "Saved!"
+        response = "Saved!",
+        level_url = url_for("level_creator", id = session['level_id'])
     )
 
 

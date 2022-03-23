@@ -1,4 +1,4 @@
-{% macro level_in_page(title="Title", rating=0, difficulty="MEDIUM", username="Username", description="", avatar="",user_id=0,
+{% macro level_in_page(level_id=0, title="Title", rating=0, difficulty="MEDIUM", username="Username", description="", avatar="",user_id=0,
     session=None) -%}
     {% import "./components/user_avatar.html" as user_avatar %}
     <div class="post-page pure-u-1-6" id="post-page-info">
@@ -27,11 +27,11 @@
             </p>
         </div>
 
-        <div class="{{ difficulty }} post-page-play-level button" href="{{ url_for('game',id=level_id) }}">
+        <a class="{{ difficulty }} post-page-play-level button" href="{{ url_for('game',id=level_id) }}">
             <p class="button-text">
                 Play level
             </p>
-        </div>
+        </a>
         {% if session['profile'] and session['profile']['user_name'] != username %}
             <div id="write-review" class="post-page-play-level button gray-button">
                 <p class="button-text">

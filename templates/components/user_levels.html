@@ -31,7 +31,7 @@
                 {{ description }}
             </p>
         </div>
-        <a class="play-level {{ difficulty }} pure-u-2-24 button">
+        <a class="play-level {{ difficulty }} pure-u-2-24 button" href="{{ url_for('game',id=level_id) }}">
             <p class="button-text">
                 Play<br>level
             </p>

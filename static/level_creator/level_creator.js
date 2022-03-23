@@ -593,6 +593,7 @@ function save() {
                 alert(message);
                 if(message === "Saved!") {
                     isNewLevel = false;
+                    window.location.href = response["level_url"];
                 }
             }
         });
