@@ -621,13 +621,13 @@ function save() {
  */
 function getArrowSymbol(direction) {
     switch(direction) {
-        case "U":
-            return "↑";
         case "D":
+            return "↑";
+        case "U":
             return "↓";
-        case "L":
-            return "←";
         case "R":
+            return "←";
+        case "L":
             return "→";
         case "?":
             return "?";
@@ -643,13 +643,13 @@ function getArrowSymbol(direction) {
 function getArrowLetter(direction) {
     switch(direction) {
         case "↑":
-            return "U";
-        case "↓":
             return "D";
+        case "↓":
+            return "U";
         case "←":
-            return "L";
-        case "→":
             return "R";
+        case "→":
+            return "L";
         case "?":
             return "?";
     }
