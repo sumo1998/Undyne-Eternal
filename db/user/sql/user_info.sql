@@ -1,5 +1,5 @@
 SELECT u.user_id, u.user_name, u.user_email, u.user_avatar, COALESCE(AVG(l.level_rating), 0)
-FROM user_info u, levels l
+FROM user_info AS u
+     LEFT JOIN levels l ON u.user_id = l.user_id
 WHERE u.user_name = %s
-  AND u.user_id = l.user_id
-GROUP BY u.user_id, u.user_name, u.user_email, u.user_avatar;
+GROUP BY u.user_id, u.user_name, u.user_email, u.user_avatar

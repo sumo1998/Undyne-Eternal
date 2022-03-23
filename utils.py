@@ -11,11 +11,11 @@ def get_project_base_path():
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        if 'temp' in session and 'profile' not in session:
-            return redirect(url_for('auth.get_set_username_screen'))
-        if 'profile' not in session:
+        if "temp" in session and "profile" not in session:
+            return redirect(url_for("auth.get_set_username_screen"))
+        if "profile" not in session:
             # Redirect to Login page here
-            return redirect(url_for('auth.login_user'))
+            return redirect(url_for("auth.login_user"))
         return f(*args, **kwargs)
     
     return decorated

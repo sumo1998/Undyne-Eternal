@@ -289,6 +289,22 @@ p {
     top: -6px;
 }
 
+#error-box {
+    text-align: center;
+    background-color: #5D1818;
+    border-width: 3px;
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+    border-color: #3C3C3C;
+}
+
+#error-box > h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 25px;
+}
+
 #avatar-link-input {
     color: #CFCFCF;
     background-color: #242424;

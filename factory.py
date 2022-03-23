@@ -19,13 +19,13 @@ class ObjectFactory:
         if app is None:
             print("Did not initialize the auth object before calling it")
             raise RuntimeError
-        self.objects['auth'] = Auth(app)
+        self.objects["auth"] = Auth(app)
     
     def get_auth_object(self, app: Flask = None):
-        if 'auth' not in self.objects:
+        if "auth" not in self.objects:
             self._create_auth_object(app)
         
-        return self.objects['auth']
+        return self.objects["auth"]
 
 
 object_factory = ObjectFactory()
