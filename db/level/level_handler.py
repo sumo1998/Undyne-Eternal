@@ -37,5 +37,6 @@ def delete_level(level_id):
 
 
 def add_level(level_data: LevelData):
+    print(level_data.dict())
     return database_handler.execute_query_from_files(f'{BASE_PATH}/addLevel.sql', level_data.dict(), get_result = True)[
         0]

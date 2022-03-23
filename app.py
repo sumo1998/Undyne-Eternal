@@ -1,19 +1,18 @@
 import json
 import os
 
-import pydantic
-from dotenv import load_dotenv, find_dotenv
-from flask import Flask, render_template, redirect, url_for, request, session, jsonify
-
 import auth_router
+import pydantic
 import utils
 from db import database_handler
 from db.home import home_handler
 from db.level import level_handler, level_models
 from db.level.level_models import CommentData
 from db.user import user_handler
+from dotenv import load_dotenv, find_dotenv
 from factory import object_factory
 from firebase_handler import Firebase
+from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 from level_data_model import LevelData
 
 load_dotenv(find_dotenv())
@@ -165,13 +164,13 @@ def delete_comment():
 
 @app.route("/level-creator/")
 def level_creator():
-    if session['user_id'] is None:
+    if session['profile']['user_id'] is None:
         return feed()
     level_id = request.args.get("id")
     session['level_id'] = None
     if level_id is not None:
         level_data = level_handler.get_level_info(level_id)
-        if session['user_id'] != level_data[0][0]:
+        if session['profile']['user_id'] != level_data[0][0]:
             return feed()
         
         session['level_id'] = level_id
@@ -243,7 +242,7 @@ def add_level():
         return jsonify(response = response)
     
     add = {
-        "userId": session['user_id'],
+        "user_id": session['profile']['user_id'],
         "levelName": level_data.title,
         "levelRating": 0,
         "levelSummary": level_data.description,
@@ -255,8 +254,9 @@ def add_level():
         "levelDiff": level_data.difficulty,
         "levelPublished": level_data.is_public
     }
+    session['level_id'] = level_handler.add_level(level_models.LevelData(**add))
     return jsonify(
-        response = level_handler.add_level(level_models.LevelData(**add))
+        response = "Saved!"
     )
 
 

@@ -13,13 +13,13 @@ class LevelData(BaseModel):
     level_summary: str = Field(alias = "levelSummary")
     level_description: str = Field(alias = "levelDescription")
     user_id: str = ''
-    level_published: bool
+    level_published: bool = Field(alias = "levelPublished")
     
     @validator("user_id")
     def get_user_data_if_logged_in(cls, value):
         if 'profile' in session:
             return session['profile']['user_id']
-        return ''
+        return value
     
     @validator("level_description")
     def verify_level_description_is_a_valid_json(cls, value):
@@ -27,6 +27,8 @@ class LevelData(BaseModel):
             json.loads(value)
         except json.JSONDecodeError as e:
             raise ValueError("The level description is not a valid json")
+        
+        return value
 
 
 class CommentBase(BaseModel):
@@ -43,8 +45,3 @@ class CommentData(CommentBase):
         if 'profile' in session:
             return session['profile']['user_id']
         raise ValueError("The user cannot add comment without logging in")
-
-
-
-
-
