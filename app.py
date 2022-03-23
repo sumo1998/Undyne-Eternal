@@ -188,8 +188,9 @@ def update_comment():
 
 @app.route("/delete-comment", methods = ["DELETE"])
 def delete_comment():
-    data = request.form
-    level_handler.delete_comment(data)
+    comment_id = request.form.get('commentId')
+    level_id = request.form.get('levelId')
+    level_handler.delete_comment(comment_id, level_id)
     return jsonify({"result": "success"})
 
 
@@ -230,7 +231,7 @@ def level_creator():
 @utils.requires_auth
 def update_level():
     current_level_data = level_handler.get_level_info(session['level_id'])
-
+    
     if session['profile']['user_id'] != current_level_data[0][7]:
         return redirect(url_for('home'))
     
