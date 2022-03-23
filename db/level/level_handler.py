@@ -16,7 +16,7 @@ def get_level_comments(level_id):
 
 def add_level_comment(comment_data: CommentData):
     query_file_paths = [f'{BASE_PATH}/addLevelComment.sql', f'{BASE_PATH}/updateLevelRating.sql']
-    return database_handler.execute_query_from_files(query_file_paths, comment_data.dict(), get_result = True)[0]
+    database_handler.execute_query_from_files(query_file_paths, comment_data.dict())
 
 
 def update_level_comment(comment_data: CommentData):
