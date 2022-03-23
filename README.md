@@ -44,9 +44,9 @@ along with a very brief caption:**
 
 ## Mockup 
 
-Wireframe link: https://tinyurl.com/eternalwireframe
+Wireframe link: https://framer.com/share/UNDYNE--jIlIFQL6MHGJ5Dj21T4k/PVzi9pijX
 
-There are two main parts to the wireframe. The first is the social media part consisting of the following three pages: the main feed page, the level page, and the user profile page. Then, there is the game part, which is launched from any of the social-media-related pages by clicking on the "Launch Game" button on the navigation bar. The game consists of four sections (likely would be combined as interactive parts of a single page). The first section gives users the choice between playing the provided levels or launching the level creator. The second section allows the user to choose a difficulty from the provided levels to play. The third section is the game itself (playing a provided level, level creator level, or other user's level). The fourth is the level creator.
+There are three main parts to the wireframe. The first is the social media part consisting of the following three pages: the main feed page, the level page, and the user profile page. Then, there is the game part, which is launched from any of the social-media-related pages by clicking on the "Launch Game" button on the navigation bar. The third is the level creater where users can design their own levels.
 
 ## External Dependencies
 
