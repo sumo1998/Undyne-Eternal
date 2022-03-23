@@ -19,9 +19,9 @@ from level_data_model import LevelData
 load_dotenv(find_dotenv())
 
 app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-app.secret_key = os.getenv('APP_SECRET')
+app.secret_key = os.getenv("APP_SECRET")
 object_factory._create_auth_object(app)
 
 app.register_blueprint(auth_router.auth_blueprint)
@@ -48,7 +48,7 @@ def feed():
     return render_template("home/home_template.html", res = res)
 
 
-@app.route("/search", methods = ['POST'])
+@app.route("/search", methods = ["POST"])
 def feed_search():
     data = request.get_json()
     if data:
@@ -159,14 +159,14 @@ def level(id):
     return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
 
-@app.route("/add-comment", methods = ['POST'])
+@app.route("/add-comment", methods = ["POST"])
 def add_comment():
     comment_data = CommentData(
         **{
-            "userId": request.form.get('user'),
-            "commentBody": request.form.get('comment'),
-            "levelId": request.form.get('level'),
-            "commentRating": request.form.get('rating')
+            "userId": request.form.get("user"),
+            "commentBody": request.form.get("comment"),
+            "levelId": request.form.get("level"),
+            "commentRating": request.form.get("rating")
         }
     )
     level_handler.add_level_comment(comment_data)
@@ -174,7 +174,7 @@ def add_comment():
     return redirect(url_for("level", id = comment_data.level_id))
 
 
-@app.route("/update-comment", methods = ['PATCH'])
+@app.route("/update-comment", methods = ["PATCH"])
 def update_comment():
     data = {
         "commentBody": request.form.get("comment"),
@@ -185,7 +185,7 @@ def update_comment():
     return jsonify({"result": "success"})
 
 
-@app.route("/delete-comment", methods = ['DELETE'])
+@app.route("/delete-comment", methods = ["DELETE"])
 def delete_comment():
     data = request.form
     level_handler.delete_comment(data)
@@ -194,21 +194,21 @@ def delete_comment():
 
 @app.route("/level-creator")
 def level_creator():
-    if session['profile']['user_id'] is None:
+    if session["profile"]["user_id"] is None:
         return feed()
     level_id = request.args.get("id")
-    session['level_id'] = None
+    session["level_id"] = None
     if level_id is not None:
         level_data = level_handler.get_level_info(level_id)
-        if session['profile']['user_id'] != level_data[0][7]:
+        if session["profile"]["user_id"] != level_data[0][7]:
             return feed()
         
-        session['level_id'] = level_id
-        send = level_data[0]['level_description']
-        send['title'] = level_data[0]['level_name']
-        send['description'] = level_data[0]['level_summary']
-        send['difficulty'] = level_data[0]['level_diff']
-        send['isPublic'] = level_data[0]['level_published']
+        session["level_id"] = level_id
+        send = level_data[0]["level_description"]
+        send["title"] = level_data[0]["level_name"]
+        send["description"] = level_data[0]["level_summary"]
+        send["difficulty"] = level_data[0]["level_diff"]
+        send["isPublic"] = level_data[0]["level_published"]
     else:
         send = {
             "title": "Untitled",

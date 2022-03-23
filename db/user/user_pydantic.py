@@ -6,12 +6,12 @@ class UpdateUser(BaseModel):
     userName: str
     userAvatar: str
 
-    @validator('userId')
+    @validator("userId")
     def check_uid(cls, value):
         if value < 0:
             raise ValueError("invalid uid")
     
-    @validator('userName')
+    @validator("userName")
     def check_user_name(cls,value):
         if value == "":
             raise ValueError("Invalid userName")

@@ -20,15 +20,15 @@ window.onclick = function(event) {
 
 async function patchAvatar(userId, userName) {
     let avatarLink = document.getElementById("avatar-link-input").value;
-    await fetch('/updateUser', {
-        method: 'PATCH',
+    await fetch("/updateUser", {
+        method: "PATCH",
         body: JSON.stringify({
             "userId": userId,
             "userName": userName,
             "userAvatar": avatarLink
         }),
         headers: {
-            'Content-type': 'application/json;charset=utf-8',
+            "Content-type": "application/json;charset=utf-8",
         }
     })
     .then(response => console.log(response));
