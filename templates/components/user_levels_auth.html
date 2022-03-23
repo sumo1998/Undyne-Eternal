@@ -26,10 +26,10 @@ published=false) -%}
             <div class="user">
                 {% if avatar == "" %}
                     <p><span class="fa fa-user"></span>
-                        <a class="home-feed-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a></p>
+                        <a class="home-feed-links">{{ username }}</a></p>
                 {% else %}
                     <p><img src="{{ avatar }}">
-                        <a class="home-feed-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a></p>
+                        <a class="home-feed-links">{{ username }}</a></p>
 
                 {% endif %}
 
@@ -46,23 +46,37 @@ published=false) -%}
                     Play
                 </p>
             </a>
-            <a class="play-level-feed-auth gray-button button" href="{{ url_for('level_creator', level_id=level_id) }}">
+            <a class="play-level-feed-auth gray-button button" href="{{ url_for('level_creator', id=level_id) }}">
                 <p class="button-text">
                     Edit
                 </p>
             </a>
-            <form id="delete-level" method="delete" action="{{ url_for('delete_comment',id=level_id) }}">
-                <a class="play-level-feed-auth hard button" href="javascript:$('#delete-level').submit();">
+                <a id="delete-level-button" class="play-level-feed-auth hard button">
                     <p class="button-text">
                         Delete
                     </p>
                 </a>
-            </form>
         </div>
         <script>
             var date = "{{ timestamp }}".slice(0, 10);
             $("#timestamp{{ level_id }}").text("Created: " + date);
             console.log("hellow world");
+            $(document).ready(function(){
+                $("#delete-level-button").click(function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        cache: false,
+                        data: {
+                            id: {{ level_id }}
+                        },
+                        type: "DELETE",
+                        url: "/delete-level",
+                        success: function(response) {
+                            window.location.replace(`/user/${response['username']}`);
+                        }
+                    });
+                });
+            });
         </script>
     </div>
 {%- endmacro %}

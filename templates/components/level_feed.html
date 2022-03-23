@@ -17,7 +17,7 @@
             </div>
             <div class="user">
                 {{ user_avatar.user_avatar(avatar, username, user_id) }}
-                <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
+                <a class="text-links" href="{{ url_for('user', id=username) }}">{{ username }}</a>
             </div>
 
         </div>

@@ -15,7 +15,8 @@ def build_query(search_data: SearchData):
     
     # Add difficulty params
     if search_data.filters.difficulty:
-        query = query + f" and ( l.level_diff = {'or l.level_diff = '.join(search_data.filters.difficulty)} )"
+        sq = "'"
+        query = query + f" and ( l.level_diff = {' or l.level_diff = '.join(sq + x + sq for x in search_data.filters.difficulty)} )"
     
     # Add timespan
     if search_data.filters.timespan:
@@ -23,7 +24,21 @@ def build_query(search_data: SearchData):
     
     # Add search
     if search_data.search:
-        query = query + f" and level_ts @@ plainto_tsquery('english','%(search)s:*')"
+        searchQuery = ""
+        for word in search_data.search.split(" "):
+            word.replace(" ", "")
+            if word == "":
+                continue
+            else:
+                if searchQuery == "":
+                    searchQuery = " and level_ts @@ to_tsquery('english','" + word + ":*"
+                else:
+                    searchQuery = searchQuery + " | " + word + ":* "
+        
+        if searchQuery != "":
+            searchQuery = searchQuery + " ')"
+            # query = query + f" and level_ts @@ plainto_tsquery('english',%(search)s)"
+            query = query + searchQuery
     
     # Add sorting
     query = query + " order by "

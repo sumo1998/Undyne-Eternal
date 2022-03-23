@@ -22,11 +22,11 @@
             <p class="user-stats">Levels made: {{ level_count }}</p>
             <p class="user-stats">Average rating: {{ average_rating }}</p>
         </div>
-        <div class="medium post-page-play-level button">
+        <a class="medium post-page-play-level button" href="{{ url_for('auth.logout_user') }}">
             <p class="button-text">
                 Log out
             </p>
-        </div>
+        </a>
 
     </div>
 {%- endmacro %}
