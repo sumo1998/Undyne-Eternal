@@ -87,7 +87,7 @@ def user(id):
             "profile/profile_template.html", user_info = user_info, user_levels = user_levels, level_count = level_count
         )
     else:
-        return ""
+        abort(404)
 
 
 @app.route("/level/<level_id>")
