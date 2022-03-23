@@ -23,7 +23,7 @@ def set_username():
     auth_handler.write_userdata_to_db(user_data)
     # Only after user info is set, we allow user to continue
     session['profile'] = user_data.dict()
-    return jsonify(session['profile'])
+    return redirect(url_for("feed"))
 
 
 @auth_blueprint.route('/user-name', methods = ['GET'])
