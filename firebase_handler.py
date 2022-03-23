@@ -6,6 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 from firebase_admin import credentials
 from firebase_admin.storage import bucket
 from google.cloud.storage.bucket import Bucket
+import requests
 
 load_dotenv(find_dotenv())
 
@@ -38,3 +39,8 @@ class Firebase:
             method = "PUT",
             content_type = f"image/jpeg",
         )
+    
+    def get_file_url(self, file_name):
+        url = f"https://firebasestorage.googleapis.com/v0/b/{self.__bucket_name}/o/{file_name}"
+        response = requests.get(url).json()
+        return f"{url}?alt=media&token={response['downloadTokens']}"

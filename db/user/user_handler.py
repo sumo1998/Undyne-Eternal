@@ -1,7 +1,8 @@
 import os
 
+from flask import session
+
 from db import database_handler
-from db.user.user_pydantic import UpdateUser
 
 BASE_PATH = f"{os.path.dirname(os.path.realpath(__file__))}/sql"
 
@@ -21,21 +22,13 @@ def get_user_levels(id):
         query = f.read()
         
         with database_handler.get_db_cursor() as cur:
-            cur.execute(query, (id, ))
+            cur.execute(query, (id,))
             res = cur.fetchall()
             return res
 
 
-def update_user(data):
-    dt = UpdateUser(**data)
-    d = data
-    uid = d['userId']
-    user_name = d['userName']
-    user_avatar = d['userAvatar']
-    
-    with open('./db/user/sql/updateUser.sql') as f:
-        query = f.read()
-        
-        with database_handler.get_db_cursor(True) as cur:
-            cur.execute(query, (user_name, user_avatar, uid))
-            print("Executed query")
+def update_user_avatar(user_avatar_url):
+    assert 'profile' in session
+    database_handler.execute_query_from_files(
+        f"{BASE_PATH}/updateUser.sql", dict(user_avatar = user_avatar_url, user_id = session['profile']['user_id'])
+    )
