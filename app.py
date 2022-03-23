@@ -57,7 +57,6 @@ def feed_search():
         res = home_handler.get_homefeed(data)
     return render_template("home/search_results.html", res = res)
 
-
 @app.route("/game")
 def game():
     level_data_json = """
@@ -179,7 +178,8 @@ def update_comment():
     data = {
         "commentBody": request.form.get("comment"),
         "commentRating": request.form.get("rating"),
-        "commentId": request.form.get("comment_id")
+        "commentId": request.form.get("comment_id"),
+        "levelId": request.form.get("level_id")
     }
     level_handler.update_level_comment(CommentData(**data))
     return jsonify({"result": "success"})
