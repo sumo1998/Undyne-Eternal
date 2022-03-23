@@ -23,7 +23,7 @@
         </a>
     <script>
         $(document).ready(function() {
-            $("#avatar-wrapper").on('click', function() {
+            $("#profile{{ username }}").on('click', function() {
                 if($("#avatar-upload").css("display") == "none" || $("#avatar-upload").css("visibility") == "hidden") {
                     $("#avatar-upload").css("display", "block");
                 } else {
@@ -32,25 +32,39 @@
             });
             $("#avatar-upload-form").on('submit', function(e) {
                 e.preventDefault();
-                var link;
-                $.get('/get-upload-path', function(data, status) {
-                    link = data;
-                });
+                var fileType = "";
+                if ($("#avatar-file").prop('files')[0].type === "image/jpg" || $("#avatar-file").prop('files')[0].type === "image/jpeg") {
+                    fileType = "jpeg";
+                } else {
+                    fileType = "png";
+                }
                 $.ajax({
                     cache: false,
-                    data: $("#avatar-file").prop('files')[0],
-                    type: "PUT",
-                    url: link,
+                    type: "GET",
+                    url: `/get-upload-path?fileType=${fileType}`,
                     contentType: false,
                     processData: false,
-                    success: function() {
+                    success: function(response) {
+                        link = response;
                         $.ajax({
                             cache: false,
-                            type: "POST",
-                            url: "/upload-completed",
-                            data: {}
+                            data: $("#avatar-file").prop('files')[0],
+                            type: "PUT",
+                            url: link,
+                            contentType: false,
+                            processData: false,
+                            success: function() {
+                                $.ajax({
+                                    cache: false,
+                                    type: "POST",
+                                    url: "/upload-completed",
+                                    data: {},
+                                    success: function(response) {
+                                        window.location.replace(`/user/{{ username }}`);
+                                    }
+                                });
+                            }
                         });
-                        window.location.replace(`/level/{{ level_id }}`);
                     }
                 });
             });
