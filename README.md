@@ -21,10 +21,10 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
-* Searching, filtering, and sorting levels by title, description, difficulty, rating, and time.
-* Redesigning the game from scratch to allow users to create their own levels.
-* Making a level creator where users can design their own levels with a lot of custom options.
-* Letting users pick their own unique username after logging in and integrating it with Auth0.
+* Added searching, filtering, and sorting levels based on title, description, difficulty, rating, and time.
+* Redesigned the game from scratch to improve its structure, reduce bad practices, and incorporate it when our ideals.
+* Developed a level creator in which users can design their own levels with many custom options and a cool user interface.
+* Made it possible for user to pick their own unique username after logging in and integrating it with Auth0, accounting for users who try to use the same email with different login options.
 
 ## Testing Notes
 
