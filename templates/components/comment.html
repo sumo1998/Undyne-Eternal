@@ -4,7 +4,7 @@
         <div class="pure-u-1-1">
             <div class="comment-wrapper">
                 <div class="comment">{{ user_avatar.user_avatar(avatar, username, user_id) }}
-                    <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
+                    <a class="text-links" href="{{ url_for('user', id=username) }}">{{ username }}</a>
                     {% if session and session["profile"]["user_id"]|default('NONE') == user_id %}
                         <div class="icon-wrapper">
                             <i id="edit-comment{{ comment_id }}" class="button fa fa-pencil"></i>

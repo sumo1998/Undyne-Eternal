@@ -152,10 +152,10 @@ def user(id):
         return ""
 
 
-@app.route("/level/<id>")
-def level(id):
-    level_info = level_handler.get_level_info(id)
-    level_comments = level_handler.get_level_comments(id)
+@app.route("/level/<level_id>")
+def level(level_id):
+    level_info = level_handler.get_level_info(level_id)
+    level_comments = level_handler.get_level_comments(level_id)
     return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
 
@@ -171,7 +171,7 @@ def add_comment():
     )
     level_handler.add_level_comment(comment_data)
     
-    return redirect(url_for("level", id = comment_data.level_id))
+    return redirect(url_for("level", level_id = comment_data.level_id))
 
 
 @app.route("/update-comment", methods = ['PATCH'])
@@ -312,6 +312,7 @@ def get_upload_path():
 def upload_completed():
     file_url = firebase_object.get_file_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
     user_handler.update_user_avatar(file_url)
+    session['profile']['user_avatar'] = file_url
     return redirect(url_for("user", id = session['profile']['user_id']))
 
 

@@ -28,7 +28,7 @@
                 {% if session['profile'] %}
                     <a class="launch-game launch-game-text button" href="{{ url_for('level_creator') }}">Level Editor</a>
                     <a href="{{ url_for('user',id=session['profile']['user_name']) }}" style="display: inline-block" class="button">
-                        <object data="{{ session['profile']['user_avatar'] }}" type="image/jpg" class="avatar-nav">
+                        <object data="{{ session['profile']['user_avatar'] }}" type="image/jpg" class="avatar-nav" id="update-avatar">
                             <img src="../static/img/user.png" class="avatar-nav"/>
                         </object>
                     </a>
