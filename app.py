@@ -3,7 +3,7 @@ import os
 
 import pydantic
 from dotenv import load_dotenv, find_dotenv
-from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+from flask import Flask, render_template, redirect, url_for, request, session, jsonify, abort
 
 import auth_router
 import utils
@@ -301,7 +301,10 @@ def update_user():
 @app.route("/get-upload-path", methods = ['GET'])
 @utils.requires_auth
 def get_upload_path():
-    return firebase_object.get_signed_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
+    file_type = request.args.get('fileType')
+    if file_type not in {'png', 'jpeg'}:
+        abort(403)
+    return firebase_object.get_signed_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg", file_type = file_type)
 
 
 @app.route("/upload-completed", methods = ["POST"])
