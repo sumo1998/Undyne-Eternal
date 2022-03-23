@@ -193,7 +193,7 @@ def delete_comment():
     return jsonify({"result": "success"})
 
 
-@app.route("/level-creator/")
+@app.route("/level-creator")
 def level_creator():
     if session['profile']['user_id'] is None:
         return feed()
@@ -201,7 +201,7 @@ def level_creator():
     session['level_id'] = None
     if level_id is not None:
         level_data = level_handler.get_level_info(level_id)
-        if session['profile']['user_id'] != level_data[0][0]:
+        if session['profile']['user_id'] != level_data[0][7]:
             return feed()
         
         session['level_id'] = level_id
@@ -252,14 +252,15 @@ def update_level():
 
 
 @app.route("/delete-level", methods = ['DELETE'])
+@utils.requires_auth
 def delete_level():
     level_id = request.args.get("id")
     level_data = level_handler.get_level_info(level_id)
-    if session['profile']['user_id'] != level_data[0][0]:
-        return None
+    if session['profile']['user_id'] != level_data[0][7]:
+        return redirect(url_for('home'))
     
     level_handler.delete_level(level_id)
-    return user(session['user_id'])
+    return user(session['profile']['user_id'])
 
 
 @app.route("/add-level", methods = ['POST'])

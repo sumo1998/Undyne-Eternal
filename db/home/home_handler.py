@@ -33,7 +33,7 @@ def build_query(search_data: SearchData):
                 if searchQuery == "":
                     searchQuery = " and level_ts @@ to_tsquery('english','" + word + ":*"
                 else:
-                    searchQuery = searchQuery + " & " + word + ":* "
+                    searchQuery = searchQuery + " | " + word + ":* "
         
         if searchQuery != "":
             searchQuery = searchQuery + " ')"
@@ -61,7 +61,7 @@ def get_homefeed_with_filters(data):
         query = build_query(search_data)
         cur.execute(
             query, dict(
-                search = search_data.search + ':*', low_rating = search_data.filters.rating[0],
+                search = search_data.search, low_rating = search_data.filters.rating[0],
                 high_rating = search_data.filters.rating[1]
             )
         )

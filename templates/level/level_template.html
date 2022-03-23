@@ -17,7 +17,7 @@
                   style="display: none">
                 <label>Your Rating (1-5): <input class="rating-picker" name="rating" type="number" min="1" max="5"
                                                  required=""></label>
-                <textarea class="comment-textarea" placeholder="Enter comment here" name="comment" minlength="1"
+                <textarea class="comment-textarea" placeholder="Enter comment here" name="comment" minlength="1" maxlength="200"
                           required=""></textarea>
                 <input type="hidden" id="levelID" name="level" value="{{ levelInfo[0][0] }}">
                 <input type="hidden" id="userID" name="user" value="{{ levelInfo[0][6] }}">

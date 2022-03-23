@@ -4,5 +4,5 @@ SET level_name=%(level_name)s,
     level_summary=%(level_summary)s,
     level_description=%(level_description)s,
     level_diff=%(level_diff)s,
-    level_published= %s
-WHERE level_id = %s;
+    level_published= %(level_published)s
+WHERE level_id = %(level_id)s;
