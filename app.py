@@ -54,89 +54,27 @@ def feed_search():
     if data:
         res = home_handler.get_homefeed_with_filters(data)
     else:
-        res = home_handler.get_homefeed(data)
+        res = home_handler.get_homefeed()
     return render_template("home/search_results.html", res = res)
 
 
 @app.route("/game")
 def game():
-    level_data_json = """
-    {"attacks": [
-        {
-            "attackDelay": 3200,
-            "clockwiseShift": false,
-            "arrows": [
-                {"direction": "?", "reversed": false, "delay": 0, "speed": 100},
-                {"direction": "?", "reversed": false, "delay": 600, "speed": 100},
-                {"direction": "?", "reversed": false, "delay": 600, "speed": 100}
-            ]
-        },
-        {
-            "attackDelay": 4500,
-            "clockwiseShift": false,
-            "arrows": [
-                {"direction": "U", "reversed": false, "delay": 0, "speed": 150},
-                {"direction": "U", "reversed": false, "delay": 500, "speed": 150},
-                {"direction": "L", "reversed": false, "delay": 500, "speed": 150},
-                {"direction": "L", "reversed": false, "delay": 500, "speed": 150},
-                {"direction": "R", "reversed": false, "delay": 500, "speed": 150},
-                {"direction": "R", "reversed": false, "delay": 500, "speed": 150}
-            ]
-        },
-        {
-            "attackDelay": 4800,
-            "clockwiseShift": true,
-            "arrows": [
-                {"direction": "L", "reversed": false, "delay": 0, "speed": 200},
-                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
-                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
-                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
-                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
-                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
-                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
-                {"direction": "D", "reversed": false, "delay": 400, "speed": 200}
-            ]
-        },
-        {
-            "attackDelay": 4850,
-            "clockwiseShift": true,
-            "arrows": [
-                {"direction": "D", "reversed": false, "delay": 0, "speed": 250},
-                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "D", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "D", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "D", "reversed": false, "delay": 150, "speed": 250},
-                {"direction": "D", "reversed": false, "delay": 150, "speed": 250},
-                {"direction": "D", "reversed": false, "delay": 150, "speed": 250}
-            ]
-        },
-        {
-            "attackDelay": 4100,
-            "clockwiseShift": true,
-            "arrows": [
-                {"direction": "R", "reversed": false, "delay": 0, "speed": 250},
-                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "U", "reversed": false, "delay": 150, "speed": 250},
-                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "U", "reversed": false, "delay": 150, "speed": 250},
-                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
-                {"direction": "D", "reversed": false, "delay": 300, "speed": 250}
-            ]
-        }
-    ]}
-    """
+    level_id = request.args.get("id")
+    if level_id is None or not level_id.isdigit():
+        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = False)
     
-    level_data_json = json.loads(level_data_json)
-    difficulty = "easy"
+    level_info = level_handler.get_level_info(level_id)
     
-    return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
+    if len(level_info) != 1:
+        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = False)
+    
+    level_info = level_info[0]
+    
+    level_data_dict = level_info[4]
+    difficulty = level_info[5]
+    
+    return render_template("game/game.html", level_data_dict = level_data_dict, difficulty = difficulty, debug = False)
 
 
 @app.route("/user/<id>")
