@@ -61,7 +61,7 @@ This is the game page where you can play anyone's levels.
 
 Wireframe link: https://framer.com/share/UNDYNE--jIlIFQL6MHGJ5Dj21T4k/PVzi9pijX
 
-There are three main parts to the wireframe. The first is the social media part consisting of the following three pages: the main feed page, the level page, and the user profile page. Then, there is the game part, which is launched from any of the social-media-related pages by clicking on the "Launch Game" button on the navigation bar. The third is the level creater where users can design their own levels.
+There are three main parts to the wireframe. The first is the social media part consisting of the following three pages: the main feed page, the level page, and the user profile page. Then, there is the game part, which is launched from any of the social-media-related pages by launching it from any of the levels. The third is the level creator where users can design their own levels.
 
 ## External Dependencies
 
