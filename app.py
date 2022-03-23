@@ -298,7 +298,7 @@ def server_error(e):
 
 
 @app.errorhandler(502)
-def server_error(e):
+def bad_gateway(e):
     data = {
         "error_code": 502,
         "error_message": "Bad Gateway!"
@@ -307,4 +307,10 @@ def server_error(e):
 
 
 if __name__ == '__main__':
+    app.config["TRAP_HTTP_EXCEPTIONS"] = True
+    app.register_error_handler(404, resource_not_found)
+    app.register_error_handler(403, forbidden_resource)
+    app.register_error_handler(500, server_error)
+    app.register_error_handler(502, bad_gateway)
+    
     app.run()
