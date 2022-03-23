@@ -16,9 +16,9 @@ auth_blueprint = Blueprint(
 @auth_blueprint.route('/user-name', methods = ['POST'])
 def set_username():
     data = request.form
-    session['temp']['nickname'] = data['userName']
-    if auth_handler.check_if_username_exists(data['userName']):
+    if auth_handler.check_if_username_exists(data['username']):
         abort(401)
+    session['temp']['nickname'] = data['username']
     user_data = auth_models.UserModel(**session.pop('temp'))
     auth_handler.write_userdata_to_db(user_data)
     # Only after user info is set, we allow user to continue
