@@ -1,0 +1,55 @@
+{% macro level_in_page(level_id=0, title="Title", rating=0, difficulty="MEDIUM", username="Username", description="", avatar="",user_id=0,
+    session=None, commenters=[]) -%}
+    {% import "./components/user_avatar.html" as user_avatar %}
+    <div class="post-page pure-u-1-6" id="post-page-info">
+        <div class="pure-u-1-1">
+            <h1 class="post-page-title">{{ title }}</h1>
+            <div class="post-page-stars">
+                {%- for star in range(rating |int) %}
+                    <span class="fa fa-star checked"></span>
+                {%- endfor %}
+                {%- for star in range((5 - rating|int)) %}
+                    <span class="fa fa-star-o"></span>
+                {%- endfor %}
+            </div>
+            <div class="post-page-difficulty {{ difficulty }}">
+                {{ difficulty | upper }}
+            </div>
+            <div class="post-page-user">
+                {{ user_avatar.user_avatar(avatar, username, user_id) }}
+                <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
+            </div>
+        </div>
+        
+        <div class="post-page-description">
+            <p>
+                {{ description }}
+            </p>
+        </div>
+        
+        <a class="{{ difficulty }} post-page-play-level button" href="{{ url_for('game',id=level_id) }}">
+            <p class="button-text">
+                Play level
+            </p>
+        </a>
+        {% if (session['profile']) and (session['profile']['user_name'] != username ) and (session['profile']['user_name'] not in commenters) %}
+            <div id="write-review" class="post-page-play-level button gray-button">
+                <p class="button-text">
+                    Write a review
+                </p>
+            </div>
+        {% endif %}
+        <script>
+            $(document).ready(function() {
+                $("#write-review").on("click", function() {
+                    if($("#new-comment").css("display") == "none" || $("#new-comment").css("visibility") == "hidden") {
+                        $("#new-comment").css("display", "inline-block");
+                    }
+                });
+                $("#close-editor").on("click", function() {
+                    $("#new-comment").hide();
+                });
+            });
+        </script>
+    </div>
+{%- endmacro %}

@@ -1,0 +1,21 @@
+{% extends "parent_template.html" %}
+{% block content %}
+    <div class="error-page-div">
+        <div class="error-page-inner-div">
+            <img src="/static/img/undyne_error_face.png" class="error-page-image">
+        </div>
+        <div class="error-page-inner-div">
+            <p class="error-page-title"> OOPS! Something went wrong </p>
+        </div>
+        {% if 'error_code' in data.keys() %}
+            <div class="error-page-inner-div">
+                <p class="error-page-sub-title"> Code: {{ data['error_code'] }} </p>
+            </div>
+        {% endif %}
+        {% if 'error_message' in data.keys() %}
+            <div class="error-page-inner-div">
+                <p class="error-page-sub-title"> Message: {{ data['error_message'] }} </p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
