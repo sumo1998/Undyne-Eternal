@@ -37,6 +37,7 @@ class CommentBase(BaseModel):
 
 
 class CommentData(CommentBase):
+    comment_id: conint(gt = 0) = Field(1, alias = "commentId")
     user_id: str = Field('', alias = "userId")
     level_id: conint(gt = 0) = Field(alias = "levelId")
     
