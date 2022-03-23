@@ -1,30 +1,31 @@
-# Have changed the structure from what we discussed
-# Removed the structure of "client" module and just added a common templates folder
-# Made it like this to make the structure conform to what flask expects. Just a little less manual path specification
-# But if the project grows bigger, we can change the structure to be more modular
+import json
 import os
 
-from flask import Flask, render_template, redirect, url_for, request
-from api.auth import auth_router
-from flask import Flask, render_template, redirect, url_for, request, jsonify, session
+import pydantic
 from dotenv import load_dotenv, find_dotenv
-from factory import object_factory
+from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 
-load_dotenv(find_dotenv())
-
-from db.home import home_handler
-from db.user import user_handler
-from db.level import level_handler
+import auth_router
+import utils
 from db import database_handler
+from db.home import home_handler
+from db.level import level_handler, level_models
+from db.level.level_models import CommentData
+from db.user import user_handler
+from factory import object_factory
+from firebase_handler import Firebase
+from level_data_model import LevelData
 
 load_dotenv(find_dotenv())
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 app.secret_key = os.getenv('APP_SECRET')
 object_factory._create_auth_object(app)
 
 app.register_blueprint(auth_router.auth_blueprint)
+firebase_object = Firebase()
 
 
 @app.before_first_request
@@ -44,20 +45,96 @@ def feed_search():
     res = home_handler.get_home_feed(data)
     return render_template("home/search_results.html", res = res)
 
-@app.route("/home-feed", methods=['GET'])
-def feed_get():
-    data = request.get_json()
-    res = home_handler.get_home_feed(data)
-    test_session = {"profile": {
-        "user_id": 1,
-        "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"
-    }};
-    return render_template("home/home_template.html", res = res, session=test_session)
-
 
 @app.route("/game")
 def game():
-    return render_template("game/game.html")
+    level_data_json = """
+    {"attacks": [
+        {
+            "attackDelay": 3200,
+            "clockwiseShift": false,
+            "arrows": [
+                {"direction": "?", "reversed": false, "delay": 0, "speed": 100},
+                {"direction": "?", "reversed": false, "delay": 600, "speed": 100},
+                {"direction": "?", "reversed": false, "delay": 600, "speed": 100}
+            ]
+        },
+        {
+            "attackDelay": 4500,
+            "clockwiseShift": false,
+            "arrows": [
+                {"direction": "U", "reversed": false, "delay": 0, "speed": 150},
+                {"direction": "U", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "L", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "L", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "R", "reversed": false, "delay": 500, "speed": 150},
+                {"direction": "R", "reversed": false, "delay": 500, "speed": 150}
+            ]
+        },
+        {
+            "attackDelay": 4800,
+            "clockwiseShift": true,
+            "arrows": [
+                {"direction": "L", "reversed": false, "delay": 0, "speed": 200},
+                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "R", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "L", "reversed": false, "delay": 400, "speed": 200},
+                {"direction": "D", "reversed": false, "delay": 400, "speed": 200}
+            ]
+        },
+        {
+            "attackDelay": 4850,
+            "clockwiseShift": true,
+            "arrows": [
+                {"direction": "D", "reversed": false, "delay": 0, "speed": 250},
+                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 150, "speed": 250}
+            ]
+        },
+        {
+            "attackDelay": 4100,
+            "clockwiseShift": true,
+            "arrows": [
+                {"direction": "R", "reversed": false, "delay": 0, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "L", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 150, "speed": 250},
+                {"direction": "R", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "U", "reversed": false, "delay": 300, "speed": 250},
+                {"direction": "D", "reversed": false, "delay": 300, "speed": 250}
+            ]
+        }
+    ]}
+    """
+    
+    level_data_json = json.loads(level_data_json)
+    difficulty = "easy"
+    
+    return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
+
+
+@app.route("/home-feed")
+def feed():
+    data = request.json
+    if data is None:
+        res = home_handler.get_homefeed()
+    else:
+        res = home_handler.get_homefeed_with_filters(data)
+    return render_template("home/home_template.html", res = res)
 
 
 @app.route("/user/<id>")
@@ -65,27 +142,21 @@ def user(id):
     user_info = user_handler.get_user_info(id)
     user_levels = user_handler.get_user_levels(id)
     level_count = len(user_levels)
-    test_session = {"profile": {
-        "user_id": 1,
-        "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"
-    }};
     return render_template("profile/profile_template.html", user_info = user_info, user_levels = user_levels, level_count=level_count,
                             session=test_session)
 
 
 @app.route("/level/<id>")
-def level(id):
-    level_info = level_handler.get_level_info(id)
-    level_comments = level_handler.get_level_comments(id)
-    test_session = {"profile": {
-        "user_id": 1,
-        "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"
-    }};
-    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments, session=test_session)
+def level(level_id):
+    level_info = level_handler.get_level_info(level_id)
+    level_comments = level_handler.get_level_comments(level_id)
+    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
 
 @app.route("/add-comment", methods = ['POST'])
 def add_comment():
+    data = request.form
+    level_handler.add_level_comment(CommentData(**data))
     data = {
         "userId": request.form.get('user'),
         "commentBody": request.form.get('comment'),
@@ -99,6 +170,8 @@ def add_comment():
 @app.route("/update-comment", methods = ['PATCH'])
 def update_comment():
     data = request.form
+    level_handler.update_level_comment(CommentData(**data))
+    return redirect(url_for("level", id = data['levelId']))
     data = {
         "commentBody": request.form.get("comment"),
         "commentRating": request.form.get("rating"),
@@ -115,32 +188,114 @@ def delete_comment():
     return jsonify({"result": "success"})
 
 
+@app.route("/level-creator/")
+def level_creator():
+    if session['user_id'] is None:
+        return feed()
+    level_id = request.args.get("id")
+    session['level_id'] = None
+    if level_id is not None:
+        level_data = level_handler.get_level_info(level_id)
+        if session['user_id'] != level_data[0][0]:
+            return feed()
+        
+        session['level_id'] = level_id
+        send = level_data[0]['level_description']
+        send['title'] = level_data[0]['level_name']
+        send['description'] = level_data[0]['level_summary']
+        send['difficulty'] = level_data[0]['level_diff']
+        send['isPublic'] = level_data[0]['level_published']
+    else:
+        send = {
+            "title": "Untitled",
+            "description": "Add a description",
+            "difficulty": "easy",
+            "isPublic": False,
+            "attacks": []
+        }
+    
+    return render_template("level_creator/level_creator.html", level_json = send, is_new_level = level_id is None)
+
+
 @app.route("/update-level", methods = ['PATCH'])
+@utils.requires_auth
 def update_level():
-    data = request.form
-    level_handler.update_level(data)
-    return redirect(url_for("level", id = data['levelId']))
+    current_level_data = level_handler.get_level_info(session['level_id'])
+    
+    client_level_data = request.get_json()
+    try:
+        level_data = LevelData(**client_level_data)
+    except pydantic.ValidationError as e:
+        response = str(e).replace("(type=value_error)", "")
+        return jsonify(response = response)
+    
+    attacks = {
+        "attacks": client_level_data['attacks']
+    }
+    update = {
+        "levelId": session['level_id'],
+        "levelName": level_data.title,
+        "levelRating": current_level_data[0]['level_rating'],
+        "levelSummary": level_data.description,
+        "levelDescription": json.dumps(attacks),
+        "levelDiff": level_data.difficulty,
+        "levelPublished": level_data.is_public
+    }
+    level_handler.update_level(level_models.LevelData(**update))
+    response = "Saved!"
+    return jsonify(response = response)
 
 
 @app.route("/delete-level", methods = ['DELETE'])
 def delete_level():
-    data = request.form
-    level_handler.delete_level(data)
-    return redirect(url_for("home_page"))
+    level_id = request.args.get("id")
+    level_data = level_handler.get_level_info(level_id)
+    if session['profile']['user_id'] != level_data[0][0]:
+        return None
+    
+    level_handler.delete_level(level_id)
+    return user(session['user_id'])
 
 
 @app.route("/add-level", methods = ['POST'])
+@utils.requires_auth
 def add_level():
-    data = request.form
-    level_handler.add_level(data)
-    return redirect(url_for("home_page"))
+    client_level_data = request.get_json()
+    try:
+        level_data = LevelData(**client_level_data)
+    except pydantic.ValidationError as e:
+        response = str(e).replace("(type=value_error)", "")
+        return jsonify(response = response)
+    
+    add = {
+        "userId": session['user_id'],
+        "levelName": level_data.title,
+        "levelRating": 0,
+        "levelSummary": level_data.description,
+        "levelDescription": json.dumps(
+            {
+                "attacks": client_level_data['attacks']
+            }
+        ),
+        "levelDiff": level_data.difficulty,
+        "levelPublished": level_data.is_public
+    }
+    return jsonify(
+        response = level_handler.add_level(level_models.LevelData(**add))
+    )
 
 
 @app.route("/update-user", methods = ['PATCH'])
 def update_user():
-    data = request.json
+    data = request.get_json()
     user_handler.update_user(data)
     return redirect(url_for("user", id = data["userId"]))
+
+
+@app.route("/get-upload-path", methods = ['GET'])
+@utils.requires_auth
+def get_upload_path():
+    return firebase_object.get_signed_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
 
 
 if __name__ == '__main__':

@@ -1,5 +1,3 @@
-update usr
-set
-    user_name=%s,user_avatar=%s
-where
-    user_id=%s;
+UPDATE user_info
+SET user_avatar=%s
+WHERE user_id =% s;

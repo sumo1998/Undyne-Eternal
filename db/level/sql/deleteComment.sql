@@ -1,1 +1,3 @@
-delete from comments where comment_id=%s;
+DELETE
+FROM comments
+WHERE comment_id = %s;

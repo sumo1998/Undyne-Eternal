@@ -1,12 +1,12 @@
-
-select
-    u.user_id, u.user_name, u.user_avatar,
-    c.comment_id,c.comment_rating, c.comment_desc
-from
-    levels as l, comments as c, usr as u
-where
-        c.level_id = l.level_id and
-            l.level_id = %s and
-        c.user_id = u.user_id
-order by
-    c.comment_rating desc;
+SELECT u.user_id,
+       u.user_name,
+       c.comment_id,
+       c.comment_rating,
+       c.comment_desc
+FROM levels AS l,
+     comments AS c,
+     user_info AS u
+WHERE c.level_id = l.level_id
+  AND l.level_id = %s
+  AND c.user_id = u.user_id
+ORDER BY c.comment_rating DESC;

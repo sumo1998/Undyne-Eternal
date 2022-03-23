@@ -1,6 +1,6 @@
 from flask import Flask
 
-from api.auth.auth_handler import Auth
+from auth_handler import Auth
 
 """
 Some of the things like auth and db might need access to the base level flask app object
@@ -14,17 +14,17 @@ And we can use one object for the whole project
 class ObjectFactory:
     def __init__(self):
         self.objects = {}
-
+    
     def _create_auth_object(self, app: Flask = None):
         if app is None:
             print("Did not initialize the auth object before calling it")
             raise RuntimeError
         self.objects['auth'] = Auth(app)
-
+    
     def get_auth_object(self, app: Flask = None):
         if 'auth' not in self.objects:
             self._create_auth_object(app)
-
+        
         return self.objects['auth']
 
 

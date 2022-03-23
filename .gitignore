@@ -278,3 +278,9 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Game minifier stuff
+gruntfile.js
+minify_game.sh
+node_modules
+package.json
+package-lock.json

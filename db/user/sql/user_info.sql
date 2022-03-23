@@ -1,2 +1,3 @@
-
-select * from usr where user_id = %s;
+select *
+from usr
+where user_id = %s;
