@@ -45,8 +45,11 @@ def get_set_username_screen():
 
 @auth_blueprint.route("/callback")
 def oauth_callback():
-    if object_factory.get_auth_object().handle_callbacks():
-        return redirect(url_for("home_page"))
+    error = request.args.get("error")
+    if error is not None and error == "access_denied":
+        return redirect(url_for("auth.logout_user"))
+    elif object_factory.get_auth_object().handle_callbacks():
+        return redirect(url_for("auth.logout_user"))
     return redirect(url_for("auth.get_set_username_screen"))
 
 
