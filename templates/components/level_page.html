@@ -1,5 +1,5 @@
 {% macro level_in_page(level_id=0, title="Title", rating=0, difficulty="MEDIUM", username="Username", description="", avatar="",user_id=0,
-    session=None) -%}
+    session=None, commenters=[]) -%}
     {% import "./components/user_avatar.html" as user_avatar %}
     <div class="post-page pure-u-1-6" id="post-page-info">
         <div class="pure-u-1-1">
@@ -32,7 +32,7 @@
                 Play level
             </p>
         </a>
-        {% if session['profile'] and session['profile']['user_name'] != username %}
+        {% if (session['profile']) and (session['profile']['user_name'] != username ) and (session['profile']['user_name'] not in commenters)%}
             <div id="write-review" class="post-page-play-level button gray-button">
                 <p class="button-text">
                     Write a review

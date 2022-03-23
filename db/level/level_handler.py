@@ -15,12 +15,12 @@ def get_level_comments(level_id):
 
 
 def add_level_comment(comment_data: CommentData):
-    query_file_paths = [f"{BASE_PATH}/add_level_comment.sql", f"{BASE_PATH}/updateLevelRating.sql"]
+    query_file_paths = [f"{BASE_PATH}/add_level_comment.sql", f"{BASE_PATH}/update_level_rating.sql"]
     database_handler.execute_query_from_files(query_file_paths, comment_data.dict())
 
 
 def update_level_comment(comment_data: CommentData):
-    query_file_paths = [f"{BASE_PATH}/update_level_comment.sql", f"{BASE_PATH}/updateLevelRating.sql"]
+    query_file_paths = [f"{BASE_PATH}/update_level_comment.sql", f"{BASE_PATH}/update_level_rating.sql"]
     database_handler.execute_query_from_files(query_file_paths, comment_data.dict())
 
 

@@ -156,7 +156,8 @@ def user(id):
 def level(level_id):
     level_info = level_handler.get_level_info(level_id)
     level_comments = level_handler.get_level_comments(level_id)
-    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
+    level_commenters = [l[1] for l in level_comments]
+    return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments, commenters=level_commenters)
 
 
 @app.route("/add-comment", methods = ["POST"])
