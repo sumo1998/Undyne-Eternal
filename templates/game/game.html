@@ -49,8 +49,8 @@
             Main.initializeMain();
             Main.runner.load();
             Main.runner.startGame(
-                {% if level_data_json | length %}
-                    {{ level_data_json | tojson }}
+                {% if level_data_dict | length %}
+                    {{ level_data_dict | tojson }}
                 {% else %}
                     ""
                 {% endif %},
