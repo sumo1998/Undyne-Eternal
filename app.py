@@ -294,7 +294,7 @@ def add_level():
 @app.route("/update-user", methods = ['PATCH'])
 def update_user():
     data = request.get_json()
-    user_handler.update_user(data)
+    user_handler.update_user_avatar(data)
     return redirect(url_for("user", id = data["userId"]))
 
 
@@ -302,6 +302,14 @@ def update_user():
 @utils.requires_auth
 def get_upload_path():
     return firebase_object.get_signed_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
+
+
+@app.route("/upload-completed", methods = ["POST"])
+@utils.requires_auth
+def upload_completed():
+    file_url = firebase_object.get_file_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
+    user_handler.update_user_avatar(file_url)
+    return redirect(url_for("user", id = session['profile']['user_id']))
 
 
 if __name__ == '__main__':
