@@ -176,15 +176,12 @@ def add_comment():
 
 @app.route("/update-comment", methods = ['PATCH'])
 def update_comment():
-    data = request.form
-    level_handler.update_level_comment(CommentData(**data))
-    return redirect(url_for("level", id = data['levelId']))
     data = {
         "commentBody": request.form.get("comment"),
         "commentRating": request.form.get("rating"),
         "commentId": request.form.get("comment_id")
     }
-    level_handler.update_level_comment(data)
+    level_handler.update_level_comment(CommentData(**data))
     return jsonify({"result": "success"})
 
 
