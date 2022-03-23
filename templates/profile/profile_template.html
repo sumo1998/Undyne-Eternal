@@ -8,7 +8,7 @@
 {% block content %}
     {{ form.sortFilter() }}
     {# if session's user id matches user id then have edit and log out functionality, use _auth components #}
-    {% if session and session["profile"]["user_id"]|default('NONE') == user_info[0][0] %}
+    {% if session["profile"] and session["profile"]["user_id"]|default('NONE') == user_info[0][0] %}
         <div>{{ user_profile_auth.user_in_profile(user_info[0][1],
     user_info[0][3],
     level_count, user_info[0][4], user_info[0][0]) }}

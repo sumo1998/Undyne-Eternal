@@ -3,7 +3,7 @@
     <div class="user-page pure-u-1-5">
         <div class="user-page-title">
             {{ user_avatar.user_avatar(avatar, username, user_id) }}
-            <a class="text-links" href="{{ url_for('user', id=user_id) }}">{{ username }}</a>
+            <a class="text-links">{{ username }}</a>
         </div>
         <div class="user-level-info">
             <p class="user-stats">Levels made: {{ level_count }}</p>
