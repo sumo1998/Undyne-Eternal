@@ -57,6 +57,7 @@ def feed_search():
         res = home_handler.get_homefeed(data)
     return render_template("home/search_results.html", res = res)
 
+
 @app.route("/game")
 def game():
     level_data_json = """
@@ -192,7 +193,8 @@ def delete_comment():
     return jsonify({"result": "success"})
 
 
-@app.route("/level-creator")
+@app.route("/level-creator/")
+@utils.requires_auth
 def level_creator():
     if session["profile"]["user_id"] is None:
         return feed()
@@ -285,7 +287,7 @@ def add_level():
         "levelDiff": level_data.difficulty,
         "levelPublished": level_data.is_public
     }
-    session['level_id'] = level_handler.add_level(level_models.LevelData(**add))
+    session['level_id'] = level_handler.add_level(level_models.LevelData(**add))[0]
     return jsonify(
         response = "Saved!"
     )
@@ -304,7 +306,9 @@ def get_upload_path():
     file_type = request.args.get('fileType')
     if file_type not in {'png', 'jpeg'}:
         abort(403)
-    return firebase_object.get_signed_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg", file_type = file_type)
+    return firebase_object.get_signed_url(
+        file_name = f"{session['profile']['user_name']}_pfp.jpeg", file_type = file_type
+    )
 
 
 @app.route("/upload-completed", methods = ["POST"])
