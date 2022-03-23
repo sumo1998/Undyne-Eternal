@@ -220,7 +220,10 @@ def level_creator():
             "attacks": []
         }
     
-    return render_template("level_creator/level_creator.html", level_json = send, is_new_level = level_id is None)
+    return render_template(
+        "level_creator/level_creator.html", level_json = send, is_new_level = level_id is None,
+        user_name = session['profile']['user_name']
+    )
 
 
 @app.route("/update-level", methods = ['PATCH'])
