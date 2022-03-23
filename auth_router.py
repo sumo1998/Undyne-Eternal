@@ -49,7 +49,7 @@ def oauth_callback():
     if error is not None and error == "access_denied":
         return redirect(url_for("auth.logout_user"))
     elif object_factory.get_auth_object().handle_callbacks():
-        return redirect(url_for("home_feed"))
+        return redirect(url_for("home_page"))
     return redirect(url_for("auth.get_set_username_screen"))
 
 
