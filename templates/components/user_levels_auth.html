@@ -41,7 +41,7 @@ published=false) -%}
             </p>
         </div>
         <div class="pure-u-4-24">
-            <a class="play-level-feed-auth {{ difficulty }} button">
+            <a class="play-level-feed-auth {{ difficulty }} button" href="{{ url_for('game',id=level_id) }}">
                 <p class="button-text">
                     Play
                 </p>
@@ -51,7 +51,7 @@ published=false) -%}
                     Edit
                 </p>
             </a>
-                <a id="delete-level-button" class="play-level-feed-auth hard button">
+                <a id="delete-level-button{{ level_id }}" class="play-level-feed-auth hard button">
                     <p class="button-text">
                         Delete
                     </p>
@@ -61,17 +61,14 @@ published=false) -%}
             var date = "{{ timestamp }}".slice(0, 10);
             $("#timestamp{{ level_id }}").text("Created: " + date);
             $(document).ready(function(){
-                $("#delete-level-button").click(function(e){
+                $("#delete-level-button{{ level_id }}").click(function(e){
                     e.preventDefault();
                     $.ajax({
                         cache: false,
-                        data: {
-                            id: {{ level_id }}
-                        },
                         type: "DELETE",
-                        url: "/delete-level",
+                        url: `/delete-level?id={{ level_id }}`,
                         success: function(response) {
-                            window.location.replace(`/user/${response['username']}`);
+                            window.location.replace(`/user/${response['user_name']}`);
                         }
                     });
                 });

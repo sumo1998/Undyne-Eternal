@@ -264,7 +264,7 @@ def delete_level():
         return redirect(url_for('home'))
     
     level_handler.delete_level(level_id)
-    return user(session['profile']['user_id'])
+    return session['profile']
 
 
 @app.route("/add-level", methods = ['POST'])
