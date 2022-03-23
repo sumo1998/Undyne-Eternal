@@ -32,7 +32,7 @@ class LevelData(BaseModel):
 
 
 class CommentBase(BaseModel):
-    comment_body: constr(curtail_length = 200) = Field(alias = "commendBody")
+    comment_desc: constr(curtail_length = 200) = Field(alias = "commentBody")
     comment_rating: confloat(ge = 1.0, le = 5.0) = Field(alias = "commentRating")
 
 

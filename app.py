@@ -1,18 +1,19 @@
 import json
 import os
 
-import auth_router
 import pydantic
+from dotenv import load_dotenv, find_dotenv
+from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+
+import auth_router
 import utils
 from db import database_handler
 from db.home import home_handler
 from db.level import level_handler, level_models
 from db.level.level_models import CommentData
 from db.user import user_handler
-from dotenv import load_dotenv, find_dotenv
 from factory import object_factory
 from firebase_handler import Firebase
-from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 from level_data_model import LevelData
 
 load_dotenv(find_dotenv())
@@ -36,6 +37,7 @@ def init():
 def home_page():
     return redirect(url_for("feed"))
 
+
 @app.route("/home-feed")
 def feed():
     data = request.json
@@ -45,10 +47,14 @@ def feed():
         res = home_handler.get_homefeed_with_filters(data)
     return render_template("home/home_template.html", res = res)
 
-@app.route("/search", methods=['POST'])
+
+@app.route("/search", methods = ['POST'])
 def feed_search():
     data = request.get_json()
-    res = home_handler.get_home_feed(data)
+    if data:
+        res = home_handler.get_homefeed_with_filters(data)
+    else:
+        res = home_handler.get_homefeed(data)
     return render_template("home/search_results.html", res = res)
 
 
@@ -133,35 +139,37 @@ def game():
     return render_template("game/game.html", level_data_json = level_data_json, difficulty = difficulty, debug = False)
 
 
-
 @app.route("/user/<id>")
 def user(id):
     user_info = user_handler.get_user_info(id)
-    user_levels = user_handler.get_user_levels(id)
-    level_count = len(user_levels)
-    return render_template("profile/profile_template.html", user_info = user_info, user_levels = user_levels, level_count=level_count,
-                            session=test_session)
+    if user_info:
+        user_levels = user_handler.get_user_levels(user_info[0][0])
+        level_count = len(user_levels)
+        return render_template(
+            "profile/profile_template.html", user_info = user_info, user_levels = user_levels, level_count = level_count
+        )
+    else:
+        return ""
 
 
 @app.route("/level/<id>")
-def level(level_id):
-    level_info = level_handler.get_level_info(level_id)
-    level_comments = level_handler.get_level_comments(level_id)
+def level(id):
+    level_info = level_handler.get_level_info(id)
+    level_comments = level_handler.get_level_comments(id)
     return render_template("level/level_template.html", levelInfo = level_info, levelComments = level_comments)
 
 
 @app.route("/add-comment", methods = ['POST'])
 def add_comment():
-    data = request.form
-    level_handler.add_level_comment(CommentData(**data))
-    data = {
+    comment_data = CommentData(**{
         "userId": request.form.get('user'),
         "commentBody": request.form.get('comment'),
         "levelId": request.form.get('level'),
         "commentRating": request.form.get('rating')
-    }
-    level_handler.add_level_comment(data)
-    return redirect(url_for("level", id = data['levelId']))
+    })
+    level_handler.add_level_comment(comment_data)
+
+    return redirect(url_for("level", id = comment_data.level_id))
 
 
 @app.route("/update-comment", methods = ['PATCH'])
