@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% import "./components/level_feed.html" as levelTemplate %}
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+          integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='ui/styles/styles.css') }}">
+    <title>Undyne Eternal {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu">
+            <a class="logo pure-menu-item" href="{{ url_for('home_page') }}">
+                <img class="logo-img" src="{{ url_for('static',filename='img/undyne_logo.png') }}">
+            </a>
+            <div id="searcharea">
+                <input class="pure-menu-item" id="search-bar" type="text" placeholder="Search">
+                <button id="search-button" class="pure-button gray-button"><i class="fa fa-search"></i></button>
+                <br>
+                <a id="sortnfilter">Sort & Filter</a>
+            </div>
+            
+            <div class="nav-right pure-menu-item">
+                {% if session['profile'] %}
+                    <a class="launch-game launch-game-text button" href="{{ url_for('level_creator') }}">Level
+                                                                                                         Editor</a>
+                    <a href="{{ url_for('user',id=session['profile']['user_name']) }}" style="display: inline-block"
+                       class="button">
+                        <img class="avatar-nav" id="profile{{ username }}" src="{{ session['profile']['user_avatar'] }}"
+                             alt="Not Found" onerror="this.src='../static/img/user.png'">
+                    </a>
+                {% else %}
+                    <a class="launch-game launch-game-text button" href="{{ url_for('auth.login_user') }}">Log in</a>
+                    <img class="avatar-nav" id="profile{{ username }}" src="{{ img }}" alt="Not Found"
+                         onerror="this.src='../static/img/user.png'">
+                {% endif %}
+            </div>
+        </div>
+        
+        <script defer>
+            $(document).ready(function() {
+                var search = function() {
+                    var data = {
+                        search: $("#search-bar").val(),
+                        filters: {
+                            difficulty: ["easy", "medium", "hard"],
+                            rating: [0, 5],
+                            timespan: "alltime"
+                        },
+                        sorting: "rating"
+                    };
+                    $.ajax({
+                        "cache": false,
+                        "data": JSON.stringify(data),
+                        "contentType": "application/json;charset=UTF-8",
+                        "type": "POST",
+                        "url": "/search",
+                        "success": function(response) {
+                            //document.write(response);
+                            $("#content").html(response);
+                        }
+                    });
+                };
+                $("#search-bar").keypress(function(e) {
+                    var keycode = (e.keyCode ? e.keyCode : e.which);
+                    if(keycode == "13") {
+                        search();
+                    }
+                });
+                $("#search-button").on("click", function() {
+                    search();
+                });
+                $("#sortnfilter").on("click", function() {
+                    if($("#sort-filter").css("display") == "none" || $("#sort-filter").css("visibility") == "hidden") {
+                        $("#sort-filter").css("display", "flex");
+                        $("#search-button").css("display", "none");
+                    }
+                    else {
+                        $("#sort-filter").hide();
+                        $("#search-button").show();
+                    }
+                });
+            });
+        </script>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

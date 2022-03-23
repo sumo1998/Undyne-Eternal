@@ -1,0 +1,18 @@
+{% extends "parent_template.html" %}
+
+{% block content %}
+    {% if attempted_username | length %}
+        <div id="error-box">
+            <h3>Error: The username "{{ attempted_username }}" is already in use."</h3>
+        </div>
+    {% endif %}
+    <div id="username-container-parent">
+        <form id="username-container" action="{{ url_for("auth.set_username") }}" method="POST">
+            <h2>Pick a username:</h2>
+            <label for="username-field"></label>
+            <input id="username-field" type="text" name="username" placeholder="Username" required="required"
+                   minlength="1" maxlength="20">
+            <button id="username-continue" class="pure-button gray-button" type="submit">Continue</button>
+        </form>
+    </div>
+{% endblock %}

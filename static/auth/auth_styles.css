@@ -1,0 +1,8 @@
+/*
+Have kept this folder structure to make it a little consistent with how Flask expects default folder structure to be
+We can change this if you guys think this is a little clunky
+*/
+
+.random {
+    font-size: 200px;
+}

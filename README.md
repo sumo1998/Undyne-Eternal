@@ -16,7 +16,6 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 * Sumukh Nitundila, nitun001@umn.edu
 * Sumanth Kaushik Vishwanath, kaush047@umn.edu
 
-
 ## Key Features
 
 **Describe the most challenging features you implemented
@@ -33,16 +32,22 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 
 * ...
 
-
 ## Screenshots of Site
 
 **[Add a screenshot of each key page (around 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
 along with a very brief caption:**
 
-![](https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif)
+![home](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
 
+![level](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
 
-## Mockup 
+![user](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
+
+![creator](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
+
+![game](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
+
+## Mockup
 
 Wireframe link: https://framer.com/share/UNDYNE--jIlIFQL6MHGJ5Dj21T4k/PVzi9pijX
 
@@ -50,16 +55,13 @@ There are three main parts to the wireframe. The first is the social media part 
 
 ## External Dependencies
 
-**Document integrations with 3rd Party code or services here.
-Please do not document required libraries. or libraries that are mentioned in the product requirements**
+**Document integrations with 3rd Party code or services here. Please do not document required libraries. or libraries that are mentioned in the product requirements**
 
 * PIXI.js
 * howler.js
 * pydantic
 * firebase_admin
 
-**If there's anything else you would like to disclose about how your project
-relied on external code, expertise, or anything else, please disclose that
-here:**
+**If there's anything else you would like to disclose about how your project relied on external code, expertise, or anything else, please disclose that here:**
 
 The game was based off Fairdyne by Joe Zeng but we rewrote a large majority of it from scratch.

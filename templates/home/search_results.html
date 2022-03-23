@@ -1,0 +1,15 @@
+{% import "./components/level_feed.html" as level_template %}
+{% import "./components/sort_filter.html" as form %}
+{% block content %}
+    {{ form.sortFilter() }}
+    {% for level in res %}
+        <div>{{ level_template.level_in_feed(level.level_name, level.level_rating, level.level_diff, level.level_summary,
+     level.user_name, level.user_avatar, level.level_id, level.user_id) }}
+        </div>
+    {% endfor %}
+    {% if res|length == 0 %}
+        <h1 style="text-align: center">
+            No levels found.
+        </h1>
+    {% endif %}
+{% endblock %}

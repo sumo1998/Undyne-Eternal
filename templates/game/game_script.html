@@ -1,0 +1,9 @@
+{% macro game_script(local_script_path, debug) %}
+    {% if debug == true %}
+        <script type="text/javascript"
+                src="{{ url_for("static", filename = "game/js/" + local_script_path + ".js") }}"></script>
+    {% else %}
+        <script type="text/javascript"
+                src="{{ url_for("static", filename = "game/jsmin/" + local_script_path + ".min.js") }}"></script>
+    {% endif %}
+{% endmacro %}
