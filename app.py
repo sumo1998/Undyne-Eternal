@@ -329,5 +329,41 @@ def upload_completed():
     return redirect(url_for("user", id = session['profile']['user_id']))
 
 
+@app.errorhandler(404)
+def resource_not_found(e):
+    data = {
+        "error_code" : 404,
+        "error_message" : "Resource Not Found! "
+    }
+    return render_template("error/error.html", data = data)
+
+
+@app.errorhandler(403)
+def forbidden_resource(e):
+    data = {
+        "error_code" : 403,
+        "error_message" : "Page Forbidden! "
+    }
+    return render_template("error/error.html", data = data)
+
+
+@app.errorhandler(500)
+def server_error(e):
+    data = {
+        "error_code" : 500,
+        "error_message" : "Server error!"
+    }
+    return render_template("error/error.html", data = data)
+
+
+@app.errorhandler(502)
+def server_error(e):
+    data = {
+        "error_code" : 502,
+        "error_message" : "Bad Gateway!"
+    }
+    return render_template("error/error.html", data = data)
+
+
 if __name__ == '__main__':
     app.run()
