@@ -573,3 +573,31 @@ i.fa-trash {
 #avatar-upload-button {
     margin: 20px 0px;
 }
+.error-page-div{
+    width: 100%;
+}
+.error-page-inner-div{
+    width: 50%;
+    margin: 3% auto;
+}
+
+.error-page-image{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: auto;
+    height: 15vh;
+}
+
+.error-page-title{
+    font-size: 3vw;
+    text-align: center;
+    display: block;
+}
+
+.error-page-sub-title{
+    font-size: 2vw;
+    text-align: center;
+    display: block;
+}
+
