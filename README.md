@@ -6,7 +6,7 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 
 * Team Name: TODO
 * App Name: Undyne – Eternal
-* App Link: <https://TODO.heroku.com/>
+* App Link: <https://whispering-waters-75938.herokuapp.com/>
 
 ### Students
 
@@ -22,7 +22,10 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
-* ...
+* Searching, filtering, and sorting levels by title, description, difficulty, rating, and time.
+* Redesigning the game from scratch to allow users to create their own levels.
+* Making a level creator where users can design their own levels with a lot of custom options.
+* Letting users pick their own unique username after logging in and integrating it with Auth0.
 
 ## Testing Notes
 
@@ -50,11 +53,13 @@ There are two main parts to the wireframe. The first is the social media part co
 **Document integrations with 3rd Party code or services here.
 Please do not document required libraries. or libraries that are mentioned in the product requirements**
 
-* Library or service name: description of use
-* ...
+* PIXI.js
+* howler.js
+* pydantic
+* firebase_admin
 
 **If there's anything else you would like to disclose about how your project
 relied on external code, expertise, or anything else, please disclose that
 here:**
 
-...
+The game was based off Fairdyne by Joe Zeng but we rewrote a large majority of it from scratch.
