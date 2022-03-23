@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, redirect, url_for, session, jsonify, request, abort
+from flask import Blueprint, redirect, url_for, session, jsonify, request, abort, render_template
 
 import utils
 from db.auth import auth_handler, auth_models
@@ -9,8 +9,7 @@ from factory import object_factory
 project_base_path = utils.get_project_base_path()
 
 auth_blueprint = Blueprint(
-    'auth', __name__, template_folder = f"{project_base_path}/templates/auth",
-    static_folder = f"templates/auth/static", root_path = project_base_path
+    'auth', __name__
 )
 
 
@@ -31,10 +30,7 @@ def set_username():
 def get_set_username_screen():
     if 'temp' not in session:
         return redirect(url_for('auth.login_user'))
-    # return render_template('set_username_template.html')
-    return "<h1>This page is to get user name data if not exists</h1><br><br>\n" + json.dumps(
-        session['temp'], indent = 4
-    )
+    return render_template("auth/set_username.html")
 
 
 @auth_blueprint.route('/user')

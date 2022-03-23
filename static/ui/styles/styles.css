@@ -4,11 +4,10 @@
     url("../../fonts/determinationsanswebregular-369x-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
-    
 }
 
 body {
-    font-family: determination_mono_webregular;
+    font-family: determination_mono_webregular, sans-serif;
     color: white;
     background-color: black;
     word-break: break-all;
@@ -25,10 +24,7 @@ p {
 
 .post {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 25px auto;
     padding: 7px;
     border-style: solid;
     border-color: #303030;
@@ -41,10 +37,7 @@ p {
 .post-page {
     display: flex;
     flex-direction: column;
-    margin-left: 25%;
-    margin-right: 5%;
-    margin-top: 5em;
-    margin-bottom: 100px;
+    margin: 5em 5% 100px 25%;
     padding: 7px;
     border-style: solid;
     border-color: #303030;
@@ -98,7 +91,7 @@ p {
     background-color: #74570D;
     color: #FBB403;
     display: inline-block;
-    padding: 0.5px 7px;
+    padding: 1px 7px;
     border-radius: 10px;
 }
 
@@ -106,7 +99,7 @@ p {
     background-color: #74570D;
     color: #FBB403;
     display: inline-block;
-    padding: 0.5px 7px;
+    padding: 1px 7px;
     border-radius: 10px;
     font-size: 1.5em;
 }
@@ -123,13 +116,13 @@ p {
 }
 
 .user {
-    padding: 0px;
+    padding: 0;
     display: block;
     font-size: 1.25em;
 }
 
 .post-page-user {
-    padding: 0px;
+    padding: 0;
     display: block;
     font-size: 2em;
 }
@@ -170,33 +163,24 @@ p {
     position: relative;
     background-color: #74570D;
     color: #FBB403;
-    display: inline-block;
-    padding: 0.5px 7px;
     margin-left: 30px;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 50px 7px;
     cursor: pointer;
     text-decoration: none;
 }
 
 .play-level-feed-auth {
     position: relative;
-    display: flex;
     background-color: #74570D;
     color: #FBB403;
-    display: inline-block;
-    padding: 0.5px 7px;
     margin-left: 30px;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px 7px;
     cursor: pointer;
 }
 
@@ -218,8 +202,6 @@ p {
 .post-page-play-level {
     position: relative;
     width: 90%;
-    display: inline-block;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -244,8 +226,7 @@ p {
 }
 
 .home-menu {
-    padding: 1em;
-    padding-bottom: 0.5em;
+    padding: 1em 1em 0.5em;
     font-size: 1.5em;
     border-bottom: solid;
     border-color: #3C3C3C;
@@ -259,21 +240,59 @@ p {
     position: relative;
     color: #CFCFCF;
     background-color: #242424;
-    border: solid;
-    border-color: #3C3C3C;
-    border-width: 3px;
+    border: 3px solid #3C3C3C;
     height: 1.5em;
     width: 20em;
     padding: 0.25em;
     margin-left: -6em;
 }
 
+#username-container-parent {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 7px;
+    border-style: solid;
+    border-color: #303030;
+    border-width: 5px;
+    width: 33%;
+    margin-top: 40px;
+}
+
+#username-container {
+    text-align: center;
+}
+
+#username-container > h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 50px;
+    margin-right: 2px;
+}
+
+#username-field {
+    position: relative;
+    color: #CFCFCF;
+    background-color: #242424;
+    border: 3px solid #3C3C3C;
+    height: 30px;
+    padding: 5px;
+    font-size: 30px;
+}
+
+#username-continue {
+    position: relative;
+    background-color: #00A1FF;
+    height: 45px;
+    padding: 8px;
+    font-size: 30px;
+    top: -6px;
+}
+
 #avatar-link-input {
     color: #CFCFCF;
     background-color: #242424;
-    border: solid;
-    border-color: #3C3C3C;
-    border-width: 3px;
+    border: 3px solid #3C3C3C;
     height: 1.5em;
     width: 20em;
     padding: 0.25em;
@@ -327,7 +346,6 @@ p {
     transform: scale(0.909, 0.909);
     cursor: pointer;
     user-select: none;
-    text-decoration: none;
 }
 
 .button:hover {
@@ -445,8 +463,6 @@ p {
 #avatar-upload-button {
     position: relative;
     width: 100px;
-    display: inline-block;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -503,7 +519,7 @@ i.fa-pencil {
 i.fa-trash {
     position: absolute;
     top: 10px;
-    right: 0px;
+    right: 0;
 }
 
 #sort-filter {
@@ -561,7 +577,7 @@ i.fa-trash {
     background-color: #75746f;
     color: #c9c8bf;
     display: inline-block;
-    padding: 0.5px 7px;
+    padding: 1px 7px;
     border-radius: 10px;
     font-size: 1.5em;
 }
