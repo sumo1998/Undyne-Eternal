@@ -34,15 +34,15 @@ CSCI 5117, Spring 2022, [assignment description](https://canvas.umn.edu/courses/
 **[Add a screenshot of each key page (around 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
 along with a very brief caption:**
 
-![home][static/readme/home.png]
+![home](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
 
-![level][static/readme/level.png]
+![level](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
 
-![user][static/readme/user.png]
+![user](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
 
-![creator][static/readme/creator.png]
+![creator](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
 
-![game][static/readme/game.png]
+![game](https://github.com/csci-5117-S22/project-1-todo/blob/master/static/readme/home.png)
 
 ## Mockup
 
