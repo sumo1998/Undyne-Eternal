@@ -27,12 +27,12 @@
             </p>
         </div>
 
-        <div class="{{ difficulty }} post-page-play-level button">
+        <div class="{{ difficulty }} post-page-play-level button" href="{{ url_for('game',id=level_id) }}">
             <p class="button-text">
                 Play level
             </p>
         </div>
-        {% if session['profile'] %}
+        {% if session['profile'] and session['profile']['user_name'] != username %}
             <div id="write-review" class="post-page-play-level button gray-button">
                 <p class="button-text">
                     Write a review

@@ -327,6 +327,7 @@ p {
     transform: scale(0.909, 0.909);
     cursor: pointer;
     user-select: none;
+    text-decoration: none;
 }
 
 .button:hover {

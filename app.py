@@ -45,7 +45,7 @@ def feed():
         res = home_handler.get_homefeed()
     else:
         res = home_handler.get_homefeed_with_filters(data)
-    return render_template("home/home_template.html", res = res, session={"profile":{"user_name":"bowbow", "user_avatar": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg"}})
+    return render_template("home/home_template.html", res = res)
 
 
 @app.route("/search", methods = ['POST'])
@@ -161,14 +161,16 @@ def level(id):
 
 @app.route("/add-comment", methods = ['POST'])
 def add_comment():
-    comment_data = CommentData(**{
-        "userId": request.form.get('user'),
-        "commentBody": request.form.get('comment'),
-        "levelId": request.form.get('level'),
-        "commentRating": request.form.get('rating')
-    })
+    comment_data = CommentData(
+        **{
+            "userId": request.form.get('user'),
+            "commentBody": request.form.get('comment'),
+            "levelId": request.form.get('level'),
+            "commentRating": request.form.get('rating')
+        }
+    )
     level_handler.add_level_comment(comment_data)
-
+    
     return redirect(url_for("level", id = comment_data.level_id))
 
 
@@ -252,15 +254,15 @@ def update_level():
 
 
 @app.route("/delete-level", methods = ['DELETE'])
-@utils.requires_auth
 def delete_level():
-    level_id = request.args.get("id")
+    level_id = request.form['id']
     level_data = level_handler.get_level_info(level_id)
+    print(level_data)
     if session['profile']['user_id'] != level_data[0][7]:
         return redirect(url_for('home'))
     
     level_handler.delete_level(level_id)
-    return user(session['profile']['user_id'])
+    return jsonify({"result": "success", "username": level_data[0][8]})
 
 
 @app.route("/add-level", methods = ['POST'])
