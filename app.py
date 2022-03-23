@@ -312,6 +312,7 @@ def get_upload_path():
 def upload_completed():
     file_url = firebase_object.get_file_url(file_name = f"{session['profile']['user_name']}_pfp.jpeg")
     user_handler.update_user_avatar(file_url)
+    session['profile']['user_avatar'] = file_url
     return redirect(url_for("user", id = session['profile']['user_id']))
 
 

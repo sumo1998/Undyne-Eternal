@@ -25,7 +25,7 @@ def update_level_comment(comment_data: CommentData):
 
 
 def delete_comment(comment_id):
-    database_handler.execute_query_from_files(f'{BASE_PATH}/deleteComment.sql', (comment_id,))
+    database_handler.execute_query_from_files(f'{BASE_PATH}/deleteComment.sql', dict(comment_id = comment_id))
 
 
 def update_level(level_data: LevelData):
