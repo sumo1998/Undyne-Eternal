@@ -12,16 +12,20 @@ class AttackParser {
         for(let i = 0; i < levelDataJson["attacks"].length; ++i) {
             const curAttack = levelDataJson["attacks"][i];
             
+            const arrows = curAttack["arrows"];
+            
             //Change "attackDelay" to "nextTime"
-            curAttack["nextTime"] = curAttack["attackDelay"];
+            curAttack["nextTime"] = parseInt(curAttack["attackDelay"]);
             delete curAttack["attackDelay"];
             
-            for(let j = 0; j < curAttack["arrows"].length; ++j) {
-                const curArrow = curAttack["arrows"][j];
+            for(let j = 0; j < arrows.length; ++j) {
+                const curArrow = arrows[j];
+    
+                curArrow["delay"] = parseInt(curArrow["delay"]);
                 
                 //Sequentially add the delays to make the target times and remove the delays
                 if(j !== 0) {
-                    curArrow["delay"] += curAttack["arrows"][j - 1]["targetTime"];
+                    curArrow["delay"] += arrows[j - 1]["targetTime"];
                 }
                 curArrow["targetTime"] = curArrow["delay"];
                 delete curArrow["delay"];
@@ -42,6 +46,8 @@ class AttackParser {
                         break;
                 }
             }
+            
+            curAttack["nextTime"] += arrows[arrows.length - 1]["targetTime"];
         }
         
         return levelDataJson["attacks"];
