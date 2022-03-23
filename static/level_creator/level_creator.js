@@ -114,7 +114,7 @@ function addArrowDeleteButton(arrow) {
  * @param fromJson Whether or not the arrow is being created from loading an existing level
  */
 function addArrow(
-    button, arrowDirection = "R", delayTime = "10", speedValue = "30", reversed = false, fromJson = false) {
+    button, arrowDirection = "R", delayTime = "600", speedValue = "100", reversed = false, fromJson = false) {
     if(button.parentNode.children.length > 50) {
         alert("Maximum number of arrows reached in this attack");
         return;
