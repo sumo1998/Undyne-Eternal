@@ -1,29 +1,9 @@
 {% extends "parent_template.html" %}
 
-{% block scripts %}
-    <script type="text/javascript" defer>
-        $("#username-container").on("submit", e => {
-            e.preventDefault();
-            $.ajax({
-                "cache": false,
-                "data": $("#username-container").serialize(),
-                "type": "POST",
-                "url": "/user-name",
-                "success": ignored => {
-                    window.location.replace("/home-feed");
-                },
-                "error": ignored => {
-                    console.log(ignored);
-                }
-            });
-        });
-    </script>
-{% endblock %}
-
 {% block content %}
     <div id="username-container-parent">
-        <form id="username-container">
-            <h2>Enter username:</h2>
+        <form id="username-container" action="{{ url_for("auth.set_username") }}" method="POST">
+            <h2>Pick a username:</h2>
             <label for="username-field"></label>
             <input id="username-field" type="text" name="username" placeholder="Username">
             <button id="username-continue" class="pure-button gray-button" type="submit">Continue</button>
