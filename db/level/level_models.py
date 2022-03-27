@@ -45,4 +45,4 @@ class CommentData(CommentBase):
     def check_uid(cls, value):
         if "profile" in session:
             return session["profile"]["user_id"]
-        raise ValueError("The user cannot add comment without logging in")
+        raise ValueError("The user cannot add a comment without logging in")

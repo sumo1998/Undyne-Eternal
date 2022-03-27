@@ -93,46 +93,59 @@ def user(id):
 @app.route("/level/<level_id>")
 def level(level_id):
     level_info = level_handler.get_level_info(level_id)
+    level_is_public = level_info[0][6]
+    
+    if not level_is_public:
+        abort(404)
+    
     level_comments = level_handler.get_level_comments(level_id)
-    level_commenters = [l[1] for l in level_comments]
+    level_commenters = [comment[1] for comment in level_comments]
     return render_template(
         "level/level_template.html", levelInfo = level_info, levelComments = level_comments,
         commenters = level_commenters
     )
 
 
-@app.route("/add-comment", methods = ["POST"])
-def add_comment():
-    comment_data = CommentData(
-        **{
-            "userId": request.form.get("user"),
-            "commentBody": request.form.get("comment"),
-            "levelId": request.form.get("level"),
-            "commentRating": request.form.get("rating")
-        }
-    )
-    level_handler.add_level_comment(comment_data)
+@app.route("/replace-comment", methods = ["POST"])
+def replace_comment():
+    user_id = session.get("profile")
+    if user_id is not None:
+        user_id = user_id.get("user_id")
     
-    return redirect(url_for("level", level_id = comment_data.level_id))
-
-
-@app.route("/update-comment", methods = ["PATCH"])
-def update_comment():
-    data = {
-        "commentBody": request.form.get("comment"),
-        "commentRating": request.form.get("rating"),
-        "commentId": request.form.get("comment_id"),
-        "levelId": request.form.get("level_id")
-    }
-    level_handler.update_level_comment(CommentData(**data))
-    return jsonify({"result": "success"})
+    level_id = request.form.get("level")
+    level_info = level_handler.get_level_info(level_id)[0]
+    
+    level_is_public = level_info[6]
+    level_user = level_info[7]
+    
+    if level_is_public and user_id is not None and user_id != level_user:
+        comment_data = CommentData(
+            **{
+                "userId": user_id,
+                "commentBody": request.form.get("comment"),
+                "levelId": level_id,
+                "commentRating": request.form.get("rating")
+            }
+        )
+        level_handler.add_level_comment(comment_data)
+    
+    return redirect(url_for("level", level_id = level_id))
 
 
 @app.route("/delete-comment", methods = ["DELETE"])
 def delete_comment():
+    user_id = session.get("profile")
+    if user_id is not None:
+        user_id = user_id.get("user_id")
+    
     comment_id = request.form.get('commentId')
     level_id = request.form.get('levelId')
-    level_handler.delete_comment(comment_id, level_id)
+    
+    comment_info = level_handler.get_comment_info(comment_id)[0]
+    comment_user = comment_info[3]
+    
+    if user_id is not None and user_id == comment_user:
+        level_handler.delete_comment(comment_id, level_id)
     return jsonify({"result": "success"})
 
 

@@ -13,7 +13,7 @@
                         levelInfo[0][9], levelInfo[0][8],session, commenters) }}
         <div class="reviews pure-u-2-6">
             <h1>Ratings and Reviews</h1>
-            <form id="new-comment" class="comment-editor" action="{{ url_for('add_comment') }}" method="post"
+            <form id="new-comment" class="comment-editor" action="{{ url_for('replace_comment') }}" method="post"
                   style="display: none">
                 <label>Your Rating (1-5): <input class="rating-picker" name="rating" type="number" min="1" max="5"
                                                  required=""></label>
@@ -21,7 +21,6 @@
                           maxlength="200"
                           required=""></textarea>
                 <input type="hidden" id="levelID" name="level" value="{{ levelInfo[0][0] }}">
-                <input type="hidden" id="userID" name="user" value="{{ levelInfo[0][6] }}">
                 <button id="post-comment" type="submit"
                         class="pure-button normal button gray-button">Post
                 </button>
