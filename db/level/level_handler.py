@@ -10,6 +10,10 @@ def get_level_info(level_id):
     return database_handler.execute_query_from_files(f"{BASE_PATH}/level_info.sql", (level_id,), get_result = True)
 
 
+def get_comment_info(comment_id):
+    return database_handler.execute_query_from_files(f"{BASE_PATH}/comment_info.sql", (comment_id,), get_result = True)
+
+
 def get_level_comments(level_id):
     return database_handler.execute_query_from_files(f"{BASE_PATH}/level_comments.sql", (level_id,), get_result = True)
 
