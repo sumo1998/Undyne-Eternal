@@ -73,7 +73,7 @@ class Hud extends GraphicsObject {
         
         // noinspection JSCheckFunctionSignatures
         this.#instructionsText = new PIXI.extras.BitmapText(
-            "Press Z/Enter to confirm, X/Shift to Skip,\nand arrow keys/WASD/IJKL to move\n\nBased on Fairdyne by Joe Zeng",
+            "Press Z/Enter to confirm, X/Shift to Skip,\nand arrow keys/WASD/IJKL to move\n\nBased on Unfair Undyne by Joe Zeng",
             {font: "10px SpeechBubble", align: "center"}
         );
         this.#instructionsText.position.x = 0.5 * Main.runner.gameWidth - 0.5 * this.#instructionsText.width;
