@@ -114,9 +114,16 @@ class Undyne extends GraphicsObject {
     #opacityGraphics;
     
     /**
-     * Initializes an Undyne instance.
+     * The container on which all the graphics are drawn.
      */
-    constructor(difficulty) {
+    #gameplayStage;
+    
+    /**
+     * Initializes an Undyne instance.
+     * @param difficulty The difficulty of the game
+     * @param gameplayStage The container on which all the graphics are drawn
+     */
+    constructor(difficulty, gameplayStage) {
         super();
         
         this.#difficulty = difficulty;
@@ -166,8 +173,8 @@ class Undyne extends GraphicsObject {
         this.#legsSprite.scale.set(2, 2);
         this.#legsSprite.position.set(Undyne.#legsDefaultPos.x, Undyne.#legsDefaultPos.y);
         
-        this.#greenRectangleManager = new GreenRectangleManager();
-        this.#speechBubble = new SpeechBubble();
+        this.#greenRectangleManager = new GreenRectangleManager(gameplayStage);
+        this.#speechBubble = new SpeechBubble(gameplayStage);
         
         this.#opacityGraphics = new PIXI.Graphics();
         this.opacity = 1;
@@ -175,16 +182,18 @@ class Undyne extends GraphicsObject {
         this.#opacityGraphics.drawRect(0, 0, 640, 480);
         this.#opacityGraphics.endFill();
         
-        Main.runner.gameplayStage.addChild(this.#hairSprite);
-        Main.runner.gameplayStage.addChild(this.#rightArmSprite);
-        Main.runner.gameplayStage.addChild(this.#leftArmSprite);
-        Main.runner.gameplayStage.addChild(this.#legsSprite);
-        Main.runner.gameplayStage.addChild(this.#skirtSprite);
-        Main.runner.gameplayStage.addChild(this.#bodySprite);
-        Main.runner.gameplayStage.addChild(this.#headSprite);
-        Main.runner.gameplayStage.addChild(this.#opacityGraphics);
+        gameplayStage.addChild(this.#hairSprite);
+        gameplayStage.addChild(this.#rightArmSprite);
+        gameplayStage.addChild(this.#leftArmSprite);
+        gameplayStage.addChild(this.#legsSprite);
+        gameplayStage.addChild(this.#skirtSprite);
+        gameplayStage.addChild(this.#bodySprite);
+        gameplayStage.addChild(this.#headSprite);
+        gameplayStage.addChild(this.#opacityGraphics);
         
         this.#hairSprite.play();
+    
+        this.#gameplayStage = gameplayStage;
     }
     
     /**
@@ -232,8 +241,8 @@ class Undyne extends GraphicsObject {
         this.#animationTime = 0;
         
         //Put right arm in front of all the other sprites
-        Main.runner.gameplayStage.removeChild(this.#rightArmSprite);
-        Main.runner.gameplayStage.addChild(this.#rightArmSprite);
+        this.#gameplayStage.removeChild(this.#rightArmSprite);
+        this.#gameplayStage.addChild(this.#rightArmSprite);
     }
     
     /**
@@ -318,8 +327,8 @@ class Undyne extends GraphicsObject {
         }
         else {
             //Put right arm in behind all the other sprites
-            Main.runner.gameplayStage.removeChild(this.#rightArmSprite);
-            Main.runner.gameplayStage.addChildAt(this.#rightArmSprite, 0);
+            this.#gameplayStage.removeChild(this.#rightArmSprite);
+            this.#gameplayStage.addChildAt(this.#rightArmSprite, 0);
             
             this.#animationState = "breathing";
             this.#animationTime = 0;

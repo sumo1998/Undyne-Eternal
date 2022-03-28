@@ -51,8 +51,9 @@ class SpeechBubble extends GraphicsObject {
     
     /**
      * Initializes a SpeechBubble instance.
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor() {
+    constructor(gameplayStage) {
         super();
         this.#curText = null;
         this.#textState = "none";
@@ -72,8 +73,8 @@ class SpeechBubble extends GraphicsObject {
         this.#speechText.tint = 0x000000;
         this.#speechText.visible = false;
         
-        Main.runner.gameplayStage.addChild(this.#sprite);
-        Main.runner.gameplayStage.addChild(this.#speechText);
+        gameplayStage.addChild(this.#sprite);
+        gameplayStage.addChild(this.#speechText);
     }
     
     /**

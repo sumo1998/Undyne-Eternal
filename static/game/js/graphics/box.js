@@ -60,8 +60,9 @@ class Box extends GraphicsObject {
     
     /**
      * Initializes a Box instance.
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor() {
+    constructor(gameplayStage) {
         super();
         this.#thickness = 3;
         
@@ -76,7 +77,7 @@ class Box extends GraphicsObject {
         this.#destBottom = this.#bottom;
         
         this.#graphics = new PIXI.Graphics();
-        Main.runner.gameplayStage.addChild(this.#graphics);
+        gameplayStage.addChild(this.#graphics);
     }
     
     /**

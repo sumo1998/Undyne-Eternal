@@ -51,14 +51,29 @@ class GameHandler extends GraphicsObject {
     #playAgainButton;
     
     /**
+     * The container on which all the graphics are drawn.
+     */
+    #gameplayStage;
+    
+    /**
+     * Manages the rendering of the game.
+     */
+    #rendererManager;
+    
+    /**
      * Initializes a GameHandler instance.
      * @param difficulty The difficulty of the game
      * @param levelDataJson The level data in JSON format to parse
+     * @param gameplayStage The container on which all the graphics are drawn
+     * @param rendererManager Manages the rendering of the game
      */
-    constructor(difficulty, levelDataJson) {
+    constructor(difficulty, levelDataJson, gameplayStage, rendererManager) {
         super();
         
         this.#state = "init";
+        
+        this.#gameplayStage = gameplayStage;
+        this.#rendererManager = rendererManager;
         
         //Play the intro bgm only if the level data JSON is valid
         if(levelDataJson !== "") {
@@ -83,13 +98,13 @@ class GameHandler extends GraphicsObject {
         //Parse the attacks if the level data JSON is valid; else, use an empty array as default
         const attacks = levelDataJson === "" ? [] : AttackParser.parse(levelDataJson);
         
-        this.#undyne = new Undyne(difficulty);
-        this.#box = new Box();
-        this.#player = new Player(difficulty);
+        this.#undyne = new Undyne(difficulty, gameplayStage);
+        this.#box = new Box(gameplayStage);
+        this.#player = new Player(difficulty, gameplayStage);
         this.#undyne.player = this.#player;
         this.#undyne.speechBubble.undyne = this.#undyne;
-        this.#hud = new Hud(attacks.length, love, this.#player);
-        this.#attackRunner = new AttackRunner(this.#player, this.#hud, attacks);
+        this.#hud = new Hud(attacks.length, love, this.#player, gameplayStage);
+        this.#attackRunner = new AttackRunner(this.#player, this.#hud, attacks, gameplayStage);
         
         const startButtonWidth = 113;
         this.#startButton = new Button(
@@ -101,7 +116,8 @@ class GameHandler extends GraphicsObject {
             this.restartLevel.bind(this),
             "startButtonHover",
             () => Main.runner.assetManager.getAudio("buttonHoverSfx").play(),
-            300
+            300,
+            gameplayStage
         );
         
         const playAgainButtonWidth = 197;
@@ -114,7 +130,8 @@ class GameHandler extends GraphicsObject {
             this.restartLevel.bind(this),
             "playAgainButtonHover",
             () => Main.runner.assetManager.getAudio("buttonHoverSfx").play(),
-            300
+            300,
+            gameplayStage
         );
         this.#playAgainButton.visible = false;
         
@@ -277,7 +294,7 @@ class GameHandler extends GraphicsObject {
             }
         }
         
-        Main.runner.gameplayStage.position.set(this.#player.damageShift, this.#player.damageShift);
+        this.#gameplayStage.position.set(this.#player.damageShift, this.#player.damageShift);
         
         this.render();
     }
@@ -290,6 +307,6 @@ class GameHandler extends GraphicsObject {
         this.#hud.render();
         this.#undyne.render();
         
-        Main.runner.rendererManager.render(Main.runner.gameplayStage);
+        this.#rendererManager.render(this.#gameplayStage);
     }
 }

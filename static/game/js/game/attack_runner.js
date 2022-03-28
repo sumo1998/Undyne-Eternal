@@ -28,18 +28,25 @@ class AttackRunner extends GraphicsObject {
     #hud;
     
     /**
+     * The container on which all the graphics are drawn.
+     */
+    #gameplayStage;
+    
+    /**
      * Initializes an AttackRunner instance.
      * @param player The player
      * @param hud The HUD
      * @param attacks The attacks to load into the AttackManager
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor(player, hud, attacks) {
+    constructor(player, hud, attacks, gameplayStage) {
         super();
         this.#arrows = [];
         this.#attackTimeQueue = [2000];
         this.#player = player;
         this.#hud = hud;
         this.#attackManager = new AttackManager(attacks);
+        this.#gameplayStage = gameplayStage;
     }
     
     /**
@@ -79,7 +86,8 @@ class AttackRunner extends GraphicsObject {
                 arrow.reversed,
                 arrowTime,
                 arrow.speed,
-                i === numArrows - 1
+                i === numArrows - 1,
+                this.#gameplayStage
             ));
         }
     }
@@ -110,7 +118,7 @@ class AttackRunner extends GraphicsObject {
      */
     removeAllArrows() {
         for(let i = 0; i < this.#arrows.length; ++i) {
-            Main.runner.gameplayStage.removeChild(this.#arrows[i].sprite);
+            this.#gameplayStage.removeChild(this.#arrows[i].sprite);
         }
         
         this.#arrows = [];
@@ -151,7 +159,7 @@ class AttackRunner extends GraphicsObject {
         if(arrow.last) {
             this.#hud.incrementAttackNumber();
         }
-        Main.runner.gameplayStage.removeChild(arrow.sprite);
+        this.#gameplayStage.removeChild(arrow.sprite);
         this.#arrows.splice(idx, 1);
     }
     

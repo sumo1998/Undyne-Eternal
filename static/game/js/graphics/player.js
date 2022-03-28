@@ -128,8 +128,10 @@ class Player extends GraphicsObject {
     
     /**
      * Initializes a Player instance.
+     * @param difficulty The difficulty of the game
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor(difficulty) {
+    constructor(difficulty, gameplayStage) {
         super();
         
         this.#hp = Player.#maxHp;
@@ -186,10 +188,10 @@ class Player extends GraphicsObject {
         this.#circle.drawCircle(320, 240, 24);
         this.#circle.visible = false;
         
-        Main.runner.gameplayStage.addChild(this.#heartSprite);
-        Main.runner.gameplayStage.addChild(this.#shieldSprite);
-        Main.runner.gameplayStage.addChild(this.#shieldHitSprite);
-        Main.runner.gameplayStage.addChild(this.#circle);
+        gameplayStage.addChild(this.#heartSprite);
+        gameplayStage.addChild(this.#shieldSprite);
+        gameplayStage.addChild(this.#shieldHitSprite);
+        gameplayStage.addChild(this.#circle);
     }
     
     /**

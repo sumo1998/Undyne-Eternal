@@ -35,11 +35,14 @@ class Button extends GraphicsObject {
      * @param width The width of the button.
      * @param height The height of the button.
      * @param imageName The name of the image associated with the button
-     * @param imageHoverName The name of the image associated with the button on hover
-     * @param transitionMs The time it will take to transition between the normal button sprite and the hover sprite
      * @param buttonAction The action to take on button click/touch
+     * @param imageHoverName The name of the image associated with the button on hover
+     * @param hoverAction The action to take on button mouseover
+     * @param transitionMs The time it will take to transition between the normal button sprite and the hover sprite
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor(x, y, width, height, imageName, buttonAction, imageHoverName, hoverAction, transitionMs) {
+    constructor(x, y, width, height, imageName, buttonAction, imageHoverName, hoverAction, transitionMs,
+        gameplayStage) {
         super();
         
         this.#sprite = new PIXI.Sprite(Main.runner.assetManager.getTexture(imageName));
@@ -73,13 +76,13 @@ class Button extends GraphicsObject {
             });
             this.#sprite.on("mouseout", () => {this.#hovering = false;});
             
-            Main.runner.gameplayStage.addChild(this.#hoverSprite);
+            gameplayStage.addChild(this.#hoverSprite);
         }
         else {
             this.#hoverSprite = null;
         }
         
-        Main.runner.gameplayStage.addChild(this.#sprite);
+        gameplayStage.addChild(this.#sprite);
     }
     
     /**

@@ -55,8 +55,9 @@ class GreenRectangleManager extends GraphicsObject {
     
     /**
      * Initializes a GreenRectangleManager instance.
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor() {
+    constructor(gameplayStage) {
         super();
         this.#animationTime = 0;
         //Get the x offset such that the rectangles are centered
@@ -65,7 +66,7 @@ class GreenRectangleManager extends GraphicsObject {
                 * GreenRectangleManager.#rectangleWidth);
         this.#graphics = new PIXI.Graphics();
         this.#graphics.visible = false;
-        Main.runner.gameplayStage.addChild(this.#graphics);
+        gameplayStage.addChild(this.#graphics);
     }
     
     /**

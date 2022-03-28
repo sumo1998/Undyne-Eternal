@@ -89,13 +89,13 @@ class Main {
         //Adds the hover and click SFX to the back home feed button
         const backToHomeFeedButton = document.querySelector("#back-home-feed");
         backToHomeFeedButton.addEventListener(
-            "mouseover", () => Main.runner.assetManager.getAudio("buttonHoverSfx").play()
+            "mouseover", () => Main.runner.#assetManager.getAudio("buttonHoverSfx").play()
         );
         backToHomeFeedButton.addEventListener(
-            "click", () => Main.runner.assetManager.getAudio("buttonSelectSfx").play()
+            "click", () => Main.runner.#assetManager.getAudio("buttonSelectSfx").play()
         );
         
-        this.#gameHandler = new GameHandler(difficulty, levelDataJson);
+        this.#gameHandler = new GameHandler(difficulty, levelDataJson, this.#gameplayStage, this.#rendererManager);
         
         KeyboardHandler.initialize(this.#gameHandler);
         
@@ -125,22 +125,6 @@ class Main {
      */
     get assetManager() {
         return this.#assetManager;
-    }
-    
-    /**
-     * Returns the container on which all the graphics are drawn.
-     * @return The container on which all the graphics are drawn
-     */
-    get gameplayStage() {
-        return this.#gameplayStage;
-    }
-    
-    /**
-     * Returns the instance that manages the rendering of the game.
-     * @return The instance that manages the rendering of the game.
-     */
-    get rendererManager() {
-        return this.#rendererManager;
     }
     
     /**

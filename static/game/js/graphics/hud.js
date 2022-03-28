@@ -63,8 +63,9 @@ class Hud extends GraphicsObject {
      * @param numAttacks The total number of attacks in the level
      * @param love The LOVE value of the player
      * @param player The player
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor(numAttacks, love, player) {
+    constructor(numAttacks, love, player, gameplayStage) {
         super();
         
         this.#currentAttackNumber = 0;
@@ -108,12 +109,12 @@ class Hud extends GraphicsObject {
         
         this.#hpGraphics = new PIXI.Graphics();
         
-        Main.runner.gameplayStage.addChild(this.#instructionsTest);
-        Main.runner.gameplayStage.addChild(this.#currentAttackText);
-        Main.runner.gameplayStage.addChild(this.#loveText);
-        Main.runner.gameplayStage.addChild(this.#hpText);
-        Main.runner.gameplayStage.addChild(this.#timeText);
-        Main.runner.gameplayStage.addChild(this.#hpGraphics);
+        gameplayStage.addChild(this.#instructionsTest);
+        gameplayStage.addChild(this.#currentAttackText);
+        gameplayStage.addChild(this.#loveText);
+        gameplayStage.addChild(this.#hpText);
+        gameplayStage.addChild(this.#timeText);
+        gameplayStage.addChild(this.#hpGraphics);
     }
     
     /**

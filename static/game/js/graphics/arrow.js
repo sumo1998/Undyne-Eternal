@@ -54,8 +54,9 @@ class Arrow extends GraphicsObject {
      * @param targetTime The time remaining until the shield should destroy the arrow
      * @param speed The speed of the arrow in px/s
      * @param last True if this is the last arrow in an attack
+     * @param gameplayStage The container on which all the graphics are drawn
      */
-    constructor(direction, reversed, targetTime, speed, last) {
+    constructor(direction, reversed, targetTime, speed, last, gameplayStage) {
         super();
         this.#direction = direction;
         this.#reversed = reversed;
@@ -81,7 +82,7 @@ class Arrow extends GraphicsObject {
          */
         this.#sprite.tint = this.#reversed ? 0xffdf23 : 0x2fd0ff;
         
-        Main.runner.gameplayStage.addChild(this.#sprite);
+        gameplayStage.addChild(this.#sprite);
     }
     
     /**
