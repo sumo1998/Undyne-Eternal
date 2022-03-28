@@ -21,7 +21,7 @@ class Hud extends GraphicsObject {
     /**
      * Contains the instructions on the controls.
      */
-    #instructionsTest;
+    #instructionsText;
     
     /**
      * The HUD text showing the current attack number out of the total number of attacks.
@@ -72,12 +72,12 @@ class Hud extends GraphicsObject {
         this.#numAttacks = numAttacks;
         
         // noinspection JSCheckFunctionSignatures
-        this.#instructionsTest = new PIXI.extras.BitmapText(
-            "Press Z/Enter to confirm, X/Shift to Skip,\nand arrow keys/WASD/IJKL to move",
+        this.#instructionsText = new PIXI.extras.BitmapText(
+            "Press Z/Enter to confirm, X/Shift to Skip,\nand arrow keys/WASD/IJKL to move\n\nBased on Fairdyne by Joe Zeng",
             {font: "10px SpeechBubble", align: "center"}
         );
-        this.#instructionsTest.position.x = 0.5 * Main.runner.gameWidth - 0.5 * this.#instructionsTest.width;
-        this.#instructionsTest.position.y = 392;
+        this.#instructionsText.position.x = 0.5 * Main.runner.gameWidth - 0.5 * this.#instructionsText.width;
+        this.#instructionsText.position.y = 369;
         
         // noinspection JSCheckFunctionSignatures
         this.#currentAttackText = new PIXI.extras.BitmapText("", {font: "15px Numbers", align: "right"});
@@ -109,7 +109,7 @@ class Hud extends GraphicsObject {
         
         this.#hpGraphics = new PIXI.Graphics();
         
-        gameplayStage.addChild(this.#instructionsTest);
+        gameplayStage.addChild(this.#instructionsText);
         gameplayStage.addChild(this.#currentAttackText);
         gameplayStage.addChild(this.#loveText);
         gameplayStage.addChild(this.#hpText);
@@ -156,7 +156,7 @@ class Hud extends GraphicsObject {
      * shifted-up instructions text.
      */
     badLevelMode() {
-        this.#instructionsTest.position.y = 300;
+        this.#instructionsText.position.y = 300;
         this.#currentAttackText.visible = false;
         this.#loveText.visible = false;
         this.#hpText.visible = false;
@@ -168,7 +168,7 @@ class Hud extends GraphicsObject {
      * Resets the fields to match the start of a new level.
      */
     reset() {
-        this.#instructionsTest.visible = false;
+        this.#instructionsText.visible = false;
         this.#currentAttackNumber = 0;
         this.incrementAttackNumber();
         this.#updateHp();

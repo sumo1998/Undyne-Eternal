@@ -106,10 +106,12 @@ class GameHandler extends GraphicsObject {
         this.#hud = new Hud(attacks.length, love, this.#player, gameplayStage);
         this.#attackRunner = new AttackRunner(this.#player, this.#hud, attacks, gameplayStage);
         
+        const buttonYShift = 50;
+        
         const startButtonWidth = 113;
         this.#startButton = new Button(
             0.5 * (Main.runner.gameWidth - startButtonWidth),
-            0.5 * Main.runner.gameHeight + 85,
+            0.5 * Main.runner.gameHeight + buttonYShift,
             startButtonWidth,
             53,
             "startButton",
@@ -123,7 +125,7 @@ class GameHandler extends GraphicsObject {
         const playAgainButtonWidth = 197;
         this.#playAgainButton = new Button(
             0.5 * (Main.runner.gameWidth - playAgainButtonWidth),
-            0.5 * Main.runner.gameHeight + 85,
+            0.5 * Main.runner.gameHeight + buttonYShift,
             playAgainButtonWidth,
             53,
             "playAgainButton",
