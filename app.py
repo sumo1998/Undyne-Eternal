@@ -60,30 +60,34 @@ def feed_search():
 
 @app.route("/game")
 def game():
+    debug_enabled = False
+    
     user_id = session.get("profile")
     if user_id is not None:
         user_id = user_id.get("user_id")
     
     level_id = request.args.get("id")
     if level_id is None or not level_id.isdigit():
-        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = False)
+        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = debug_enabled)
     
     level_info = level_handler.get_level_info(level_id)
     
     if len(level_info) != 1:
-        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = False)
+        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = debug_enabled)
     
     level_info = level_info[0]
     level_is_public = level_info[6]
     level_user = level_info[7]
     
     if not level_is_public and level_user != user_id:
-        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = False)
+        return render_template("game/game.html", level_data_dict = "", difficulty = "", debug = debug_enabled)
     
     level_data_dict = level_info[4]
     difficulty = level_info[5]
     
-    return render_template("game/game.html", level_data_dict = level_data_dict, difficulty = difficulty, debug = False)
+    return render_template(
+        "game/game.html", level_data_dict = level_data_dict, difficulty = difficulty, debug = debug_enabled
+    )
 
 
 @app.route("/user/<id>")
