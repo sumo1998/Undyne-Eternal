@@ -45,6 +45,8 @@
     {{ game_script.game_script("main", debug) }}
     
     <script type="text/javascript">
+        PIXI.utils._saidHello = true;
+        
         window.addEventListener("load", () => {
             Main.initializeMain();
             Main.runner.load();
