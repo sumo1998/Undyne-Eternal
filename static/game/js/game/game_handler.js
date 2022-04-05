@@ -192,7 +192,15 @@ class GameHandler extends GraphicsObject {
             this.#undyne.speechBubble.advanceTextX();
         }
         else if(key === "Z") {
-            this.#undyne.speechBubble.advanceTextZ();
+            if(this.#startButton.visible) {
+                this.#startButton.click();
+            }
+            else if(this.#playAgainButton.visible) {
+                this.#playAgainButton.click();
+            }
+            else {
+                this.#undyne.speechBubble.advanceTextZ();
+            }
         }
         
         if(this.#state === "playing" && this.#player.heartColor === "green") {

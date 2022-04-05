@@ -14,6 +14,11 @@ class Button extends GraphicsObject {
     #hoverSprite;
     
     /**
+     * The visibility of this button.
+     */
+    #visible;
+    
+    /**
      * The time it takes to transition from the normal button to the hover button.
      */
     #transitionTime;
@@ -27,6 +32,11 @@ class Button extends GraphicsObject {
      * True if the mouse is hovering over the button.
      */
     #hovering;
+    
+    /**
+     * The button action.
+     */
+    #buttonAction;
     
     /**
      * Initializes a button.
@@ -54,6 +64,8 @@ class Button extends GraphicsObject {
         this.#sprite.buttonMode = true;
         this.#sprite.on("mousedown", buttonAction);
         this.#sprite.on("touchdown", buttonAction);
+        this.#buttonAction = buttonAction;
+        this.#visible = true;
         
         /*
          * If the image hover name is not null, set up the hover transition between the image with imageName and the
@@ -86,12 +98,28 @@ class Button extends GraphicsObject {
     }
     
     /**
-     * Sets the visibility of this button to the given value.
+     * Performs the action normally done when clicking the button.
+     */
+    click() {
+        this.#buttonAction();
+    }
+    
+    /**
+     * Returns the visibility of this button.
+     * @return The visibility of this button
+     */
+    get visible() {
+        return this.#visible;
+    }
+    
+    /**
+     * Sets the visibility of this button.
      * @param visibility The new visibility of the button
      */
     set visible(visibility) {
         this.#sprite.visible = visibility;
         this.#hoverSprite.visible = visibility;
+        this.#visible = visibility;
     }
     
     /**
