@@ -514,7 +514,6 @@ function addHeaderLevelSaveButton(attackCreatorHeading) {
     const saveButton = document.createElement('button');
     saveButton.classList.add('save-level-button');
     saveButton.textContent = 'Save Level';
-    saveButton.setAttribute("onClick", "save()");
     attackCreatorHeading.append(saveButton);
 }
 
@@ -541,6 +540,8 @@ function createHeaderElements() {
     
     document.body.insertBefore(attackCreatorHeading, document.body.firstChild);
     document.body.insertBefore(heading, document.body.firstChild);
+    
+    $('.save-level-button').click(save);
 }
 
 /**
@@ -573,9 +574,30 @@ function populateLevelCreator() {
 }
 
 /**
+ * Sets whether the save button's enabled/disabled state
+ * @param enabled True if the save button should be enabled
+ */
+function setSaveEnabled(enabled) {
+    const saveButton = $('.save-level-button');
+    if(enabled) {
+        saveButton.click(save);
+        saveButton.prop('disabled', false);
+        saveButton.css('background-color', '#74400D');
+        saveButton.css('color', '#FB7F03');
+    }
+    else {
+        saveButton.off('click');
+        saveButton.prop('disabled', true);
+        saveButton.css('background-color', '#494949');
+        saveButton.css('color', '#969696');
+    }
+}
+
+/**
  * Sends level information to server.
  */
 function save() {
+    setSaveEnabled(false);
     const tempJson = levelJson;
     tempJson['title'] = document.getElementById('title-input').value;
     tempJson['description'] = document.getElementById('description-input').value;
@@ -595,6 +617,11 @@ function save() {
                     isNewLevel = false;
                     window.location.href = response['level_url'];
                 }
+                setSaveEnabled(true);
+            },
+            error: function() {
+                alert('Unable to save new level');
+                setSaveEnabled(true);
             }
         });
     }
@@ -608,6 +635,11 @@ function save() {
             success: function(response) {
                 const message = response['response'];
                 alert(message);
+                setSaveEnabled(true);
+            },
+            error: function() {
+                alert('Unable to save level');
+                setSaveEnabled(true);
             }
         });
     }
