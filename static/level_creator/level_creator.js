@@ -8,24 +8,24 @@ initializeLevelCreator();
  * @param arrowDirection The direction of the initial selection
  */
 function addDirectionSelection(arrow, arrowDirection) {
-    let direction = document.createElement("label");
-    direction.textContent = "Direction: ";
-    direction.classList.add("direction-label");
+    const direction = document.createElement('label');
+    direction.textContent = 'Direction: ';
+    direction.classList.add('direction-label');
     arrow.append(direction);
     
-    let array = ["←", "→", "↑", "↓", "?"];
+    const array = ['←', '→', '↑', '↓', '?'];
     
-    let selectList = document.createElement("select");
-    selectList.classList.add("direction-select");
-    selectList.setAttribute("onchange", "updateDirectionSelection(this)");
+    const selectList = document.createElement('select');
+    selectList.classList.add('direction-select');
+    selectList.setAttribute('onchange', 'updateDirectionSelection(this)');
     arrow.appendChild(selectList);
     
     for(let i = 0; i < array.length; i++) {
-        let option = document.createElement("option");
+        const option = document.createElement('option');
         option.value = array[i];
         option.text = array[i];
         if(array[i] === arrowDirection) {
-            option.setAttribute("selected", "selected");
+            option.setAttribute('selected', 'selected');
         }
         selectList.appendChild(option);
     }
@@ -37,16 +37,16 @@ function addDirectionSelection(arrow, arrowDirection) {
  * @param delayTime The delay value
  */
 function addArrowDelayInput(arrow, delayTime) {
-    let delay = document.createElement("label");
-    delay.textContent = "Delay: ";
+    const delay = document.createElement('label');
+    delay.textContent = 'Delay: ';
     arrow.append(delay);
     
-    let delayTimeInput = document.createElement("input");
-    delayTimeInput.type = "numeric";
+    const delayTimeInput = document.createElement('input');
+    delayTimeInput.type = 'numeric';
     delayTimeInput.value = delayTime;
-    delayTimeInput.classList.add("delay-time-input");
-    delayTimeInput.setAttribute("pattern", "[0-9]*");
-    delayTimeInput.setAttribute("oninput", "filterCharactersAndUpdateJson(this, 4)");
+    delayTimeInput.classList.add('delay-time-input');
+    delayTimeInput.setAttribute('pattern', '[0-9]*');
+    delayTimeInput.setAttribute('oninput', 'filterCharactersAndUpdateJson(this, 4)');
     arrow.append(delayTimeInput);
 }
 
@@ -56,16 +56,16 @@ function addArrowDelayInput(arrow, delayTime) {
  * @param speedValue The speed value
  */
 function addArrowSpeedInput(arrow, speedValue) {
-    let speed = document.createElement("label");
-    speed.textContent = "Speed: ";
+    const speed = document.createElement('label');
+    speed.textContent = 'Speed: ';
     arrow.append(speed);
     
-    let numberInputSpeed = document.createElement("input");
-    numberInputSpeed.type = "numeric";
+    const numberInputSpeed = document.createElement('input');
+    numberInputSpeed.type = 'numeric';
     numberInputSpeed.value = speedValue;
-    numberInputSpeed.classList.add("speed-input");
-    numberInputSpeed.setAttribute("pattern", "[0-9]*");
-    numberInputSpeed.setAttribute("oninput", "filterCharactersAndUpdateJson(this, 3)");
+    numberInputSpeed.classList.add('speed-input');
+    numberInputSpeed.setAttribute('pattern', '[0-9]*');
+    numberInputSpeed.setAttribute('oninput', 'filterCharactersAndUpdateJson(this, 3)');
     arrow.append(numberInputSpeed);
 }
 
@@ -75,16 +75,16 @@ function addArrowSpeedInput(arrow, speedValue) {
  * @param reversed checkbox checked status
  */
 function addArrowReverseCheckBox(arrow, reversed) {
-    let reverse = document.createElement("label");
-    reverse.textContent = "Reverse: ";
-    reverse.classList.add("reverse-label");
+    const reverse = document.createElement('label');
+    reverse.textContent = 'Reverse: ';
+    reverse.classList.add('reverse-label');
     arrow.append(reverse);
     
-    let checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.value = "value";
-    checkbox.classList.add("reverse-checkbox");
-    checkbox.setAttribute("onclick", "updateReverseCheckBox(this)");
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = 'value';
+    checkbox.classList.add('reverse-checkbox');
+    checkbox.setAttribute('onclick', 'updateReverseCheckBox(this)');
     if(reversed) {
         checkbox.checked = true;
     }
@@ -96,11 +96,11 @@ function addArrowReverseCheckBox(arrow, reversed) {
  * @param arrow The arrow div the button is being added to
  */
 function addArrowDeleteButton(arrow) {
-    let deleteArrow = document.createElement("button");
-    deleteArrow.setAttribute("onClick", "deleteArrow(this)");
-    deleteArrow.setAttribute("class", "delete-arrow-button");
-    deleteArrow.className += " ui-button";
-    deleteArrow.textContent = "Delete";
+    const deleteArrow = document.createElement('button');
+    deleteArrow.setAttribute('onClick', 'deleteArrow(this)');
+    deleteArrow.setAttribute('class', 'delete-arrow-button');
+    deleteArrow.className += ' ui-button';
+    deleteArrow.textContent = 'Delete';
     arrow.append(deleteArrow);
 }
 
@@ -114,20 +114,20 @@ function addArrowDeleteButton(arrow) {
  * @param fromJson Whether or not the arrow is being created from loading an existing level
  */
 function addArrow(
-    button, arrowDirection = "R", delayTime = "600", speedValue = "100", reversed = false, fromJson = false) {
+    button, arrowDirection = 'R', delayTime = '600', speedValue = '100', reversed = false, fromJson = false) {
     if(button.parentNode.children.length > 50) {
-        alert("Maximum number of arrows reached in this attack");
+        alert('Maximum number of arrows reached in this attack');
         return;
     }
     if(!fromJson) {
-        let attackIndex = getAttackIndexFromAttackElement(button);
-        levelJson["attacks"][attackIndex]["arrows"].push({
-            "direction": arrowDirection, "reversed": reversed, "delay": delayTime, "speed": speedValue
+        const attackIndex = getAttackIndexFromAttackElement(button);
+        levelJson['attacks'][attackIndex]['arrows'].push({
+            'direction': arrowDirection, 'reversed': reversed, 'delay': delayTime, 'speed': speedValue
         });
     }
     
-    let arrow = document.createElement("div");
-    arrow.setAttribute("class", "arrow-container");
+    const arrow = document.createElement('div');
+    arrow.setAttribute('class', 'arrow-container');
     $(arrow).insertBefore(button);
     
     addDirectionSelection(arrow, getArrowSymbol(arrowDirection));
@@ -142,8 +142,8 @@ function addArrow(
  * @param deleteArrowButton The delete button that belongs to the arrow
  */
 function deleteArrow(deleteArrowButton) {
-    let indices = getAttackAndArrowIndicesFromArrowElement(deleteArrowButton);
-    levelJson["attacks"][indices[0]]["arrows"].splice(indices[1], 1);
+    const indices = getAttackAndArrowIndicesFromArrowElement(deleteArrowButton);
+    levelJson['attacks'][indices[0]]['arrows'].splice(indices[1], 1);
     deleteArrowButton.parentNode.remove();
 }
 
@@ -152,16 +152,16 @@ function deleteArrow(deleteArrowButton) {
  * @param deleteAttackButton The delete button that belongs to the attack
  */
 function deleteAttack(deleteAttackButton) {
-    let attack = deleteAttackButton.parentNode.parentNode;
-    let deletedAttack = getAttackIndexFromAttackElement(deleteAttackButton);
-    levelJson["attacks"].splice(deletedAttack, 1);
+    const attack = deleteAttackButton.parentNode.parentNode;
+    const deletedAttack = getAttackIndexFromAttackElement(deleteAttackButton);
+    levelJson['attacks'].splice(deletedAttack, 1);
     attack.remove();
     attackCount--;
     // Forward renumbering
-    $(".attackTitle").each(function() {
-        let id = this.textContent.slice(7);
+    $('.attackTitle').each(function() {
+        const id = this.textContent.slice(7);
         if(id > deletedAttack) {
-            this.textContent = "Attack " + (id - 1);
+            this.textContent = 'Attack ' + (id - 1);
         }
     });
 }
@@ -171,16 +171,16 @@ function deleteAttack(deleteAttackButton) {
  * @param randomCWShiftButton The random CW shift button
  */
 function randomClockwiseShift(randomCWShiftButton) {
-    let attackIndex = getAttackIndexFromAttackElement(randomCWShiftButton);
-    if(randomCWShiftButton.classList.contains("random-clockwise-shift-off")) {
-        randomCWShiftButton.classList.remove("random-clockwise-shift-off");
-        randomCWShiftButton.classList.add("random-clockwise-shift-on");
-        levelJson["attacks"][attackIndex]["clockwiseShift"] = true;
+    const attackIndex = getAttackIndexFromAttackElement(randomCWShiftButton);
+    if(randomCWShiftButton.classList.contains('random-clockwise-shift-off')) {
+        randomCWShiftButton.classList.remove('random-clockwise-shift-off');
+        randomCWShiftButton.classList.add('random-clockwise-shift-on');
+        levelJson['attacks'][attackIndex]['clockwiseShift'] = true;
     }
     else {
-        randomCWShiftButton.classList.remove("random-clockwise-shift-on");
-        randomCWShiftButton.classList.add("random-clockwise-shift-off");
-        levelJson["attacks"][attackIndex]["clockwiseShift"] = false;
+        randomCWShiftButton.classList.remove('random-clockwise-shift-on');
+        randomCWShiftButton.classList.add('random-clockwise-shift-off');
+        levelJson['attacks'][attackIndex]['clockwiseShift'] = false;
     }
 }
 
@@ -189,14 +189,14 @@ function randomClockwiseShift(randomCWShiftButton) {
  * @param toggleButton The toggle button
  */
 function toggleVisibility(toggleButton) {
-    let body = toggleButton.parentNode.nextSibling;
-    if(body.style.display === "none") {
-        body.style.display = "block";
-        toggleButton.textContent = "Hide";
+    const body = toggleButton.parentNode.nextSibling;
+    if(body.style.display === 'none') {
+        body.style.display = 'block';
+        toggleButton.textContent = 'Hide';
     }
     else {
-        body.style.display = "none";
-        toggleButton.textContent = "Open";
+        body.style.display = 'none';
+        toggleButton.textContent = 'Open';
     }
 }
 
@@ -205,10 +205,10 @@ function toggleVisibility(toggleButton) {
  * @param attackTitleContainer The attack div the button is added to
  */
 function addToggleVisibilityButton(attackTitleContainer) {
-    let toggleVisibility = document.createElement("button");
-    toggleVisibility.setAttribute("onClick", "toggleVisibility(this)");
-    toggleVisibility.classList.add("toggle-visibility", "ui-button");
-    toggleVisibility.textContent = "Hide";
+    const toggleVisibility = document.createElement('button');
+    toggleVisibility.setAttribute('onClick', 'toggleVisibility(this)');
+    toggleVisibility.classList.add('toggle-visibility', 'ui-button');
+    toggleVisibility.textContent = 'Hide';
     attackTitleContainer.append(toggleVisibility);
 }
 
@@ -217,9 +217,9 @@ function addToggleVisibilityButton(attackTitleContainer) {
  * @param attackTitleContainer The attack div the title is added to
  */
 function addAttackTitle(attackTitleContainer) {
-    let h2 = document.createElement("h1");
-    h2.setAttribute("class", "attack-title");
-    h2.textContent = "Attack " + attackCount;
+    const h2 = document.createElement('h1');
+    h2.setAttribute('class', 'attack-title');
+    h2.textContent = 'Attack ' + attackCount;
     attackTitleContainer.append(h2);
 }
 
@@ -229,14 +229,14 @@ function addAttackTitle(attackTitleContainer) {
  * @param randomClockwiseShift The initial state of the button (on or off)
  */
 function addRandomCWShiftButton(attackTitleContainer, randomClockwiseShift) {
-    let randomClockwiseShiftButton = document.createElement("button");
-    randomClockwiseShiftButton.setAttribute("onClick", "randomClockwiseShift(this)");
-    let randomClockwiseShiftClass = "random-clockwise-shift-off";
+    const randomClockwiseShiftButton = document.createElement('button');
+    randomClockwiseShiftButton.setAttribute('onClick', 'randomClockwiseShift(this)');
+    let randomClockwiseShiftClass = 'random-clockwise-shift-off';
     if(randomClockwiseShift) {
-        randomClockwiseShiftClass = "random-clockwise-shift-on";
+        randomClockwiseShiftClass = 'random-clockwise-shift-on';
     }
-    randomClockwiseShiftButton.classList.add(randomClockwiseShiftClass, "ui-button");
-    randomClockwiseShiftButton.textContent = "Random CW Shift";
+    randomClockwiseShiftButton.classList.add(randomClockwiseShiftClass, 'ui-button');
+    randomClockwiseShiftButton.textContent = 'Random CW Shift';
     attackTitleContainer.append(randomClockwiseShiftButton);
 }
 
@@ -246,17 +246,17 @@ function addRandomCWShiftButton(attackTitleContainer, randomClockwiseShift) {
  * @param attackDelay The delay value
  */
 function addAttackDelayInput(attackTitleContainer, attackDelay) {
-    let delay = document.createElement("label");
-    delay.textContent = "Delay: ";
-    delay.classList.add("attack-delay-label");
+    const delay = document.createElement('label');
+    delay.textContent = 'Delay: ';
+    delay.classList.add('attack-delay-label');
     attackTitleContainer.append(delay);
     
-    let delayTimeInput = document.createElement("input");
-    delayTimeInput.type = "numeric";
+    const delayTimeInput = document.createElement('input');
+    delayTimeInput.type = 'numeric';
     delayTimeInput.value = attackDelay;
-    delayTimeInput.classList.add("attack-delay-time-input");
-    delayTimeInput.setAttribute("pattern", "[0-9]*");
-    delayTimeInput.setAttribute("oninput", "filterCharactersAndUpdateJson(this, 4)");
+    delayTimeInput.classList.add('attack-delay-time-input');
+    delayTimeInput.setAttribute('pattern', '[0-9]*');
+    delayTimeInput.setAttribute('oninput', 'filterCharactersAndUpdateJson(this, 4)');
     attackTitleContainer.append(delayTimeInput);
 }
 
@@ -265,10 +265,10 @@ function addAttackDelayInput(attackTitleContainer, attackDelay) {
  * @param attackTitleContainer The div the button is added to
  */
 function addDeleteAttackButton(attackTitleContainer) {
-    let deleteAttack = document.createElement("button");
-    deleteAttack.setAttribute("onClick", "deleteAttack(this)");
-    deleteAttack.classList.add("delete-attack-button", "ui-button");
-    deleteAttack.textContent = "Delete";
+    const deleteAttack = document.createElement('button');
+    deleteAttack.setAttribute('onClick', 'deleteAttack(this)');
+    deleteAttack.classList.add('delete-attack-button', 'ui-button');
+    deleteAttack.textContent = 'Delete';
     attackTitleContainer.append(deleteAttack);
 }
 
@@ -278,10 +278,10 @@ function addDeleteAttackButton(attackTitleContainer) {
  * @returns {HTMLButtonElement} The add arrow button
  */
 function addAddArrowButton(attackBodyContainer) {
-    let addArrowButton = document.createElement("button");
-    addArrowButton.setAttribute("onClick", "addArrow(this)");
-    addArrowButton.classList.add("add-arrow-button", "ui-button");
-    addArrowButton.textContent = "Add Arrow";
+    const addArrowButton = document.createElement('button');
+    addArrowButton.setAttribute('onClick', 'addArrow(this)');
+    addArrowButton.classList.add('add-arrow-button', 'ui-button');
+    addArrowButton.textContent = 'Add Arrow';
     attackBodyContainer.append(addArrowButton);
     return addArrowButton;
 }
@@ -294,23 +294,23 @@ function addAddArrowButton(attackBodyContainer) {
  * @returns {HTMLButtonElement|null} The attack's add arrow button after an attack is added and returns null of limit
  *     was reached
  */
-function addAttack(randomClockwiseShift = false, attackDelay = "10", fromJson = false) {
+function addAttack(randomClockwiseShift = false, attackDelay = '10', fromJson = false) {
     if(attackCount >= 40) {
-        alert("Maximum number of attacks reached");
+        alert('Maximum number of attacks reached');
         return null;
     }
     attackCount++;
     if(!fromJson) {
-        levelJson["attacks"].push({"clockwiseShift": randomClockwiseShift, "attackDelay": attackDelay, "arrows": []});
+        levelJson['attacks'].push({'clockwiseShift': randomClockwiseShift, 'attackDelay': attackDelay, 'arrows': []});
     }
-    const attack = document.createElement("div");
-    attack.setAttribute("class", "attack");
+    const attack = document.createElement('div');
+    attack.setAttribute('class', 'attack');
     
-    const attackTitleContainer = document.createElement("div");
-    attackTitleContainer.setAttribute("class", "attack-title-container");
+    const attackTitleContainer = document.createElement('div');
+    attackTitleContainer.setAttribute('class', 'attack-title-container');
     
-    let attackBodyContainer = document.createElement("div");
-    attackBodyContainer.setAttribute("class", "attack-body-container");
+    const attackBodyContainer = document.createElement('div');
+    attackBodyContainer.setAttribute('class', 'attack-body-container');
     
     addToggleVisibilityButton(attackTitleContainer);
     addAttackTitle(attackTitleContainer);
@@ -319,9 +319,9 @@ function addAttack(randomClockwiseShift = false, attackDelay = "10", fromJson = 
     addDeleteAttackButton(attackTitleContainer);
     attack.append(attackTitleContainer);
     attack.append(attackBodyContainer);
-    let addArrowButton = addAddArrowButton(attackBodyContainer);
+    const addArrowButton = addAddArrowButton(attackBodyContainer);
     
-    $(".attacks").append(attack);
+    $('.attacks').append(attack);
     return addArrowButton;
 }
 
@@ -332,18 +332,18 @@ function addAttack(randomClockwiseShift = false, attackDelay = "10", fromJson = 
  */
 function filterCharactersAndUpdateJson(input, max) {
     limitCharacters(input, max);
-    input.value = input.value.replace(/\D/g, "");
+    input.value = input.value.replace(/\D/g, '');
     input.value = Math.round(input.value);
     
-    let inputType = input.className;
+    const inputType = input.className;
     switch(inputType) {
-        case "attack-delay-time-input":
+        case 'attack-delay-time-input':
             updateAttackDelay(input);
             break;
-        case "delay-time-input":
+        case 'delay-time-input':
             updateArrowDelay(input);
             break;
-        case "speed-input":
+        case 'speed-input':
             updateSpeed(input);
     }
 }
@@ -364,8 +364,8 @@ function limitCharacters(input, max) {
  * @param input the input element
  */
 function updateAttackDelay(input) {
-    let attackIndex = getAttackIndexFromAttackElement(input);
-    levelJson["attacks"][attackIndex]["attackDelay"] = input.value;
+    const attackIndex = getAttackIndexFromAttackElement(input);
+    levelJson['attacks'][attackIndex]['attackDelay'] = input.value;
 }
 
 /**
@@ -373,8 +373,8 @@ function updateAttackDelay(input) {
  * @param input the input element
  */
 function updateArrowDelay(input) {
-    let indices = getAttackAndArrowIndicesFromArrowElement(input);
-    levelJson["attacks"][indices[0]]["arrows"][indices[1]]["delay"] = input.value;
+    const indices = getAttackAndArrowIndicesFromArrowElement(input);
+    levelJson['attacks'][indices[0]]['arrows'][indices[1]]['delay'] = input.value;
 }
 
 /**
@@ -382,8 +382,8 @@ function updateArrowDelay(input) {
  * @param input the input element
  */
 function updateSpeed(input) {
-    let indices = getAttackAndArrowIndicesFromArrowElement(input);
-    levelJson["attacks"][indices[0]]["arrows"][indices[1]]["speed"] = input.value;
+    const indices = getAttackAndArrowIndicesFromArrowElement(input);
+    levelJson['attacks'][indices[0]]['arrows'][indices[1]]['speed'] = input.value;
 }
 
 /**
@@ -391,8 +391,8 @@ function updateSpeed(input) {
  * @param checkbox the checkbox
  */
 function updateReverseCheckBox(checkbox) {
-    let indices = getAttackAndArrowIndicesFromArrowElement(checkbox);
-    levelJson["attacks"][indices[0]]["arrows"][indices[1]]["reversed"] = checkbox.checked;
+    const indices = getAttackAndArrowIndicesFromArrowElement(checkbox);
+    levelJson['attacks'][indices[0]]['arrows'][indices[1]]['reversed'] = checkbox.checked;
 }
 
 /**
@@ -400,8 +400,8 @@ function updateReverseCheckBox(checkbox) {
  * @param selection the direction selection element
  */
 function updateDirectionSelection(selection) {
-    let indices = getAttackAndArrowIndicesFromArrowElement(selection);
-    levelJson["attacks"][indices[0]]["arrows"][indices[1]]["direction"] = getArrowLetter(selection.value);
+    const indices = getAttackAndArrowIndicesFromArrowElement(selection);
+    levelJson['attacks'][indices[0]]['arrows'][indices[1]]['direction'] = getArrowLetter(selection.value);
 }
 
 /**
@@ -410,10 +410,10 @@ function updateDirectionSelection(selection) {
  * @returns {number[]} Attack index and arrow index
  */
 function getAttackAndArrowIndicesFromArrowElement(arrowElement) {
-    let child = arrowElement.parentNode;
-    let parent = child.parentNode;
-    let arrowIndex = Array.prototype.indexOf.call(parent.children, child);
-    let attackIndex = Array.prototype.indexOf.call(parent.parentNode.parentNode.children, parent.parentNode);
+    const child = arrowElement.parentNode;
+    const parent = child.parentNode;
+    const arrowIndex = Array.prototype.indexOf.call(parent.children, child);
+    const attackIndex = Array.prototype.indexOf.call(parent.parentNode.parentNode.children, parent.parentNode);
     return [attackIndex, arrowIndex];
 }
 
@@ -423,8 +423,8 @@ function getAttackAndArrowIndicesFromArrowElement(arrowElement) {
  * @returns {number} Index of the attack
  */
 function getAttackIndexFromAttackElement(attackElement) {
-    let attack = attackElement.parentNode.parentNode;
-    let attacksContainer = attack.parentNode;
+    const attack = attackElement.parentNode.parentNode;
+    const attacksContainer = attack.parentNode;
     return Array.prototype.indexOf.call(attacksContainer.children, attack);
 }
 
@@ -433,16 +433,16 @@ function getAttackIndexFromAttackElement(attackElement) {
  * @param attackCreatorHeading The div the input is added to.
  */
 function addHeaderTitleInput(attackCreatorHeading) {
-    let title = document.createElement("label");
-    title.textContent = "Title: ";
-    title.classList.add("header-label");
+    const title = document.createElement('label');
+    title.textContent = 'Title: ';
+    title.classList.add('header-label');
     attackCreatorHeading.append(title);
     
-    let titleInput = document.createElement("input");
-    titleInput.type = "text";
-    titleInput.value = "Untitled";
-    titleInput.id = "title-input";
-    titleInput.setAttribute("oninput", "limitCharacters(this, 20)");
+    const titleInput = document.createElement('input');
+    titleInput.type = 'text';
+    titleInput.value = 'Untitled';
+    titleInput.id = 'title-input';
+    titleInput.setAttribute('oninput', 'limitCharacters(this, 20)');
     attackCreatorHeading.append(titleInput);
 }
 
@@ -451,16 +451,16 @@ function addHeaderTitleInput(attackCreatorHeading) {
  * @param attackCreatorHeading The div the textarea is added to
  */
 function addHeaderDescriptionInput(attackCreatorHeading) {
-    let description = document.createElement("label");
-    description.textContent = "Description: ";
-    description.classList.add("header-label");
+    const description = document.createElement('label');
+    description.textContent = 'Description: ';
+    description.classList.add('header-label');
     attackCreatorHeading.append(description);
     
-    let descriptionInput = document.createElement("textarea");
-    descriptionInput.type = "text";
-    descriptionInput.value = "Add description";
-    descriptionInput.id = "description-input";
-    descriptionInput.setAttribute("oninput", "limitCharacters(this, 200)");
+    const descriptionInput = document.createElement('textarea');
+    descriptionInput.type = 'text';
+    descriptionInput.value = 'Add description';
+    descriptionInput.id = 'description-input';
+    descriptionInput.setAttribute('oninput', 'limitCharacters(this, 200)');
     attackCreatorHeading.append(descriptionInput);
 }
 
@@ -469,20 +469,20 @@ function addHeaderDescriptionInput(attackCreatorHeading) {
  * @param diffAndVisibilityDiv The div the selection is added to
  */
 function addHeaderDifficultySelection(diffAndVisibilityDiv) {
-    let difficulty = document.createElement("label");
-    difficulty.textContent = "Difficulty: ";
-    difficulty.classList.add("header-label");
+    const difficulty = document.createElement('label');
+    difficulty.textContent = 'Difficulty: ';
+    difficulty.classList.add('header-label');
     diffAndVisibilityDiv.append(difficulty);
     
-    let array = ["easy", "medium", "hard"];
+    const array = ['easy', 'medium', 'hard'];
     
-    let selectList = document.createElement("select");
-    selectList.classList.add("direction-select", "diffSelect");
-    selectList.id = "difficulty";
+    const selectList = document.createElement('select');
+    selectList.classList.add('direction-select', 'diffSelect');
+    selectList.id = 'difficulty';
     diffAndVisibilityDiv.appendChild(selectList);
     
     for(let i = 0; i < array.length; i++) {
-        let option = document.createElement("option");
+        const option = document.createElement('option');
         option.value = array[i];
         option.text = array[i];
         selectList.appendChild(option);
@@ -494,15 +494,15 @@ function addHeaderDifficultySelection(diffAndVisibilityDiv) {
  * @param diffAndVisibilityDiv The div the checkbox is added to
  */
 function addHeaderVisibilityCheckBox(diffAndVisibilityDiv) {
-    let isPublic = document.createElement("label");
-    isPublic.textContent = "Public: ";
-    isPublic.classList.add("header-label");
+    const isPublic = document.createElement('label');
+    isPublic.textContent = 'Public: ';
+    isPublic.classList.add('header-label');
     diffAndVisibilityDiv.append(isPublic);
     
-    let isPublicCheckbox = document.createElement("input");
-    isPublicCheckbox.type = "checkbox";
-    isPublicCheckbox.value = "value";
-    isPublicCheckbox.id = "is-public-checkbox";
+    const isPublicCheckbox = document.createElement('input');
+    isPublicCheckbox.type = 'checkbox';
+    isPublicCheckbox.value = 'value';
+    isPublicCheckbox.id = 'is-public-checkbox';
     diffAndVisibilityDiv.appendChild(isPublicCheckbox);
 }
 
@@ -511,9 +511,9 @@ function addHeaderVisibilityCheckBox(diffAndVisibilityDiv) {
  * @param attackCreatorHeading The header div
  */
 function addHeaderLevelSaveButton(attackCreatorHeading) {
-    let saveButton = document.createElement("button");
-    saveButton.classList.add("save-level-button");
-    saveButton.textContent = "Save Level";
+    const saveButton = document.createElement('button');
+    saveButton.classList.add('save-level-button');
+    saveButton.textContent = 'Save Level';
     saveButton.setAttribute("onClick", "save()");
     attackCreatorHeading.append(saveButton);
 }
@@ -522,17 +522,17 @@ function addHeaderLevelSaveButton(attackCreatorHeading) {
  * Creates UI for header
  */
 function createHeaderElements() {
-    let attackCreatorHeading = document.createElement("div");
-    attackCreatorHeading.classList.add("attack-creator-heading");
+    const attackCreatorHeading = document.createElement('div');
+    attackCreatorHeading.classList.add('attack-creator-heading');
     
-    let heading = document.createElement("h1");
-    heading.textContent = "Level Creator";
+    const heading = document.createElement('h1');
+    heading.textContent = 'Level Creator';
     
     addHeaderTitleInput(attackCreatorHeading);
     addHeaderDescriptionInput(attackCreatorHeading);
     
-    let diffAndVisibilityDiv = document.createElement("div");
-    diffAndVisibilityDiv.id = "diff-and-visibility-div";
+    const diffAndVisibilityDiv = document.createElement('div');
+    diffAndVisibilityDiv.id = 'diff-and-visibility-div';
     attackCreatorHeading.append(diffAndVisibilityDiv);
     
     addHeaderDifficultySelection(diffAndVisibilityDiv);
@@ -556,18 +556,18 @@ function initializeLevelCreator() {
  * Populates level creator UI with data from json.
  */
 function populateLevelCreator() {
-    document.getElementById("title-input").value = levelJson["title"];
-    document.getElementById("description-input").value = levelJson["description"];
-    document.getElementById("difficulty").value = levelJson["difficulty"];
-    document.getElementById("is-public-checkbox").checked = levelJson["isPublic"];
+    document.getElementById('title-input').value = levelJson['title'];
+    document.getElementById('description-input').value = levelJson['description'];
+    document.getElementById('difficulty').value = levelJson['difficulty'];
+    document.getElementById('is-public-checkbox').checked = levelJson['isPublic'];
     
     for(let i = 0; i < levelJson["attacks"].length; i++) {
-        let attack = levelJson["attacks"][i];
-        let arrows = attack["arrows"];
-        let addArrowButton = addAttack(attack["clockwiseShift"], attack["attackDelay"], true);
+        const attack = levelJson['attacks'][i];
+        const arrows = attack['arrows'];
+        const addArrowButton = addAttack(attack['clockwiseShift'], attack['attackDelay'], true);
         for(let j = 0; j < arrows.length; j++) {
-            let arrow = arrows[j];
-            addArrow(addArrowButton, arrow["direction"], arrow["delay"], arrow["speed"], arrow["reversed"], true);
+            const arrow = arrows[j];
+            addArrow(addArrowButton, arrow['direction'], arrow['delay'], arrow['speed'], arrow['reversed'], true);
         }
     }
 }
@@ -576,37 +576,37 @@ function populateLevelCreator() {
  * Sends level information to server.
  */
 function save() {
-    let tempJson = levelJson;
-    tempJson["title"] = document.getElementById("title-input").value;
-    tempJson["description"] = document.getElementById("description-input").value;
-    tempJson["difficulty"] = document.getElementById("difficulty").value;
-    tempJson["isPublic"] = document.getElementById("is-public-checkbox").checked;
+    const tempJson = levelJson;
+    tempJson['title'] = document.getElementById('title-input').value;
+    tempJson['description'] = document.getElementById('description-input').value;
+    tempJson['difficulty'] = document.getElementById('difficulty').value;
+    tempJson['isPublic'] = document.getElementById('is-public-checkbox').checked;
     if(isNewLevel) {
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: addLevelUrl,
-            contentType: "application/json",
+            contentType: 'application/json',
             data: JSON.stringify(tempJson),
-            dataType: "json",
+            dataType: 'json',
             success: function(response) {
-                let message = response["response"];
+                const message = response['response'];
                 alert(message);
-                if(message === "Saved!") {
+                if(message === 'Saved!') {
                     isNewLevel = false;
-                    window.location.href = response["level_url"];
+                    window.location.href = response['level_url'];
                 }
             }
         });
     }
     else {
         $.ajax({
-            type: "PATCH",
+            type: 'PATCH',
             url: updateLevelUrl,
-            contentType: "application/json",
+            contentType: 'application/json',
             data: JSON.stringify(tempJson),
-            dataType: "json",
+            dataType: 'json',
             success: function(response) {
-                let message = response["response"];
+                const message = response['response'];
                 alert(message);
             }
         });
@@ -621,16 +621,16 @@ function save() {
  */
 function getArrowSymbol(direction) {
     switch(direction) {
-        case "D":
-            return "↑";
-        case "U":
-            return "↓";
-        case "R":
-            return "←";
-        case "L":
-            return "→";
-        case "?":
-            return "?";
+        case 'D':
+            return '↑';
+        case 'U':
+            return '↓';
+        case 'R':
+            return '←';
+        case 'L':
+            return '→';
+        case '?':
+            return '?';
     }
     return null;
 }
@@ -642,16 +642,16 @@ function getArrowSymbol(direction) {
  */
 function getArrowLetter(direction) {
     switch(direction) {
-        case "↑":
-            return "D";
-        case "↓":
-            return "U";
-        case "←":
-            return "R";
-        case "→":
-            return "L";
-        case "?":
-            return "?";
+        case '↑':
+            return 'D';
+        case '↓':
+            return 'U';
+        case '←':
+            return 'R';
+        case '→':
+            return 'L';
+        case '?':
+            return '?';
     }
     return null;
 }
