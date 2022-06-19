@@ -19,7 +19,6 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="pixi.js" level="application" />
     <orderEntry type="library" name="howler" level="application" />
-    <orderEntry type="library" name="jquery-3.6.0" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
