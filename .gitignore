@@ -284,3 +284,6 @@ minify_game.sh
 node_modules
 package.json
 package-lock.json
+
+# Firebase stuff
+./firebaseKeys.json
