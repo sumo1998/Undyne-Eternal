@@ -4,6 +4,9 @@ The game is based off Fairdyne by Joe Zeng but we rewrote a large majority of it
 ## About the game
 Undyne eternal is a social platform created around the Fairdyne game with a twist. On this site people can create custom levels and showcase them to public if they wish to, challenge other players on the site, and rate and review levels created by other players. They can even search and filter for levels!
 
+## Play the game [here](https://agile-fjord-18411-9fa6c76e3014.herokuapp.com/home-feed)
+The website is live for you to try out our game! We challenge you to complete levels created by the devs!
+
 ## Key Features
 * Added searching, filtering, and sorting levels based on title, description, difficulty, rating, and time.
 * Redesigned the game from scratch to improve its structure, reduce bad practices, and incorporate it when our ideals.
