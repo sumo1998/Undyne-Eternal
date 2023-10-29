@@ -27,7 +27,7 @@ class Firebase:
                 "client_x509_cert_url": os.getenv("client_x509_cert_url")
             }
         )
-        self.__bucket_name = firebase_admin.get_app().options.storage_bucket
+        self.__bucket_name = "undyne-eternal.appspot.com"
         self.__app = firebase_admin.initialize_app(self.__credentials)
     
     def __get_storage_bucket(self) -> Bucket:
