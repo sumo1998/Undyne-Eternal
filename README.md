@@ -1,5 +1,5 @@
 # Undyne Eternal
-The game is based off Fairdyne by Joe Zeng but we rewrote a large majority of it from scratch.
+A social game based off Fairdyne by Joe Zeng but we rewrote a large majority of it from scratch.
 
 ## About the game
 Undyne eternal is a social platform created around the Fairdyne game with a twist. On this site people can create custom levels and showcase them to public if they wish to, challenge other players on the site, and rate and review levels created by other players. They can even search and filter for levels!
